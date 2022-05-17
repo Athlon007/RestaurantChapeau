@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 using RestaurantModel;
 
 namespace RestaurantDAL
 {
-    internal class OrderDao : BaseDao
+    public class OrderDao : BaseDao
     {
         public List<MenuType> GetMenuTypes()
         {
@@ -30,7 +29,7 @@ namespace RestaurantDAL
             return menuTypes;
         }
 
-        public List<MenuCategory> GetMenuCategories()
+        public List<MenuCategory> GetMenuCategories(MenuType menuType)
         {
             string query = "SELECT [id], [name] FROM dbo.MenuCategory;";
             return ReadMenuCategories(ExecuteSelectQuery(query));
