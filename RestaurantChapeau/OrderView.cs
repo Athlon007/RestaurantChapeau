@@ -17,8 +17,7 @@ namespace RestaurantChapeau
         Font fontMenuType = new Font("Segoe UI", 12);
         Font fontMenuCategory = new Font("Segoe UI", 8);
 
-        // TODO: This must require a Bill
-        public OrderView()
+        public OrderView(Bill bill)
         {
             InitializeComponent();
             orderLogic = new OrderLogic();
