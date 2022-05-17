@@ -57,5 +57,10 @@ namespace RestaurantLogic
         {
             return orderDao.GetMenuItems(menuType.Id, menuCategory.Id);
         }
+
+        public MenuItem GetMenuItem(int itemId)
+        {
+            return orderDao.GetMenuItemById(itemId);
+        }
     }
 }

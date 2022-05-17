@@ -65,6 +65,11 @@ namespace RestaurantChapeau
             {
                 itemsInBasket.Add(item.Id, quantity);
             }
+
+            if (itemsInBasket[item.Id] == 0)
+            {
+                itemsInBasket.Remove(item.Id);
+            }
         }
 
         public int ItemCount(MenuItem item)
@@ -77,6 +82,16 @@ namespace RestaurantChapeau
             {
                 return 0;
             }
+        }
+
+        public void Clear()
+        {
+            itemsInBasket.Clear();
+        }
+
+        public Dictionary<int, int> GetAll()
+        {
+            return itemsInBasket;
         }
     }
 }

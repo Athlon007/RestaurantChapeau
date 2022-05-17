@@ -15,6 +15,8 @@ namespace RestaurantChapeau
         private Button btnQuantitySubtract, btnQuantityAdd;
         private TextBox txtQuantity; 
 
+        public bool DeleteOnZero { get; set; }
+
         public MenuItemUIControl(FlowLayoutPanel flow, MenuItem menuItem, int nameSpace)
         {
             this.menuItem = menuItem;

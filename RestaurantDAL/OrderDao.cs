@@ -56,7 +56,7 @@ namespace RestaurantDAL
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " + 
                             "JOIN Menu m ON m.menuItemId = mi.id " +
-                            "WHERE mi.categoryId = @CategoryId AND m.menuTypeId = @MenuTypeId";
+                            "WHERE mi.categoryId = @CategoryId AND m.menuTypeId = @MenuTypeId;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@CategoryId", menuCategoryId),
@@ -80,6 +80,37 @@ namespace RestaurantDAL
             }
 
             return menuItems;
+        }
+
+        public MenuItem GetMenuItemById(int itemId)
+        {
+            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat " +
+                            "FROM MenuItem mi " +
+                            "JOIN Vat v ON v.id = mi.vatId " +
+                            "WHERE mi.[id] = @ItemId;";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@ItemId", itemId)
+            };
+
+            return ReadMenuItem(ExecuteSelectQuery(query, parameters));
+        }
+
+        private MenuItem ReadMenuItem(DataTable table)
+        {
+            if (table.Rows.Count == 0)
+            {
+                throw new NoNullAllowedException("Menu item not found!");
+            }
+
+            MenuItem menuItem = new MenuItem();
+            menuItem.Id = Convert.ToInt32(table.Rows[0]["id"]);
+            menuItem.Name = (string)table.Rows[0]["name"];
+            menuItem.PriceBrutto = Convert.ToDecimal(table.Rows[0]["priceBrutto"]);
+            menuItem.Vat = Convert.ToDecimal(table.Rows[0]["vat"]);
+
+            return menuItem;
         }
     }
 }
