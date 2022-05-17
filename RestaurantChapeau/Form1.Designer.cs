@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_LoginPassword = new System.Windows.Forms.TextBox();
+            this.txt_LoginEmail = new System.Windows.Forms.TextBox();
             this.btn_login = new System.Windows.Forms.Button();
             this.btn_forgotPassword = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,22 +42,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txt_LoginPassword
             // 
-            this.textBox1.Location = new System.Drawing.Point(146, 495);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(452, 58);
-            this.textBox1.TabIndex = 0;
+            this.txt_LoginPassword.Location = new System.Drawing.Point(146, 495);
+            this.txt_LoginPassword.Multiline = true;
+            this.txt_LoginPassword.Name = "txt_LoginPassword";
+            this.txt_LoginPassword.Size = new System.Drawing.Size(452, 58);
+            this.txt_LoginPassword.TabIndex = 0;
+            this.txt_LoginPassword.TextChanged += new System.EventHandler(this.txt_LoginPassword_TextChanged);
             // 
-            // textBox2
+            // txt_LoginEmail
             // 
-            this.textBox2.Location = new System.Drawing.Point(146, 337);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(452, 58);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txt_LoginEmail.Location = new System.Drawing.Point(146, 337);
+            this.txt_LoginEmail.Multiline = true;
+            this.txt_LoginEmail.Name = "txt_LoginEmail";
+            this.txt_LoginEmail.Size = new System.Drawing.Size(452, 58);
+            this.txt_LoginEmail.TabIndex = 1;
+            this.txt_LoginEmail.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // btn_login
             // 
@@ -126,7 +127,7 @@
             // 
             // pnl_tableView
             // 
-            this.pnl_tableView.Location = new System.Drawing.Point(0, 0);
+            this.pnl_tableView.Location = new System.Drawing.Point(439, 34);
             this.pnl_tableView.Name = "pnl_tableView";
             this.pnl_tableView.Size = new System.Drawing.Size(744, 1102);
             this.pnl_tableView.TabIndex = 9;
@@ -143,8 +144,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_forgotPassword);
             this.Controls.Add(this.btn_login);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_LoginEmail);
+            this.Controls.Add(this.txt_LoginPassword);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -156,8 +157,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_LoginPassword;
+        private System.Windows.Forms.TextBox txt_LoginEmail;
         private System.Windows.Forms.Button btn_login;
         private System.Windows.Forms.Button btn_forgotPassword;
         private System.Windows.Forms.Label label3;
