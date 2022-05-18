@@ -127,7 +127,7 @@ namespace RestaurantDAL
         /// </summary>
         public Order CreateNewOrderForBill(Bill bill)
         {
-            string query =  "INSERT INTO dbo.Order (placedTime, status, billId) " +
+            string query =  "INSERT INTO dbo.[Order] (placedTime, status, billId) " +
                             "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.billId " +
                             "VALUES (@Now, 0, @BillId)";
             SqlParameter[] parameters = new SqlParameter[]
@@ -155,6 +155,20 @@ namespace RestaurantDAL
             order.Bill = bill;
 
             return order;
+        }
+
+        public void AddItemToOrder(Order order, MenuItem item, int quantity)
+        {
+            string query =  "INSERT INTO dbo.PartOf (orderId, menuItemId, quantity)" +
+                            "VALUES (@OrderId, @ItemId, @Quantity)";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderId", order.Id),
+                new SqlParameter("@ItemId", item.Id),
+                new SqlParameter("@Quantity", quantity)
+            };
+
+            ExecuteEditQuery(query, parameters);
         }
     }
 }

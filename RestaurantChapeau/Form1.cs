@@ -24,12 +24,11 @@ namespace RestaurantChapeau
         /////////////////////////////////
         private void button1_Click(object sender, EventArgs e)
         {
-            OrderLogic orderLogic = new OrderLogic();
-
             Table table = new Table();
             table.Id = 1;
             Bill bill = new Bill();
             bill.Id = 1;
+            bill.Table = table;
 
             OrderView orderView = new OrderView(bill);
             orderView.ShowDialog();

@@ -62,5 +62,16 @@ namespace RestaurantLogic
         {
             return orderDao.CreateNewOrderForBill(bill);
         }
+
+        /// <summary>
+        /// Adds a new item to the order.
+        /// </summary>
+        /// <param name="order">Order to which add the item to.</param>
+        /// <param name="item">Item that is meant to be added.</param>
+        /// <param name="quantity">Quantity of the item.</param>
+        public void AddItemToOrder(Order order, MenuItem item, int quantity)
+        {
+            orderDao.AddItemToOrder(order, item, quantity);
+        }
     }
 }

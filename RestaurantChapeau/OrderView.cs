@@ -30,7 +30,13 @@ namespace RestaurantChapeau
             theTabControl.SizeMode = TabSizeMode.Fixed;
 
             OrderBasket.Instance.Clear();
+            LoadHeader();
             LoadMenuTypes();
+        }
+
+        void LoadHeader()
+        {
+            lblHeader.Text = $"Table {bill.Table.Id}";
         }
 
         private void LoadMenuTypes()
@@ -148,6 +154,7 @@ namespace RestaurantChapeau
                 lblNothingPurchased.Width = flwCheckout.Width - 10;
                 lblNothingPurchased.Height = flwCheckout.Height - 10;
                 flwCheckout.Controls.Add(lblNothingPurchased);
+                btnFinish.Enabled = false;
             }
             else
             {
@@ -158,6 +165,8 @@ namespace RestaurantChapeau
                     new MenuItemUIControl(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
                     count++;
                 }
+
+                btnFinish.Enabled = true;
             }
 
             theTabControl.SelectedTab = tabPageCheckout;
@@ -169,13 +178,19 @@ namespace RestaurantChapeau
             // TODO: Record order into database
             Order order = orderLogic.CreateNewOrderForBill(bill);
 
+            foreach (KeyValuePair<int, int> basketItem in OrderBasket.Instance.GetAll())
+            {
+                MenuItem menuItem = orderLogic.GetMenuItem(basketItem.Key);
+                orderLogic.AddItemToOrder(order, menuItem, basketItem.Value);
+            }
+
             this.Close();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             theTabControl.SelectedTab = tabPageMenu;
-            lblHeader.Text = "Menu";
+            LoadHeader();
         }
     }
 }

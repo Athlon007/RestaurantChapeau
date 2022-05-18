@@ -63,11 +63,14 @@ namespace RestaurantChapeau
             if (IsNameOverflowing())
             {
                 // If the item's name is overflowing, increase the height of controls by x2.
-                lblCount.Height *= 2;
-                lblName.Height *= 2;
-                btnQuantityAdd.Height *= 2;
-                btnQuantitySubtract.Height *= 2;
-                txtQuantity.MinimumSize = new Size(txtQuantity.Width, txtQuantity.Height * 2);
+                int preffered = lblCount.PreferredHeight;
+                int real = lblCount.Height;
+                int multiplyBy = (int)Math.Ceiling((double)lblCount.Height/ lblCount.PreferredHeight);
+                lblCount.Height *= multiplyBy;
+                lblName.Height *= multiplyBy;
+                btnQuantityAdd.Height *= multiplyBy;
+                btnQuantitySubtract.Height *= multiplyBy;
+                txtQuantity.MinimumSize = new Size(txtQuantity.Width, txtQuantity.Height * multiplyBy);
             }
         }
 

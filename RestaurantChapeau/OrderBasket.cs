@@ -24,16 +24,25 @@ namespace RestaurantChapeau
         // ItemID. Quantity.
         private Dictionary<int, int> itemsInBasket;
 
+        const int MaximumQuantity = 100;
+
         private OrderBasket() 
         {
             itemsInBasket = new Dictionary<int, int>();
         }
 
-        
+        /// <summary>
+        /// Add ONE of the specified item.
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(MenuItem item)
         {
             if (itemsInBasket.ContainsKey(item.Id))
             {
+                if (itemsInBasket[item.Id] >= MaximumQuantity)
+                {
+                    return;
+                }
                 itemsInBasket[item.Id]++;
             }
             else
@@ -42,6 +51,10 @@ namespace RestaurantChapeau
             }
         }
 
+        /// <summary>
+        /// Subtract ONE of thespecified item.
+        /// </summary>
+        /// <param name="item"></param>
         public void Subtract(MenuItem item)
         {
             if (itemsInBasket.ContainsKey(item.Id))
@@ -69,6 +82,10 @@ namespace RestaurantChapeau
             if (itemsInBasket[item.Id] == 0)
             {
                 itemsInBasket.Remove(item.Id);
+            }
+            else if (itemsInBasket[item.Id] > MaximumQuantity)
+            {
+                itemsInBasket[item.Id] = MaximumQuantity;
             }
         }
 
