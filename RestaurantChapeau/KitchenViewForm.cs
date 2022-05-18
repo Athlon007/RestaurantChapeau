@@ -14,5 +14,16 @@ namespace RestaurantChapeau
         {
             InitializeComponent();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+            pnlKitchen_NewOrders.Show();
+        }
+        private void HidePanels()
+        {
+            pnlKitchen_NewOrders.Hide();
+            pnlKitchen_NewOrders.Hide();
+        }
     }
 }
