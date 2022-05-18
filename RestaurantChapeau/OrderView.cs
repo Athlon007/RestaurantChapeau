@@ -75,6 +75,7 @@ namespace RestaurantChapeau
             foreach (MenuCategory menuCategory in menuCategories)
             {
                 Button menuCategoryButon = new Button();
+                menuCategory.MenuType = menuType;
                 menuCategoryButon.Tag = menuCategory;
                 menuCategoryButon.Text = menuCategory.Name;
                 menuCategoryButon.Height = flwMenuCategory.Height;
@@ -109,9 +110,11 @@ namespace RestaurantChapeau
 
             List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
 
+            int count = 1;
             foreach (MenuItem menuItem in menuItems)
             {
-                new MenuItemUIControl(flwMenuItems, menuItem, lblSub.Left);
+                new MenuItemUIControl(flwMenuItems, menuItem, lblSub.Left, count);
+                count++;
             }
         }
 
@@ -146,10 +149,12 @@ namespace RestaurantChapeau
             }
             else
             {
+                int count = 1;
                 foreach (KeyValuePair<int, int> key in OrderBasket.Instance.GetAll())
                 {
                     MenuItem menuItem = orderLogic.GetMenuItem(key.Key);
-                    new MenuItemUIControl(flwCheckout, menuItem, lblQuantityCheckout.Left);
+                    new MenuItemUIControl(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
+                    count++;
                 }
             }
 

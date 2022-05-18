@@ -15,17 +15,23 @@ namespace RestaurantChapeau
         private Button btnQuantitySubtract, btnQuantityAdd;
         private TextBox txtQuantity; 
 
-        public bool DeleteOnZero { get; set; }
-
-        public MenuItemUIControl(FlowLayoutPanel flow, MenuItem menuItem, int nameSpace)
+        public MenuItemUIControl(FlowLayoutPanel flow, MenuItem menuItem, int nameSpace, int count)
         {
             this.menuItem = menuItem;
+
+            Label lblCount = new Label();
+            lblCount.Text = count.ToString();
+            lblCount.Font = menuItemsFont;
+            lblCount.Height = RowHeight;
+            lblCount.Width = RowHeight;
+            lblCount.TextAlign = ContentAlignment.MiddleLeft;
+            flow.Controls.Add(lblCount);
 
             lblName = new Label();
             lblName.Text = menuItem.Name;
             lblName.Font = menuItemsFont;
             lblName.Height = RowHeight;
-            lblName.Width = nameSpace;
+            lblName.Width = nameSpace - lblCount.Width;
             lblName.TextAlign = ContentAlignment.MiddleLeft;
             flow.Controls.Add(lblName);
 
@@ -39,11 +45,11 @@ namespace RestaurantChapeau
             txtQuantity = new TextBox();
             UpdateQuantityTextBox();
             txtQuantity.Font = menuItemsFont;
-            txtQuantity.Height = RowHeight;
+            txtQuantity.MinimumSize = new Size(txtQuantity.Width, RowHeight);
             txtQuantity.TextAlign = HorizontalAlignment.Center;
             txtQuantity.KeyPress += TextBoxQuantityKeyPress;
             txtQuantity.TextChanged += TextBoxQuantityTextChanged;
-            flow.Controls.Add(txtQuantity);        
+            flow.Controls.Add(txtQuantity);
 
             btnQuantityAdd = new Button();
             btnQuantityAdd.Text = "+";
@@ -51,8 +57,25 @@ namespace RestaurantChapeau
             btnQuantityAdd.Font = menuItemsFont;
             btnQuantityAdd.Click += QuantityAddClick;
             flow.Controls.Add(btnQuantityAdd);
+            // Make sure that the "+" is the last element in that flow's line.
+            flow.SetFlowBreak(btnQuantityAdd, true);
+
+            if (IsNameOverflowing())
+            {
+                // If the item's name is overflowing, increase the height of controls by x2.
+                lblCount.Height *= 2;
+                lblName.Height *= 2;
+                btnQuantityAdd.Height *= 2;
+                btnQuantitySubtract.Height *= 2;
+                txtQuantity.MinimumSize = new Size(txtQuantity.Width, txtQuantity.Height * 2);
+            }
         }
 
+        /// <summary>
+        /// Called when text in quantity textbox has changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxQuantityTextChanged(object sender, EventArgs e)
         {
             int quantity = 0;
@@ -69,6 +92,9 @@ namespace RestaurantChapeau
             txtQuantity.SelectionLength = 0;
         }
 
+        /// <summary>
+        /// Makes sure that the only allowed input for the textbox is either digit or backspace.
+        /// </summary>
         private void TextBoxQuantityKeyPress(object sender, KeyPressEventArgs e)
         {
             // Don't allow anything other than digits.
@@ -78,21 +104,39 @@ namespace RestaurantChapeau
             }
         }
 
+        /// <summary>
+        /// Adds the number of specific item by calling OrderBasket.Add.
+        /// </summary>
         private void QuantityAddClick(object sender, EventArgs e)
         {
             OrderBasket.Instance.Add(menuItem);
             UpdateQuantityTextBox();
         }
 
+        /// <summary>
+        /// Subtracts the number of specific item by calling OrderBasket.Subtract.
+        /// </summary>
         private void QuantitySubtractClick(object sender, EventArgs e)
         {
             OrderBasket.Instance.Subtract(menuItem);
             UpdateQuantityTextBox();
         }
 
+        /// <summary>
+        /// Updates the quantity label.
+        /// </summary>
         private void UpdateQuantityTextBox()
         {
             txtQuantity.Text = OrderBasket.Instance.ItemCount(menuItem).ToString();
+        }
+
+        /// <summary>
+        /// Returns true if the text is longer than the label's width.
+        /// </summary>
+        /// <returns></returns>
+        private bool IsNameOverflowing()
+        {
+            return lblName.PreferredWidth > lblName.Width;
         }
     }
 }

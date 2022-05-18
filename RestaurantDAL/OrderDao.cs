@@ -31,8 +31,17 @@ namespace RestaurantDAL
 
         public List<MenuCategory> GetMenuCategories(MenuType menuType)
         {
-            string query = "SELECT [id], [name] FROM dbo.MenuCategory;";
-            return ReadMenuCategories(ExecuteSelectQuery(query));
+            string query =  "SELECT mc.[id], mc.[name] " +
+                            "FROM dbo.MenuCategory mc " +
+                            "JOIN dbo.HasCategory hc ON mc.[id] = hc.menuCategoryId " +
+                            "WHERE hc.menuTypeId = @MenuTypeId;";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@MenuTypeId", menuType.Id)
+            };
+
+            return ReadMenuCategories(ExecuteSelectQuery(query, parameters));
         }
 
         private List<MenuCategory> ReadMenuCategories(DataTable table)

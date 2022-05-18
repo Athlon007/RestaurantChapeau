@@ -41,12 +41,15 @@
             this.theTabControl = new System.Windows.Forms.TabControl();
             this.tabPageMenu = new System.Windows.Forms.TabPage();
             this.pnlColumns = new System.Windows.Forms.Panel();
+            this.lblNumber = new System.Windows.Forms.Label();
             this.tlpPlaceCancelOrder = new System.Windows.Forms.TableLayoutPanel();
             this.tabPageCheckout = new System.Windows.Forms.TabPage();
             this.flwCheckout = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlColumnsCheckout = new System.Windows.Forms.Panel();
             this.lblQuantityCheckout = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblComment = new System.Windows.Forms.Label();
+            this.txtComment = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
@@ -105,7 +108,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(3, 3);
+            this.lblName.Location = new System.Drawing.Point(81, 3);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(78, 32);
             this.lblName.TabIndex = 5;
@@ -174,6 +177,7 @@
             // pnlColumns
             // 
             this.pnlColumns.BackColor = System.Drawing.Color.PowderBlue;
+            this.pnlColumns.Controls.Add(this.lblNumber);
             this.pnlColumns.Controls.Add(this.lblSub);
             this.pnlColumns.Controls.Add(this.lblName);
             this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Top;
@@ -181,6 +185,15 @@
             this.pnlColumns.Name = "pnlColumns";
             this.pnlColumns.Size = new System.Drawing.Size(1222, 40);
             this.pnlColumns.TabIndex = 10;
+            // 
+            // lblNumber
+            // 
+            this.lblNumber.AutoSize = true;
+            this.lblNumber.Location = new System.Drawing.Point(3, 3);
+            this.lblNumber.Name = "lblNumber";
+            this.lblNumber.Size = new System.Drawing.Size(46, 32);
+            this.lblNumber.TabIndex = 7;
+            this.lblNumber.Text = "No";
             // 
             // tlpPlaceCancelOrder
             // 
@@ -201,6 +214,8 @@
             // 
             this.tabPageCheckout.Controls.Add(this.flwCheckout);
             this.tabPageCheckout.Controls.Add(this.pnlColumnsCheckout);
+            this.tabPageCheckout.Controls.Add(this.lblComment);
+            this.tabPageCheckout.Controls.Add(this.txtComment);
             this.tabPageCheckout.Controls.Add(this.tableLayoutPanel1);
             this.tabPageCheckout.Location = new System.Drawing.Point(8, 46);
             this.tabPageCheckout.Name = "tabPageCheckout";
@@ -217,7 +232,7 @@
             this.flwCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flwCheckout.Location = new System.Drawing.Point(3, 43);
             this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1222, 1072);
+            this.flwCheckout.Size = new System.Drawing.Size(1222, 858);
             this.flwCheckout.TabIndex = 11;
             // 
             // pnlColumnsCheckout
@@ -248,6 +263,28 @@
             this.label2.Size = new System.Drawing.Size(78, 32);
             this.label2.TabIndex = 5;
             this.label2.Text = "Name";
+            // 
+            // lblComment
+            // 
+            this.lblComment.AutoSize = true;
+            this.lblComment.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblComment.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblComment.Location = new System.Drawing.Point(3, 901);
+            this.lblComment.Name = "lblComment";
+            this.lblComment.Size = new System.Drawing.Size(256, 65);
+            this.lblComment.TabIndex = 11;
+            this.lblComment.Text = "Comments";
+            // 
+            // txtComment
+            // 
+            this.txtComment.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtComment.Location = new System.Drawing.Point(3, 966);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.PlaceholderText = "Insert comment here...";
+            this.txtComment.Size = new System.Drawing.Size(1222, 149);
+            this.txtComment.TabIndex = 11;
             // 
             // tableLayoutPanel1
             // 
@@ -316,6 +353,7 @@
             this.pnlColumns.PerformLayout();
             this.tlpPlaceCancelOrder.ResumeLayout(false);
             this.tabPageCheckout.ResumeLayout(false);
+            this.tabPageCheckout.PerformLayout();
             this.pnlColumnsCheckout.ResumeLayout(false);
             this.pnlColumnsCheckout.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -348,5 +386,8 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnFinish;
         private System.Windows.Forms.Label lblHeader;
+        private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.Label lblComment;
+        private System.Windows.Forms.Label lblNumber;
     }
 }
