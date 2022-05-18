@@ -13,6 +13,7 @@ namespace RestaurantChapeau
     public partial class OrderView : Form
     {
         OrderLogic orderLogic;
+        Bill bill;
 
         Font fontMenuType = new Font("Segoe UI", 12);
         Font fontMenuCategory = new Font("Segoe UI", 8);
@@ -20,6 +21,7 @@ namespace RestaurantChapeau
         public OrderView(Bill bill)
         {
             InitializeComponent();
+            this.bill = bill;
             orderLogic = new OrderLogic();
 
             // Hide tab view tabs.
@@ -165,6 +167,8 @@ namespace RestaurantChapeau
         private void btnFinish_Click(object sender, EventArgs e)
         {
             // TODO: Record order into database
+            Order order = orderLogic.CreateNewOrderForBill(bill);
+
             this.Close();
         }
 

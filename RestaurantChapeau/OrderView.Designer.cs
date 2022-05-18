@@ -132,7 +132,7 @@
             this.btnPlaceOrder.Name = "btnPlaceOrder";
             this.btnPlaceOrder.Size = new System.Drawing.Size(605, 108);
             this.btnPlaceOrder.TabIndex = 7;
-            this.btnPlaceOrder.Text = "Place Order";
+            this.btnPlaceOrder.Text = "Basket";
             this.btnPlaceOrder.UseVisualStyleBackColor = true;
             this.btnPlaceOrder.Click += new System.EventHandler(this.btnPlaceOrder_Click);
             // 
@@ -321,7 +321,7 @@
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(605, 108);
             this.btnFinish.TabIndex = 7;
-            this.btnFinish.Text = "Finish";
+            this.btnFinish.Text = "Place Order";
             this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 

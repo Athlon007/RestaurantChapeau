@@ -121,5 +121,40 @@ namespace RestaurantDAL
 
             return menuItem;
         }
+
+        /// <summary>
+        /// Registers a new order in database and returns it at the same time.
+        /// </summary>
+        public Order CreateNewOrderForBill(Bill bill)
+        {
+            string query =  "INSERT INTO dbo.Order (placedTime, status, billId) " +
+                            "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.billId " +
+                            "VALUES (@Now, 0, @BillId)";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Now", DateTime.Now.ToString("yyyyMMdd HH:mm:ss")),
+                new SqlParameter("@BillId", bill.Id)
+            };
+
+            return ReadOrder(ExecuteSelectQuery(query, parameters), bill);
+        }
+
+        private Order ReadOrder(DataTable table, Bill bill)
+        {
+            Order order = new Order();
+
+            if (table.Rows.Count == 0)
+            {
+                throw new NoNullAllowedException("Could not create a new order");
+            }
+
+            DataRow row = table.Rows[0];
+            order.Id = Convert.ToInt32(row["id"]);
+            order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
+            order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
+            order.Bill = bill;
+
+            return order;
+        }
     }
 }

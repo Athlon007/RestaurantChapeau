@@ -17,7 +17,7 @@ namespace RestaurantChapeau
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OrderView(new RestaurantModel.Bill()));
+            Application.Run(new Form1());
         }
     }
 }

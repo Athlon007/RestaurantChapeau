@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RestaurantModel
+﻿namespace RestaurantModel
 {
     public class Bill
     {
+        public int Id { get; set; }
+        public Table Table { get; set; }
     }
 }
