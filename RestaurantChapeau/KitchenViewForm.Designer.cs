@@ -30,13 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitchenViewForm));
             this.pnlKitchen_NewOrders = new System.Windows.Forms.Panel();
-            this.pnlKitchen_CompleteOrders = new System.Windows.Forms.Panel();
-            this.btnKitchen_ClearOrders = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.listViewKitchen_CompleteOrders = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,6 +43,13 @@
             this.columnHeaderTable = new System.Windows.Forms.ColumnHeader();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.pnlKitchen_CompleteOrders = new System.Windows.Forms.Panel();
+            this.btnKitchen_ClearOrders = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.listViewKitchen_CompleteOrders = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.btn_readyOrder = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,11 +62,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.sidebarPanelCompleteOrder = new System.Windows.Forms.Panel();
             this.pnlKitchen_ActiveOrder = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblKitchenn_OrderNo = new System.Windows.Forms.Label();
+            this.lblKitchen_OrderTime = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.listViewKitchen_ActiveOrder = new System.Windows.Forms.ListView();
+            this.label11 = new System.Windows.Forms.Label();
             this.pnlKitchen_NewOrders.SuspendLayout();
-            this.pnlKitchen_CompleteOrders.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.pnlKitchen_CompleteOrders.SuspendLayout();
             this.sidebarPanelCompleteOrder.SuspendLayout();
             this.pnlKitchen_ActiveOrder.SuspendLayout();
             this.SuspendLayout();
@@ -82,69 +86,6 @@
             this.pnlKitchen_NewOrders.Name = "pnlKitchen_NewOrders";
             this.pnlKitchen_NewOrders.Size = new System.Drawing.Size(1844, 1157);
             this.pnlKitchen_NewOrders.TabIndex = 0;
-            // 
-            // pnlKitchen_CompleteOrders
-            // 
-            this.pnlKitchen_CompleteOrders.Controls.Add(this.btnKitchen_ClearOrders);
-            this.pnlKitchen_CompleteOrders.Controls.Add(this.label12);
-            this.pnlKitchen_CompleteOrders.Controls.Add(this.listViewKitchen_CompleteOrders);
-            this.pnlKitchen_CompleteOrders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlKitchen_CompleteOrders.Location = new System.Drawing.Point(0, 0);
-            this.pnlKitchen_CompleteOrders.Name = "pnlKitchen_CompleteOrders";
-            this.pnlKitchen_CompleteOrders.Size = new System.Drawing.Size(1844, 1157);
-            this.pnlKitchen_CompleteOrders.TabIndex = 10;
-            // 
-            // btnKitchen_ClearOrders
-            // 
-            this.btnKitchen_ClearOrders.BackColor = System.Drawing.Color.Salmon;
-            this.btnKitchen_ClearOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnKitchen_ClearOrders.Location = new System.Drawing.Point(1457, 1053);
-            this.btnKitchen_ClearOrders.Name = "btnKitchen_ClearOrders";
-            this.btnKitchen_ClearOrders.Size = new System.Drawing.Size(235, 46);
-            this.btnKitchen_ClearOrders.TabIndex = 9;
-            this.btnKitchen_ClearOrders.Text = "Clear Orders";
-            this.btnKitchen_ClearOrders.UseVisualStyleBackColor = false;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(816, 46);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(500, 87);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "Complete Orders";
-            // 
-            // listViewKitchen_CompleteOrders
-            // 
-            this.listViewKitchen_CompleteOrders.BackColor = System.Drawing.Color.White;
-            this.listViewKitchen_CompleteOrders.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listViewKitchen_CompleteOrders.HideSelection = false;
-            this.listViewKitchen_CompleteOrders.Location = new System.Drawing.Point(310, 174);
-            this.listViewKitchen_CompleteOrders.Name = "listViewKitchen_CompleteOrders";
-            this.listViewKitchen_CompleteOrders.Size = new System.Drawing.Size(1440, 819);
-            this.listViewKitchen_CompleteOrders.TabIndex = 8;
-            this.listViewKitchen_CompleteOrders.UseCompatibleStateImageBehavior = false;
-            this.listViewKitchen_CompleteOrders.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Orders";
-            this.columnHeader1.Width = 450;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Time";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 500;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 500;
             // 
             // panel1
             // 
@@ -273,6 +214,69 @@
             this.label4.Size = new System.Drawing.Size(0, 32);
             this.label4.TabIndex = 6;
             // 
+            // pnlKitchen_CompleteOrders
+            // 
+            this.pnlKitchen_CompleteOrders.Controls.Add(this.btnKitchen_ClearOrders);
+            this.pnlKitchen_CompleteOrders.Controls.Add(this.label12);
+            this.pnlKitchen_CompleteOrders.Controls.Add(this.listViewKitchen_CompleteOrders);
+            this.pnlKitchen_CompleteOrders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlKitchen_CompleteOrders.Location = new System.Drawing.Point(0, 0);
+            this.pnlKitchen_CompleteOrders.Name = "pnlKitchen_CompleteOrders";
+            this.pnlKitchen_CompleteOrders.Size = new System.Drawing.Size(1844, 1157);
+            this.pnlKitchen_CompleteOrders.TabIndex = 10;
+            // 
+            // btnKitchen_ClearOrders
+            // 
+            this.btnKitchen_ClearOrders.BackColor = System.Drawing.Color.Salmon;
+            this.btnKitchen_ClearOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnKitchen_ClearOrders.Location = new System.Drawing.Point(1457, 1053);
+            this.btnKitchen_ClearOrders.Name = "btnKitchen_ClearOrders";
+            this.btnKitchen_ClearOrders.Size = new System.Drawing.Size(235, 46);
+            this.btnKitchen_ClearOrders.TabIndex = 9;
+            this.btnKitchen_ClearOrders.Text = "Clear Orders";
+            this.btnKitchen_ClearOrders.UseVisualStyleBackColor = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(816, 46);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(500, 87);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "Complete Orders";
+            // 
+            // listViewKitchen_CompleteOrders
+            // 
+            this.listViewKitchen_CompleteOrders.BackColor = System.Drawing.Color.White;
+            this.listViewKitchen_CompleteOrders.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listViewKitchen_CompleteOrders.HideSelection = false;
+            this.listViewKitchen_CompleteOrders.Location = new System.Drawing.Point(310, 174);
+            this.listViewKitchen_CompleteOrders.Name = "listViewKitchen_CompleteOrders";
+            this.listViewKitchen_CompleteOrders.Size = new System.Drawing.Size(1440, 819);
+            this.listViewKitchen_CompleteOrders.TabIndex = 8;
+            this.listViewKitchen_CompleteOrders.UseCompatibleStateImageBehavior = false;
+            this.listViewKitchen_CompleteOrders.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Orders";
+            this.columnHeader1.Width = 450;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Time";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 500;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 500;
+            // 
             // btn_readyOrder
             // 
             this.btn_readyOrder.BackColor = System.Drawing.Color.DarkSeaGreen;
@@ -330,7 +334,7 @@
             this.btnKitchen_newOrders.Size = new System.Drawing.Size(145, 141);
             this.btnKitchen_newOrders.TabIndex = 1;
             this.btnKitchen_newOrders.UseVisualStyleBackColor = false;
-            this.btnKitchen_newOrders.Click += new System.EventHandler(this.button3_Click);
+            this.btnKitchen_newOrders.Click += new System.EventHandler(this.btnKitchen_newOrders_Click);
             // 
             // btnKitchen_ActiveOrder
             // 
@@ -342,6 +346,7 @@
             this.btnKitchen_ActiveOrder.Size = new System.Drawing.Size(145, 141);
             this.btnKitchen_ActiveOrder.TabIndex = 1;
             this.btnKitchen_ActiveOrder.UseVisualStyleBackColor = false;
+            this.btnKitchen_ActiveOrder.Click += new System.EventHandler(this.btnKitchen_ActiveOrder_Click);
             // 
             // btnKitchen_CompleteOrders
             // 
@@ -353,6 +358,7 @@
             this.btnKitchen_CompleteOrders.Size = new System.Drawing.Size(145, 141);
             this.btnKitchen_CompleteOrders.TabIndex = 1;
             this.btnKitchen_CompleteOrders.UseVisualStyleBackColor = false;
+            this.btnKitchen_CompleteOrders.Click += new System.EventHandler(this.btnKitchen_CompleteOrders_Click);
             // 
             // label8
             // 
@@ -401,6 +407,10 @@
             // 
             // pnlKitchen_ActiveOrder
             // 
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblKitchenn_OrderNo);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblKitchen_OrderTime);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.label14);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.label13);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.btn_readyOrder);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.listViewKitchen_ActiveOrder);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label11);
@@ -408,6 +418,49 @@
             this.pnlKitchen_ActiveOrder.Name = "pnlKitchen_ActiveOrder";
             this.pnlKitchen_ActiveOrder.Size = new System.Drawing.Size(1629, 1154);
             this.pnlKitchen_ActiveOrder.TabIndex = 10;
+            // 
+            // lblKitchenn_OrderNo
+            // 
+            this.lblKitchenn_OrderNo.AutoSize = true;
+            this.lblKitchenn_OrderNo.Location = new System.Drawing.Point(251, 171);
+            this.lblKitchenn_OrderNo.Name = "lblKitchenn_OrderNo";
+            this.lblKitchenn_OrderNo.Size = new System.Drawing.Size(0, 32);
+            this.lblKitchenn_OrderNo.TabIndex = 10;
+            // 
+            // lblKitchen_OrderTime
+            // 
+            this.lblKitchen_OrderTime.AutoSize = true;
+            this.lblKitchen_OrderTime.Location = new System.Drawing.Point(1302, 171);
+            this.lblKitchen_OrderTime.Name = "lblKitchen_OrderTime";
+            this.lblKitchen_OrderTime.Size = new System.Drawing.Size(0, 32);
+            this.lblKitchen_OrderTime.TabIndex = 10;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(1217, 171);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(79, 32);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Time: ";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(118, 171);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 32);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Order:";
+            // 
+            // listViewKitchen_ActiveOrder
+            // 
+            this.listViewKitchen_ActiveOrder.HideSelection = false;
+            this.listViewKitchen_ActiveOrder.Location = new System.Drawing.Point(200, 303);
+            this.listViewKitchen_ActiveOrder.Name = "listViewKitchen_ActiveOrder";
+            this.listViewKitchen_ActiveOrder.Size = new System.Drawing.Size(1202, 687);
+            this.listViewKitchen_ActiveOrder.TabIndex = 9;
+            this.listViewKitchen_ActiveOrder.UseCompatibleStateImageBehavior = false;
             // 
             // label11
             // 
@@ -420,37 +473,29 @@
             this.label11.TabIndex = 8;
             this.label11.Text = "Active order";
             // 
-            // listViewKitchen_ActiveOrder
-            // 
-            this.listViewKitchen_ActiveOrder.HideSelection = false;
-            this.listViewKitchen_ActiveOrder.Location = new System.Drawing.Point(199, 215);
-            this.listViewKitchen_ActiveOrder.Name = "listViewKitchen_ActiveOrder";
-            this.listViewKitchen_ActiveOrder.Size = new System.Drawing.Size(1202, 687);
-            this.listViewKitchen_ActiveOrder.TabIndex = 9;
-            this.listViewKitchen_ActiveOrder.UseCompatibleStateImageBehavior = false;
-            // 
             // KitchenViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1844, 1157);
-            this.Controls.Add(this.pnlKitchen_ActiveOrder);
-            this.Controls.Add(this.pnlKitchen_NewOrders);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
-            this.Controls.Add(this.pnlKitchen_CompleteOrders);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.label10);
+            this.Controls.Add(this.pnlKitchen_CompleteOrders);
+            this.Controls.Add(this.pnlKitchen_ActiveOrder);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.pnlKitchen_NewOrders);
+            this.Controls.Add(this.button4);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";
+            this.Load += new System.EventHandler(this.KitchenViewForm_Load);
             this.pnlKitchen_NewOrders.ResumeLayout(false);
             this.pnlKitchen_NewOrders.PerformLayout();
-            this.pnlKitchen_CompleteOrders.ResumeLayout(false);
-            this.pnlKitchen_CompleteOrders.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlKitchen_CompleteOrders.ResumeLayout(false);
+            this.pnlKitchen_CompleteOrders.PerformLayout();
             this.sidebarPanelCompleteOrder.ResumeLayout(false);
             this.sidebarPanelCompleteOrder.PerformLayout();
             this.pnlKitchen_ActiveOrder.ResumeLayout(false);
@@ -497,5 +542,9 @@
         private System.Windows.Forms.Panel pnlKitchen_ActiveOrder;
         private System.Windows.Forms.ListView listViewKitchen_ActiveOrder;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblKitchenn_OrderNo;
+        private System.Windows.Forms.Label lblKitchen_OrderTime;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }
