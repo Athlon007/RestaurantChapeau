@@ -31,7 +31,7 @@ namespace RestaurantChapeau
         private void DisplayListviewInformation()
         {
             orderService = new OrderLogic();
-            List<Order> orders = new List<Order>();
+            List<Order> orders = orderService.GetOrdersToPrepare();
             
             if (currentPanel == pnlKitchen_NewOrders)
             {
