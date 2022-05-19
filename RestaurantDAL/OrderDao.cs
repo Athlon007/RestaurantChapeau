@@ -125,6 +125,7 @@ namespace RestaurantDAL
         /// <summary>
         /// Registers a new order in database and returns it at the same time.
         /// </summary>
+        /// <returns>Returns a new order.</returns>
         public Order CreateNewOrderForBill(Bill bill)
         {
             string query =  "INSERT INTO dbo.[Order] (placedTime, status, billId) " +
@@ -157,6 +158,12 @@ namespace RestaurantDAL
             return order;
         }
 
+        /// <summary>
+        /// Adds a new item to an order.
+        /// </summary>
+        /// <param name="order">Order to add the item to.</param>
+        /// <param name="item">Item to add.</param>
+        /// <param name="quantity">Quantity of that item.</param>
         public void AddItemToOrder(Order order, MenuItem item, int quantity)
         {
             string query =  "INSERT INTO dbo.PartOf (orderId, menuItemId, quantity)" +
@@ -169,6 +176,60 @@ namespace RestaurantDAL
             };
 
             ExecuteEditQuery(query, parameters);
+        }
+
+        /// <summary>
+        /// Returns the list of orders that are either not started, or being prepared with all the items.
+        /// </summary>
+        public List<Order> GetOrdersToPrepare()
+        {
+            string query =  "SELECT o.[id], o.placedTime, o.status " +
+                            "FROM[Order] o " +
+                            "WHERE o.status <= 1;";
+
+            DataTable tableOrders = ExecuteSelectQuery(query);
+            List<Order> orders = new List<Order>();
+            foreach (DataRow row in tableOrders.Rows)
+            {
+                Order order = new Order();
+                order.Id = Convert.ToInt32(row["id"]);
+                order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
+                order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
+
+                // Get all items belonging to that order.
+                string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat " +
+                                            "FROM PartOf po " +
+                                            "JOIN MenuItem mi ON po.menuItemId = mi.id " +
+                                            "JOIN Vat v ON mi.vatId = v.id " +
+                                            "WHERE orderId = @OrderId;";
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                    new SqlParameter("@OrderId", order.Id)
+                };
+
+                order.Items = ReadOrderMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
+
+                orders.Add(order);
+            }
+
+            return orders;
+        }
+
+        private List<MenuItem> ReadOrderMenuItems(DataTable table)
+        {
+            List<MenuItem> items = new List<MenuItem>();
+            foreach (DataRow row in table.Rows)
+            {
+                MenuItem menuItem = new MenuItem();
+                menuItem.Id = Convert.ToInt32(row["id"]);
+                menuItem.Name = Convert.ToString(row["name"]);
+                menuItem.Vat = Convert.ToDecimal(row["vat"]);
+                menuItem.Quantity = Convert.ToInt32(row["quantity"]);
+
+                items.Add(menuItem);
+            }
+
+            return items;
         }
     }
 }
