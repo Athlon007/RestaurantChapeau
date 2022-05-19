@@ -73,5 +73,13 @@ namespace RestaurantLogic
         {
             orderDao.AddItemToOrder(order, item, quantity);
         }
+
+        /// <summary>
+        /// Returns the list of all orders that are either not started, or being prepared, with all of its items.
+        /// </summary>
+        public List<Order> GetOrdersToPrepare()
+        {
+            return orderDao.GetOrdersToPrepare();
+        }
     }
 }
