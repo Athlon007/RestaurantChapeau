@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using RestaurantLogic;
 using RestaurantModel;
+using System.Threading;
 
 namespace RestaurantChapeau
 {
@@ -14,6 +12,7 @@ namespace RestaurantChapeau
     {
         OrderLogic orderLogic;
         Bill bill;
+        bool isConnected;
 
         Font fontMenuType = new Font("Segoe UI", 12);
         Font fontMenuCategory = new Font("Segoe UI", 8);
@@ -21,8 +20,8 @@ namespace RestaurantChapeau
         public OrderView(Bill bill)
         {
             InitializeComponent();
+
             this.bill = bill;
-            orderLogic = new OrderLogic();
 
             // Hide tab view tabs.
             theTabControl.Appearance = TabAppearance.FlatButtons;
@@ -30,13 +29,32 @@ namespace RestaurantChapeau
             theTabControl.SizeMode = TabSizeMode.Fixed;
 
             OrderBasket.Instance.Clear();
-            LoadHeader();
-            LoadMenuTypes();
+
+            try
+            {
+                orderLogic = new OrderLogic();
+                LoadHeader();
+                LoadMenuTypes();
+
+                isConnected = true;
+                theTabControl.SelectedTab = tabPageMenu;
+            }
+            catch 
+            { 
+                lblConnecting.Text = "Failed to connect :(";
+            }
         }
 
         void LoadHeader()
         {
-            lblHeader.Text = $"Table {bill.Table.Id}";
+            if (theTabControl.SelectedTab == tabPageMenu)
+            {
+                lblHeader.Text = $"Table {bill.Table.Id}";
+            }
+            else if (theTabControl.SelectedTab == tabPageCheckout)
+            {
+                lblHeader.Text = $"Checkout Table {bill.Table.Id}";
+            }
         }
 
         private void LoadMenuTypes()
@@ -71,7 +89,14 @@ namespace RestaurantChapeau
             }
             (sender as Control).Enabled = false;
 
-            LoadMenuCategories((MenuType)(sender as Button).Tag);
+            try
+            {
+                LoadMenuCategories((MenuType)(sender as Button).Tag);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
         private void LoadMenuCategories(MenuType menuType)
@@ -107,9 +132,16 @@ namespace RestaurantChapeau
             }
             (sender as Control).Enabled = false;
 
-            MenuCategory category = (MenuCategory)(sender as Button).Tag;
-            MenuType menuType = category.MenuType;
-            LoadMenuItems(menuType, category);
+            try
+            {
+                MenuCategory category = (MenuCategory)(sender as Button).Tag;
+                MenuType menuType = category.MenuType;
+                LoadMenuItems(menuType, category);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
         private void LoadMenuItems(MenuType menuType, MenuCategory menuCategory)
@@ -133,7 +165,14 @@ namespace RestaurantChapeau
 
         private void btnPlaceOrder_Click(object sender, EventArgs e)
         {
-            LoadCheckout();
+            try
+            {
+                LoadCheckout();
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -170,7 +209,7 @@ namespace RestaurantChapeau
             }
 
             theTabControl.SelectedTab = tabPageCheckout;
-            lblHeader.Text = "Checkout";
+            LoadHeader();
         }
 
         private void btnFinish_Click(object sender, EventArgs e)

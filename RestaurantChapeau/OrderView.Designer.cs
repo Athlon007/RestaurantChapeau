@@ -54,6 +54,8 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.tabConnecting = new System.Windows.Forms.TabPage();
+            this.lblConnecting = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.theTabControl.SuspendLayout();
             this.tabPageMenu.SuspendLayout();
@@ -62,6 +64,7 @@
             this.tabPageCheckout.SuspendLayout();
             this.pnlColumnsCheckout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabConnecting.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -150,6 +153,7 @@
             // 
             // theTabControl
             // 
+            this.theTabControl.Controls.Add(this.tabConnecting);
             this.theTabControl.Controls.Add(this.tabPageMenu);
             this.theTabControl.Controls.Add(this.tabPageCheckout);
             this.theTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -335,6 +339,27 @@
             this.lblHeader.TabIndex = 10;
             this.lblHeader.Text = "Menu";
             // 
+            // tabConnecting
+            // 
+            this.tabConnecting.Controls.Add(this.lblConnecting);
+            this.tabConnecting.Location = new System.Drawing.Point(8, 46);
+            this.tabConnecting.Name = "tabConnecting";
+            this.tabConnecting.Size = new System.Drawing.Size(1228, 1232);
+            this.tabConnecting.TabIndex = 2;
+            this.tabConnecting.Text = "tabConnecting";
+            this.tabConnecting.UseVisualStyleBackColor = true;
+            // 
+            // lblConnecting
+            // 
+            this.lblConnecting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConnecting.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblConnecting.Location = new System.Drawing.Point(0, 0);
+            this.lblConnecting.Name = "lblConnecting";
+            this.lblConnecting.Size = new System.Drawing.Size(1228, 1232);
+            this.lblConnecting.TabIndex = 0;
+            this.lblConnecting.Text = "Connecting to server...";
+            this.lblConnecting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // OrderView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -357,6 +382,7 @@
             this.pnlColumnsCheckout.ResumeLayout(false);
             this.pnlColumnsCheckout.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tabConnecting.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -389,5 +415,7 @@
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.Label lblComment;
         private System.Windows.Forms.Label lblNumber;
+        private System.Windows.Forms.TabPage tabConnecting;
+        private System.Windows.Forms.Label lblConnecting;
     }
 }
