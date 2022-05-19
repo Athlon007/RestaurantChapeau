@@ -23,11 +23,12 @@ namespace RestaurantChapeau
         }
         public void HidePanels()
         {
-            pnl_tableView.Hide();
+            pnl_ForgotPassword.Hide();
+            pnl_Register.Hide();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            pnl_tableView.Hide();
+            HidePanels();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -35,14 +36,14 @@ namespace RestaurantChapeau
             //if the username and password fields are not empty enable and color the button
             if (txt_LoginEmail.Text != "" && txt_LoginPassword.Text != "")
             {
-                btn_login.Enabled = true;
-                btn_login.BackColor = Color.FromArgb(39, 126, 172);
+                btn_LoginLogin.Enabled = true;
+                btn_LoginLogin.BackColor = Color.FromArgb(39, 126, 172);
             }
             //else disable it
             else
             {
-                btn_login.Enabled = false;
-                btn_login.BackColor = Color.Transparent;
+                btn_LoginLogin.Enabled = false;
+                btn_LoginLogin.BackColor = Color.Transparent;
             }
         }
 
@@ -100,7 +101,7 @@ namespace RestaurantChapeau
             {
                 HidePanels();
 
-                pnl_tableView.Show();
+                pnl_ForgotPassword.Show();
 
                 txt_LoginEmail.Text = "";
                 txt_LoginPassword.Text = "";
@@ -133,15 +134,44 @@ namespace RestaurantChapeau
             //if the username and password fields are not empty enable and color the button
             if (txt_LoginEmail.Text != "" && txt_LoginPassword.Text != "")
             {
-                btn_login.Enabled = true;
-                btn_login.BackColor = Color.FromArgb(39, 126, 172);
+                btn_LoginLogin.Enabled = true;
+                btn_LoginLogin.BackColor = Color.FromArgb(39, 126, 172);
             }
             //else diable it
             else
             {
-                btn_login.Enabled = false;
-                btn_login.BackColor = Color.Transparent;
+                btn_LoginLogin.Enabled = false;
+                btn_LoginLogin.BackColor = Color.Transparent;
             }
+        }
+
+        private void btn_Register_Click(object sender, EventArgs e)
+        {
+            pnl_Register.Show();
+        }
+
+        private void btn_RegisterLogin_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+        }
+
+        private void btn_ForgotLogin_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+        }
+
+        private void btn_forgotPassword_Click(object sender, EventArgs e)
+        {
+            pnl_ForgotPassword.Show();
+        }
+
+        private void pnl_Register_Paint(object sender, PaintEventArgs e)
+        {
+
+        }       
+        private void btn_LoginRegister_Click_1(object sender, EventArgs e)
+        {
+            pnl_Register.Show();
         }
     }
 }

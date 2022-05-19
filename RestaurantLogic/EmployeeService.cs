@@ -14,6 +14,11 @@ namespace RestaurantLogic
             //create connection to database
             employeeDb = new EmployeeDao();
         }
+        //adding the user to the db
+        public void AddToRegister(string firstName, string lastName, string passwordHash, string passwordSalt, string managerId)
+        {
+            employeeDb.AddToRegister(firstName, lastName, passwordHash, passwordSalt,managerId);
+        }
         //getting the user by its username
         public Employee GetEmployeeByEmployeeName(string employeeName)
         {

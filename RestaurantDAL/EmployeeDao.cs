@@ -6,18 +6,22 @@ using System.Data;
 using RestaurantModel;
 
 namespace RestaurantDAL
-{
+{   
     public class EmployeeDao : BaseDao
     {
-        //private SqlConnection connection;
-        //public EmployeeDao()
-        //{
-        //    connection = new SqlConnection();
-        //}
-        //getting the user from the db by the employeeName, in order to get the salt
-        public Employee GetEmployeeByEmployeeName(string employeeName)
+
+        //adding a new user to the db
+        public void AddToRegister(string firstName, string lastName, string passwordHash, string passwordSalt, string managerId)
         {
-            string query = $"SELECT Username, Password, Salt, Role FROM [User] WHERE Username ='{employeeName}'";
+
+            string query = $"INSERT INTO [Employee] (firstName, lastName, passwordHash, passwordSalt, managerId) VALUES ('{firstName}', '{lastName}', '{passwordHash}', '{passwordSalt}', '{managerId}')";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        //getting the user from the db by the employeeName, in order to get the salt
+        public Employee GetEmployeeByEmployeeName(string firstName)
+        {
+            string query = $"SELECT firstName, lastName, passwordHash, passwordSalt, managerId FROM [Employee] WHERE firstName ='{firstName}'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -25,7 +29,7 @@ namespace RestaurantDAL
         //getting a list of all the employees
         public List<Employee> GetAllEmployees()
         {
-            string query = $"SELECT Username, Password, Salt, Role FROM [User]";
+            string query = $"SELECT firstName, lastName, passwordHash, passwordSalt, managerId FROM [Employee]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
