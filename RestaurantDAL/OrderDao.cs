@@ -61,7 +61,7 @@ namespace RestaurantDAL
 
         public List<MenuItem> GetMenuItems(int menuTypeId, int menuCategoryId)
         {
-            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat " +
+            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " + 
                             "JOIN Menu m ON m.menuItemId = mi.id " +
@@ -79,12 +79,7 @@ namespace RestaurantDAL
             List<MenuItem> menuItems = new List<MenuItem>();
             foreach (DataRow dr in table.Rows)
             {
-                MenuItem item = new MenuItem();
-                item.Id = Convert.ToInt32(dr["id"]);
-                item.Name = (string)dr["name"];
-                item.PriceBrutto = Convert.ToDecimal(dr["priceBrutto"]);
-                item.Vat = Convert.ToDecimal(dr["vat"]);
-
+                MenuItem item = ReadMenuItem(dr);
                 menuItems.Add(item);
             }
 
@@ -93,7 +88,7 @@ namespace RestaurantDAL
 
         public MenuItem GetMenuItemById(int itemId)
         {
-            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat " +
+            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " +
                             "WHERE mi.[id] = @ItemId;";
@@ -103,21 +98,32 @@ namespace RestaurantDAL
                 new SqlParameter("@ItemId", itemId)
             };
 
-            return ReadMenuItem(ExecuteSelectQuery(query, parameters));
+
+            DataTable table = ExecuteSelectQuery(query, parameters);
+            if (table.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            return ReadMenuItem(table.Rows[0]);
         }
 
-        private MenuItem ReadMenuItem(DataTable table)
+        private MenuItem ReadMenuItem(DataRow row)
         {
-            if (table.Rows.Count == 0)
+            if (row == null)
             {
                 throw new NoNullAllowedException("Menu item not found!");
             }
 
             MenuItem menuItem = new MenuItem();
-            menuItem.Id = Convert.ToInt32(table.Rows[0]["id"]);
-            menuItem.Name = (string)table.Rows[0]["name"];
-            menuItem.PriceBrutto = Convert.ToDecimal(table.Rows[0]["priceBrutto"]);
-            menuItem.Vat = Convert.ToDecimal(table.Rows[0]["vat"]);
+            menuItem.Id = Convert.ToInt32(row["id"]);
+            menuItem.Name = (string)row["name"];
+            menuItem.PriceBrutto = Convert.ToDecimal(row["priceBrutto"]);
+            menuItem.Vat = Convert.ToDecimal(row["vat"]);
+            if (!Convert.IsDBNull(row["isDrink"]))
+            {
+                menuItem.IsDrink = Convert.ToBoolean(row["isDrink"]);
+            }
 
             return menuItem;
         }
@@ -197,7 +203,7 @@ namespace RestaurantDAL
                 order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
 
                 // Get all items belonging to that order.
-                string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat " +
+                string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink " +
                                             "FROM PartOf po " +
                                             "JOIN MenuItem mi ON po.menuItemId = mi.id " +
                                             "JOIN Vat v ON mi.vatId = v.id " +
@@ -207,29 +213,12 @@ namespace RestaurantDAL
                     new SqlParameter("@OrderId", order.Id)
                 };
 
-                order.Items = ReadOrderMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
+                order.Items = ReadMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
 
                 orders.Add(order);
             }
 
             return orders;
-        }
-
-        private List<MenuItem> ReadOrderMenuItems(DataTable table)
-        {
-            List<MenuItem> items = new List<MenuItem>();
-            foreach (DataRow row in table.Rows)
-            {
-                MenuItem menuItem = new MenuItem();
-                menuItem.Id = Convert.ToInt32(row["id"]);
-                menuItem.Name = Convert.ToString(row["name"]);
-                menuItem.Vat = Convert.ToDecimal(row["vat"]);
-                menuItem.Quantity = Convert.ToInt32(row["quantity"]);
-
-                items.Add(menuItem);
-            }
-
-            return items;
         }
     }
 }
