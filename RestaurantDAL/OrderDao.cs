@@ -61,7 +61,7 @@ namespace RestaurantDAL
 
         public List<MenuItem> GetMenuItems(int menuTypeId, int menuCategoryId)
         {
-            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, m.isDrink " +
+            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " + 
                             "JOIN Menu m ON m.menuItemId = mi.id " +
