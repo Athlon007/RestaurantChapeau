@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\RestaurantDAL\RestaurantDAL.csproj" />
     <ProjectReference Include="..\RestaurantModel\RestaurantModel.csproj" />
   </ItemGroup>

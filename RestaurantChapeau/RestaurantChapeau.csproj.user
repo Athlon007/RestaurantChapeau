@@ -5,6 +5,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TableViewForm.cs">
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="KitchenViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OrderView.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
