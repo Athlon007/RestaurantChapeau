@@ -39,6 +39,8 @@
             this.btnPlaceOrder = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.theTabControl = new System.Windows.Forms.TabControl();
+            this.tabConnecting = new System.Windows.Forms.TabPage();
+            this.lblConnecting = new System.Windows.Forms.Label();
             this.tabPageMenu = new System.Windows.Forms.TabPage();
             this.pnlColumns = new System.Windows.Forms.Panel();
             this.lblNumber = new System.Windows.Forms.Label();
@@ -54,17 +56,15 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
             this.lblHeader = new System.Windows.Forms.Label();
-            this.tabConnecting = new System.Windows.Forms.TabPage();
-            this.lblConnecting = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.theTabControl.SuspendLayout();
+            this.tabConnecting.SuspendLayout();
             this.tabPageMenu.SuspendLayout();
             this.pnlColumns.SuspendLayout();
             this.tlpPlaceCancelOrder.SuspendLayout();
             this.tabPageCheckout.SuspendLayout();
             this.pnlColumnsCheckout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tabConnecting.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -135,7 +135,7 @@
             this.btnPlaceOrder.Name = "btnPlaceOrder";
             this.btnPlaceOrder.Size = new System.Drawing.Size(605, 108);
             this.btnPlaceOrder.TabIndex = 7;
-            this.btnPlaceOrder.Text = "Basket";
+            this.btnPlaceOrder.Text = "View Order";
             this.btnPlaceOrder.UseVisualStyleBackColor = true;
             this.btnPlaceOrder.Click += new System.EventHandler(this.btnPlaceOrder_Click);
             // 
@@ -162,6 +162,27 @@
             this.theTabControl.SelectedIndex = 0;
             this.theTabControl.Size = new System.Drawing.Size(1244, 1286);
             this.theTabControl.TabIndex = 9;
+            // 
+            // tabConnecting
+            // 
+            this.tabConnecting.Controls.Add(this.lblConnecting);
+            this.tabConnecting.Location = new System.Drawing.Point(8, 46);
+            this.tabConnecting.Name = "tabConnecting";
+            this.tabConnecting.Size = new System.Drawing.Size(1228, 1232);
+            this.tabConnecting.TabIndex = 2;
+            this.tabConnecting.Text = "tabConnecting";
+            this.tabConnecting.UseVisualStyleBackColor = true;
+            // 
+            // lblConnecting
+            // 
+            this.lblConnecting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConnecting.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblConnecting.Location = new System.Drawing.Point(0, 0);
+            this.lblConnecting.Name = "lblConnecting";
+            this.lblConnecting.Size = new System.Drawing.Size(1228, 1232);
+            this.lblConnecting.TabIndex = 0;
+            this.lblConnecting.Text = "Connecting to server...";
+            this.lblConnecting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPageMenu
             // 
@@ -339,27 +360,6 @@
             this.lblHeader.TabIndex = 10;
             this.lblHeader.Text = "Menu";
             // 
-            // tabConnecting
-            // 
-            this.tabConnecting.Controls.Add(this.lblConnecting);
-            this.tabConnecting.Location = new System.Drawing.Point(8, 46);
-            this.tabConnecting.Name = "tabConnecting";
-            this.tabConnecting.Size = new System.Drawing.Size(1228, 1232);
-            this.tabConnecting.TabIndex = 2;
-            this.tabConnecting.Text = "tabConnecting";
-            this.tabConnecting.UseVisualStyleBackColor = true;
-            // 
-            // lblConnecting
-            // 
-            this.lblConnecting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblConnecting.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblConnecting.Location = new System.Drawing.Point(0, 0);
-            this.lblConnecting.Name = "lblConnecting";
-            this.lblConnecting.Size = new System.Drawing.Size(1228, 1232);
-            this.lblConnecting.TabIndex = 0;
-            this.lblConnecting.Text = "Connecting to server...";
-            this.lblConnecting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // OrderView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -371,8 +371,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "OrderView";
             this.Text = "OrderView";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderView_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.theTabControl.ResumeLayout(false);
+            this.tabConnecting.ResumeLayout(false);
             this.tabPageMenu.ResumeLayout(false);
             this.pnlColumns.ResumeLayout(false);
             this.pnlColumns.PerformLayout();
@@ -382,7 +384,6 @@
             this.pnlColumnsCheckout.ResumeLayout(false);
             this.pnlColumnsCheckout.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tabConnecting.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

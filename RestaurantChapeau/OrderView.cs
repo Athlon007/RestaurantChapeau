@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using RestaurantLogic;
 using RestaurantModel;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RestaurantChapeau
 {
@@ -12,7 +13,9 @@ namespace RestaurantChapeau
     {
         OrderLogic orderLogic;
         Bill bill;
-        bool isConnected;
+
+        MenuType currentMenuType;
+        MenuCategory currentMenuCategory;
 
         Font fontMenuType = new Font("Segoe UI", 12);
         Font fontMenuCategory = new Font("Segoe UI", 8);
@@ -20,6 +23,11 @@ namespace RestaurantChapeau
         public OrderView(Bill bill)
         {
             InitializeComponent();
+
+            if (bill == null)
+            {
+                throw new NullReferenceException("Bill must be provided!");
+            }
 
             this.bill = bill;
 
@@ -29,32 +37,48 @@ namespace RestaurantChapeau
             theTabControl.SizeMode = TabSizeMode.Fixed;
 
             OrderBasket.Instance.Clear();
+            OrderBasket.Instance.AddListener(this);
 
             try
             {
-                orderLogic = new OrderLogic();
-                LoadHeader();
-                LoadMenuTypes();
-
-                isConnected = true;
-                theTabControl.SelectedTab = tabPageMenu;
+                Task.Run(() => AttemptConnect());
             }
-            catch 
+            catch (Exception ex)
             { 
                 lblConnecting.Text = "Failed to connect :(";
+                ErrorLogger.Instance.WriteError(ex, false);
+            }
+        }
+
+        void AttemptConnect()
+        {
+            orderLogic = new OrderLogic();
+
+            if (lblHeader.InvokeRequired)
+            {
+                Action safeLoad = delegate { LoadGUI(); };
+                lblHeader.Invoke(safeLoad);
+            }
+        }
+
+        void LoadGUI()
+        {
+            LoadHeader();
+            try
+            {
+                LoadMenuTypes();
+                theTabControl.SelectedTab = tabPageMenu;
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
             }
         }
 
         void LoadHeader()
         {
-            if (theTabControl.SelectedTab == tabPageMenu)
-            {
-                lblHeader.Text = $"Table {bill.Table.Id}";
-            }
-            else if (theTabControl.SelectedTab == tabPageCheckout)
-            {
-                lblHeader.Text = $"Checkout Table {bill.Table.Id}";
-            }
+            string headerText = theTabControl.SelectedTab == tabPageMenu ? $"Table {bill.Table.Id}" : $"Checkout Table {bill.Table.Id}";
+            lblHeader.Text = headerText;
         }
 
         private void LoadMenuTypes()
@@ -89,9 +113,11 @@ namespace RestaurantChapeau
             }
             (sender as Control).Enabled = false;
 
+            currentMenuType = (MenuType)(sender as Button).Tag;
+
             try
             {
-                LoadMenuCategories((MenuType)(sender as Button).Tag);
+                LoadMenuCategories(currentMenuType);
             }
             catch (Exception ex)
             {
@@ -132,11 +158,11 @@ namespace RestaurantChapeau
             }
             (sender as Control).Enabled = false;
 
+            currentMenuCategory = (MenuCategory)(sender as Button).Tag;
+
             try
             {
-                MenuCategory category = (MenuCategory)(sender as Button).Tag;
-                MenuType menuType = category.MenuType;
-                LoadMenuItems(menuType, category);
+                LoadMenuItems(currentMenuType, currentMenuCategory);
             }
             catch (Exception ex)
             {
@@ -147,6 +173,11 @@ namespace RestaurantChapeau
         private void LoadMenuItems(MenuType menuType, MenuCategory menuCategory)
         {
             ClearMenuItems();
+
+            if (menuType == null || menuCategory == null)
+            {
+                return;
+            }
 
             List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
 
@@ -198,9 +229,8 @@ namespace RestaurantChapeau
             else
             {
                 int count = 1;
-                foreach (KeyValuePair<int, int> key in OrderBasket.Instance.GetAll())
+                foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
                 {
-                    MenuItem menuItem = orderLogic.GetMenuItem(key.Key);
                     new MenuItemUIControl(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
                     count++;
                 }
@@ -214,14 +244,14 @@ namespace RestaurantChapeau
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            // TODO: Record order into database
             Order order = orderLogic.CreateNewOrderForBill(bill);
 
-            foreach (KeyValuePair<int, int> basketItem in OrderBasket.Instance.GetAll())
+            foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
             {
-                MenuItem menuItem = orderLogic.GetMenuItem(basketItem.Key);
-                orderLogic.AddItemToOrder(order, menuItem, basketItem.Value);
+                orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
             }
+
+            OrderBasket.Instance.Clear();
 
             this.Close();
         }
@@ -230,6 +260,34 @@ namespace RestaurantChapeau
         {
             theTabControl.SelectedTab = tabPageMenu;
             LoadHeader();
+
+            try
+            {
+                LoadMenuItems(currentMenuType, currentMenuCategory);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
+        }
+
+        private void OrderView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (OrderBasket.Instance.Count > 0)
+            {
+                DialogResult dl = MessageBox.Show("You have selected items to order.\n\nAre you sure you want to cancel this order?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dl == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        public void UpdateUI()
+        {
+            btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
+            btnFinish.Enabled = OrderBasket.Instance.Count > 0;
         }
     }
 }
