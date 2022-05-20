@@ -11,17 +11,17 @@ namespace RestaurantDAL
     {
 
         //adding a new user to the db
-        public void AddToRegister(string firstName, string lastName, string passwordHash, string passwordSalt, string managerId)
+        public void AddToRegister(string firstName, string lastName, string email,string passwordHash, string passwordSalt)
         {
 
-            string query = $"INSERT INTO [Employee] (firstName, lastName, passwordHash, passwordSalt, managerId) VALUES ('{firstName}', '{lastName}', '{passwordHash}', '{passwordSalt}', '{managerId}')";
+            string query = $"INSERT INTO [Employee] (firstName, lastName, email, passwordHash, passwordSalt) VALUES ('{firstName}', '{lastName}', '{email}', '{passwordHash}', '{passwordSalt}')";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the user from the db by the employeeName, in order to get the salt
         public Employee GetEmployeeByEmployeeName(string firstName)
         {
-            string query = $"SELECT firstName, lastName, passwordHash, passwordSalt, managerId FROM [Employee] WHERE firstName ='{firstName}'";
+            string query = $"SELECT firstName, lastName, email, passwordHash, passwordSalt FROM [Employee] WHERE firstName ='{firstName}'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -29,7 +29,7 @@ namespace RestaurantDAL
         //getting a list of all the employees
         public List<Employee> GetAllEmployees()
         {
-            string query = $"SELECT firstName, lastName, passwordHash, passwordSalt, managerId FROM [Employee]";
+            string query = $"SELECT firstName, lastName, email, passwordHash, passwordSalt FROM [Employee]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -48,9 +48,8 @@ namespace RestaurantDAL
                     lastName = (string)(dr["lastName"]),
                     email = (string)(dr["email"]),
                     passwordHash = (string)(dr["passwordHash"]),
-                    passwordSalt = (string)(dr["managerId"]),
-                    managerId = (string)(dr["managerId"])
-                };
+                    passwordSalt = (string)(dr["passwordSalt"])
+            };
                 employees.Add(employee);
             }
             return employees;
@@ -68,7 +67,6 @@ namespace RestaurantDAL
                 employee.email = (string)(dr["email"]);
                 employee.passwordHash = (string)(dr["passwordHash"]);
                 employee.passwordSalt = (string)(dr["passwordSalt"]);
-                employee.managerId = (string)(dr["managerId"]);
             }
             else
             {
