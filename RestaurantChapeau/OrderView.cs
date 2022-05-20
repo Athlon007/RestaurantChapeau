@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using RestaurantLogic;
 using RestaurantModel;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RestaurantChapeau
 {
@@ -32,12 +33,7 @@ namespace RestaurantChapeau
 
             try
             {
-                orderLogic = new OrderLogic();
-                LoadHeader();
-                LoadMenuTypes();
-
-                isConnected = true;
-                theTabControl.SelectedTab = tabPageMenu;
+                Task.Run(() => AttemptConnect());
             }
             catch 
             { 
@@ -45,16 +41,30 @@ namespace RestaurantChapeau
             }
         }
 
+        void AttemptConnect()
+        {
+            orderLogic = new OrderLogic();
+
+            if (lblHeader.InvokeRequired)
+            {
+                Action safeLoad = delegate { LoadGUI(); };
+                lblHeader.Invoke(safeLoad);
+            }
+        }
+
+        void LoadGUI()
+        {
+            LoadHeader();
+            LoadMenuTypes();
+
+            isConnected = true;
+            theTabControl.SelectedTab = tabPageMenu;
+        }
+
         void LoadHeader()
         {
-            if (theTabControl.SelectedTab == tabPageMenu)
-            {
-                lblHeader.Text = $"Table {bill.Table.Id}";
-            }
-            else if (theTabControl.SelectedTab == tabPageCheckout)
-            {
-                lblHeader.Text = $"Checkout Table {bill.Table.Id}";
-            }
+            string headerText = theTabControl.SelectedTab == tabPageMenu ? $"Table {bill.Table.Id}" : $"Checkout Table {bill.Table.Id}";
+            lblHeader.Text = headerText;
         }
 
         private void LoadMenuTypes()
