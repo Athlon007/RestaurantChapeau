@@ -28,6 +28,8 @@ namespace RestaurantChapeau
 
         private OrderBasket() { }
 
+        private List<OrderView> listeners = new List<OrderView>();
+
         /// <summary>
         /// Add ONE of the specified item.
         /// </summary>
@@ -48,6 +50,8 @@ namespace RestaurantChapeau
             {
                 itemsInBasket.Add(item.Id, 1);
             }
+
+            UpdateListeners();
         }
 
         /// <summary>
@@ -67,6 +71,8 @@ namespace RestaurantChapeau
                     itemsInBasket.Remove(item.Id);
                 }
             }
+
+            UpdateListeners();
         }
 
         /// <summary>
@@ -97,6 +103,8 @@ namespace RestaurantChapeau
                 // Set the count to the max allowed.
                 itemsInBasket[item.Id] = MaximumQuantity;
             }
+
+            UpdateListeners();
         }
 
         /// <summary>
@@ -130,6 +138,45 @@ namespace RestaurantChapeau
         public Dictionary<int, int> GetAll()
         {
             return itemsInBasket;
+        }
+
+        //public int Count => itemsInBasket.Count;
+
+        public int Count
+        {
+            get
+            {
+                int count = 0;
+                foreach (KeyValuePair<int, int> item in itemsInBasket)
+                {
+                    count += item.Value;
+                }
+
+                return count;
+            }
+        }
+
+        public void AddListener(OrderView view)
+        {
+            listeners.Add(view);
+
+            UpdateListeners();
+        }
+
+        public void RemoveListener(OrderView view)
+        {
+            if (listeners.Contains(view))
+            {
+                listeners.Remove(view);
+            }
+        }
+
+        private void UpdateListeners()
+        {
+            foreach (OrderView view in listeners)
+            {
+                view.UpdateViewOrderButton();
+            }
         }
     }
 }

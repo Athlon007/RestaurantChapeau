@@ -30,6 +30,7 @@ namespace RestaurantChapeau
             theTabControl.SizeMode = TabSizeMode.Fixed;
 
             OrderBasket.Instance.Clear();
+            OrderBasket.Instance.AddListener(this);
 
             try
             {
@@ -224,7 +225,6 @@ namespace RestaurantChapeau
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            // TODO: Record order into database
             Order order = orderLogic.CreateNewOrderForBill(bill);
 
             foreach (KeyValuePair<int, int> basketItem in OrderBasket.Instance.GetAll())
@@ -233,6 +233,8 @@ namespace RestaurantChapeau
                 orderLogic.AddItemToOrder(order, menuItem, basketItem.Value);
             }
 
+            OrderBasket.Instance.Clear();
+
             this.Close();
         }
 
@@ -240,6 +242,24 @@ namespace RestaurantChapeau
         {
             theTabControl.SelectedTab = tabPageMenu;
             LoadHeader();
+        }
+
+        private void OrderView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (OrderBasket.Instance.Count > 0)
+            {
+                DialogResult dl = MessageBox.Show("You have selected items to order.\n\nAre you sure you want to cancel this order?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dl == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        public void UpdateViewOrderButton()
+        {
+            btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
         }
     }
 }
