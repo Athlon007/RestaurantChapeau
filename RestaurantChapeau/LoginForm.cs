@@ -228,14 +228,14 @@ namespace RestaurantChapeau
         {
             try
             {
-                //create connection to user layer
+                //create connection to employee layer
                 EmployeeService employeeService = new EmployeeService();
 
                 //store the entered username and password
                 string email = txt_LoginEmail.Text;
                 string enteredPassword = txt_LoginPassword.Text;
 
-                //get the user by the entered username
+                //get the user by the entered employeename
                 Employee employee = employeeService.GetEmployeeByEmployeeName(email);
 
                 //password hasher
@@ -246,7 +246,7 @@ namespace RestaurantChapeau
                 {
                     MessageBox.Show("Login successful!");
 
-                    //the current user becomes the entered user
+                    //the current user becomes the entered employee
                     currentEmployee = employee;
 
                     //hide the panels and show the dashboard again
