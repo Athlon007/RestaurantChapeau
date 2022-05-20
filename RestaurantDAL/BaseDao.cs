@@ -8,7 +8,7 @@ namespace RestaurantDAL
     public abstract class BaseDao
     {
         private SqlDataAdapter adapter;
-        private SqlConnection connection;
+        private SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChapeauDatabase"].ConnectionString);
 
         public BaseDao()
         {
