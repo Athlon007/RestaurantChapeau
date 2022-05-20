@@ -61,7 +61,7 @@ namespace RestaurantDAL
 
         public List<MenuItem> GetMenuItems(int menuTypeId, int menuCategoryId)
         {
-            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat " +
+            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, m.isDrink " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " + 
                             "JOIN Menu m ON m.menuItemId = mi.id " +
@@ -84,6 +84,7 @@ namespace RestaurantDAL
                 item.Name = (string)dr["name"];
                 item.PriceBrutto = Convert.ToDecimal(dr["priceBrutto"]);
                 item.Vat = Convert.ToDecimal(dr["vat"]);
+                item.IsDrink = Convert.ToBoolean(dr["isDrink"]);
 
                 menuItems.Add(item);
             }
@@ -93,7 +94,7 @@ namespace RestaurantDAL
 
         public MenuItem GetMenuItemById(int itemId)
         {
-            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat " +
+            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " +
                             "WHERE mi.[id] = @ItemId;";
@@ -118,6 +119,7 @@ namespace RestaurantDAL
             menuItem.Name = (string)table.Rows[0]["name"];
             menuItem.PriceBrutto = Convert.ToDecimal(table.Rows[0]["priceBrutto"]);
             menuItem.Vat = Convert.ToDecimal(table.Rows[0]["vat"]);
+            menuItem.IsDrink = Convert.ToBoolean(table.Rows[0]["isDrink"]);
 
             return menuItem;
         }
@@ -197,7 +199,7 @@ namespace RestaurantDAL
                 order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
 
                 // Get all items belonging to that order.
-                string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat " +
+                string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink " +
                                             "FROM PartOf po " +
                                             "JOIN MenuItem mi ON po.menuItemId = mi.id " +
                                             "JOIN Vat v ON mi.vatId = v.id " +
@@ -225,6 +227,7 @@ namespace RestaurantDAL
                 menuItem.Name = Convert.ToString(row["name"]);
                 menuItem.Vat = Convert.ToDecimal(row["vat"]);
                 menuItem.Quantity = Convert.ToInt32(row["quantity"]);
+                menuItem.IsDrink = Convert.ToBoolean(row["isDrink"]);
 
                 items.Add(menuItem);
             }
