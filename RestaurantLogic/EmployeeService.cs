@@ -20,9 +20,9 @@ namespace RestaurantLogic
             employeeDb.AddToRegister(firstName, lastName,email, passwordHash, passwordSalt);
         }
         //getting the user by its username
-        public Employee GetEmployeeByEmployeeName(string employeeName)
+        public Employee GetEmployeeByEmployeeName(string email)
         {
-            return employeeDb.GetEmployeeByEmployeeName(employeeName);
+            return employeeDb.GetEmployeeByEmployeeName(email);
         }
 
         //getting the list of all users

@@ -54,50 +54,7 @@ namespace RestaurantChapeau
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //create connection to user layer
-                EmployeeService employeeService = new EmployeeService();
 
-                //store the entered username and password
-                string email = txt_LoginEmail.Text;
-                string enteredPassword = txt_LoginPassword.Text;
-
-                //get the user by the entered username
-                Employee employee = employeeService.GetEmployeeByEmployeeName(email);
-
-                //password hasher
-                PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
-
-                //if the entered password matches the one in the db
-                if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
-                {
-                    MessageBox.Show("Login successful!");
-
-                    //the current user becomes the entered user
-                    currentEmployee = employee;
-
-                    //hide the panels and show the dashboard again
-                    HidePanels();
-                    TableViewForm tableView = new TableViewForm();
-                    tableView.Show();
-                  
-                }
-                else
-                    MessageBox.Show("Login failed.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Login failed: {ex.Message}");
-
-                //clear the text boxes
-                txt_LoginEmail.Text = "";
-                txt_LoginPassword.Text = "";                
-
-            }
-        }
         private void showPanel(string panelName)
         {
             if(panelName == "tableView")
@@ -109,24 +66,7 @@ namespace RestaurantChapeau
                 txt_LoginEmail.Text = "";
                 txt_LoginPassword.Text = "";
             }
-        }
-        private void LogError(Exception ex)
-        {
-            string message = string.Format($"Time: {DateTime.Now:dd/MM/yyyy hh:mm:ss tt}");
-            message += Environment.NewLine;
-            message += "-----------------------------------------------------------";
-            message += Environment.NewLine;
-            message += string.Format($"Message: {ex.Message}");
-            message += Environment.NewLine;
-            message += "-----------------------------------------------------------";
-            message += Environment.NewLine;
-            string path = "../../../ErrorLog.txt";
-            using (StreamWriter writer = new StreamWriter(path, true))
-            {
-                writer.WriteLine(message);
-                writer.Close();
-            }
-        }
+        }        
         private void button3_Click(object sender, EventArgs e)
         {
 
@@ -281,6 +221,52 @@ namespace RestaurantChapeau
 
         private void btn_ForgotChange_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btn_LoginLogin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //create connection to user layer
+                EmployeeService employeeService = new EmployeeService();
+
+                //store the entered username and password
+                string email = txt_LoginEmail.Text;
+                string enteredPassword = txt_LoginPassword.Text;
+
+                //get the user by the entered username
+                Employee employee = employeeService.GetEmployeeByEmployeeName(email);
+
+                //password hasher
+                PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
+
+                //if the entered password matches the one in the db
+                if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
+                {
+                    MessageBox.Show("Login successful!");
+
+                    //the current user becomes the entered user
+                    currentEmployee = employee;
+
+                    //hide the panels and show the dashboard again
+                    HidePanels();
+                    TableViewForm tableView = new TableViewForm();
+                    tableView.Show();
+
+                }
+                else
+                    MessageBox.Show("Login failed.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Login failed: {ex.Message}");
+
+                //clear the text boxes
+                txt_LoginEmail.Text = "";
+                txt_LoginPassword.Text = "";
+
+            }
 
         }
     }

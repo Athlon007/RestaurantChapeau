@@ -97,7 +97,7 @@
             this.btn_LoginLogin.TabIndex = 2;
             this.btn_LoginLogin.Text = "Login";
             this.btn_LoginLogin.UseVisualStyleBackColor = false;
-            this.btn_LoginLogin.Click += new System.EventHandler(this.button1_Click);
+            this.btn_LoginLogin.Click += new System.EventHandler(this.btn_LoginLogin_Click);
             // 
             // btn_LoginForgot
             // 
@@ -163,7 +163,6 @@
             this.pnl_ForgotPassword.Controls.Add(this.textBox2);
             this.pnl_ForgotPassword.Controls.Add(this.textBox1);
             this.pnl_ForgotPassword.Controls.Add(this.pictureBox3);
-            this.pnl_ForgotPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_ForgotPassword.Location = new System.Drawing.Point(0, 0);
             this.pnl_ForgotPassword.Name = "pnl_ForgotPassword";
             this.pnl_ForgotPassword.Size = new System.Drawing.Size(726, 1055);
@@ -268,7 +267,6 @@
             this.pnl_Register.Controls.Add(this.txt_RegisterEmail);
             this.pnl_Register.Controls.Add(this.txt_RegisterLastName);
             this.pnl_Register.Controls.Add(this.txt_RegisterFirstName);
-            this.pnl_Register.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_Register.Location = new System.Drawing.Point(0, 0);
             this.pnl_Register.Name = "pnl_Register";
             this.pnl_Register.Size = new System.Drawing.Size(726, 1055);
@@ -397,8 +395,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
-            this.Controls.Add(this.pnl_Register);
             this.Controls.Add(this.pnl_ForgotPassword);
+            this.Controls.Add(this.pnl_Register);
             this.Controls.Add(this.btn_LoginRegister);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);

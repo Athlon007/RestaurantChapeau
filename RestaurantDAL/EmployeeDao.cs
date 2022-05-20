@@ -19,10 +19,13 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the user from the db by the employeeName, in order to get the salt
-        public Employee GetEmployeeByEmployeeName(string firstName)
+        public Employee GetEmployeeByEmployeeName(string email)
         {
-            string query = $"SELECT firstName, lastName, email, passwordHash, passwordSalt FROM dbo.[Employee] WHERE firstName ='{firstName}'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"SELECT firstName, lastName, email, passwordHash, passwordSalt FROM dbo.[Employee] WHERE email = @email";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@email", email)
+            };
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
 
