@@ -246,11 +246,12 @@ namespace RestaurantChapeau
                 {
                     MessageBox.Show("Login successful!");
 
-                    //the current user becomes the entered employee
+                    //the current employee becomes the entered employee
                     currentEmployee = employee;
 
-                    //hide the panels and show the dashboard again
+                    //hide the panels and form, display form of tableView
                     HidePanels();
+                    this.Hide();
                     TableViewForm tableView = new TableViewForm();
                     tableView.Show();
 
