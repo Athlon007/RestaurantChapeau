@@ -77,5 +77,9 @@ namespace RestaurantDAL
             }
             return employee;
         }
+        public void GitHub()
+        {
+
+        }
     }
 }
