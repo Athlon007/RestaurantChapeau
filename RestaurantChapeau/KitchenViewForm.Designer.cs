@@ -172,12 +172,14 @@
             this.columnHeaderTime,
             this.columnHeaderTable});
             this.listViewNewOrders.HideSelection = false;
+            this.listViewNewOrders.HoverSelection = true;
             this.listViewNewOrders.Location = new System.Drawing.Point(310, 174);
             this.listViewNewOrders.Name = "listViewNewOrders";
             this.listViewNewOrders.Size = new System.Drawing.Size(1440, 819);
             this.listViewNewOrders.TabIndex = 8;
             this.listViewNewOrders.UseCompatibleStateImageBehavior = false;
             this.listViewNewOrders.View = System.Windows.Forms.View.Details;
+            this.listViewNewOrders.SelectedIndexChanged += new System.EventHandler(this.listViewNewOrders_SelectedIndexChanged);
             // 
             // colHeadOrders
             // 
@@ -192,6 +194,7 @@
             // 
             // columnHeaderTable
             // 
+            this.columnHeaderTable.Text = "Status";
             this.columnHeaderTable.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeaderTable.Width = 500;
             // 
@@ -480,11 +483,11 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1844, 1157);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
+            this.Controls.Add(this.pnlKitchen_NewOrders);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Controls.Add(this.pnlKitchen_ActiveOrder);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.pnlKitchen_NewOrders);
             this.Controls.Add(this.button4);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";

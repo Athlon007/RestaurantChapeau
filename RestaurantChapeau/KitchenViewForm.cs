@@ -13,8 +13,8 @@ namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
     {
-       private OrderStatus orderStatus;
-       private Panel currentPanel;
+        private OrderStatus orderStatus;
+        private Panel currentPanel;
         private OrderLogic orderService;
         public KitchenViewForm()
         {
@@ -28,39 +28,36 @@ namespace RestaurantChapeau
             pnlKitchen_CompleteOrders.Hide();
             pnlKitchen_ActiveOrder.Hide();
         }
-        private void DisplayListviewInformation()
+        public void DisplayListviewInformation()
         {
             orderService = new OrderLogic();
             List<Order> orders = orderService.GetOrdersToPrepare();
-            
-            if (currentPanel == pnlKitchen_NewOrders)
-            {
+
                 foreach (Order order in orders)
                 {
                     //clear the listview
-                    listViewKitchen_CompleteOrders.Clear();
+                    listViewNewOrders.Items.Clear();
 
                     //create new listview item and add the items to the listview item
                     ListViewItem li = new ListViewItem(order.Id.ToString());
                     li.SubItems.Add(order.PlacedTime.ToString());
+                    li.SubItems.Add(order.Status.ToString());
 
-                    if (order.Status==0)
-                    {
-                        orderStatus=OrderStatus.NotStarted;
-                        li.SubItems.Add(orderStatus.ToString());
-                    }
+                    //if (order.Status == 0)
+                    //{
+                    //    orderStatus = OrderStatus.NotStarted;
+                    //    li.SubItems.Add(orderStatus.ToString());
+                    //}
                     //add listview items to the listview
-                    listViewKitchen_ActiveOrder.Items.Add(li);  
+                    listViewNewOrders.Items.Add(li);
                 }
-               
-            }
-
         }
 
         private void KitchenViewForm_Load(object sender, EventArgs e)
         {
-            currentPanel = pnlKitchen_CompleteOrders;
-            pnlKitchen_CompleteOrders.Show();
+            HidePanels();
+            currentPanel = pnlKitchen_NewOrders;
+            pnlKitchen_NewOrders.Show();
         }
 
         private void btnKitchen_newOrders_Click(object sender, EventArgs e)
@@ -82,6 +79,11 @@ namespace RestaurantChapeau
         {
             HidePanels();
             pnlKitchen_CompleteOrders.Show();
+        }
+
+        private void listViewNewOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pnlKitchen_ActiveOrder.Show();
         }
     }
 }
