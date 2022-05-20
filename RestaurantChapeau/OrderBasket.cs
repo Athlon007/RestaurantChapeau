@@ -175,7 +175,7 @@ namespace RestaurantChapeau
         {
             foreach (OrderView view in listeners)
             {
-                view.UpdateViewOrderButton();
+                view.UpdateUI();
             }
         }
     }

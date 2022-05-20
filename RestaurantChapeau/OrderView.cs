@@ -260,6 +260,7 @@ namespace RestaurantChapeau
         public void UpdateViewOrderButton()
         {
             btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
+            btnFinish.Enabled = OrderBasket.Instance.Count > 0;
         }
     }
 }
