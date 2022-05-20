@@ -197,10 +197,7 @@ namespace RestaurantDAL
             List<Order> orders = new List<Order>();
             foreach (DataRow row in tableOrders.Rows)
             {
-                Order order = new Order();
-                order.Id = Convert.ToInt32(row["id"]);
-                order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
-                order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
+                Order order = ReadOrder(tableOrders, null);
 
                 // Get all items belonging to that order.
                 string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink " +
