@@ -39,6 +39,15 @@
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnl_ForgotPassword = new System.Windows.Forms.Panel();
+            this.lbl_ForgotConfirm = new System.Windows.Forms.Label();
+            this.lbl_ForgotNew = new System.Windows.Forms.Label();
+            this.lbl_ForgotEmail = new System.Windows.Forms.Label();
+            this.btn_ForgotLogin = new System.Windows.Forms.Button();
+            this.btn_ForgotChange = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pnl_Register = new System.Windows.Forms.Panel();
             this.lbl_RegisterPassword = new System.Windows.Forms.Label();
             this.txt_RegisterPassword = new System.Windows.Forms.TextBox();
@@ -51,21 +60,12 @@
             this.txt_RegisterEmail = new System.Windows.Forms.TextBox();
             this.txt_RegisterLastName = new System.Windows.Forms.TextBox();
             this.txt_RegisterFirstName = new System.Windows.Forms.TextBox();
-            this.lbl_ForgotConfirm = new System.Windows.Forms.Label();
-            this.lbl_ForgotNew = new System.Windows.Forms.Label();
-            this.lbl_ForgotEmail = new System.Windows.Forms.Label();
-            this.btn_ForgotLogin = new System.Windows.Forms.Button();
-            this.btn_ForgotChange = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.btn_LoginRegister = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnl_ForgotPassword.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.pnl_Register.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_LoginPassword
@@ -163,10 +163,97 @@
             this.pnl_ForgotPassword.Controls.Add(this.textBox2);
             this.pnl_ForgotPassword.Controls.Add(this.textBox1);
             this.pnl_ForgotPassword.Controls.Add(this.pictureBox3);
+            this.pnl_ForgotPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_ForgotPassword.Location = new System.Drawing.Point(0, 0);
             this.pnl_ForgotPassword.Name = "pnl_ForgotPassword";
             this.pnl_ForgotPassword.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ForgotPassword.TabIndex = 9;
+            // 
+            // lbl_ForgotConfirm
+            // 
+            this.lbl_ForgotConfirm.AutoSize = true;
+            this.lbl_ForgotConfirm.Location = new System.Drawing.Point(146, 631);
+            this.lbl_ForgotConfirm.Name = "lbl_ForgotConfirm";
+            this.lbl_ForgotConfirm.Size = new System.Drawing.Size(129, 20);
+            this.lbl_ForgotConfirm.TabIndex = 16;
+            this.lbl_ForgotConfirm.Text = "Confirm password";
+            // 
+            // lbl_ForgotNew
+            // 
+            this.lbl_ForgotNew.AutoSize = true;
+            this.lbl_ForgotNew.Location = new System.Drawing.Point(146, 472);
+            this.lbl_ForgotNew.Name = "lbl_ForgotNew";
+            this.lbl_ForgotNew.Size = new System.Drawing.Size(106, 20);
+            this.lbl_ForgotNew.TabIndex = 15;
+            this.lbl_ForgotNew.Text = "New password";
+            // 
+            // lbl_ForgotEmail
+            // 
+            this.lbl_ForgotEmail.AutoSize = true;
+            this.lbl_ForgotEmail.Location = new System.Drawing.Point(146, 314);
+            this.lbl_ForgotEmail.Name = "lbl_ForgotEmail";
+            this.lbl_ForgotEmail.Size = new System.Drawing.Size(46, 20);
+            this.lbl_ForgotEmail.TabIndex = 14;
+            this.lbl_ForgotEmail.Text = "Email";
+            // 
+            // btn_ForgotLogin
+            // 
+            this.btn_ForgotLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btn_ForgotLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_ForgotLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_ForgotLogin.Location = new System.Drawing.Point(146, 871);
+            this.btn_ForgotLogin.Name = "btn_ForgotLogin";
+            this.btn_ForgotLogin.Size = new System.Drawing.Size(452, 58);
+            this.btn_ForgotLogin.TabIndex = 12;
+            this.btn_ForgotLogin.Text = "Go back to login";
+            this.btn_ForgotLogin.UseVisualStyleBackColor = false;
+            this.btn_ForgotLogin.Click += new System.EventHandler(this.btn_ForgotLogin_Click);
+            // 
+            // btn_ForgotChange
+            // 
+            this.btn_ForgotChange.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btn_ForgotChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_ForgotChange.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_ForgotChange.Location = new System.Drawing.Point(146, 770);
+            this.btn_ForgotChange.Name = "btn_ForgotChange";
+            this.btn_ForgotChange.Size = new System.Drawing.Size(452, 58);
+            this.btn_ForgotChange.TabIndex = 12;
+            this.btn_ForgotChange.Text = "Change password";
+            this.btn_ForgotChange.UseVisualStyleBackColor = false;
+            this.btn_ForgotChange.Click += new System.EventHandler(this.btn_ForgotChange_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(146, 654);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(452, 58);
+            this.textBox3.TabIndex = 12;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(146, 495);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(452, 58);
+            this.textBox2.TabIndex = 12;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(146, 337);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(452, 58);
+            this.textBox1.TabIndex = 12;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox3.Location = new System.Drawing.Point(171, 34);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(401, 221);
+            this.pictureBox3.TabIndex = 13;
+            this.pictureBox3.TabStop = false;
             // 
             // pnl_Register
             // 
@@ -181,6 +268,7 @@
             this.pnl_Register.Controls.Add(this.txt_RegisterEmail);
             this.pnl_Register.Controls.Add(this.txt_RegisterLastName);
             this.pnl_Register.Controls.Add(this.txt_RegisterFirstName);
+            this.pnl_Register.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_Register.Location = new System.Drawing.Point(0, 0);
             this.pnl_Register.Name = "pnl_Register";
             this.pnl_Register.Size = new System.Drawing.Size(726, 1055);
@@ -290,91 +378,6 @@
             this.txt_RegisterFirstName.Size = new System.Drawing.Size(452, 58);
             this.txt_RegisterFirstName.TabIndex = 0;
             // 
-            // lbl_ForgotConfirm
-            // 
-            this.lbl_ForgotConfirm.AutoSize = true;
-            this.lbl_ForgotConfirm.Location = new System.Drawing.Point(146, 631);
-            this.lbl_ForgotConfirm.Name = "lbl_ForgotConfirm";
-            this.lbl_ForgotConfirm.Size = new System.Drawing.Size(129, 20);
-            this.lbl_ForgotConfirm.TabIndex = 16;
-            this.lbl_ForgotConfirm.Text = "Confirm password";
-            // 
-            // lbl_ForgotNew
-            // 
-            this.lbl_ForgotNew.AutoSize = true;
-            this.lbl_ForgotNew.Location = new System.Drawing.Point(146, 472);
-            this.lbl_ForgotNew.Name = "lbl_ForgotNew";
-            this.lbl_ForgotNew.Size = new System.Drawing.Size(106, 20);
-            this.lbl_ForgotNew.TabIndex = 15;
-            this.lbl_ForgotNew.Text = "New password";
-            // 
-            // lbl_ForgotEmail
-            // 
-            this.lbl_ForgotEmail.AutoSize = true;
-            this.lbl_ForgotEmail.Location = new System.Drawing.Point(146, 314);
-            this.lbl_ForgotEmail.Name = "lbl_ForgotEmail";
-            this.lbl_ForgotEmail.Size = new System.Drawing.Size(46, 20);
-            this.lbl_ForgotEmail.TabIndex = 14;
-            this.lbl_ForgotEmail.Text = "Email";
-            // 
-            // btn_ForgotLogin
-            // 
-            this.btn_ForgotLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_ForgotLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_ForgotLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_ForgotLogin.Location = new System.Drawing.Point(146, 871);
-            this.btn_ForgotLogin.Name = "btn_ForgotLogin";
-            this.btn_ForgotLogin.Size = new System.Drawing.Size(452, 58);
-            this.btn_ForgotLogin.TabIndex = 12;
-            this.btn_ForgotLogin.Text = "Go back to login";
-            this.btn_ForgotLogin.UseVisualStyleBackColor = false;
-            this.btn_ForgotLogin.Click += new System.EventHandler(this.btn_ForgotLogin_Click);
-            // 
-            // btn_ForgotChange
-            // 
-            this.btn_ForgotChange.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_ForgotChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_ForgotChange.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_ForgotChange.Location = new System.Drawing.Point(146, 770);
-            this.btn_ForgotChange.Name = "btn_ForgotChange";
-            this.btn_ForgotChange.Size = new System.Drawing.Size(452, 58);
-            this.btn_ForgotChange.TabIndex = 12;
-            this.btn_ForgotChange.Text = "Change password";
-            this.btn_ForgotChange.UseVisualStyleBackColor = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(146, 654);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(452, 58);
-            this.textBox3.TabIndex = 12;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(146, 495);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(452, 58);
-            this.textBox2.TabIndex = 12;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(146, 337);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(452, 58);
-            this.textBox1.TabIndex = 12;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.pictureBox3.Location = new System.Drawing.Point(171, 34);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(401, 221);
-            this.pictureBox3.TabIndex = 13;
-            this.pictureBox3.TabStop = false;
-            // 
             // btn_LoginRegister
             // 
             this.btn_LoginRegister.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
@@ -410,10 +413,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnl_ForgotPassword.ResumeLayout(false);
             this.pnl_ForgotPassword.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.pnl_Register.ResumeLayout(false);
             this.pnl_Register.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

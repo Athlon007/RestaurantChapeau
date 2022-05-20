@@ -62,11 +62,11 @@ namespace RestaurantChapeau
                 EmployeeService employeeService = new EmployeeService();
 
                 //store the entered username and password
-                string employeeName = txt_LoginEmail.Text;
+                string email = txt_LoginEmail.Text;
                 string enteredPassword = txt_LoginPassword.Text;
 
                 //get the user by the entered username
-                Employee employee = employeeService.GetEmployeeByEmployeeName(employeeName);
+                Employee employee = employeeService.GetEmployeeByEmployeeName(email);
 
                 //password hasher
                 PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
@@ -81,6 +81,8 @@ namespace RestaurantChapeau
 
                     //hide the panels and show the dashboard again
                     HidePanels();
+                    TableViewForm tableView = new TableViewForm();
+                    tableView.Show();
                   
                 }
                 else
@@ -94,7 +96,6 @@ namespace RestaurantChapeau
                 txt_LoginEmail.Text = "";
                 txt_LoginPassword.Text = "";                
 
-                LogError(ex);
             }
         }
         private void showPanel(string panelName)
@@ -276,6 +277,11 @@ namespace RestaurantChapeau
 
             //return true if the current conditions are the same as the goodconditions, false otherwise
             return conditions == goodConditions;
+        }
+
+        private void btn_ForgotChange_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
