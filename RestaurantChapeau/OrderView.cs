@@ -24,6 +24,11 @@ namespace RestaurantChapeau
         {
             InitializeComponent();
 
+            if (bill == null)
+            {
+                throw new NullReferenceException("Bill must be provided!");
+            }
+
             this.bill = bill;
 
             // Hide tab view tabs.
@@ -38,9 +43,10 @@ namespace RestaurantChapeau
             {
                 Task.Run(() => AttemptConnect());
             }
-            catch 
+            catch (Exception ex)
             { 
                 lblConnecting.Text = "Failed to connect :(";
+                ErrorLogger.Instance.WriteError(ex, false);
             }
         }
 
@@ -58,8 +64,15 @@ namespace RestaurantChapeau
         void LoadGUI()
         {
             LoadHeader();
-            LoadMenuTypes();
-            theTabControl.SelectedTab = tabPageMenu;
+            try
+            {
+                LoadMenuTypes();
+                theTabControl.SelectedTab = tabPageMenu;
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
         void LoadHeader()

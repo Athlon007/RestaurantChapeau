@@ -32,7 +32,7 @@ namespace RestaurantChapeau
         public void WriteError(Exception ex, bool displayError = true)
         {
             string error = $"({DateTime.Now:yyyy-MM-dd HH:mm:ss}) {ex.Message}\n    {ex.StackTrace}\n";
-            StreamWriter sw = new StreamWriter(LogFileName);
+            StreamWriter sw = new StreamWriter(LogFileName, true);
             sw.WriteLine(error);
             sw.Close();
             sw.Dispose();
