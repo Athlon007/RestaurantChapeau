@@ -13,7 +13,9 @@ namespace RestaurantChapeau
     {
         OrderLogic orderLogic;
         Bill bill;
-        bool isConnected;
+
+        MenuType currentMenuType;
+        MenuCategory currentMenuCategory;
 
         Font fontMenuType = new Font("Segoe UI", 12);
         Font fontMenuCategory = new Font("Segoe UI", 8);
@@ -57,8 +59,6 @@ namespace RestaurantChapeau
         {
             LoadHeader();
             LoadMenuTypes();
-
-            isConnected = true;
             theTabControl.SelectedTab = tabPageMenu;
         }
 
@@ -100,9 +100,11 @@ namespace RestaurantChapeau
             }
             (sender as Control).Enabled = false;
 
+            currentMenuType = (MenuType)(sender as Button).Tag;
+
             try
             {
-                LoadMenuCategories((MenuType)(sender as Button).Tag);
+                LoadMenuCategories(currentMenuType);
             }
             catch (Exception ex)
             {
@@ -143,11 +145,11 @@ namespace RestaurantChapeau
             }
             (sender as Control).Enabled = false;
 
+            currentMenuCategory = (MenuCategory)(sender as Button).Tag;
+
             try
             {
-                MenuCategory category = (MenuCategory)(sender as Button).Tag;
-                MenuType menuType = category.MenuType;
-                LoadMenuItems(menuType, category);
+                LoadMenuItems(currentMenuType, currentMenuCategory);
             }
             catch (Exception ex)
             {
@@ -158,6 +160,11 @@ namespace RestaurantChapeau
         private void LoadMenuItems(MenuType menuType, MenuCategory menuCategory)
         {
             ClearMenuItems();
+
+            if (menuType == null || menuCategory == null)
+            {
+                return;
+            }
 
             List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
 
@@ -209,9 +216,8 @@ namespace RestaurantChapeau
             else
             {
                 int count = 1;
-                foreach (KeyValuePair<int, int> key in OrderBasket.Instance.GetAll())
+                foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
                 {
-                    MenuItem menuItem = orderLogic.GetMenuItem(key.Key);
                     new MenuItemUIControl(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
                     count++;
                 }
@@ -227,10 +233,9 @@ namespace RestaurantChapeau
         {
             Order order = orderLogic.CreateNewOrderForBill(bill);
 
-            foreach (KeyValuePair<int, int> basketItem in OrderBasket.Instance.GetAll())
+            foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
             {
-                MenuItem menuItem = orderLogic.GetMenuItem(basketItem.Key);
-                orderLogic.AddItemToOrder(order, menuItem, basketItem.Value);
+                orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
             }
 
             OrderBasket.Instance.Clear();
@@ -242,6 +247,15 @@ namespace RestaurantChapeau
         {
             theTabControl.SelectedTab = tabPageMenu;
             LoadHeader();
+
+            try
+            {
+                LoadMenuItems(currentMenuType, currentMenuCategory);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
         private void OrderView_FormClosing(object sender, FormClosingEventArgs e)
@@ -257,7 +271,7 @@ namespace RestaurantChapeau
             }
         }
 
-        public void UpdateViewOrderButton()
+        public void UpdateUI()
         {
             btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
             btnFinish.Enabled = OrderBasket.Instance.Count > 0;
