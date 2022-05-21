@@ -33,24 +33,36 @@ namespace RestaurantChapeau
             orderService = new OrderLogic();
             List<Order> orders = orderService.GetOrdersToPrepare();
 
-                foreach (Order order in orders)
+            foreach (Order order in orders)
+            {
+                //clear the listview
+                listViewNewOrders.Items.Clear();
+
+                //create new listview item and add the items to the listview item
+                ListViewItem li = new ListViewItem(order.Id.ToString());
+                li.SubItems.Add(order.PlacedTime.ToString());
+                li.SubItems.Add(order.Status.ToString());
+
+                //add items to the listview
+                listViewNewOrders.Items.Add(li);
+            }
+
+        }
+        private void DisplayOrderItems()
+        {
+            List<Order> order = orderService.GetOrdersToPrepare();
+            foreach (Order o in order)
+            {
+                List<MenuItem> items = o.Items;
+
+                foreach (MenuItem item in items)
                 {
-                    //clear the listview
-                    listViewNewOrders.Items.Clear();
+                    ListViewItem li = new ListViewItem(item.Name.ToString());
 
-                    //create new listview item and add the items to the listview item
-                    ListViewItem li = new ListViewItem(order.Id.ToString());
-                    li.SubItems.Add(order.PlacedTime.ToString());
-                    li.SubItems.Add(order.Status.ToString());
-
-                    //if (order.Status == 0)
-                    //{
-                    //    orderStatus = OrderStatus.NotStarted;
-                    //    li.SubItems.Add(orderStatus.ToString());
-                    //}
-                    //add listview items to the listview
-                    listViewNewOrders.Items.Add(li);
+                    listViewKitchen_ActiveOrder.Items.Add(li);
                 }
+            }
+            
         }
 
         private void KitchenViewForm_Load(object sender, EventArgs e)
@@ -74,7 +86,6 @@ namespace RestaurantChapeau
             pnlKitchen_ActiveOrder.Show();
 
         }
-
         private void btnKitchen_CompleteOrders_Click(object sender, EventArgs e)
         {
             HidePanels();
@@ -83,7 +94,10 @@ namespace RestaurantChapeau
 
         private void listViewNewOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
+            HidePanels();
             pnlKitchen_ActiveOrder.Show();
+            DisplayOrderItems();
+
         }
     }
 }

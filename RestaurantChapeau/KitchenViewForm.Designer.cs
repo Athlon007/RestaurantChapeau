@@ -171,9 +171,10 @@
             this.colHeadOrders,
             this.columnHeaderTime,
             this.columnHeaderTable});
+            this.listViewNewOrders.FullRowSelect = true;
             this.listViewNewOrders.HideSelection = false;
             this.listViewNewOrders.HoverSelection = true;
-            this.listViewNewOrders.Location = new System.Drawing.Point(310, 174);
+            this.listViewNewOrders.Location = new System.Drawing.Point(323, 174);
             this.listViewNewOrders.Name = "listViewNewOrders";
             this.listViewNewOrders.Size = new System.Drawing.Size(1440, 819);
             this.listViewNewOrders.TabIndex = 8;
