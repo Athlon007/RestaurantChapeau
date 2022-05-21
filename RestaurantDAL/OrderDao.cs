@@ -31,7 +31,7 @@ namespace RestaurantDAL
 
         public List<MenuCategory> GetMenuCategories(MenuType menuType)
         {
-            string query =  "SELECT mc.[id], mc.[name] " +
+            string query = "SELECT mc.[id], mc.[name] " +
                             "FROM dbo.MenuCategory mc " +
                             "JOIN dbo.HasCategory hc ON mc.[id] = hc.menuCategoryId " +
                             "WHERE hc.menuTypeId = @MenuTypeId;";
@@ -61,9 +61,9 @@ namespace RestaurantDAL
 
         public List<MenuItem> GetMenuItems(int menuTypeId, int menuCategoryId)
         {
-            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat " +
+            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat " +
                             "FROM MenuItem mi " +
-                            "JOIN Vat v ON v.id = mi.vatId " + 
+                            "JOIN Vat v ON v.id = mi.vatId " +
                             "JOIN Menu m ON m.menuItemId = mi.id " +
                             "WHERE mi.categoryId = @CategoryId AND m.menuTypeId = @MenuTypeId;";
             SqlParameter[] parameters = new SqlParameter[]
@@ -128,7 +128,7 @@ namespace RestaurantDAL
         /// <returns>Returns a new order.</returns>
         public Order CreateNewOrderForBill(Bill bill)
         {
-            string query =  "INSERT INTO dbo.[Order] (placedTime, status, billId) " +
+            string query = "INSERT INTO dbo.[Order] (placedTime, status, billId) " +
                             "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.billId " +
                             "VALUES (@Now, 0, @BillId)";
             SqlParameter[] parameters = new SqlParameter[]
@@ -166,7 +166,7 @@ namespace RestaurantDAL
         /// <param name="quantity">Quantity of that item.</param>
         public void AddItemToOrder(Order order, MenuItem item, int quantity)
         {
-            string query =  "INSERT INTO dbo.PartOf (orderId, menuItemId, quantity)" +
+            string query = "INSERT INTO dbo.PartOf (orderId, menuItemId, quantity)" +
                             "VALUES (@OrderId, @ItemId, @Quantity)";
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -183,7 +183,7 @@ namespace RestaurantDAL
         /// </summary>
         public List<Order> GetOrdersToPrepare()
         {
-            string query =  "SELECT o.[id], o.placedTime, o.status " +
+            string query = "SELECT o.[id], o.placedTime, o.status " +
                             "FROM[Order] o " +
                             "WHERE o.status <= 1;";
 
@@ -197,7 +197,7 @@ namespace RestaurantDAL
                 order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
 
                 // Get all items belonging to that order.
-                string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat " +
+                string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat " +
                                             "FROM PartOf po " +
                                             "JOIN MenuItem mi ON po.menuItemId = mi.id " +
                                             "JOIN Vat v ON mi.vatId = v.id " +
@@ -214,7 +214,24 @@ namespace RestaurantDAL
 
             return orders;
         }
-
+        //Returns all the items in an order with a specific orderID
+        public List<MenuItem> GetOrderFoodItems(Order order)
+        {
+            List<MenuItem> menuItems = new List<MenuItem>();
+        
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @OrderId AND mi.isDrink is null";
+            DataTable tableOrders = ExecuteSelectQuery(selectItemsQuery);
+            foreach (var item in tableOrders.Rows )
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+               new SqlParameter("@OrderId", order.Id)
+                };
+                order.Items = ReadOrderMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
+                menuItems.Add((MenuItem)item);
+            }
+            return menuItems;
+        }
         private List<MenuItem> ReadOrderMenuItems(DataTable table)
         {
             List<MenuItem> items = new List<MenuItem>();

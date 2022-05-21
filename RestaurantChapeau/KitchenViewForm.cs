@@ -33,11 +33,10 @@ namespace RestaurantChapeau
             orderService = new OrderLogic();
             List<Order> orders = orderService.GetOrdersToPrepare();
 
+            //clear the listview
+            listViewNewOrders.Items.Clear();
             foreach (Order order in orders)
             {
-                //clear the listview
-                listViewNewOrders.Items.Clear();
-
                 //create new listview item and add the items to the listview item
                 ListViewItem li = new ListViewItem(order.Id.ToString());
                 li.SubItems.Add(order.PlacedTime.ToString());
@@ -50,12 +49,17 @@ namespace RestaurantChapeau
         }
         private void DisplayOrderItems()
         {
-            List<Order> order = orderService.GetOrdersToPrepare();
-            foreach (Order o in order)
+           string orderItem= listViewNewOrders.SelectedItems.ToString();
+           
+            Order order=new Order();
+            order.Id = orderItem[0];
+            List<MenuItem> orderMenuItems= orderService.GetOrderFoodItems(order);
+         
+            foreach (MenuItem i in orderMenuItems)
             {
-                List<MenuItem> items = o.Items;
+                //List<MenuItem> items = i.Items;
 
-                foreach (MenuItem item in items)
+                foreach (MenuItem item in orderMenuItems)
                 {
                     ListViewItem li = new ListViewItem(item.Name.ToString());
 
@@ -77,6 +81,7 @@ namespace RestaurantChapeau
             HidePanels();
             currentPanel = pnlKitchen_NewOrders;
             pnlKitchen_NewOrders.Show();
+           listViewKitchen_ActiveOrder.Refresh();
         }
 
         private void btnKitchen_ActiveOrder_Click(object sender, EventArgs e)

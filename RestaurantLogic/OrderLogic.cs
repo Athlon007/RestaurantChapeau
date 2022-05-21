@@ -81,5 +81,9 @@ namespace RestaurantLogic
         {
             return orderDao.GetOrdersToPrepare();
         }
+        public List<MenuItem> GetOrderFoodItems(Order order)
+        {
+            return orderDao.GetOrderFoodItems(order);
+        }
     }
 }
