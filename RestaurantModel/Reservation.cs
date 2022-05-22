@@ -4,12 +4,13 @@ using System.Text;
 
 namespace RestaurantModel
 {
-    public class Employee
+    public class Reservation
     {
         public string firstName;
         public string lastName;
         public string email;
-        public string passwordHash;
-        public string passwordSalt;
+        public bool isReserved;
+        public DateTime ReservationStart;
+        public int tableid;
     }
 }

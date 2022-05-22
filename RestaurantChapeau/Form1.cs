@@ -39,5 +39,10 @@ namespace RestaurantChapeau
             KitchenViewForm kitchen = new KitchenViewForm();
             kitchen.ShowDialog();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

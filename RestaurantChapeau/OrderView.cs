@@ -231,5 +231,10 @@ namespace RestaurantChapeau
             theTabControl.SelectedTab = tabPageMenu;
             LoadHeader();
         }
+
+        private void lblConnecting_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

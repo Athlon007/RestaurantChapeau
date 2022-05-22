@@ -39,8 +39,14 @@
             this.btn_Table9 = new System.Windows.Forms.Button();
             this.btn_Table10 = new System.Windows.Forms.Button();
             this.pnl_TableViews = new System.Windows.Forms.Panel();
+            this.btn_TableViewOrder = new System.Windows.Forms.Button();
             this.btn_TableViewPnGoBack = new System.Windows.Forms.Button();
+            this.pnl_Reservation = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btn_TableViewReservation = new System.Windows.Forms.Button();
+            this.btn_MakeReservation = new System.Windows.Forms.Button();
             this.pnl_TableViews.SuspendLayout();
+            this.pnl_Reservation.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Table1
@@ -156,11 +162,22 @@
             // 
             // pnl_TableViews
             // 
+            this.pnl_TableViews.Controls.Add(this.btn_TableViewOrder);
             this.pnl_TableViews.Controls.Add(this.btn_TableViewPnGoBack);
-            this.pnl_TableViews.Location = new System.Drawing.Point(0, 0);
+            this.pnl_TableViews.Location = new System.Drawing.Point(627, 38);
             this.pnl_TableViews.Name = "pnl_TableViews";
-            this.pnl_TableViews.Size = new System.Drawing.Size(744, 1102);
+            this.pnl_TableViews.Size = new System.Drawing.Size(726, 1055);
             this.pnl_TableViews.TabIndex = 30;
+            // 
+            // btn_TableViewOrder
+            // 
+            this.btn_TableViewOrder.Location = new System.Drawing.Point(104, 611);
+            this.btn_TableViewOrder.Name = "btn_TableViewOrder";
+            this.btn_TableViewOrder.Size = new System.Drawing.Size(94, 29);
+            this.btn_TableViewOrder.TabIndex = 31;
+            this.btn_TableViewOrder.Text = "Order";
+            this.btn_TableViewOrder.UseVisualStyleBackColor = true;
+            this.btn_TableViewOrder.Click += new System.EventHandler(this.btn_TableViewOrder_Click);
             // 
             // btn_TableViewPnGoBack
             // 
@@ -172,12 +189,53 @@
             this.btn_TableViewPnGoBack.UseVisualStyleBackColor = true;
             this.btn_TableViewPnGoBack.Click += new System.EventHandler(this.btn_TableViewPnGoBack_Click);
             // 
+            // pnl_Reservation
+            // 
+            this.pnl_Reservation.Controls.Add(this.btn_MakeReservation);
+            this.pnl_Reservation.Location = new System.Drawing.Point(0, 0);
+            this.pnl_Reservation.Name = "pnl_Reservation";
+            this.pnl_Reservation.Size = new System.Drawing.Size(726, 1055);
+            this.pnl_Reservation.TabIndex = 32;
+            this.pnl_Reservation.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(173, 247);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(37, 29);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btn_TableViewReservation
+            // 
+            this.btn_TableViewReservation.Location = new System.Drawing.Point(279, 85);
+            this.btn_TableViewReservation.Name = "btn_TableViewReservation";
+            this.btn_TableViewReservation.Size = new System.Drawing.Size(172, 29);
+            this.btn_TableViewReservation.TabIndex = 32;
+            this.btn_TableViewReservation.Text = "Manage Reservation";
+            this.btn_TableViewReservation.UseVisualStyleBackColor = true;
+            this.btn_TableViewReservation.Click += new System.EventHandler(this.btn_TableViewReservation_Click);
+            // 
+            // btn_MakeReservation
+            // 
+            this.btn_MakeReservation.Location = new System.Drawing.Point(70, 74);
+            this.btn_MakeReservation.Name = "btn_MakeReservation";
+            this.btn_MakeReservation.Size = new System.Drawing.Size(208, 29);
+            this.btn_MakeReservation.TabIndex = 0;
+            this.btn_MakeReservation.Text = "Make Reservation";
+            this.btn_MakeReservation.UseVisualStyleBackColor = true;
+            // 
             // TableViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
+            this.Controls.Add(this.pnl_Reservation);
+            this.Controls.Add(this.btn_TableViewReservation);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnl_TableViews);
             this.Controls.Add(this.btn_Table10);
             this.Controls.Add(this.btn_Table9);
@@ -193,6 +251,7 @@
             this.Text = "TableViewForm";
             this.Load += new System.EventHandler(this.TableViewForm_Load);
             this.pnl_TableViews.ResumeLayout(false);
+            this.pnl_Reservation.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -210,5 +269,10 @@
         private System.Windows.Forms.Button btn_Table10;
         private System.Windows.Forms.Panel pnl_TableViews;
         private System.Windows.Forms.Button btn_TableViewPnGoBack;
+        private System.Windows.Forms.Button btn_TableViewOrder;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_TableViewReservation;
+        private System.Windows.Forms.Panel pnl_Reservation;
+        private System.Windows.Forms.Button btn_MakeReservation;
     }
 }

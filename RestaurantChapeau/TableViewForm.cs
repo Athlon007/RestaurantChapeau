@@ -21,6 +21,7 @@ namespace RestaurantChapeau
         public void HidePanel()
         {
             pnl_TableViews.Hide();
+            pnl_Reservation.Hide();
         }             
         private void btn_Table1_Click(object sender, EventArgs e)
         {
@@ -84,6 +85,28 @@ namespace RestaurantChapeau
         {
             HidePanel();
             pnl_TableViews.Show();
+        }
+
+        private void btn_TableViewOrder_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.Red;            
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btn_TableViewReservation_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+            pnl_Reservation.Show();
         }
     }
 }

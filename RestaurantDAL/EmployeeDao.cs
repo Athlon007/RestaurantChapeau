@@ -76,10 +76,6 @@ namespace RestaurantDAL
                 throw new Exception("There is no user with these credentials");
             }
             return employee;
-        }
-        public void GitHub()
-        {
-
-        }
+        }       
     }
 }
