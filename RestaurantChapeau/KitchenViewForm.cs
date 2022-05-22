@@ -49,24 +49,18 @@ namespace RestaurantChapeau
         }
         private void DisplayOrderItems()
         {
-           string orderItem= listViewNewOrders.SelectedItems.ToString();
-           
-            Order order=new Order();
-            order.Id = orderItem[0];
-            List<MenuItem> orderMenuItems= orderService.GetOrderFoodItems(order);
-         
+            string orderItem = listViewNewOrders.SelectedItems.ToString();
+            
+            int orderId = orderItem[0];
+            List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderId);
+
             foreach (MenuItem i in orderMenuItems)
             {
-                //List<MenuItem> items = i.Items;
+                ListViewItem li = new ListViewItem(i.Name.ToString());
 
-                foreach (MenuItem item in orderMenuItems)
-                {
-                    ListViewItem li = new ListViewItem(item.Name.ToString());
-
-                    listViewKitchen_ActiveOrder.Items.Add(li);
-                }
+                listViewKitchen_ActiveOrder.Items.Add(li);
             }
-            
+
         }
 
         private void KitchenViewForm_Load(object sender, EventArgs e)
@@ -81,7 +75,7 @@ namespace RestaurantChapeau
             HidePanels();
             currentPanel = pnlKitchen_NewOrders;
             pnlKitchen_NewOrders.Show();
-           listViewKitchen_ActiveOrder.Refresh();
+            listViewKitchen_ActiveOrder.Refresh();
         }
 
         private void btnKitchen_ActiveOrder_Click(object sender, EventArgs e)
