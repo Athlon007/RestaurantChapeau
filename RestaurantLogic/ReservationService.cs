@@ -31,5 +31,9 @@ namespace RestaurantLogic
             List<Reservation> reservations= reservationDb.GetAllReservations();
             return reservations;
         }
+        public void CancelReservation(Reservation reservation)
+        {
+            reservationDb.CancelReservation(reservation);
+        }
     }
 }

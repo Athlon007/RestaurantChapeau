@@ -79,5 +79,11 @@ namespace RestaurantDAL
             }
             return reservation;
         }
+        public void CancelReservation(Reservation reservation)
+        {
+            string query = $"DELETE FROM dbo.[Reservation] WHERE id={reservation.reservationID}";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
     }
 }

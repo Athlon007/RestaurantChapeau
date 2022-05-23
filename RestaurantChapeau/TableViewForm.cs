@@ -23,19 +23,16 @@ namespace RestaurantChapeau
         }
         public void HidePanel()
         {
-            pnl_TableViews.Hide();
             pnl_Reservation.Hide();
             pnl_ViewReservation.Hide();
         }             
         private void btn_Table1_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
         private void btn_Table2_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }        
         private void btn_TableViewPnGoBack_Click(object sender, EventArgs e)
         {
@@ -46,49 +43,41 @@ namespace RestaurantChapeau
         private void btn_Table3_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_Table4_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_Table5_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_Table6_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_Table7_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_Table8_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_Table9_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_Table10_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pnl_TableViews.Show();
         }
 
         private void btn_TableViewOrder_Click(object sender, EventArgs e)
@@ -153,11 +142,12 @@ namespace RestaurantChapeau
                 List<Reservation> reservationList = reservationService.GetAllReservations();
 
                 lV_ReservationDisplay.Clear();
-                lV_ReservationDisplay.Columns.Add("ID", 80, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("First Name", 150, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Last Name", 100, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Email", 80, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Table Number", 100, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("ID", 50, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("First Name", 90, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Last Name", 90, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Email", 150, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Time",150, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Table number", 150, HorizontalAlignment.Left);
                 lV_ReservationDisplay.View = View.Details;
                 foreach (Reservation r in reservationList)
                 {
@@ -165,6 +155,7 @@ namespace RestaurantChapeau
                     li.SubItems.Add(r.firstName);
                     li.SubItems.Add(r.lastName);
                     li.SubItems.Add(r.email);
+                    li.SubItems.Add(r.ReservationStart.ToString());
                     li.SubItems.Add(r.tableid.ToString());
                     lV_ReservationDisplay.Items.Add(li);    
                 }
@@ -173,6 +164,53 @@ namespace RestaurantChapeau
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btn_MakeReservationGoBack_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+            pnl_ViewReservation.Show();
+        }
+
+        private void btn_ViewReservationGoBack_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+        }
+
+        private void btn_ViewReservationMake_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+            pnl_Reservation.Show();
+        }
+
+        private void btn_ViewReservationCancel_Click(object sender, EventArgs e)
+        {
+            //dialog pop up asking the user if he is sure of the action
+            DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Remove activity", MessageBoxButtons.YesNo);
+
+            //if the answer is yes proceed to remove activity
+            if (dialogResult == DialogResult.Yes)
+            {
+                //create activity object
+                Reservation reservation= new Reservation();
+                {
+                    reservation.reservationID= int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);                         
+                };
+
+                //delete reservation
+                reservationService.CancelReservation(reservation);
+                // show that delete was successful
+                MessageBox.Show("Succeesfully cancel the reservation!");
+                //refresh panel
+                HidePanel();
+                pnl_ViewReservation.Show();
+            }
+
+            //if the answer is no do nothing
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
             }
         }
     }
