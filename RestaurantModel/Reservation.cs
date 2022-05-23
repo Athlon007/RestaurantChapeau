@@ -6,11 +6,12 @@ namespace RestaurantModel
 {
     public class Reservation
     {
-        public string firstName;
-        public string lastName;
-        public string email;
-        public bool isReserved;
-        public DateTime ReservationStart;
-        public int tableid;
+        public int reservationID { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string email { get; set; }
+        public bool isReserved { get; set; }
+        public DateTime ReservationStart { get; set; }
+        public int tableid { get; set; }
     }
 }

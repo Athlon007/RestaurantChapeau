@@ -11,17 +11,17 @@ namespace RestaurantDAL
     public class ReservationDao : BaseDao
     {
         //adding a new reservation to the db
-        public void AddToReservation(string firstName, string lastName, string email, DateTime ReservationStart, int tableid)
+        public void AddToReservation(string firstName, string lastName, string email,string isReserved, DateTime ReservationStart, string tableid)
         {
 
-            string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, ReservationStart, tableid) VALUES ('{firstName}', '{lastName}', '{email}', '{ReservationStart}', '{tableid}')";
+            string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, isReserved, ReservationStart, tableid) VALUES ('{firstName}', '{lastName}', '{email}', '{isReserved}', '{ReservationStart}', '{tableid}');";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the reservation from the db by the email
         public Reservation GetReservationByEmail(string email)
         {
-            string query = $"SELECT firstName, lastName, email, passwordHash, passwordSalt FROM dbo.[Reservation] WHERE email = @email";
+            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM dbo.[Reservation] WHERE email = @email";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@email", email)
@@ -31,7 +31,7 @@ namespace RestaurantDAL
         //getting a list of all the reservation
         public List<Reservation> GetAllReservations()
         {
-            string query = $"SELECT firstName, lastName, email, isReserved, ReservationStart, tableid FROM [Reservation]";
+            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM [Reservation]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -45,13 +45,14 @@ namespace RestaurantDAL
                 //store each room with the following fields from the database
                 Reservation reservation= new Reservation()
                 {
+                    reservationID = int.Parse(dr["id"].ToString()),
                     firstName = (string)(dr["firstName"]),
                     lastName = (string)(dr["lastName"]),
                     email = (string)(dr["email"]),
                     isReserved = (bool)(dr["isReserved"]),
                     ReservationStart = (DateTime)(dr["ReservationStart"]),
-                    tableid = (int)(dr["tableid"])
-                };
+                    tableid = int.Parse(dr["tableid"].ToString())
+            };
                 reservations.Add(reservation);
             }
             return reservations;
@@ -64,16 +65,17 @@ namespace RestaurantDAL
             if (dataTable.Rows.Count > 0)
             {
                 DataRow dr = dataTable.Rows[0];
+                reservation.reservationID = int.Parse(dr["id"].ToString());
                 reservation.firstName = (string)(dr["firstName"]);
                 reservation.lastName = (string)(dr["lastName"]);
                 reservation.email = (string)(dr["email"]);
                 reservation.isReserved = (bool)(dr["isReserved"]);
                 reservation.ReservationStart = (DateTime)(dr["ReservationStart"]);
-                reservation.tableid = (int)(dr["tableid"]);
+                reservation.tableid = int.Parse(dr["tableid"].ToString());
             }
             else
             {
-                throw new Exception("There is no user with these credentials");
+                throw new Exception("There is no reservation");
             }
             return reservation;
         }
