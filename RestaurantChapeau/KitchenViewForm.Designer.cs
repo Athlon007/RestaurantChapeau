@@ -65,7 +65,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.listViewKitchen_ActiveOrder = new System.Windows.Forms.ListView();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.Order_item = new System.Windows.Forms.ColumnHeader();
+            this.Quantity = new System.Windows.Forms.ColumnHeader();
             this.label11 = new System.Windows.Forms.Label();
             this.pnlKitchen_NewOrders.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -179,7 +180,6 @@
             this.listViewNewOrders.TabIndex = 8;
             this.listViewNewOrders.UseCompatibleStateImageBehavior = false;
             this.listViewNewOrders.View = System.Windows.Forms.View.Details;
-            this.listViewNewOrders.SelectedIndexChanged += new System.EventHandler(this.listViewNewOrders_SelectedIndexChanged);
             // 
             // colHeadOrders
             // 
@@ -436,7 +436,8 @@
             // 
             this.listViewKitchen_ActiveOrder.CheckBoxes = true;
             this.listViewKitchen_ActiveOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
+            this.Order_item,
+            this.Quantity});
             this.listViewKitchen_ActiveOrder.FullRowSelect = true;
             this.listViewKitchen_ActiveOrder.GridLines = true;
             this.listViewKitchen_ActiveOrder.HideSelection = false;
@@ -446,11 +447,17 @@
             this.listViewKitchen_ActiveOrder.TabIndex = 9;
             this.listViewKitchen_ActiveOrder.UseCompatibleStateImageBehavior = false;
             this.listViewKitchen_ActiveOrder.View = System.Windows.Forms.View.Details;
+            this.listViewKitchen_ActiveOrder.Click += new System.EventHandler(this.listViewKitchen_ActiveOrder_Click);
             // 
-            // columnHeader4
+            // Order_item
             // 
-            this.columnHeader4.Text = "Order Item";
-            this.columnHeader4.Width = 1000;
+            this.Order_item.Text = "Order Item";
+            this.Order_item.Width = 600;
+            // 
+            // Quantity
+            // 
+            this.Quantity.Text = "Quantity";
+            this.Quantity.Width = 600;
             // 
             // label11
             // 
@@ -532,6 +539,7 @@
         private System.Windows.Forms.Label lblKitchen_OrderTime;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader Order_item;
+        private System.Windows.Forms.ColumnHeader Quantity;
     }
 }

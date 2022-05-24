@@ -223,8 +223,6 @@ namespace RestaurantDAL
                 new SqlParameter("@OrderId", orderId)
             };
             
-                  
-           
             return ReadOrderMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
         }
         private List<MenuItem> ReadOrderMenuItems(DataTable table)

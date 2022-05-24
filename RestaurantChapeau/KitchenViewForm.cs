@@ -49,18 +49,17 @@ namespace RestaurantChapeau
         }
         private void DisplayOrderItems()
         {
-            //string orderItem= listViewNewOrders.SelectedItems[0].ToString();
-           
-           
+            //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
+            lblKitchenn_OrderNo.Text=orderItem.Id.ToString();
+            // select from database which items have the order id of the id stated in the listview
             List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
-            MessageBox.Show(orderItem.Id.ToString());
-
+            
+            //foreach item in the list acquired from the db, add the name to the active order 
             foreach (MenuItem item in orderMenuItems)
             {
                 ListViewItem li = new ListViewItem(item.Name.ToString());
-                //li.SubItems.Add(item.Quantity.ToString());
-               //li.SubItems.Add(item.Vat.ToString());
+                li.SubItems.Add(item.Quantity.ToString());
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
             }
@@ -95,7 +94,7 @@ namespace RestaurantChapeau
             pnlKitchen_CompleteOrders.Show();
         }
 
-        private void listViewNewOrders_SelectedIndexChanged(object sender, EventArgs e)
+        private void listViewKitchen_ActiveOrder_Click(object sender, EventArgs e)
         {
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
