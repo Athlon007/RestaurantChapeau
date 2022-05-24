@@ -41,7 +41,7 @@ namespace RestaurantChapeau
                 ListViewItem li = new ListViewItem(order.Id.ToString());
                 li.SubItems.Add(order.PlacedTime.ToString());
                 li.SubItems.Add(order.Status.ToString());
-
+                li.Tag = order;
                 //add items to the listview
                 listViewNewOrders.Items.Add(li);
             }
@@ -49,10 +49,8 @@ namespace RestaurantChapeau
         }
         private void DisplayOrderItems()
         {
-            string orderItem = listViewNewOrders.SelectedItems.ToString();
-            
-            int orderId = orderItem[0];
-            List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderId);
+            Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
+            List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
 
             foreach (MenuItem i in orderMenuItems)
             {
@@ -60,7 +58,6 @@ namespace RestaurantChapeau
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
             }
-
         }
 
         private void KitchenViewForm_Load(object sender, EventArgs e)

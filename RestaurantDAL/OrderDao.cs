@@ -220,21 +220,19 @@ namespace RestaurantDAL
             List<MenuItem> menuItems = new List<MenuItem>();
 
             string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
-            DataTable tableOrders = ExecuteSelectQuery(selectItemsQuery);
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                    new SqlParameter("@OrderId", orderId)
+            };
+            DataTable tableOrders = ExecuteSelectQuery(selectItemsQuery, parameters);
+
             foreach (DataRow row in tableOrders.Rows)
             {
-                MenuItem Item= new MenuItem();
-                Item.Name= (string)row["name"];
-                Item.PriceBrutto = Convert.ToDecimal(row["priceBrutto"]);
-                Item.Quantity = Convert.ToInt32(row["quantity"]);
-                Item.Vat = Convert.ToDecimal(row["vat"]);
+                MenuItem item = new MenuItem();
+                item.Quantity = Convert.ToInt32(row["quantity"]);
+                item.Vat = Convert.ToInt32(row["vat"]);
 
-                SqlParameter[] parameters = new SqlParameter[]
-                {
-                    new SqlParameter("@OrderId", orderId)
-                };
-                menuItems = ReadOrderMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
-                menuItems.Add(Item);
+                menuItems.Add(item);
             }
             return menuItems;
 
