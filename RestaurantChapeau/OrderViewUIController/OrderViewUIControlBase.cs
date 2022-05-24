@@ -13,6 +13,7 @@ namespace RestaurantChapeau.OrderViewUIController
         private Font menuItemsFont = new Font("Segoe UI", 12);
         private Font txtboxFont = new Font("Segoe UI", 24);
         private Color backgroundColor = Color.FromArgb(56, 186, 186, 186);
+        private Color textBoxColor = Color.FromArgb(255, 67, 179, 215);
         private Padding margin = new Padding(4, 10, 4, 10);
 
         const int RowHeight = 100;
@@ -88,12 +89,21 @@ namespace RestaurantChapeau.OrderViewUIController
 
         public TextBox AddTextBox()
         {
+            Panel pnl = new Panel();
+            pnl.Padding = new Padding(3,3,3,4);
+            pnl.Margin = margin;
+            pnl.BackColor = textBoxColor;
+            pnl.Width = RowHeight;
+            pnl.Height = RowHeight;
+            flow.Controls.Add(pnl);
+
             TextBox txt = new TextBox();
             txt.Font = txtboxFont;
-            txt.MinimumSize = new Size(RowHeight, targetHeight);
+            //txt.MinimumSize = new Size(RowHeight - 4, RowHeight - 4);
             txt.TextAlign = HorizontalAlignment.Center;
             txt.Margin = margin;
-            flow.Controls.Add(txt);
+            txt.Dock = DockStyle.Fill;
+            pnl.Controls.Add(txt);
 
             controls.Add(txt);
 
