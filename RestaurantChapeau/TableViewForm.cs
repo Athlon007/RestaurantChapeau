@@ -12,7 +12,7 @@ namespace RestaurantChapeau
 {
     public partial class TableViewForm : Form
     {
-        ReservationService reservationService;
+        ReservationService reservationService = new ReservationService();        
         public TableViewForm()
         {
             InitializeComponent();
@@ -138,32 +138,35 @@ namespace RestaurantChapeau
             pnl_ViewReservation.Show();
             try
             {
-                ReservationService reservationService = new ReservationService();
-                List<Reservation> reservationList = reservationService.GetAllReservations();
-
-                lV_ReservationDisplay.Clear();
-                lV_ReservationDisplay.Columns.Add("ID", 50, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("First Name", 90, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Last Name", 90, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Email", 150, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Time",150, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Table number", 150, HorizontalAlignment.Left);
-                lV_ReservationDisplay.View = View.Details;
-                foreach (Reservation r in reservationList)
-                {
-                    ListViewItem li = new ListViewItem(r.reservationID.ToString());
-                    li.SubItems.Add(r.firstName);
-                    li.SubItems.Add(r.lastName);
-                    li.SubItems.Add(r.email);
-                    li.SubItems.Add(r.ReservationStart.ToString());
-                    li.SubItems.Add(r.tableid.ToString());
-                    lV_ReservationDisplay.Items.Add(li);    
-                }
-                
+                DisplayReservation();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DisplayReservation()
+        {
+            List<Reservation> reservationList = reservationService.GetAllReservations();
+
+            lV_ReservationDisplay.Clear();
+            lV_ReservationDisplay.Columns.Add("ID", 50, HorizontalAlignment.Left);
+            lV_ReservationDisplay.Columns.Add("First Name", 90, HorizontalAlignment.Left);
+            lV_ReservationDisplay.Columns.Add("Last Name", 90, HorizontalAlignment.Left);
+            lV_ReservationDisplay.Columns.Add("Email", 150, HorizontalAlignment.Left);
+            lV_ReservationDisplay.Columns.Add("Time", 150, HorizontalAlignment.Left);
+            lV_ReservationDisplay.Columns.Add("Table number", 150, HorizontalAlignment.Left);
+            lV_ReservationDisplay.View = View.Details;
+            foreach (Reservation r in reservationList)
+            {
+                ListViewItem li = new ListViewItem(r.reservationID.ToString());
+                li.SubItems.Add(r.firstName);
+                li.SubItems.Add(r.lastName);
+                li.SubItems.Add(r.email);
+                li.SubItems.Add(r.ReservationStart.ToString());
+                li.SubItems.Add(r.tableid.ToString());
+                lV_ReservationDisplay.Items.Add(li);
             }
         }
 
@@ -195,7 +198,8 @@ namespace RestaurantChapeau
                 //create activity object
                 Reservation reservation= new Reservation();
                 {
-                    reservation.reservationID= int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);                         
+                    reservation.reservationID= int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);        
+                    
                 };
 
                 //delete reservation
@@ -204,6 +208,7 @@ namespace RestaurantChapeau
                 MessageBox.Show("Succeesfully cancel the reservation!");
                 //refresh panel
                 HidePanel();
+                DisplayReservation();
                 pnl_ViewReservation.Show();
             }
 
