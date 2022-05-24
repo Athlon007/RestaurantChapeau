@@ -82,5 +82,10 @@ namespace RestaurantLogic
         {
             return orderDao.GetOrdersToPrepare();
         }
+
+        public void RegisterOrderToBartender(Employee employee, Order order)
+        {
+            return orderDao.RegisterOrderToBartender(employee, order);
+        }
     }
 }

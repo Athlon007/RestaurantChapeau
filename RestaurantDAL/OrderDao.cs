@@ -222,5 +222,18 @@ namespace RestaurantDAL
 
             return orders;
         }
+
+        public void RegisterOrderToBartender(Employee employee, Order order)
+        {
+            string query =  "INSERT INTO dbo.[Bartender] (employeeId, orderId) " +
+                            "VALUES (@EmployeeId, @OrderId)";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeId", employee.id),
+                new SqlParameter("@OrderId", order.Id)
+            };
+
+            ExecuteEditQuery(query, parameters);
+        }
     }
 }

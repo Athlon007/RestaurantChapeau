@@ -14,6 +14,7 @@ namespace RestaurantChapeau
     {
         OrderLogic orderLogic;
         Bill bill;
+        Employee employee;
 
         MenuType currentMenuType;
 
@@ -22,7 +23,13 @@ namespace RestaurantChapeau
         Color activeButtonColor = Color.FromArgb(255, 67, 179, 215);
         Color activeButtonTextColor = Color.FromArgb(255, 255, 255, 255);
 
-        public OrderView(Bill bill)
+        /// <summary>
+        /// Creates a new Order View. Both BILL for which the order is taken, and EMPLOYEE that takes the order must be specified!
+        /// </summary>
+        /// <param name="bill">Bill for wich the new order is created</param>
+        /// <param name="employee">Employee which takes the order</param>
+        /// <exception cref="NullReferenceException">Bill and Employee cannot be null.</exception>
+        public OrderView(Bill bill, Employee employee)
         {
             InitializeComponent();
 
@@ -31,7 +38,13 @@ namespace RestaurantChapeau
                 throw new NullReferenceException("Bill must be provided!");
             }
 
+            if (employee == null)
+            {
+                throw new NullReferenceException("Employee must be provided");
+            }
+
             this.bill = bill;
+            this.employee = employee;
 
             // Hide tab view tabs.
             theTabControl.Appearance = TabAppearance.FlatButtons;
@@ -230,6 +243,8 @@ namespace RestaurantChapeau
             {
                 orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
             }
+
+            orderLogic.RegisterOrderToBartender(employee, order);
 
             OrderBasket.Instance.Clear();
             theTabControl.SelectedTab = tabOrderSucceeded;

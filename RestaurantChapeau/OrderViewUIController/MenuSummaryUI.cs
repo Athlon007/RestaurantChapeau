@@ -58,8 +58,7 @@ namespace RestaurantChapeau.OrderViewUIController
                 if (dl == DialogResult.Yes)
                 {
                     OrderBasket.Instance.Set(menuItem, 0);
-                    if (OnDeleteItem != null)
-                        OnDeleteItem();
+                    OnDeleteItem?.Invoke();
                     return;
                 }
             }
@@ -108,8 +107,7 @@ namespace RestaurantChapeau.OrderViewUIController
                 if (dl == DialogResult.Yes)
                 {
                     OrderBasket.Instance.Subtract(menuItem);
-                    if (OnDeleteItem != null)
-                        OnDeleteItem();
+                    OnDeleteItem?.Invoke();
                 }
             }
             else
