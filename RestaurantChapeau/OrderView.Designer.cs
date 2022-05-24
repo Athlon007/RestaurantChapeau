@@ -476,6 +476,7 @@
             this.Name = "OrderView";
             this.Text = "OrderView";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderView_FormClosing);
+            this.Load += new System.EventHandler(this.OrderView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.theTabControl.ResumeLayout(false);
             this.tabConnecting.ResumeLayout(false);

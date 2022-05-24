@@ -59,37 +59,31 @@ namespace RestaurantChapeau
 
             lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
             lblHeader.Text = "";
-
-            try
-            {
-                Task.Run(() => AttemptConnect());
-            }
-            catch (Exception ex)
-            { 
-                ShowFail("Couldn't obtain the menu info :(");
-                ErrorLogger.Instance.WriteError(ex, false);
-            }
         }
 
-        void AttemptConnect()
+        private async void OrderView_Load(object sender, EventArgs e)
         {
-            orderLogic = new OrderLogic();
-
-            if (lblHeader.InvokeRequired)
-            {
-                Action safeLoad = delegate { LoadGUI(); };
-                lblHeader.Invoke(safeLoad);
-            }
+            await Task.Run(ConnectToServer);
+            LoadGUI();
         }
 
-        void LoadGUI()
+        private async Task ConnectToServer()
         {
-            lblHeader.Text = "Menu";
+            orderLogic = await Task.Run(() =>
+            {
+                 return new OrderLogic();
+            });
+        }
+
+        private void LoadGUI()
+        {
             try
             {
                 LoadMenuTypes();
                 LoadMenu(currentMenuType);
+
                 theTabControl.SelectedTab = tabPageMenu;
+                lblHeader.Text = "Menu";
             }
             catch (Exception ex)
             {
@@ -144,7 +138,7 @@ namespace RestaurantChapeau
             }
         }
 
-        private void LoadMenu(MenuType menuType)
+        private async void LoadMenu(MenuType menuType)
         {
             // First we update the buttons of menu types.
             foreach (Control control in flwMenuTypes.Controls)
@@ -166,13 +160,13 @@ namespace RestaurantChapeau
             }
 
             ClearMenuItems();
-            List<MenuCategory> menuCategories = orderLogic.GetMenuCategories(menuType);
+            List<MenuCategory> menuCategories = await Task.Run(() => { return orderLogic.GetMenuCategories(menuType); });
 
             foreach (MenuCategory menuCategory in menuCategories)
             {
                 new CategorySeparatorUI(flwMenuItems, menuCategory.Name);
 
-                List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
+                List<MenuItem> menuItems = await Task.Run(() => { return orderLogic.GetMenuItems(menuType, menuCategory); });
 
                 foreach (MenuItem menuItem in menuItems)
                 {
