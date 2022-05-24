@@ -6,6 +6,7 @@ using RestaurantLogic;
 using RestaurantModel;
 using System.Threading;
 using System.Threading.Tasks;
+using RestaurantChapeau.OrderViewUIController;
 
 namespace RestaurantChapeau
 {
@@ -15,10 +16,11 @@ namespace RestaurantChapeau
         Bill bill;
 
         MenuType currentMenuType;
-        MenuCategory currentMenuCategory;
 
-        Font fontMenuType = new Font("Segoe UI", 12);
-        Font fontMenuCategory = new Font("Segoe UI", 8);
+        Font fontMenuType = new Font("Segoe UI", 18);
+
+        Color activeButtonColor = Color.FromArgb(255, 67, 179, 215);
+        Color activeButtonTextColor = Color.FromArgb(255, 255, 255, 255);
 
         public OrderView(Bill bill)
         {
@@ -45,7 +47,7 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             { 
-                lblConnecting.Text = "Failed to connect :(";
+                ShowFail("Couldn't obtain the menu info :(");
                 ErrorLogger.Instance.WriteError(ex, false);
             }
         }
@@ -67,17 +69,19 @@ namespace RestaurantChapeau
             try
             {
                 LoadMenuTypes();
+                LoadMenu(currentMenuType);
                 theTabControl.SelectedTab = tabPageMenu;
             }
             catch (Exception ex)
             {
-                ErrorLogger.Instance.WriteError(ex);
+                ErrorLogger.Instance.WriteError(ex, false);
+                ShowFail("Can't obtain menu info :(");
             }
         }
 
         void LoadHeader()
         {
-            string headerText = theTabControl.SelectedTab == tabPageMenu ? $"Table {bill.Table.Id}" : $"Checkout Table {bill.Table.Id}";
+            string headerText = theTabControl.SelectedTab == tabPageMenu ? $"Menu" : $"Summary";
             lblHeader.Text = headerText;
         }
 
@@ -91,12 +95,20 @@ namespace RestaurantChapeau
                 Button menuTypeButton = new Button();
                 menuTypeButton.Tag = menuType;
                 menuTypeButton.Text = menuType.Name;
-                menuTypeButton.Height = flwMenuTypes.Height;
-                menuTypeButton.Width = flwMenuTypes.Width / menuTypes.Count - 7;
+                menuTypeButton.Height = flwMenuTypes.Height - 22;
+                menuTypeButton.Width = flwMenuTypes.Width / menuTypes.Count - 22;
                 menuTypeButton.Click += OnMenuTypeClick;
-                menuTypeButton.TextAlign = ContentAlignment.MiddleLeft;
+                menuTypeButton.TextAlign = ContentAlignment.MiddleCenter;
                 menuTypeButton.Font = fontMenuType;
+                menuTypeButton.Margin = new Padding(10, 10, 10, 10);
+                menuTypeButton.FlatStyle = FlatStyle.Flat;
+                menuTypeButton.FlatAppearance.BorderSize = 0; 
                 flwMenuTypes.Controls.Add(menuTypeButton);
+            }
+
+            if (currentMenuType == null)
+            {
+                currentMenuType = menuTypes[0];
             }
         }
 
@@ -107,17 +119,11 @@ namespace RestaurantChapeau
 
         private void OnMenuTypeClick(object sender, EventArgs e)
         {
-            foreach (Control control in flwMenuTypes.Controls)
-            {
-                control.Enabled = true;
-            }
-            (sender as Control).Enabled = false;
-
             currentMenuType = (MenuType)(sender as Button).Tag;
 
             try
             {
-                LoadMenuCategories(currentMenuType);
+                LoadMenu(currentMenuType);
             }
             catch (Exception ex)
             {
@@ -125,67 +131,40 @@ namespace RestaurantChapeau
             }
         }
 
-        private void LoadMenuCategories(MenuType menuType)
+        private void LoadMenu(MenuType menuType)
         {
-            ClearMenuCategories();
+            // First we update the buttons of menu types.
+            foreach (Control control in flwMenuTypes.Controls)
+            {
+                if (control is Button)
+                {
+                    Button button = control as Button;
+                    Color backgroundColor = Color.White;
+                    Color textColor = Color.Black;
+                    if (button.Tag == menuType)
+                    {
+                        backgroundColor = activeButtonColor;
+                        textColor = activeButtonTextColor;
+                    }
+
+                    button.BackColor = backgroundColor;
+                    button.ForeColor = textColor;
+                }
+            }
+
             ClearMenuItems();
             List<MenuCategory> menuCategories = orderLogic.GetMenuCategories(menuType);
 
             foreach (MenuCategory menuCategory in menuCategories)
             {
-                Button menuCategoryButon = new Button();
-                menuCategory.MenuType = menuType;
-                menuCategoryButon.Tag = menuCategory;
-                menuCategoryButon.Text = menuCategory.Name;
-                menuCategoryButon.Height = flwMenuCategory.Height;
-                menuCategoryButon.Width = flwMenuCategory.Width / menuCategories.Count - 7;
-                menuCategoryButon.Click += OnMenuCategoryClick;
-                menuCategoryButon.Font = fontMenuCategory;
-                flwMenuCategory.Controls.Add(menuCategoryButon);
-            }
-        }
+                new CategorySeparatorUI(flwMenuItems, menuCategory.Name);
 
-        private void ClearMenuCategories()
-        {
-            flwMenuCategory.Controls.Clear();
-        }
+                List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
 
-        private void OnMenuCategoryClick(object sender, EventArgs e)
-        {
-            foreach (Control control in flwMenuCategory.Controls)
-            {
-                control.Enabled = true;
-            }
-            (sender as Control).Enabled = false;
-
-            currentMenuCategory = (MenuCategory)(sender as Button).Tag;
-
-            try
-            {
-                LoadMenuItems(currentMenuType, currentMenuCategory);
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex);
-            }
-        }
-
-        private void LoadMenuItems(MenuType menuType, MenuCategory menuCategory)
-        {
-            ClearMenuItems();
-
-            if (menuType == null || menuCategory == null)
-            {
-                return;
-            }
-
-            List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
-
-            int count = 1;
-            foreach (MenuItem menuItem in menuItems)
-            {
-                new MenuItemUIControl(flwMenuItems, menuItem, lblSub.Left, count);
-                count++;
+                foreach (MenuItem menuItem in menuItems)
+                {
+                    new MenuItemUI(flwMenuItems, menuItem, lblSub.Left);
+                }
             }
         }
 
@@ -231,7 +210,7 @@ namespace RestaurantChapeau
                 int count = 1;
                 foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
                 {
-                    new MenuItemUIControl(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
+                    new MenuItemUI(flwCheckout, menuItem, lblQuantityCheckout.Left);
                     count++;
                 }
 
@@ -263,7 +242,7 @@ namespace RestaurantChapeau
 
             try
             {
-                LoadMenuItems(currentMenuType, currentMenuCategory);
+                LoadMenu(currentMenuType);
             }
             catch (Exception ex)
             {
@@ -288,6 +267,12 @@ namespace RestaurantChapeau
         {
             btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
             btnFinish.Enabled = OrderBasket.Instance.Count > 0;
+        }
+
+        private void ShowFail(string failReason)
+        {
+            lblConnecting.Text = failReason;
+            theTabControl.SelectedTab = tabConnecting;
         }
     }
 }

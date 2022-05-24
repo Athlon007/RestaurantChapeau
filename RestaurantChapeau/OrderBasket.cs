@@ -43,7 +43,7 @@ namespace RestaurantChapeau
                 if (basketItem.Id == item.Id)
                 {
                     itemFound = true;
-                    if (basketItem.Quantity > MaximumQuantity)
+                    if (basketItem.Quantity >= MaximumQuantity)
                     {
                         break;
                     }    
@@ -96,6 +96,11 @@ namespace RestaurantChapeau
         /// <param name="quantity"></param>
         public void Set(MenuItem item, int quantity)
         {
+            if (quantity > MaximumQuantity)
+            {
+                quantity = MaximumQuantity;
+            }
+
             bool itemFound = false;
             foreach (MenuItem basketItem in itemsInBasket)
             {
@@ -104,9 +109,9 @@ namespace RestaurantChapeau
                     itemFound = true;
                     basketItem.Quantity = quantity;
 
-                    if (basketItem.Quantity == 0)
+                    if (basketItem.Quantity > MaximumQuantity)
                     {
-                        itemsInBasket.Remove(basketItem);
+                        basketItem.Quantity = MaximumQuantity;
                     }
 
                     break;
