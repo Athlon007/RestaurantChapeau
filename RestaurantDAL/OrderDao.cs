@@ -222,7 +222,7 @@ namespace RestaurantDAL
             {
                 new SqlParameter("@OrderId", orderId)
             };
-            
+
             return ReadOrderMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
         }
         private List<MenuItem> ReadOrderMenuItems(DataTable table)
@@ -241,5 +241,18 @@ namespace RestaurantDAL
 
             return items;
         }
+
+        public void UpdateOrderStatus(Order order)
+        {
+            string command = (
+            "UPDATE dbo.[Order] SET status =@status  WHERE Id = @orderId");
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                    new SqlParameter("@status", order.Status),
+                    new SqlParameter("@OrderId", order.Id)
+            };
+            ExecuteEditQuery(command, parameters);
+        }
+
     }
 }

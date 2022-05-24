@@ -180,6 +180,7 @@
             this.listViewNewOrders.TabIndex = 8;
             this.listViewNewOrders.UseCompatibleStateImageBehavior = false;
             this.listViewNewOrders.View = System.Windows.Forms.View.Details;
+            this.listViewNewOrders.Click += new System.EventHandler(this.listViewNewOrders_Click);
             // 
             // colHeadOrders
             // 
@@ -292,6 +293,7 @@
             this.btn_readyOrder.TabIndex = 9;
             this.btn_readyOrder.Text = "Ready";
             this.btn_readyOrder.UseVisualStyleBackColor = false;
+            this.btn_readyOrder.Click += new System.EventHandler(this.btn_readyOrder_Click);
             // 
             // label10
             // 
@@ -447,7 +449,6 @@
             this.listViewKitchen_ActiveOrder.TabIndex = 9;
             this.listViewKitchen_ActiveOrder.UseCompatibleStateImageBehavior = false;
             this.listViewKitchen_ActiveOrder.View = System.Windows.Forms.View.Details;
-            this.listViewKitchen_ActiveOrder.Click += new System.EventHandler(this.listViewKitchen_ActiveOrder_Click);
             // 
             // Order_item
             // 

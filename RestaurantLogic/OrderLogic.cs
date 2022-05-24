@@ -85,5 +85,9 @@ namespace RestaurantLogic
         {
             return orderDao.GetOrderFoodItems(orderID);
         }
+        public void UpdateOrderStatus(Order order)
+        {
+            orderDao.UpdateOrderStatus(order);
+        }
     }
 }

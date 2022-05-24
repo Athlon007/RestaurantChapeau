@@ -51,6 +51,7 @@ namespace RestaurantChapeau
         {
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
+
             lblKitchenn_OrderNo.Text=orderItem.Id.ToString();
             // select from database which items have the order id of the id stated in the listview
             List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
@@ -94,12 +95,20 @@ namespace RestaurantChapeau
             pnlKitchen_CompleteOrders.Show();
         }
 
-        private void listViewKitchen_ActiveOrder_Click(object sender, EventArgs e)
+        private void listViewNewOrders_Click(object sender, EventArgs e)
         {
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
             DisplayOrderItems();
 
+        }
+
+        private void btn_readyOrder_Click(object sender, EventArgs e)
+        {
+            Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
+            orderItem.Status = OrderStatus.Preparing;
+
+            orderService.UpdateOrderStatus(orderItem);
         }
     }
 }
