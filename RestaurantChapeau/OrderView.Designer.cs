@@ -173,7 +173,7 @@
             this.tabConnecting.Controls.Add(this.lblConnecting);
             this.tabConnecting.Location = new System.Drawing.Point(8, 46);
             this.tabConnecting.Name = "tabConnecting";
-            this.tabConnecting.Size = new System.Drawing.Size(1228, 1232);
+            this.tabConnecting.Size = new System.Drawing.Size(1164, 1433);
             this.tabConnecting.TabIndex = 2;
             this.tabConnecting.Text = "tabConnecting";
             this.tabConnecting.UseVisualStyleBackColor = true;
@@ -184,7 +184,7 @@
             this.lblConnecting.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblConnecting.Location = new System.Drawing.Point(0, 0);
             this.lblConnecting.Name = "lblConnecting";
-            this.lblConnecting.Size = new System.Drawing.Size(1228, 1232);
+            this.lblConnecting.Size = new System.Drawing.Size(1164, 1433);
             this.lblConnecting.TabIndex = 0;
             this.lblConnecting.Text = "Getting menu...";
             this.lblConnecting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -239,7 +239,7 @@
             this.tabPageCheckout.Location = new System.Drawing.Point(8, 46);
             this.tabPageCheckout.Name = "tabPageCheckout";
             this.tabPageCheckout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCheckout.Size = new System.Drawing.Size(1228, 1232);
+            this.tabPageCheckout.Size = new System.Drawing.Size(1164, 1433);
             this.tabPageCheckout.TabIndex = 1;
             this.tabPageCheckout.Text = "tabPageCheckout";
             this.tabPageCheckout.UseVisualStyleBackColor = true;
@@ -251,7 +251,7 @@
             this.flwCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flwCheckout.Location = new System.Drawing.Point(3, 43);
             this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1222, 858);
+            this.flwCheckout.Size = new System.Drawing.Size(1158, 1059);
             this.flwCheckout.TabIndex = 11;
             // 
             // pnlColumnsCheckout
@@ -262,7 +262,7 @@
             this.pnlColumnsCheckout.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlColumnsCheckout.Location = new System.Drawing.Point(3, 3);
             this.pnlColumnsCheckout.Name = "pnlColumnsCheckout";
-            this.pnlColumnsCheckout.Size = new System.Drawing.Size(1222, 40);
+            this.pnlColumnsCheckout.Size = new System.Drawing.Size(1158, 40);
             this.pnlColumnsCheckout.TabIndex = 12;
             // 
             // lblQuantityCheckout
@@ -288,7 +288,7 @@
             this.lblComment.AutoSize = true;
             this.lblComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblComment.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblComment.Location = new System.Drawing.Point(3, 901);
+            this.lblComment.Location = new System.Drawing.Point(3, 1102);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(256, 65);
             this.lblComment.TabIndex = 11;
@@ -298,11 +298,11 @@
             // 
             this.txtComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txtComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtComment.Location = new System.Drawing.Point(3, 966);
+            this.txtComment.Location = new System.Drawing.Point(3, 1167);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.PlaceholderText = "Insert comment here...";
-            this.txtComment.Size = new System.Drawing.Size(1222, 149);
+            this.txtComment.Size = new System.Drawing.Size(1158, 149);
             this.txtComment.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -313,11 +313,11 @@
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnFinish, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 1115);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 1316);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1222, 114);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1158, 114);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // btnBack
@@ -326,7 +326,7 @@
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnBack.Location = new System.Drawing.Point(3, 3);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(605, 108);
+            this.btnBack.Size = new System.Drawing.Size(573, 108);
             this.btnBack.TabIndex = 8;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -336,9 +336,9 @@
             // 
             this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnFinish.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnFinish.Location = new System.Drawing.Point(614, 3);
+            this.btnFinish.Location = new System.Drawing.Point(582, 3);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(605, 108);
+            this.btnFinish.Size = new System.Drawing.Size(573, 108);
             this.btnFinish.TabIndex = 7;
             this.btnFinish.Text = "Place Order";
             this.btnFinish.UseVisualStyleBackColor = true;
@@ -366,13 +366,14 @@
             // 
             // lblTopBarText
             // 
-            this.lblTopBarText.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTopBarText.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTopBarText.Location = new System.Drawing.Point(135, 0);
             this.lblTopBarText.Name = "lblTopBarText";
             this.lblTopBarText.Size = new System.Drawing.Size(860, 127);
             this.lblTopBarText.TabIndex = 11;
             this.lblTopBarText.Text = "Order View";
             this.lblTopBarText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTopBarText.UseCompatibleTextRendering = true;
             // 
             // OrderView
             // 

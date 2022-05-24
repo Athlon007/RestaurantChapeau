@@ -41,6 +41,8 @@ namespace RestaurantChapeau
             OrderBasket.Instance.Clear();
             OrderBasket.Instance.AddListener(this);
 
+            lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
+
             try
             {
                 Task.Run(() => AttemptConnect());
