@@ -91,7 +91,7 @@
             this.flwMenuTypes.Dock = System.Windows.Forms.DockStyle.Top;
             this.flwMenuTypes.Location = new System.Drawing.Point(3, 3);
             this.flwMenuTypes.Name = "flwMenuTypes";
-            this.flwMenuTypes.Size = new System.Drawing.Size(1158, 100);
+            this.flwMenuTypes.Size = new System.Drawing.Size(1158, 120);
             this.flwMenuTypes.TabIndex = 2;
             // 
             // flwMenuItems
@@ -99,9 +99,9 @@
             this.flwMenuItems.AutoScroll = true;
             this.flwMenuItems.BackColor = System.Drawing.Color.White;
             this.flwMenuItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flwMenuItems.Location = new System.Drawing.Point(3, 157);
+            this.flwMenuItems.Location = new System.Drawing.Point(3, 177);
             this.flwMenuItems.Name = "flwMenuItems";
-            this.flwMenuItems.Size = new System.Drawing.Size(1158, 1159);
+            this.flwMenuItems.Size = new System.Drawing.Size(1158, 1139);
             this.flwMenuItems.TabIndex = 4;
             // 
             // lblName
@@ -164,6 +164,7 @@
             this.theTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.theTabControl.Location = new System.Drawing.Point(0, 201);
             this.theTabControl.Name = "theTabControl";
+            this.theTabControl.Padding = new System.Drawing.Point(18, 3);
             this.theTabControl.SelectedIndex = 0;
             this.theTabControl.Size = new System.Drawing.Size(1180, 1487);
             this.theTabControl.TabIndex = 9;
@@ -180,6 +181,7 @@
             // 
             // lblConnecting
             // 
+            this.lblConnecting.BackColor = System.Drawing.Color.White;
             this.lblConnecting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblConnecting.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblConnecting.Location = new System.Drawing.Point(0, 0);
@@ -209,7 +211,7 @@
             this.pnlColumns.Controls.Add(this.lblSub);
             this.pnlColumns.Controls.Add(this.lblName);
             this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlColumns.Location = new System.Drawing.Point(3, 103);
+            this.pnlColumns.Location = new System.Drawing.Point(3, 123);
             this.pnlColumns.Name = "pnlColumns";
             this.pnlColumns.Size = new System.Drawing.Size(1158, 54);
             this.pnlColumns.TabIndex = 10;

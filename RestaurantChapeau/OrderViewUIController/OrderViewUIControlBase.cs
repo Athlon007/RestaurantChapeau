@@ -11,7 +11,7 @@ namespace RestaurantChapeau.OrderViewUIController
 
         // Properties
         private Font menuItemsFont = new Font("Segoe UI", 12);
-        private Font txtboxFont = new Font("Segoe UI", 16);
+        private Font txtboxFont = new Font("Segoe UI", 24);
         private Color backgroundColor = Color.FromArgb(56, 186, 186, 186);
         private Padding margin = new Padding(4, 10, 4, 10);
 
