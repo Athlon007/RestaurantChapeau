@@ -57,10 +57,11 @@ namespace RestaurantLogic
         /// Creates a new order for provided bill.
         /// </summary>
         /// <param name="bill">Bill for which the order will be created.</param>
+        /// <param name="comment">Comment of the order.</param>
         /// <returns>A new order object.</returns>
-        public Order CreateNewOrderForBill(Bill bill)
+        public Order CreateNewOrderForBill(Bill bill, string comment)
         {
-            return orderDao.CreateNewOrderForBill(bill);
+            return orderDao.CreateNewOrderForBill(bill, comment);
         }
 
         /// <summary>

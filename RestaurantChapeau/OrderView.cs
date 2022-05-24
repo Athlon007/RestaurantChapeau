@@ -38,10 +38,14 @@ namespace RestaurantChapeau
             theTabControl.ItemSize = new Size(0, 1);
             theTabControl.SizeMode = TabSizeMode.Fixed;
 
+            // Center the "tick" picture.
+            picTick.Left = this.Width / 2 - picTick.Width / 2;
+
             OrderBasket.Instance.Clear();
             OrderBasket.Instance.AddListener(this);
 
             lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
+            lblHeader.Text = "";
 
             try
             {
@@ -67,7 +71,7 @@ namespace RestaurantChapeau
 
         void LoadGUI()
         {
-            LoadHeader();
+            lblHeader.Text = "Menu";
             try
             {
                 LoadMenuTypes();
@@ -79,12 +83,6 @@ namespace RestaurantChapeau
                 ErrorLogger.Instance.WriteError(ex, false);
                 ShowFail("Can't obtain menu info :(");
             }
-        }
-
-        void LoadHeader()
-        {
-            string headerText = theTabControl.SelectedTab == tabPageMenu ? $"Menu" : $"Summary";
-            lblHeader.Text = headerText;
         }
 
         private void LoadMenuTypes()
@@ -221,12 +219,12 @@ namespace RestaurantChapeau
             }
 
             theTabControl.SelectedTab = tabPageCheckout;
-            LoadHeader();
+            lblHeader.Text = "Summary";
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            Order order = orderLogic.CreateNewOrderForBill(bill);
+            Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
 
             foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
             {
@@ -234,14 +232,22 @@ namespace RestaurantChapeau
             }
 
             OrderBasket.Instance.Clear();
+            theTabControl.SelectedTab = tabOrderSucceeded;
+            lblHeader.Text = "";
+            Task.Run(() => LoadOrderCompleted());
+        }
 
-            this.Close();
+        private void LoadOrderCompleted()
+        {
+            Thread.Sleep(1000);
+            Action safeLoad = delegate { this.Close(); };
+            this.Invoke(safeLoad);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             theTabControl.SelectedTab = tabPageMenu;
-            LoadHeader();
+            lblHeader.Text = "Menu";
 
             try
             {

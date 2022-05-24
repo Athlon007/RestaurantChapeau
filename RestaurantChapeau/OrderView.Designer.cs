@@ -53,6 +53,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
+            this.tabOrderSucceeded = new System.Windows.Forms.TabPage();
+            this.lblOrderPlaced = new System.Windows.Forms.Label();
+            this.picTick = new System.Windows.Forms.PictureBox();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.picBackButton = new System.Windows.Forms.PictureBox();
@@ -67,6 +70,8 @@
             this.pnlColumnsCheckout.SuspendLayout();
             this.pnlCommentTextBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabOrderSucceeded.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTick)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackButton)).BeginInit();
             this.SuspendLayout();
@@ -160,6 +165,7 @@
             this.theTabControl.Controls.Add(this.tabConnecting);
             this.theTabControl.Controls.Add(this.tabPageMenu);
             this.theTabControl.Controls.Add(this.tabPageCheckout);
+            this.theTabControl.Controls.Add(this.tabOrderSucceeded);
             this.theTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.theTabControl.Location = new System.Drawing.Point(0, 201);
             this.theTabControl.Name = "theTabControl";
@@ -382,6 +388,37 @@
             this.btnFinish.UseVisualStyleBackColor = false;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
+            // tabOrderSucceeded
+            // 
+            this.tabOrderSucceeded.BackColor = System.Drawing.Color.White;
+            this.tabOrderSucceeded.Controls.Add(this.lblOrderPlaced);
+            this.tabOrderSucceeded.Controls.Add(this.picTick);
+            this.tabOrderSucceeded.Location = new System.Drawing.Point(8, 46);
+            this.tabOrderSucceeded.Name = "tabOrderSucceeded";
+            this.tabOrderSucceeded.Size = new System.Drawing.Size(1164, 1433);
+            this.tabOrderSucceeded.TabIndex = 3;
+            this.tabOrderSucceeded.Text = "tabOrderSucceeded";
+            // 
+            // lblOrderPlaced
+            // 
+            this.lblOrderPlaced.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOrderPlaced.Location = new System.Drawing.Point(-8, 800);
+            this.lblOrderPlaced.Name = "lblOrderPlaced";
+            this.lblOrderPlaced.Size = new System.Drawing.Size(1236, 68);
+            this.lblOrderPlaced.TabIndex = 11;
+            this.lblOrderPlaced.Text = "Order placed";
+            this.lblOrderPlaced.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picTick
+            // 
+            this.picTick.Image = global::RestaurantChapeau.Properties.Resources.tick;
+            this.picTick.Location = new System.Drawing.Point(359, 311);
+            this.picTick.Name = "picTick";
+            this.picTick.Size = new System.Drawing.Size(454, 454);
+            this.picTick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picTick.TabIndex = 0;
+            this.picTick.TabStop = false;
+            // 
             // lblHeader
             // 
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -453,6 +490,8 @@
             this.pnlCommentTextBox.ResumeLayout(false);
             this.pnlCommentTextBox.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tabOrderSucceeded.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picTick)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBackButton)).EndInit();
             this.ResumeLayout(false);
@@ -489,5 +528,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlCommentTextBox;
         private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.TabPage tabOrderSucceeded;
+        private System.Windows.Forms.Label lblOrderPlaced;
+        private System.Windows.Forms.PictureBox picTick;
     }
 }
