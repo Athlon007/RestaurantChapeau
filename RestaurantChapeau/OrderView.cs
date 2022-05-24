@@ -212,7 +212,8 @@ namespace RestaurantChapeau
                 int count = 1;
                 foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
                 {
-                    new MenuItemUI(flwCheckout, menuItem, lblQuantityCheckout.Left);
+                    MenuSummaryUI summaryButton = new MenuSummaryUI(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
+                    summaryButton.OnDeleteItem = LoadCheckout;
                     count++;
                 }
 

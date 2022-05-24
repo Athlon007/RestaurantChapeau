@@ -44,6 +44,7 @@
             this.tabPageCheckout = new System.Windows.Forms.TabPage();
             this.flwCheckout = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlColumnsCheckout = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblQuantityCheckout = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblComment = new System.Windows.Forms.Label();
@@ -208,6 +209,7 @@
             this.pnlColumns.Controls.Add(this.lblName);
             this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlColumns.Location = new System.Drawing.Point(3, 123);
+            this.pnlColumns.Margin = new System.Windows.Forms.Padding(0);
             this.pnlColumns.Name = "pnlColumns";
             this.pnlColumns.Size = new System.Drawing.Size(1158, 54);
             this.pnlColumns.TabIndex = 10;
@@ -256,19 +258,31 @@
             // pnlColumnsCheckout
             // 
             this.pnlColumnsCheckout.BackColor = System.Drawing.Color.White;
+            this.pnlColumnsCheckout.Controls.Add(this.label1);
             this.pnlColumnsCheckout.Controls.Add(this.lblQuantityCheckout);
             this.pnlColumnsCheckout.Controls.Add(this.label2);
             this.pnlColumnsCheckout.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlColumnsCheckout.Location = new System.Drawing.Point(3, 3);
+            this.pnlColumnsCheckout.Margin = new System.Windows.Forms.Padding(0);
             this.pnlColumnsCheckout.Name = "pnlColumnsCheckout";
             this.pnlColumnsCheckout.Size = new System.Drawing.Size(1158, 54);
             this.pnlColumnsCheckout.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(107, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(108, 45);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Name";
             // 
             // lblQuantityCheckout
             // 
             this.lblQuantityCheckout.AutoSize = true;
             this.lblQuantityCheckout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblQuantityCheckout.Location = new System.Drawing.Point(826, 3);
+            this.lblQuantityCheckout.Location = new System.Drawing.Point(838, 3);
             this.lblQuantityCheckout.Name = "lblQuantityCheckout";
             this.lblQuantityCheckout.Size = new System.Drawing.Size(149, 45);
             this.lblQuantityCheckout.TabIndex = 6;
@@ -280,9 +294,9 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(3, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 45);
+            this.label2.Size = new System.Drawing.Size(65, 45);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Name";
+            this.label2.Text = "No";
             // 
             // lblComment
             // 
@@ -457,5 +471,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTopBarText;
         private System.Windows.Forms.PictureBox picBackButton;
+        private System.Windows.Forms.Label label1;
     }
 }

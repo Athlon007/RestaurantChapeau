@@ -111,7 +111,10 @@ namespace RestaurantChapeau
                     {
                         basketItem.Quantity = MaximumQuantity;
                     }
-
+                    else if (basketItem.Quantity == 0)
+                    {
+                        itemsInBasket.Remove(basketItem);
+                    }
                     break;
                 }
             }
