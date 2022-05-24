@@ -35,6 +35,9 @@ namespace RestaurantChapeau.OrderViewUIController
             btn.Font = txtboxFont;
             btn.Margin = margin;
             btn.Click += onClickAction;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.BackColor = backgroundColor;
+            btn.FlatAppearance.BorderSize = 0;
             flow.Controls.Add(btn);
 
             controls.Add(btn);

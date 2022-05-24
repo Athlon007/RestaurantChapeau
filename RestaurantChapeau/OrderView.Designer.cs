@@ -48,6 +48,7 @@
             this.lblQuantityCheckout = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblComment = new System.Windows.Forms.Label();
+            this.pnlCommentTextBox = new System.Windows.Forms.Panel();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBack = new System.Windows.Forms.Button();
@@ -64,6 +65,7 @@
             this.tlpPlaceCancelOrder.SuspendLayout();
             this.tabPageCheckout.SuspendLayout();
             this.pnlColumnsCheckout.SuspendLayout();
+            this.pnlCommentTextBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackButton)).BeginInit();
@@ -236,7 +238,7 @@
             this.tabPageCheckout.Controls.Add(this.flwCheckout);
             this.tabPageCheckout.Controls.Add(this.pnlColumnsCheckout);
             this.tabPageCheckout.Controls.Add(this.lblComment);
-            this.tabPageCheckout.Controls.Add(this.txtComment);
+            this.tabPageCheckout.Controls.Add(this.pnlCommentTextBox);
             this.tabPageCheckout.Controls.Add(this.tableLayoutPanel1);
             this.tabPageCheckout.Location = new System.Drawing.Point(8, 46);
             this.tabPageCheckout.Name = "tabPageCheckout";
@@ -252,7 +254,7 @@
             this.flwCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flwCheckout.Location = new System.Drawing.Point(3, 57);
             this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1158, 1065);
+            this.flwCheckout.Size = new System.Drawing.Size(1158, 1014);
             this.flwCheckout.TabIndex = 11;
             // 
             // pnlColumnsCheckout
@@ -303,22 +305,34 @@
             this.lblComment.AutoSize = true;
             this.lblComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblComment.Location = new System.Drawing.Point(3, 1122);
+            this.lblComment.Location = new System.Drawing.Point(3, 1071);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(180, 45);
             this.lblComment.TabIndex = 11;
             this.lblComment.Text = "Comments";
             // 
+            // pnlCommentTextBox
+            // 
+            this.pnlCommentTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.pnlCommentTextBox.Controls.Add(this.txtComment);
+            this.pnlCommentTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlCommentTextBox.Location = new System.Drawing.Point(3, 1116);
+            this.pnlCommentTextBox.Name = "pnlCommentTextBox";
+            this.pnlCommentTextBox.Padding = new System.Windows.Forms.Padding(4);
+            this.pnlCommentTextBox.Size = new System.Drawing.Size(1158, 200);
+            this.pnlCommentTextBox.TabIndex = 14;
+            // 
             // txtComment
             // 
-            this.txtComment.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtComment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtComment.Location = new System.Drawing.Point(3, 1167);
+            this.txtComment.Location = new System.Drawing.Point(4, 4);
+            this.txtComment.Margin = new System.Windows.Forms.Padding(10);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.PlaceholderText = "Insert comment here...";
-            this.txtComment.Size = new System.Drawing.Size(1158, 149);
-            this.txtComment.TabIndex = 11;
+            this.txtComment.PlaceholderText = "Insert comment or wishes here...";
+            this.txtComment.Size = new System.Drawing.Size(1150, 192);
+            this.txtComment.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -436,6 +450,8 @@
             this.tabPageCheckout.PerformLayout();
             this.pnlColumnsCheckout.ResumeLayout(false);
             this.pnlColumnsCheckout.PerformLayout();
+            this.pnlCommentTextBox.ResumeLayout(false);
+            this.pnlCommentTextBox.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBackButton)).EndInit();
@@ -464,7 +480,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnFinish;
         private System.Windows.Forms.Label lblHeader;
-        private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.Label lblComment;
         private System.Windows.Forms.TabPage tabConnecting;
         private System.Windows.Forms.Label lblConnecting;
@@ -472,5 +487,7 @@
         private System.Windows.Forms.Label lblTopBarText;
         private System.Windows.Forms.PictureBox picBackButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnlCommentTextBox;
+        private System.Windows.Forms.TextBox txtComment;
     }
 }
