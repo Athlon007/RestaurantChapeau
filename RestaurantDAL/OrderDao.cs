@@ -217,25 +217,15 @@ namespace RestaurantDAL
         //Returns all the items in an order with a specific orderID
         public List<MenuItem> GetOrderFoodItems(int orderId)
         {
-            List<MenuItem> menuItems = new List<MenuItem>();
-
             string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
             SqlParameter[] parameters = new SqlParameter[]
             {
-                    new SqlParameter("@OrderId", orderId)
+                new SqlParameter("@OrderId", orderId)
             };
-            DataTable tableOrders = ExecuteSelectQuery(selectItemsQuery, parameters);
-
-            foreach (DataRow row in tableOrders.Rows)
-            {
-                MenuItem item = new MenuItem();
-                item.Quantity = Convert.ToInt32(row["quantity"]);
-                item.Vat = Convert.ToInt32(row["vat"]);
-
-                menuItems.Add(item);
-            }
-            return menuItems;
-
+            
+                  
+           
+            return ReadOrderMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
         }
         private List<MenuItem> ReadOrderMenuItems(DataTable table)
         {

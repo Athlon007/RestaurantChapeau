@@ -52,7 +52,6 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.btn_readyOrder = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.btnKitchen_newOrders = new System.Windows.Forms.Button();
             this.btnKitchen_ActiveOrder = new System.Windows.Forms.Button();
             this.btnKitchen_CompleteOrders = new System.Windows.Forms.Button();
@@ -67,7 +66,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.listViewKitchen_ActiveOrder = new System.Windows.Forms.ListView();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.label11 = new System.Windows.Forms.Label();
             this.pnlKitchen_NewOrders.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -305,19 +303,6 @@
             this.label10.Size = new System.Drawing.Size(0, 32);
             this.label10.TabIndex = 6;
             // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(1386, 1033);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(205, 64);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Ready";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
             // btnKitchen_newOrders
             // 
             this.btnKitchen_newOrders.BackColor = System.Drawing.Color.White;
@@ -401,11 +386,11 @@
             // 
             // pnlKitchen_ActiveOrder
             // 
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.btn_readyOrder);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.lblKitchenn_OrderNo);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.lblKitchen_OrderTime);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label14);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label13);
-            this.pnlKitchen_ActiveOrder.Controls.Add(this.btn_readyOrder);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.listViewKitchen_ActiveOrder);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label11);
             this.pnlKitchen_ActiveOrder.Location = new System.Drawing.Point(215, 3);
@@ -449,11 +434,13 @@
             // 
             // listViewKitchen_ActiveOrder
             // 
+            this.listViewKitchen_ActiveOrder.CheckBoxes = true;
             this.listViewKitchen_ActiveOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader4});
+            this.listViewKitchen_ActiveOrder.FullRowSelect = true;
+            this.listViewKitchen_ActiveOrder.GridLines = true;
             this.listViewKitchen_ActiveOrder.HideSelection = false;
-            this.listViewKitchen_ActiveOrder.Location = new System.Drawing.Point(200, 303);
+            this.listViewKitchen_ActiveOrder.Location = new System.Drawing.Point(197, 303);
             this.listViewKitchen_ActiveOrder.Name = "listViewKitchen_ActiveOrder";
             this.listViewKitchen_ActiveOrder.Size = new System.Drawing.Size(1202, 687);
             this.listViewKitchen_ActiveOrder.TabIndex = 9;
@@ -464,11 +451,6 @@
             // 
             this.columnHeader4.Text = "Order Item";
             this.columnHeader4.Width = 1000;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "";
-            this.columnHeader5.Width = 800;
             // 
             // label11
             // 
@@ -489,10 +471,9 @@
             this.ClientSize = new System.Drawing.Size(1844, 1157);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.pnlKitchen_NewOrders);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Controls.Add(this.pnlKitchen_ActiveOrder);
+            this.Controls.Add(this.pnlKitchen_NewOrders);
+            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";
@@ -537,7 +518,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn_readyOrder;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnKitchen_newOrders;
         private System.Windows.Forms.Button btnKitchen_ActiveOrder;
         private System.Windows.Forms.Button btnKitchen_CompleteOrders;
@@ -553,6 +533,5 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }

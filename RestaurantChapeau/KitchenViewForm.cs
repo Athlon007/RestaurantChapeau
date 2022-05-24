@@ -13,7 +13,7 @@ namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
     {
-        private OrderStatus orderStatus;
+       // private OrderStatus orderStatus;
         private Panel currentPanel;
         private OrderLogic orderService;
         public KitchenViewForm()
@@ -42,22 +42,29 @@ namespace RestaurantChapeau
                 li.SubItems.Add(order.PlacedTime.ToString());
                 li.SubItems.Add(order.Status.ToString());
                 li.Tag = order;
+
                 //add items to the listview
                 listViewNewOrders.Items.Add(li);
             }
-
         }
         private void DisplayOrderItems()
         {
+            //string orderItem= listViewNewOrders.SelectedItems[0].ToString();
+           
+           
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
             List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
+            MessageBox.Show(orderItem.Id.ToString());
 
-            foreach (MenuItem i in orderMenuItems)
+            foreach (MenuItem item in orderMenuItems)
             {
-                ListViewItem li = new ListViewItem(i.Name.ToString());
+                ListViewItem li = new ListViewItem(item.Name.ToString());
+                //li.SubItems.Add(item.Quantity.ToString());
+               //li.SubItems.Add(item.Vat.ToString());
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
             }
+           
         }
 
         private void KitchenViewForm_Load(object sender, EventArgs e)
