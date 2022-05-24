@@ -32,7 +32,7 @@ namespace RestaurantChapeau.OrderViewUIController
             Button btn = new Button();
             btn.Text = text;
             btn.Height = targetHeight;
-            btn.Font = menuItemsFont;
+            btn.Font = txtboxFont;
             btn.Margin = margin;
             btn.Click += onClickAction;
             flow.Controls.Add(btn);

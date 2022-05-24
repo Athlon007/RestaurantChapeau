@@ -276,5 +276,10 @@ namespace RestaurantChapeau
             lblConnecting.Text = failReason;
             theTabControl.SelectedTab = tabConnecting;
         }
+
+        private void picBackButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

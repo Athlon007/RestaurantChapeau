@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.flwMenuTypes = new System.Windows.Forms.FlowLayoutPanel();
             this.flwMenuItems = new System.Windows.Forms.FlowLayoutPanel();
@@ -55,6 +53,7 @@
             this.btnFinish = new System.Windows.Forms.Button();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.picBackButton = new System.Windows.Forms.PictureBox();
             this.lblTopBarText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.theTabControl.SuspendLayout();
@@ -66,13 +65,8 @@
             this.pnlColumnsCheckout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackButton)).BeginInit();
             this.SuspendLayout();
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // picLogo
             // 
@@ -132,9 +126,10 @@
             this.btnPlaceOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPlaceOrder.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnPlaceOrder.ForeColor = System.Drawing.Color.White;
-            this.btnPlaceOrder.Location = new System.Drawing.Point(582, 3);
+            this.btnPlaceOrder.Location = new System.Drawing.Point(619, 20);
+            this.btnPlaceOrder.Margin = new System.Windows.Forms.Padding(40, 20, 40, 20);
             this.btnPlaceOrder.Name = "btnPlaceOrder";
-            this.btnPlaceOrder.Size = new System.Drawing.Size(573, 108);
+            this.btnPlaceOrder.Size = new System.Drawing.Size(499, 74);
             this.btnPlaceOrder.TabIndex = 7;
             this.btnPlaceOrder.Text = "View Order";
             this.btnPlaceOrder.UseVisualStyleBackColor = false;
@@ -148,9 +143,10 @@
             this.btnCancel.FlatAppearance.BorderSize = 4;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCancel.Location = new System.Drawing.Point(3, 3);
+            this.btnCancel.Location = new System.Drawing.Point(40, 20);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(40, 20, 40, 20);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(573, 108);
+            this.btnCancel.Size = new System.Drawing.Size(499, 74);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -218,6 +214,7 @@
             // 
             // tlpPlaceCancelOrder
             // 
+            this.tlpPlaceCancelOrder.BackColor = System.Drawing.Color.White;
             this.tlpPlaceCancelOrder.ColumnCount = 2;
             this.tlpPlaceCancelOrder.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpPlaceCancelOrder.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -233,6 +230,7 @@
             // 
             // tabPageCheckout
             // 
+            this.tabPageCheckout.BackColor = System.Drawing.Color.White;
             this.tabPageCheckout.Controls.Add(this.flwCheckout);
             this.tabPageCheckout.Controls.Add(this.pnlColumnsCheckout);
             this.tabPageCheckout.Controls.Add(this.lblComment);
@@ -244,44 +242,45 @@
             this.tabPageCheckout.Size = new System.Drawing.Size(1164, 1433);
             this.tabPageCheckout.TabIndex = 1;
             this.tabPageCheckout.Text = "tabPageCheckout";
-            this.tabPageCheckout.UseVisualStyleBackColor = true;
             // 
             // flwCheckout
             // 
             this.flwCheckout.AutoScroll = true;
             this.flwCheckout.BackColor = System.Drawing.Color.White;
             this.flwCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flwCheckout.Location = new System.Drawing.Point(3, 43);
+            this.flwCheckout.Location = new System.Drawing.Point(3, 57);
             this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1158, 1059);
+            this.flwCheckout.Size = new System.Drawing.Size(1158, 1065);
             this.flwCheckout.TabIndex = 11;
             // 
             // pnlColumnsCheckout
             // 
-            this.pnlColumnsCheckout.BackColor = System.Drawing.Color.PowderBlue;
+            this.pnlColumnsCheckout.BackColor = System.Drawing.Color.White;
             this.pnlColumnsCheckout.Controls.Add(this.lblQuantityCheckout);
             this.pnlColumnsCheckout.Controls.Add(this.label2);
             this.pnlColumnsCheckout.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlColumnsCheckout.Location = new System.Drawing.Point(3, 3);
             this.pnlColumnsCheckout.Name = "pnlColumnsCheckout";
-            this.pnlColumnsCheckout.Size = new System.Drawing.Size(1158, 40);
+            this.pnlColumnsCheckout.Size = new System.Drawing.Size(1158, 54);
             this.pnlColumnsCheckout.TabIndex = 12;
             // 
             // lblQuantityCheckout
             // 
             this.lblQuantityCheckout.AutoSize = true;
-            this.lblQuantityCheckout.Location = new System.Drawing.Point(889, 3);
+            this.lblQuantityCheckout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblQuantityCheckout.Location = new System.Drawing.Point(826, 3);
             this.lblQuantityCheckout.Name = "lblQuantityCheckout";
-            this.lblQuantityCheckout.Size = new System.Drawing.Size(106, 32);
+            this.lblQuantityCheckout.Size = new System.Drawing.Size(149, 45);
             this.lblQuantityCheckout.TabIndex = 6;
             this.lblQuantityCheckout.Text = "Quantity";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(3, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 32);
+            this.label2.Size = new System.Drawing.Size(108, 45);
             this.label2.TabIndex = 5;
             this.label2.Text = "Name";
             // 
@@ -289,10 +288,10 @@
             // 
             this.lblComment.AutoSize = true;
             this.lblComment.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblComment.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblComment.Location = new System.Drawing.Point(3, 1102);
+            this.lblComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblComment.Location = new System.Drawing.Point(3, 1122);
             this.lblComment.Name = "lblComment";
-            this.lblComment.Size = new System.Drawing.Size(256, 65);
+            this.lblComment.Size = new System.Drawing.Size(180, 45);
             this.lblComment.TabIndex = 11;
             this.lblComment.Text = "Comments";
             // 
@@ -325,10 +324,14 @@
             // btnBack
             // 
             this.btnBack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btnBack.FlatAppearance.BorderSize = 4;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnBack.Location = new System.Drawing.Point(3, 3);
+            this.btnBack.Location = new System.Drawing.Point(40, 20);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(40, 20, 40, 20);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(573, 108);
+            this.btnBack.Size = new System.Drawing.Size(499, 74);
             this.btnBack.TabIndex = 8;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -336,14 +339,19 @@
             // 
             // btnFinish
             // 
+            this.btnFinish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
             this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFinish.FlatAppearance.BorderSize = 0;
+            this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinish.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnFinish.Location = new System.Drawing.Point(582, 3);
+            this.btnFinish.ForeColor = System.Drawing.Color.White;
+            this.btnFinish.Location = new System.Drawing.Point(619, 20);
+            this.btnFinish.Margin = new System.Windows.Forms.Padding(40, 20, 40, 20);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(573, 108);
+            this.btnFinish.Size = new System.Drawing.Size(499, 74);
             this.btnFinish.TabIndex = 7;
             this.btnFinish.Text = "Place Order";
-            this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.UseVisualStyleBackColor = false;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
             // lblHeader
@@ -358,6 +366,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.picBackButton);
             this.panel1.Controls.Add(this.lblTopBarText);
             this.panel1.Controls.Add(this.picLogo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -365,6 +374,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1180, 130);
             this.panel1.TabIndex = 11;
+            // 
+            // picBackButton
+            // 
+            this.picBackButton.BackColor = System.Drawing.Color.Transparent;
+            this.picBackButton.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
+            this.picBackButton.Location = new System.Drawing.Point(12, 12);
+            this.picBackButton.Name = "picBackButton";
+            this.picBackButton.Size = new System.Drawing.Size(100, 100);
+            this.picBackButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackButton.TabIndex = 12;
+            this.picBackButton.TabStop = false;
+            this.picBackButton.Click += new System.EventHandler(this.picBackButton_Click);
             // 
             // lblTopBarText
             // 
@@ -403,13 +424,12 @@
             this.pnlColumnsCheckout.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBackButton)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.FlowLayoutPanel flwMenuTypes;
         private System.Windows.Forms.FlowLayoutPanel flwMenuItems;
@@ -436,5 +456,6 @@
         private System.Windows.Forms.Label lblConnecting;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTopBarText;
+        private System.Windows.Forms.PictureBox picBackButton;
     }
 }

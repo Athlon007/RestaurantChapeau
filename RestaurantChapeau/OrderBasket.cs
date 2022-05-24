@@ -21,8 +21,6 @@ namespace RestaurantChapeau
             }
         }
 
-        // ItemID. Quantity.
-        //private Dictionary<int, int> itemsInBasket = new Dictionary<int, int>();
         private List<MenuItem> itemsInBasket = new List<MenuItem>();
 
         const int MaximumQuantity = 99;
