@@ -21,7 +21,7 @@ namespace RestaurantDAL
         //getting the user from the db by the employeeName, in order to get the salt
         public Employee GetEmployeeByEmployeeName(string email)
         {
-            string query = $"SELECT firstName, lastName, email, passwordHash, passwordSalt FROM dbo.[Employee] WHERE email = @email";
+            string query = $"SELECT id, firstName, lastName, email, passwordHash, passwordSalt FROM dbo.[Employee] WHERE email = @email";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@email", email)
@@ -47,6 +47,7 @@ namespace RestaurantDAL
                 //store each room with the following fields from the database
                 Employee employee = new Employee()
                 {
+                    id = Convert.ToInt32(dr["int"]),
                     firstName = (string)(dr["firstName"]),
                     lastName = (string)(dr["lastName"]),
                     email = (string)(dr["email"]),

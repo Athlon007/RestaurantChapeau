@@ -30,7 +30,11 @@ namespace RestaurantChapeau
             bill.Id = 1;
             bill.Table = table;
 
-            OrderView orderView = new OrderView(bill);
+            Employee employee = new Employee();
+            employee.email = "test@example.com";
+            employee.id = 5;
+
+            OrderView orderView = new OrderView(bill, employee);
             orderView.ShowDialog();
         }
 

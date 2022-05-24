@@ -21,11 +21,9 @@ namespace RestaurantChapeau
             }
         }
 
-        // ItemID. Quantity.
-        //private Dictionary<int, int> itemsInBasket = new Dictionary<int, int>();
         private List<MenuItem> itemsInBasket = new List<MenuItem>();
 
-        const int MaximumQuantity = 100;
+        const int MaximumQuantity = 99;
 
         private OrderBasket() { }
 
@@ -43,7 +41,7 @@ namespace RestaurantChapeau
                 if (basketItem.Id == item.Id)
                 {
                     itemFound = true;
-                    if (basketItem.Quantity > MaximumQuantity)
+                    if (basketItem.Quantity >= MaximumQuantity)
                     {
                         break;
                     }    
@@ -96,6 +94,11 @@ namespace RestaurantChapeau
         /// <param name="quantity"></param>
         public void Set(MenuItem item, int quantity)
         {
+            if (quantity > MaximumQuantity)
+            {
+                quantity = MaximumQuantity;
+            }
+
             bool itemFound = false;
             foreach (MenuItem basketItem in itemsInBasket)
             {
@@ -104,11 +107,14 @@ namespace RestaurantChapeau
                     itemFound = true;
                     basketItem.Quantity = quantity;
 
-                    if (basketItem.Quantity == 0)
+                    if (basketItem.Quantity > MaximumQuantity)
+                    {
+                        basketItem.Quantity = MaximumQuantity;
+                    }
+                    else if (basketItem.Quantity == 0)
                     {
                         itemsInBasket.Remove(basketItem);
                     }
-
                     break;
                 }
             }
