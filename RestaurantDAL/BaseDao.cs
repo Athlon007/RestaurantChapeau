@@ -105,5 +105,39 @@ namespace RestaurantDAL
         {
             return ExecuteSelectQuery(query, new SqlParameter[0]);
         }
+
+        /// <summary>
+        /// For INSERT with OUTPUT.
+        /// </summary>
+        /// <param name="query">Query to execute</param>
+        /// <param name="sqlParameters">Parameters</param>
+        /// <returns></returns>
+        protected DataTable ExecuteEditAndSelectQuery(string query, SqlParameter[] sqlParameters)
+        {
+            SqlCommand command = new SqlCommand();
+            DataTable dataTable;
+            DataSet dataSet = new DataSet();
+
+            try
+            {
+                command.Connection = OpenConnection();
+                command.CommandText = query;
+                command.Parameters.AddRange(sqlParameters);
+                adapter.SelectCommand = command;
+                adapter.Fill(dataSet);
+
+                dataTable = dataSet.Tables[0];
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return dataTable;
+        }
     }
 }

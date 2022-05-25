@@ -21,12 +21,13 @@ namespace RestaurantChapeau
             }
         }
 
-        // ItemID. Quantity.
-        private Dictionary<int, int> itemsInBasket = new Dictionary<int, int>();
+        private List<MenuItem> itemsInBasket = new List<MenuItem>();
 
-        const int MaximumQuantity = 100;
+        const int MaximumQuantity = 99;
 
         private OrderBasket() { }
+
+        private List<OrderView> listeners = new List<OrderView>();
 
         /// <summary>
         /// Add ONE of the specified item.
@@ -34,20 +35,30 @@ namespace RestaurantChapeau
         /// <param name="item"></param>
         public void Add(MenuItem item)
         {
-            if (itemsInBasket.ContainsKey(item.Id))
+            bool itemFound = false;
+            foreach (MenuItem basketItem in itemsInBasket)
             {
-                // Do not allow setting item count above allowed quantity.
-                if (itemsInBasket[item.Id] >= MaximumQuantity)
+                if (basketItem.Id == item.Id)
                 {
-                    return;
-                }
+                    itemFound = true;
+                    if (basketItem.Quantity >= MaximumQuantity)
+                    {
+                        break;
+                    }    
 
-                itemsInBasket[item.Id]++;
+                    basketItem.Quantity++;
+                    break;
+                }
             }
-            else
+
+            // Item not in the basket? Add it!
+            if (!itemFound)
             {
-                itemsInBasket.Add(item.Id, 1);
+                item.Quantity = 1;
+                itemsInBasket.Add(item);
             }
+
+            UpdateListeners();
         }
 
         /// <summary>
@@ -56,17 +67,24 @@ namespace RestaurantChapeau
         /// <param name="item"></param>
         public void Subtract(MenuItem item)
         {
-            if (itemsInBasket.ContainsKey(item.Id))
+            foreach (MenuItem basketItem in itemsInBasket)
             {
-                itemsInBasket[item.Id]--;
-
-                if (itemsInBasket[item.Id] == 0)
+                if (basketItem.Id == item.Id)
                 {
-                    // Is the item count 0?
-                    // Remove the item from the list.
-                    itemsInBasket.Remove(item.Id);
+                    basketItem.Quantity--;
+                    
+                    if (basketItem.Quantity == 0)
+                    {
+                        // Is the item count 0?
+                        // Remove the item from the list.
+                        itemsInBasket.Remove(basketItem);
+                    }
+
+                    break;
                 }
             }
+
+            UpdateListeners();
         }
 
         /// <summary>
@@ -76,27 +94,38 @@ namespace RestaurantChapeau
         /// <param name="quantity"></param>
         public void Set(MenuItem item, int quantity)
         {
-            if (itemsInBasket.ContainsKey(item.Id))
+            if (quantity > MaximumQuantity)
             {
-                itemsInBasket[item.Id] = quantity;
-            }
-            else
-            {
-                itemsInBasket.Add(item.Id, quantity);
+                quantity = MaximumQuantity;
             }
 
-            if (itemsInBasket[item.Id] == 0)
+            bool itemFound = false;
+            foreach (MenuItem basketItem in itemsInBasket)
             {
-                // Is the item count 0?
-                // Remove the item from the basket.
-                itemsInBasket.Remove(item.Id);
+                if (basketItem.Id == item.Id)
+                {
+                    itemFound = true;
+                    basketItem.Quantity = quantity;
+
+                    if (basketItem.Quantity > MaximumQuantity)
+                    {
+                        basketItem.Quantity = MaximumQuantity;
+                    }
+                    else if (basketItem.Quantity == 0)
+                    {
+                        itemsInBasket.Remove(basketItem);
+                    }
+                    break;
+                }
             }
-            else if (itemsInBasket[item.Id] > MaximumQuantity)
+
+            if (!itemFound && quantity > 0 && quantity <= MaximumQuantity)
             {
-                // Is the item count larger than maximum allowed?
-                // Set the count to the max allowed.
-                itemsInBasket[item.Id] = MaximumQuantity;
+                item.Quantity = quantity;
+                itemsInBasket.Add(item);
             }
+
+            UpdateListeners();
         }
 
         /// <summary>
@@ -106,9 +135,12 @@ namespace RestaurantChapeau
         /// <returns></returns>
         public int ItemCount(MenuItem item)
         {
-            if (itemsInBasket.ContainsKey(item.Id))
+            foreach (MenuItem basketItem in itemsInBasket)
             {
-                return itemsInBasket[item.Id];
+                if (item.Id == basketItem.Id)
+                {
+                    return basketItem.Quantity;
+                }
             }
 
             // If the item is not in the basket, return 0.
@@ -127,9 +159,46 @@ namespace RestaurantChapeau
         /// Returns all items in the basket.
         /// </summary>
         /// <returns></returns>
-        public Dictionary<int, int> GetAll()
+        public List<MenuItem> GetAll()
         {
             return itemsInBasket;
+        }
+
+        public int Count
+        {
+            get
+            {
+                int count = 0;
+                foreach (MenuItem item in itemsInBasket)
+                {
+                    count += item.Quantity;
+                }
+
+                return count;
+            }
+        }
+
+        public void AddListener(OrderView view)
+        {
+            listeners.Add(view);
+
+            UpdateListeners();
+        }
+
+        public void RemoveListener(OrderView view)
+        {
+            if (listeners.Contains(view))
+            {
+                listeners.Remove(view);
+            }
+        }
+
+        private void UpdateListeners()
+        {
+            foreach (OrderView view in listeners)
+            {
+                view.UpdateUI();
+            }
         }
     }
 }
