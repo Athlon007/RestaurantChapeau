@@ -7,15 +7,22 @@ using System.Text;
 using System.Windows.Forms;
 using RestaurantLogic;
 using RestaurantModel;
+using RestaurantDAL;
 
 namespace RestaurantChapeau
 {
     public partial class TableViewForm : Form
     {
-        ReservationService reservationService = new ReservationService();        
-        public TableViewForm()
+        ReservationService reservationService = new ReservationService();
+        Reservation reservation = new Reservation();
+        ReservationDao reservationDao = new ReservationDao();
+        Employee currentEmployee;
+
+        public TableViewForm(Employee employee)
         {
             InitializeComponent();
+            currentEmployee = employee;
+          
         }
         private void TableViewForm_Load(object sender, EventArgs e)
         {
@@ -25,7 +32,7 @@ namespace RestaurantChapeau
         {
             pnl_Reservation.Hide();
             pnl_ViewReservation.Hide();
-        }             
+        }
         private void btn_Table1_Click(object sender, EventArgs e)
         {
             HidePanel();
@@ -33,7 +40,7 @@ namespace RestaurantChapeau
         private void btn_Table2_Click(object sender, EventArgs e)
         {
             HidePanel();
-        }        
+        }
         private void btn_TableViewPnGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
@@ -88,7 +95,11 @@ namespace RestaurantChapeau
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.BackColor = Color.Red;            
+            btn_Table1.BackColor = Color.Red;
+
+            if (reservation.tableid == 2)
+            {
+            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -97,15 +108,15 @@ namespace RestaurantChapeau
         }
 
         private void btn_TableViewReservation_Click(object sender, EventArgs e)
-        {           
+        {
             HidePanel();
             pnl_Reservation.Show();
             //pnl_ViewReservation.Show();
-            
+
         }
 
         private void btn_MakeReservation_Click(object sender, EventArgs e)
-        {                     
+        {
             ReservationService reservationService = new ReservationService();
             string firstName = txt_ReservationFirstName.Text;
             string lastName = txt_ReservationLastName.Text;
@@ -114,22 +125,22 @@ namespace RestaurantChapeau
             string TableId = txt_ReservationTableID.Text;
 
             //add the customer info for the reservation to the database
-            reservationService.AddToReservation(firstName, lastName, email,"1", reservationStart, TableId);
+            reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
             MessageBox.Show("Succesfully made reservation!");
 
             //hide the panels and show the dashboard again
             HidePanel();
+            pnl_Reservation.Show();
             txt_ReservationFirstName.Clear();
             txt_ReservationLastName.Clear();
             txt_ReservationEmail.Clear();
-            txt_ReservationStartTime.Clear();
             txt_ReservationTableID.Clear();
 
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btn_Test_Click(object sender, EventArgs e)
@@ -190,16 +201,16 @@ namespace RestaurantChapeau
         private void btn_ViewReservationCancel_Click(object sender, EventArgs e)
         {
             //dialog pop up asking the user if he is sure of the action
-            DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Remove activity", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Cancel reservation", MessageBoxButtons.YesNo);
 
             //if the answer is yes proceed to remove activity
             if (dialogResult == DialogResult.Yes)
             {
                 //create activity object
-                Reservation reservation= new Reservation();
+                Reservation reservation = new Reservation();
                 {
-                    reservation.reservationID= int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);        
-                    
+                    reservation.reservationID = int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);
+
                 };
 
                 //delete reservation
@@ -217,6 +228,15 @@ namespace RestaurantChapeau
             {
                 return;
             }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

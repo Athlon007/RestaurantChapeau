@@ -110,6 +110,7 @@
             this.btn_LoginForgot.TabIndex = 3;
             this.btn_LoginForgot.Text = "Forgot password";
             this.btn_LoginForgot.UseVisualStyleBackColor = false;
+            this.btn_LoginForgot.Visible = false;
             this.btn_LoginForgot.Click += new System.EventHandler(this.btn_forgotPassword_Click);
             // 
             // label3
@@ -163,11 +164,11 @@
             this.pnl_ForgotPassword.Controls.Add(this.textBox2);
             this.pnl_ForgotPassword.Controls.Add(this.textBox1);
             this.pnl_ForgotPassword.Controls.Add(this.pictureBox3);
-            this.pnl_ForgotPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_ForgotPassword.Location = new System.Drawing.Point(0, 0);
             this.pnl_ForgotPassword.Name = "pnl_ForgotPassword";
             this.pnl_ForgotPassword.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ForgotPassword.TabIndex = 9;
+            this.pnl_ForgotPassword.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_ForgotPassword_Paint);
             // 
             // lbl_ForgotConfirm
             // 
@@ -390,6 +391,7 @@
             this.btn_LoginRegister.TabIndex = 12;
             this.btn_LoginRegister.Text = "Register";
             this.btn_LoginRegister.UseVisualStyleBackColor = false;
+            this.btn_LoginRegister.Visible = false;
             this.btn_LoginRegister.Click += new System.EventHandler(this.btn_LoginRegister_Click_1);
             // 
             // LoginForm

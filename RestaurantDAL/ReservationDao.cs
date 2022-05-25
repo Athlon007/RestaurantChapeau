@@ -9,8 +9,9 @@ using System.Data;
 namespace RestaurantDAL
 {
     public class ReservationDao : BaseDao
-    {
+    {        
         //adding a new reservation to the db
+        
         public void AddToReservation(string firstName, string lastName, string email,string isReserved, DateTime ReservationStart, string tableid)
         {
 
@@ -82,6 +83,12 @@ namespace RestaurantDAL
         public void CancelReservation(Reservation reservation)
         {
             string query = $"DELETE FROM dbo.[Reservation] WHERE id={reservation.reservationID}";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void isReserved(Reservation reservation)
+        {
+            string query = $"Select isReserved, tableid from Reservation where id={reservation.isReserved}, {reservation.tableid};";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }

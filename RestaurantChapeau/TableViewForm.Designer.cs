@@ -41,8 +41,6 @@
             this.pnl_Reservation = new System.Windows.Forms.Panel();
             this.btn_MakeReservationGoBack = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt_ReservationStatus = new System.Windows.Forms.TextBox();
             this.lbl_ReservationIsReserved = new System.Windows.Forms.Label();
             this.lbl_ReservationTableid = new System.Windows.Forms.Label();
             this.lbl_ReservationEmail = new System.Windows.Forms.Label();
@@ -51,16 +49,15 @@
             this.txt_ReservationFirstName = new System.Windows.Forms.TextBox();
             this.txt_ReservationLastName = new System.Windows.Forms.TextBox();
             this.txt_ReservationEmail = new System.Windows.Forms.TextBox();
-            this.txt_ReservationStartTime = new System.Windows.Forms.TextBox();
             this.txt_ReservationTableID = new System.Windows.Forms.TextBox();
             this.btn_MakeReservation = new System.Windows.Forms.Button();
             this.pnl_ViewReservation = new System.Windows.Forms.Panel();
+            this.btn_ViewReservationCancel = new System.Windows.Forms.Button();
             this.btn_ViewReservationMake = new System.Windows.Forms.Button();
             this.btn_ViewReservationGoBack = new System.Windows.Forms.Button();
             this.lV_ReservationDisplay = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_test1 = new System.Windows.Forms.Button();
             this.btn_TableViewManageReservation = new System.Windows.Forms.Button();
-            this.btn_ViewReservationCancel = new System.Windows.Forms.Button();
             this.pnl_Reservation.SuspendLayout();
             this.pnl_ViewReservation.SuspendLayout();
             this.SuspendLayout();
@@ -180,8 +177,6 @@
             // 
             this.pnl_Reservation.Controls.Add(this.btn_MakeReservationGoBack);
             this.pnl_Reservation.Controls.Add(this.dateTimePicker1);
-            this.pnl_Reservation.Controls.Add(this.label1);
-            this.pnl_Reservation.Controls.Add(this.txt_ReservationStatus);
             this.pnl_Reservation.Controls.Add(this.lbl_ReservationIsReserved);
             this.pnl_Reservation.Controls.Add(this.lbl_ReservationTableid);
             this.pnl_Reservation.Controls.Add(this.lbl_ReservationEmail);
@@ -190,10 +185,9 @@
             this.pnl_Reservation.Controls.Add(this.txt_ReservationFirstName);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationLastName);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationEmail);
-            this.pnl_Reservation.Controls.Add(this.txt_ReservationStartTime);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationTableID);
             this.pnl_Reservation.Controls.Add(this.btn_MakeReservation);
-            this.pnl_Reservation.Location = new System.Drawing.Point(708, 33);
+            this.pnl_Reservation.Location = new System.Drawing.Point(687, 51);
             this.pnl_Reservation.Name = "pnl_Reservation";
             this.pnl_Reservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Reservation.TabIndex = 32;
@@ -211,28 +205,16 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CustomFormat = "ddMMMM yyyy | hh:mm";
+            this.dateTimePicker1.CustomFormat = "ddMMMM yyyy | HH:mm";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(318, 351);
+            this.dateTimePicker1.Location = new System.Drawing.Point(357, 351);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2022, 12, 31, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(2022, 5, 25, 23, 59, 59, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(294, 27);
             this.dateTimePicker1.TabIndex = 34;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 281);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 20);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "Reservation status";
-            // 
-            // txt_ReservationStatus
-            // 
-            this.txt_ReservationStatus.Location = new System.Drawing.Point(434, 281);
-            this.txt_ReservationStatus.Name = "txt_ReservationStatus";
-            this.txt_ReservationStatus.Size = new System.Drawing.Size(125, 27);
-            this.txt_ReservationStatus.TabIndex = 43;
+            this.dateTimePicker1.Value = new System.DateTime(2022, 5, 25, 23, 59, 59, 0);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // lbl_ReservationIsReserved
             // 
@@ -300,13 +282,6 @@
             this.txt_ReservationEmail.Size = new System.Drawing.Size(125, 27);
             this.txt_ReservationEmail.TabIndex = 35;
             // 
-            // txt_ReservationStartTime
-            // 
-            this.txt_ReservationStartTime.Location = new System.Drawing.Point(546, 29);
-            this.txt_ReservationStartTime.Name = "txt_ReservationStartTime";
-            this.txt_ReservationStartTime.Size = new System.Drawing.Size(125, 27);
-            this.txt_ReservationStartTime.TabIndex = 36;
-            // 
             // txt_ReservationTableID
             // 
             this.txt_ReservationTableID.Location = new System.Drawing.Point(442, 422);
@@ -326,15 +301,25 @@
             // 
             // pnl_ViewReservation
             // 
-            this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationCancel);
             this.pnl_ViewReservation.Controls.Add(this.pnl_Reservation);
+            this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationCancel);
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationMake);
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationGoBack);
             this.pnl_ViewReservation.Controls.Add(this.lV_ReservationDisplay);
-            this.pnl_ViewReservation.Location = new System.Drawing.Point(0, 0);
+            this.pnl_ViewReservation.Location = new System.Drawing.Point(641, 52);
             this.pnl_ViewReservation.Name = "pnl_ViewReservation";
             this.pnl_ViewReservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ViewReservation.TabIndex = 33;
+            // 
+            // btn_ViewReservationCancel
+            // 
+            this.btn_ViewReservationCancel.Location = new System.Drawing.Point(54, 670);
+            this.btn_ViewReservationCancel.Name = "btn_ViewReservationCancel";
+            this.btn_ViewReservationCancel.Size = new System.Drawing.Size(175, 29);
+            this.btn_ViewReservationCancel.TabIndex = 35;
+            this.btn_ViewReservationCancel.Text = "Cancel reservation";
+            this.btn_ViewReservationCancel.UseVisualStyleBackColor = true;
+            this.btn_ViewReservationCancel.Click += new System.EventHandler(this.btn_ViewReservationCancel_Click);
             // 
             // btn_ViewReservationMake
             // 
@@ -367,15 +352,15 @@
             this.lV_ReservationDisplay.UseCompatibleStateImageBehavior = false;
             this.lV_ReservationDisplay.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // button1
+            // btn_test1
             // 
-            this.button1.Location = new System.Drawing.Point(173, 247);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(37, 29);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_test1.Location = new System.Drawing.Point(173, 247);
+            this.btn_test1.Name = "btn_test1";
+            this.btn_test1.Size = new System.Drawing.Size(37, 29);
+            this.btn_test1.TabIndex = 31;
+            this.btn_test1.Text = "button1";
+            this.btn_test1.UseVisualStyleBackColor = true;
+            this.btn_test1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_TableViewManageReservation
             // 
@@ -387,16 +372,6 @@
             this.btn_TableViewManageReservation.UseVisualStyleBackColor = true;
             this.btn_TableViewManageReservation.Click += new System.EventHandler(this.btn_Test_Click);
             // 
-            // btn_ViewReservationCancel
-            // 
-            this.btn_ViewReservationCancel.Location = new System.Drawing.Point(54, 670);
-            this.btn_ViewReservationCancel.Name = "btn_ViewReservationCancel";
-            this.btn_ViewReservationCancel.Size = new System.Drawing.Size(175, 29);
-            this.btn_ViewReservationCancel.TabIndex = 35;
-            this.btn_ViewReservationCancel.Text = "Cancel reservation";
-            this.btn_ViewReservationCancel.UseVisualStyleBackColor = true;
-            this.btn_ViewReservationCancel.Click += new System.EventHandler(this.btn_ViewReservationCancel_Click);
-            // 
             // TableViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -405,7 +380,7 @@
             this.ClientSize = new System.Drawing.Size(726, 1055);
             this.Controls.Add(this.pnl_ViewReservation);
             this.Controls.Add(this.btn_TableViewManageReservation);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_test1);
             this.Controls.Add(this.btn_Table10);
             this.Controls.Add(this.btn_Table9);
             this.Controls.Add(this.btn_Table8);
@@ -437,21 +412,18 @@
         private System.Windows.Forms.Button btn_Table8;
         private System.Windows.Forms.Button btn_Table9;
         private System.Windows.Forms.Button btn_Table10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_test1;
         private System.Windows.Forms.Panel pnl_Reservation;
         private System.Windows.Forms.Button btn_MakeReservation;
         private System.Windows.Forms.TextBox txt_ReservationFirstName;
         private System.Windows.Forms.TextBox txt_ReservationLastName;
         private System.Windows.Forms.TextBox txt_ReservationEmail;
-        private System.Windows.Forms.TextBox txt_ReservationStartTime;
         private System.Windows.Forms.TextBox txt_ReservationTableID;
         private System.Windows.Forms.Label lbl_ReservationIsReserved;
         private System.Windows.Forms.Label lbl_ReservationTableid;
         private System.Windows.Forms.Label lbl_ReservationEmail;
         private System.Windows.Forms.Label lbl_ReservationLastName;
         private System.Windows.Forms.Label lbl_ReservationFirstName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_ReservationStatus;
         private System.Windows.Forms.Panel pnl_ViewReservation;
         private System.Windows.Forms.ListView lV_ReservationDisplay;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
