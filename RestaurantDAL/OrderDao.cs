@@ -161,7 +161,7 @@ namespace RestaurantDAL
             order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
             order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
             order.Bill = bill;
-            if (!Convert.IsDBNull(row["comment"]))
+            if (table.Columns.Contains("comment") && !Convert.IsDBNull(row["comment"]))
             {
                 order.Comment = Convert.ToString(row["comment"]);
             }
