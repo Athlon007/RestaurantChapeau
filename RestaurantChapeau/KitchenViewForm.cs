@@ -13,22 +13,16 @@ namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
     {
-       // private OrderStatus orderStatus;
-        private Panel currentPanel;
         private OrderLogic orderService;
         public KitchenViewForm()
         {
             InitializeComponent();
-            DisplayListviewInformation();
+            DisplayOrders();
+            Timer();
         }
 
-        private void HidePanels()
-        {
-            pnlKitchen_NewOrders.Hide();
-            pnlKitchen_CompleteOrders.Hide();
-            pnlKitchen_ActiveOrder.Hide();
-        }
-        public void DisplayListviewInformation()
+       
+        public void DisplayOrders()
         {
             orderService = new OrderLogic();
             List<Order> orders = orderService.GetOrdersToPrepare();
@@ -49,11 +43,11 @@ namespace RestaurantChapeau
         }
         private void DisplayOrderItems()
         {
-            
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
             lblKitchenn_OrderNo.Text=orderItem.Id.ToString();
+            
             // select from database which items have the order id of the id stated in the listview
             List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
 
@@ -71,41 +65,49 @@ namespace RestaurantChapeau
            
         }
 
-        private void KitchenViewForm_Load(object sender, EventArgs e)
-        {
-            HidePanels();
-            currentPanel = pnlKitchen_NewOrders;
-            pnlKitchen_NewOrders.Show();
-        }
-
-        private void btnKitchen_newOrders_Click(object sender, EventArgs e)
-        {
-            HidePanels();
-            currentPanel = pnlKitchen_NewOrders;
-            pnlKitchen_NewOrders.Show();
-           
-        }
-
-        private void btnKitchen_ActiveOrder_Click(object sender, EventArgs e)
-        {
-            HidePanels();
-            currentPanel = pnlKitchen_ActiveOrder;
-            pnlKitchen_ActiveOrder.Show();
-
-        }
-        private void btnKitchen_CompleteOrders_Click(object sender, EventArgs e)
-        {
-            HidePanels();
-            pnlKitchen_CompleteOrders.Show();
-        }
-
+        #region Select item in new orders list view
         private void listViewNewOrders_Click(object sender, EventArgs e)
         {
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
             DisplayOrderItems();
         }
+        #endregion
 
+        #region Load Kitchen View
+        private void KitchenViewForm_Load(object sender, EventArgs e)
+        {
+            HidePanels();
+            pnlKitchen_NewOrders.Show();
+        }
+        #endregion
+
+        #region New Order button
+        private void btnKitchen_newOrders_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+            pnlKitchen_NewOrders.Show();    
+        }
+        #endregion
+
+        #region Active order button
+        private void btnKitchen_ActiveOrder_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+            pnlKitchen_ActiveOrder.Show();
+        }
+        #endregion
+
+        #region Complete Orders button 
+        private void btnKitchen_CompleteOrders_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+            pnlKitchen_CompleteOrders.Show();
+        }
+        #endregion
+
+
+        #region Ready Order Button
         private void btn_readyOrder_Click(object sender, EventArgs e)
         {
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
@@ -113,11 +115,40 @@ namespace RestaurantChapeau
             orderItem.Status = OrderStatus.Preparing;
 
             orderService.UpdateOrderStatus(orderItem);
+            listViewKitchen_CompleteOrders.Items.Add(orderItem.Id.ToString()); ;
+         
         }
+        #endregion
+
+        #region Hide Panels
+        private void HidePanels()
+        {
+            pnlKitchen_NewOrders.Hide();
+            pnlKitchen_CompleteOrders.Hide();
+            pnlKitchen_ActiveOrder.Hide();
+        }
+        #endregion
+
+        #region Remove ListviewItems
         private void RemoveListViewItems()
         {
             foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
                 listViewKitchen_ActiveOrder.Items.Remove(item);
+        }
+        #endregion
+
+        private void Timer()
+        {
+            timer1 = new Timer();
+            timer1.Interval = (10 * 1000); // 30 secs
+            timer1.Tick += new EventHandler(timer1_Tick_1);
+            timer1.Start();
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            
+            
         }
     }
 }
