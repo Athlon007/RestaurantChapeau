@@ -87,5 +87,14 @@ namespace RestaurantLogic
         {
             orderDao.RegisterOrderToBartender(employee, order);
         }
+      
+        public List<MenuItem> GetOrderFoodItems(int orderID)
+        {
+            return orderDao.GetOrderFoodItems(orderID);
+        }
+        public void UpdateOrderStatus(Order order)
+        {
+            orderDao.UpdateOrderStatus(order);
+        }
     }
 }
