@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using RestaurantLogic;
 using RestaurantModel;
+using System.Threading;
+using System.Threading.Tasks;
+using RestaurantChapeau.OrderViewUIController;
 
 namespace RestaurantChapeau
 {
@@ -14,29 +14,82 @@ namespace RestaurantChapeau
     {
         OrderLogic orderLogic;
         Bill bill;
+        Employee employee;
 
-        Font fontMenuType = new Font("Segoe UI", 12);
-        Font fontMenuCategory = new Font("Segoe UI", 8);
+        MenuType currentMenuType;
 
-        public OrderView(Bill bill)
+        Font fontMenuType = new Font("Segoe UI", 18);
+
+        Color activeButtonColor = Color.FromArgb(255, 67, 179, 215);
+        Color activeButtonTextColor = Color.FromArgb(255, 255, 255, 255);
+
+        /// <summary>
+        /// Creates a new Order View. Both BILL for which the order is taken, and EMPLOYEE that takes the order must be specified!
+        /// </summary>
+        /// <param name="bill">Bill for wich the new order is created</param>
+        /// <param name="employee">Employee which takes the order</param>
+        /// <exception cref="NullReferenceException">Bill and Employee cannot be null.</exception>
+        public OrderView(Bill bill, Employee employee)
         {
             InitializeComponent();
+
+            if (bill == null)
+            {
+                throw new NullReferenceException("Bill must be provided!");
+            }
+
+            if (employee == null)
+            {
+                throw new NullReferenceException("Employee must be provided");
+            }
+
             this.bill = bill;
-            orderLogic = new OrderLogic();
+            this.employee = employee;
 
             // Hide tab view tabs.
             theTabControl.Appearance = TabAppearance.FlatButtons;
             theTabControl.ItemSize = new Size(0, 1);
             theTabControl.SizeMode = TabSizeMode.Fixed;
 
+            // Center the "tick" picture.
+            picTick.Left = this.Width / 2 - picTick.Width / 2;
+
             OrderBasket.Instance.Clear();
-            LoadHeader();
-            LoadMenuTypes();
+            OrderBasket.Instance.AddListener(this);
+
+            lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
+            lblHeader.Text = "";
         }
 
-        void LoadHeader()
+        private async void OrderView_Load(object sender, EventArgs e)
         {
-            lblHeader.Text = $"Table {bill.Table.Id}";
+            await Task.Run(ConnectToServer);
+            LoadGUI();
+        }
+
+        private async Task ConnectToServer()
+        {
+            orderLogic = await Task.Run(() =>
+            {
+                 return new OrderLogic();
+            });
+        }
+
+        private void LoadGUI()
+        {
+            try
+            {
+                LoadMenuTypes();
+                LoadMenu(currentMenuType);
+
+                theTabControl.SelectedTab = tabPageMenu;
+                lblHeader.Text = "Menu";
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex, false);
+                ShowFail("Can't obtain menu info :(");
+            }
         }
 
         private void LoadMenuTypes()
@@ -49,12 +102,20 @@ namespace RestaurantChapeau
                 Button menuTypeButton = new Button();
                 menuTypeButton.Tag = menuType;
                 menuTypeButton.Text = menuType.Name;
-                menuTypeButton.Height = flwMenuTypes.Height;
-                menuTypeButton.Width = flwMenuTypes.Width / menuTypes.Count - 7;
+                menuTypeButton.Height = flwMenuTypes.Height - 22;
+                menuTypeButton.Width = flwMenuTypes.Width / menuTypes.Count - 22;
                 menuTypeButton.Click += OnMenuTypeClick;
-                menuTypeButton.TextAlign = ContentAlignment.MiddleLeft;
+                menuTypeButton.TextAlign = ContentAlignment.MiddleCenter;
                 menuTypeButton.Font = fontMenuType;
+                menuTypeButton.Margin = new Padding(10, 10, 10, 10);
+                menuTypeButton.FlatStyle = FlatStyle.Flat;
+                menuTypeButton.FlatAppearance.BorderSize = 0; 
                 flwMenuTypes.Controls.Add(menuTypeButton);
+            }
+
+            if (currentMenuType == null)
+            {
+                currentMenuType = menuTypes[0];
             }
         }
 
@@ -65,64 +126,52 @@ namespace RestaurantChapeau
 
         private void OnMenuTypeClick(object sender, EventArgs e)
         {
-            foreach (Control control in flwMenuTypes.Controls)
-            {
-                control.Enabled = true;
-            }
-            (sender as Control).Enabled = false;
+            currentMenuType = (MenuType)(sender as Button).Tag;
 
-            LoadMenuCategories((MenuType)(sender as Button).Tag);
+            try
+            {
+                LoadMenu(currentMenuType);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
-        private void LoadMenuCategories(MenuType menuType)
+        private async void LoadMenu(MenuType menuType)
         {
-            ClearMenuCategories();
+            // First we update the buttons of menu types.
+            foreach (Control control in flwMenuTypes.Controls)
+            {
+                if (control is Button)
+                {
+                    Button button = control as Button;
+                    Color backgroundColor = Color.White;
+                    Color textColor = Color.Black;
+                    if (button.Tag == menuType)
+                    {
+                        backgroundColor = activeButtonColor;
+                        textColor = activeButtonTextColor;
+                    }
+
+                    button.BackColor = backgroundColor;
+                    button.ForeColor = textColor;
+                }
+            }
+
             ClearMenuItems();
-            List<MenuCategory> menuCategories = orderLogic.GetMenuCategories(menuType);
+            List<MenuCategory> menuCategories = await Task.Run(() => { return orderLogic.GetMenuCategories(menuType); });
 
             foreach (MenuCategory menuCategory in menuCategories)
             {
-                Button menuCategoryButon = new Button();
-                menuCategory.MenuType = menuType;
-                menuCategoryButon.Tag = menuCategory;
-                menuCategoryButon.Text = menuCategory.Name;
-                menuCategoryButon.Height = flwMenuCategory.Height;
-                menuCategoryButon.Width = flwMenuCategory.Width / menuCategories.Count - 7;
-                menuCategoryButon.Click += OnMenuCategoryClick;
-                menuCategoryButon.Font = fontMenuCategory;
-                flwMenuCategory.Controls.Add(menuCategoryButon);
-            }
-        }
+                new CategorySeparatorUI(flwMenuItems, menuCategory.Name);
 
-        private void ClearMenuCategories()
-        {
-            flwMenuCategory.Controls.Clear();
-        }
+                List<MenuItem> menuItems = await Task.Run(() => { return orderLogic.GetMenuItems(menuType, menuCategory); });
 
-        private void OnMenuCategoryClick(object sender, EventArgs e)
-        {
-            foreach (Control control in flwMenuCategory.Controls)
-            {
-                control.Enabled = true;
-            }
-            (sender as Control).Enabled = false;
-
-            MenuCategory category = (MenuCategory)(sender as Button).Tag;
-            MenuType menuType = category.MenuType;
-            LoadMenuItems(menuType, category);
-        }
-
-        private void LoadMenuItems(MenuType menuType, MenuCategory menuCategory)
-        {
-            ClearMenuItems();
-
-            List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
-
-            int count = 1;
-            foreach (MenuItem menuItem in menuItems)
-            {
-                new MenuItemUIControl(flwMenuItems, menuItem, lblSub.Left, count);
-                count++;
+                foreach (MenuItem menuItem in menuItems)
+                {
+                    new MenuItemUI(flwMenuItems, menuItem, lblSub.Left);
+                }
             }
         }
 
@@ -133,7 +182,14 @@ namespace RestaurantChapeau
 
         private void btnPlaceOrder_Click(object sender, EventArgs e)
         {
-            LoadCheckout();
+            try
+            {
+                LoadCheckout();
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -159,10 +215,10 @@ namespace RestaurantChapeau
             else
             {
                 int count = 1;
-                foreach (KeyValuePair<int, int> key in OrderBasket.Instance.GetAll())
+                foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
                 {
-                    MenuItem menuItem = orderLogic.GetMenuItem(key.Key);
-                    new MenuItemUIControl(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
+                    MenuSummaryUI summaryButton = new MenuSummaryUI(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
+                    summaryButton.OnDeleteItem = LoadCheckout;
                     count++;
                 }
 
@@ -170,27 +226,76 @@ namespace RestaurantChapeau
             }
 
             theTabControl.SelectedTab = tabPageCheckout;
-            lblHeader.Text = "Checkout";
+            lblHeader.Text = "Summary";
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            // TODO: Record order into database
-            Order order = orderLogic.CreateNewOrderForBill(bill);
+            Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
 
-            foreach (KeyValuePair<int, int> basketItem in OrderBasket.Instance.GetAll())
+            foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
             {
-                MenuItem menuItem = orderLogic.GetMenuItem(basketItem.Key);
-                orderLogic.AddItemToOrder(order, menuItem, basketItem.Value);
+                orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
             }
 
-            this.Close();
+            orderLogic.RegisterOrderToBartender(employee, order);
+
+            OrderBasket.Instance.Clear();
+            theTabControl.SelectedTab = tabOrderSucceeded;
+            lblHeader.Text = "";
+            Task.Run(() => LoadOrderCompleted());
+        }
+
+        private void LoadOrderCompleted()
+        {
+            Thread.Sleep(1000);
+            Action safeLoad = delegate { this.Close(); };
+            this.Invoke(safeLoad);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             theTabControl.SelectedTab = tabPageMenu;
-            LoadHeader();
+            lblHeader.Text = "Menu";
+
+            try
+            {
+                LoadMenu(currentMenuType);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
+        }
+
+        private void OrderView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (OrderBasket.Instance.Count > 0)
+            {
+                DialogResult dl = MessageBox.Show("You have selected items to order.\n\nAre you sure you want to cancel this order?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dl == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        public void UpdateUI()
+        {
+            btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
+            btnFinish.Enabled = OrderBasket.Instance.Count > 0;
+        }
+
+        private void ShowFail(string failReason)
+        {
+            lblConnecting.Text = failReason;
+            theTabControl.SelectedTab = tabConnecting;
+        }
+
+        private void picBackButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

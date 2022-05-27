@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove=".DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RestaurantLogic\RestaurantLogic.csproj" />
     <ProjectReference Include="..\RestaurantModel\RestaurantModel.csproj" />
   </ItemGroup>

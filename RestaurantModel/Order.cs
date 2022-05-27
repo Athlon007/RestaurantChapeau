@@ -8,7 +8,8 @@ namespace RestaurantModel
         public int Id { get; set; } 
         public DateTime PlacedTime { get; set; }
         public List<MenuItem> Items { get; set; }
-        public OrderStatus Status { get; set; } 
-        public Bill Bill { get; set; } 
+        public OrderStatus Status { get; set; }
+        public Bill Bill { get; set; }
+        public string Comment { get; set; }
     }
 }
