@@ -9,6 +9,7 @@ using RestaurantLogic;
 using RestaurantDAL;
 using RestaurantModel;
 
+
 namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
@@ -17,8 +18,12 @@ namespace RestaurantChapeau
         public KitchenViewForm()
         {
             InitializeComponent();
+            
             DisplayOrders();
+            SetFonts();
             Timer();
+        
+
         }
 
        
@@ -28,7 +33,7 @@ namespace RestaurantChapeau
             List<Order> orders = orderService.GetOrdersToPrepare();
 
             //clear the listview
-            listViewNewOrders.Items.Clear();
+      
             foreach (Order order in orders)
             {
                 //create new listview item and add the items to the listview item
@@ -47,6 +52,7 @@ namespace RestaurantChapeau
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
             lblKitchenn_OrderNo.Text=orderItem.Id.ToString();
+            txt_kitchenActiveOrder.Text=orderItem.Comment.ToString();
             
             // select from database which items have the order id of the id stated in the listview
             List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
@@ -112,10 +118,11 @@ namespace RestaurantChapeau
         {
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
-            orderItem.Status = OrderStatus.Preparing;
+            orderItem.Status = OrderStatus.ReadyToServe;
 
             orderService.UpdateOrderStatus(orderItem);
-            listViewKitchen_CompleteOrders.Items.Add(orderItem.Id.ToString()); ;
+            listViewKitchen_CompleteOrders.Items.Add(orderItem.Id.ToString());
+            MessageBox.Show($"Order {orderItem.Id} has been completed");
          
         }
         #endregion
@@ -147,8 +154,14 @@ namespace RestaurantChapeau
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            
-            
+
+
+        }
+        public void SetFonts()
+        {
+            lbl_activeOrder.Font = FontManager.Instance.ScriptMT(lbl_activeOrder.Font.Size);
+            lbl_completedOrders.Font = FontManager.Instance.ScriptMT(lbl_completedOrders.Font.Size);
+            lbl_newOrders.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
         }
     }
 }
