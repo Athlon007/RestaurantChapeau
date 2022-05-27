@@ -162,6 +162,10 @@ namespace RestaurantChapeau
             lbl_activeOrder.Font = FontManager.Instance.ScriptMT(lbl_activeOrder.Font.Size);
             lbl_completedOrders.Font = FontManager.Instance.ScriptMT(lbl_completedOrders.Font.Size);
             lbl_newOrders.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
+
+            lbl_activeOrder.UseCompatibleTextRendering = true;
+            lbl_completedOrders.UseCompatibleTextRendering = true;
+            lbl_newOrders.UseCompatibleTextRendering = true;
         }
     }
 }
