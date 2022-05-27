@@ -194,9 +194,9 @@ namespace RestaurantDAL
         /// </summary>
         public List<Order> GetOrdersToPrepare()
         {
-            string query = "SELECT o.[id], o.placedTime, o.status " +
-                            "FROM[Order] o " +
-                            "WHERE o.status <= 1;";
+            string query = "SELECT o.[id], o.placedTime, o.status, o.comment " +
+                            "FROM[Order] o ";
+                            //"WHERE o.status <= 4;";
 
             DataTable tableOrders = ExecuteSelectQuery(query);
             List<Order> orders = new List<Order>();
@@ -257,6 +257,30 @@ namespace RestaurantDAL
                     new SqlParameter("@OrderId", order.Id)
             };
             ExecuteEditQuery(command, parameters);
+        }
+
+        public Order GetOrderCommentByID(int OrderID)
+        {
+            string command = (
+            "select [Order].comment from dbo.[Order] WHERE Id = @orderId");
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                    new SqlParameter("@OrderId", OrderID)
+            };
+            return ReadOrderColumns(ExecuteSelectQuery(command, parameters));
+        }
+        public Order ReadOrderColumns(DataTable table)
+        {
+            Order order = new Order();
+
+            DataRow row = table.Rows[0];
+
+            if (table.Columns.Contains("comment")&&!Convert.IsDBNull(row["comment"]))
+            {
+                order.Comment = Convert.ToString(row["comment"]);
+            }
+
+            return order;
         }
 
     }

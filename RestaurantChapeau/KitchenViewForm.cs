@@ -14,7 +14,6 @@ namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
     {
-        private OrderLogic orderService;
         public KitchenViewForm()
         {
             InitializeComponent();
@@ -22,18 +21,15 @@ namespace RestaurantChapeau
             DisplayOrders();
            
             Timer();
-        
-
         }
 
        
         public void DisplayOrders()
         {
-            orderService = new OrderLogic();
+            OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetOrdersToPrepare();
 
             //clear the listview
-      
             foreach (Order order in orders)
             {
                 //create new listview item and add the items to the listview item
@@ -48,11 +44,14 @@ namespace RestaurantChapeau
         }
         private void DisplayOrderItems()
         {
+            OrderLogic orderService = new OrderLogic();
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
            
             lblKitchenn_OrderNo.Text=orderItem.Id.ToString();
-            lbl_OrderComments.Text=orderItem.Comment.ToString();
+
+           Order selectedOrder= orderService.GetOrderCommentByID(orderItem.Id);
+            lbl_OrderComments.Text = selectedOrder.Comment;
             
             // select from database which items have the order id of the id stated in the listview
             List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
@@ -67,8 +66,8 @@ namespace RestaurantChapeau
                 li.SubItems.Add(item.Quantity.ToString());
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
-            }
-           
+            } 
+
         }
 
         #region Select item in new orders list view
@@ -116,6 +115,7 @@ namespace RestaurantChapeau
         #region Ready Order Button
         private void btn_readyOrder_Click(object sender, EventArgs e)
         {
+            OrderLogic orderService = new OrderLogic();
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
             orderItem.Status = OrderStatus.ReadyToServe;
