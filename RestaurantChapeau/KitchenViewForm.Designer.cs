@@ -63,7 +63,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.sidebarPanelCompleteOrder = new System.Windows.Forms.Panel();
             this.pnlKitchen_ActiveOrder = new System.Windows.Forms.Panel();
-            this.txt_kitchenActiveOrder = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblKitchenn_OrderNo = new System.Windows.Forms.Label();
@@ -75,6 +74,7 @@
             this.Quantity = new System.Windows.Forms.ColumnHeader();
             this.lbl_activeOrder = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lbl_OrderComments = new System.Windows.Forms.Label();
             this.pnlKitchen_NewOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -422,7 +422,7 @@
             // 
             // pnlKitchen_ActiveOrder
             // 
-            this.pnlKitchen_ActiveOrder.Controls.Add(this.txt_kitchenActiveOrder);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lbl_OrderComments);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label9);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.pictureBox1);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.btn_readyOrder);
@@ -437,18 +437,10 @@
             this.pnlKitchen_ActiveOrder.Size = new System.Drawing.Size(1629, 1154);
             this.pnlKitchen_ActiveOrder.TabIndex = 10;
             // 
-            // txt_kitchenActiveOrder
-            // 
-            this.txt_kitchenActiveOrder.Location = new System.Drawing.Point(228, 969);
-            this.txt_kitchenActiveOrder.Multiline = true;
-            this.txt_kitchenActiveOrder.Name = "txt_kitchenActiveOrder";
-            this.txt_kitchenActiveOrder.Size = new System.Drawing.Size(604, 127);
-            this.txt_kitchenActiveOrder.TabIndex = 13;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(80, 972);
+            this.label9.Location = new System.Drawing.Point(109, 969);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(142, 32);
             this.label9.TabIndex = 12;
@@ -542,6 +534,14 @@
             this.timer1.Interval = 101;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
+            // lbl_OrderComments
+            // 
+            this.lbl_OrderComments.AutoSize = true;
+            this.lbl_OrderComments.Location = new System.Drawing.Point(257, 969);
+            this.lbl_OrderComments.Name = "lbl_OrderComments";
+            this.lbl_OrderComments.Size = new System.Drawing.Size(0, 32);
+            this.lbl_OrderComments.TabIndex = 12;
+            // 
             // KitchenViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -550,9 +550,9 @@
             this.ClientSize = new System.Drawing.Size(1844, 1157);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Controls.Add(this.pnlKitchen_ActiveOrder);
             this.Controls.Add(this.pnlKitchen_NewOrders);
+            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";
@@ -620,7 +620,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox txt_kitchenActiveOrder;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lbl_OrderComments;
     }
 }

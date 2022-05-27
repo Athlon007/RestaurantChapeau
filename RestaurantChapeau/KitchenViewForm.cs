@@ -18,9 +18,9 @@ namespace RestaurantChapeau
         public KitchenViewForm()
         {
             InitializeComponent();
-            
-            DisplayOrders();
             SetFonts();
+            DisplayOrders();
+           
             Timer();
         
 
@@ -50,9 +50,9 @@ namespace RestaurantChapeau
         {
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
-
+           
             lblKitchenn_OrderNo.Text=orderItem.Id.ToString();
-            txt_kitchenActiveOrder.Text=orderItem.Comment.ToString();
+            lbl_OrderComments.Text=orderItem.Comment.ToString();
             
             // select from database which items have the order id of the id stated in the listview
             List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
