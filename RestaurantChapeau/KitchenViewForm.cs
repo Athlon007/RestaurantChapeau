@@ -19,11 +19,10 @@ namespace RestaurantChapeau
             InitializeComponent();
             SetFonts();
             DisplayOrders();
-           
-            Timer();
+
+           // Timer();
         }
 
-       
         public void DisplayOrders()
         {
             OrderLogic orderService = new OrderLogic();
@@ -38,8 +37,16 @@ namespace RestaurantChapeau
                 li.SubItems.Add(order.Status.ToString());
                 li.Tag = order;
 
+                if (order.Status==OrderStatus.ReadyToServe)
+                {
+                    listViewKitchen_CompleteOrders.Items.Add(li);
+                }
+                else
+                {
+                    listViewNewOrders.Items.Add(li);
+                }
                 //add items to the listview
-                listViewNewOrders.Items.Add(li);
+                
             }
         }
         private void DisplayOrderItems()
@@ -47,17 +54,17 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
-           
-            lblKitchenn_OrderNo.Text=orderItem.Id.ToString();
 
-           Order selectedOrder= orderService.GetOrderCommentByID(orderItem.Id);
+            lblKitchenn_OrderNo.Text = orderItem.Id.ToString();
+
+            Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
             lbl_OrderComments.Text = selectedOrder.Comment;
-            
+
             // select from database which items have the order id of the id stated in the listview
-            List<MenuItem> orderMenuItems = orderService.GetOrderFoodItems(orderItem.Id);
+            List<MenuItem> orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
 
             // delete all the items in the listview before adding new ones
-            RemoveListViewItems();
+            RemoveListViewItems(listViewKitchen_ActiveOrder);
 
             //foreach item in the list acquired from the db, add the name to the active order 
             foreach (MenuItem item in orderMenuItems)
@@ -66,7 +73,7 @@ namespace RestaurantChapeau
                 li.SubItems.Add(item.Quantity.ToString());
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
-            } 
+            }
 
         }
 
@@ -91,7 +98,7 @@ namespace RestaurantChapeau
         private void btnKitchen_newOrders_Click(object sender, EventArgs e)
         {
             HidePanels();
-            pnlKitchen_NewOrders.Show();    
+            pnlKitchen_NewOrders.Show();
         }
         #endregion
 
@@ -118,12 +125,13 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
+            
             orderItem.Status = OrderStatus.ReadyToServe;
 
             orderService.UpdateOrderStatus(orderItem);
             listViewKitchen_CompleteOrders.Items.Add(orderItem.Id.ToString());
             MessageBox.Show($"Order {orderItem.Id} has been completed");
-         
+
         }
         #endregion
 
@@ -137,10 +145,10 @@ namespace RestaurantChapeau
         #endregion
 
         #region Remove ListviewItems
-        private void RemoveListViewItems()
+        private void RemoveListViewItems(ListView listView)
         {
-            foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
-                listViewKitchen_ActiveOrder.Items.Remove(item);
+            foreach (ListViewItem item in listView.Items)
+                listView.Items.Remove(item);
         }
         #endregion
 
@@ -154,7 +162,10 @@ namespace RestaurantChapeau
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-
+            int ticks = 0;
+            lblKitchen_OrderTime.Text = ticks++.ToString();
+            // ticks++;
+            lblKitchen_OrderTime.Refresh();
 
         }
         public void SetFonts()

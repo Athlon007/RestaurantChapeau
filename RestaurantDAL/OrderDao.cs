@@ -61,7 +61,7 @@ namespace RestaurantDAL
 
         public List<MenuItem> GetMenuItems(int menuTypeId, int menuCategoryId)
         {
-            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
+            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " +
                             "JOIN Menu m ON m.menuItemId = mi.id " +
@@ -134,7 +134,7 @@ namespace RestaurantDAL
         /// <returns>Returns a new order.</returns>
         public Order CreateNewOrderForBill(Bill bill, string comment)
         {
-            string query =  "INSERT INTO dbo.[Order] (placedTime, status, billId, comment) " +
+            string query = "INSERT INTO dbo.[Order] (placedTime, status, billId, comment) " +
                             "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.billId, Inserted.comment " +
                             "VALUES (@Now, 0, @BillId, @Comment)";
             SqlParameter[] parameters = new SqlParameter[]
@@ -195,35 +195,15 @@ namespace RestaurantDAL
         public List<Order> GetOrdersToPrepare()
         {
             string query = "SELECT o.[id], o.placedTime, o.status, o.comment " +
-                            "FROM[Order] o ";
-                            //"WHERE o.status <= 4;";
+                            "FROM[Order] o " +
+                        "WHERE o.status = 0 or o.status > 0;";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadOrderTables(ExecuteSelectQuery(query, sqlParameters));
 
-            DataTable tableOrders = ExecuteSelectQuery(query);
-            List<Order> orders = new List<Order>();
-            foreach (DataRow row in tableOrders.Rows)
-            {
-                Order order = ReadOrder(tableOrders, null);
-
-                // Get all items belonging to that order.
-                string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink " +
-                                            "FROM PartOf po " +
-                                            "JOIN MenuItem mi ON po.menuItemId = mi.id " +
-                                            "JOIN Vat v ON mi.vatId = v.id " +
-                                            "WHERE orderId = @OrderId AND mi.isDrink is null;";
-                SqlParameter[] parameters = new SqlParameter[]
-                {
-                    new SqlParameter("@OrderId", order.Id)
-                };
-
-                order.Items = ReadMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
-
-                orders.Add(order);
-            }
-
-            return orders;
         }
+
         //Returns all the items in an order with a specific orderID
-        public List<MenuItem> GetOrderFoodItems(int orderId)
+        public List<MenuItem> GetOrderItemsByID(int orderId)
         {
             string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
             SqlParameter[] parameters = new SqlParameter[]
@@ -233,10 +213,10 @@ namespace RestaurantDAL
 
             return ReadMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
         }
-        
+
         public void RegisterOrderToBartender(Employee employee, Order order)
         {
-            string query =  "INSERT INTO dbo.[Bartender] (employeeId, orderId) " +
+            string query = "INSERT INTO dbo.[Bartender] (employeeId, orderId) " +
                             "VALUES (@EmployeeId, @OrderId)";
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -275,7 +255,7 @@ namespace RestaurantDAL
 
             DataRow row = table.Rows[0];
 
-            if (table.Columns.Contains("comment")&&!Convert.IsDBNull(row["comment"]))
+            if (table.Columns.Contains("comment") && !Convert.IsDBNull(row["comment"]))
             {
                 order.Comment = Convert.ToString(row["comment"]);
             }
@@ -283,5 +263,22 @@ namespace RestaurantDAL
             return order;
         }
 
+        private List<Order> ReadOrderTables(DataTable datatable)
+        {
+            List<Order> orders = new List<Order>();
+            foreach (DataRow dr in datatable.Rows)
+            {
+                Order order = new Order
+                {
+                    Id = Convert.ToInt32(dr["id"]),
+                    PlacedTime = Convert.ToDateTime(dr["placedTime"]),
+                    Status = (OrderStatus)Convert.ToInt32(dr["status"])
+                };
+                orders.Add(order);
+            }
+            return orders;
+
+        }
     }
 }
+

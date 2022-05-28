@@ -63,6 +63,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.sidebarPanelCompleteOrder = new System.Windows.Forms.Panel();
             this.pnlKitchen_ActiveOrder = new System.Windows.Forms.Panel();
+            this.lbl_OrderComments = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblKitchenn_OrderNo = new System.Windows.Forms.Label();
@@ -74,7 +75,6 @@
             this.Quantity = new System.Windows.Forms.ColumnHeader();
             this.lbl_activeOrder = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lbl_OrderComments = new System.Windows.Forms.Label();
             this.pnlKitchen_NewOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -437,6 +437,14 @@
             this.pnlKitchen_ActiveOrder.Size = new System.Drawing.Size(1629, 1154);
             this.pnlKitchen_ActiveOrder.TabIndex = 10;
             // 
+            // lbl_OrderComments
+            // 
+            this.lbl_OrderComments.AutoSize = true;
+            this.lbl_OrderComments.Location = new System.Drawing.Point(257, 969);
+            this.lbl_OrderComments.Name = "lbl_OrderComments";
+            this.lbl_OrderComments.Size = new System.Drawing.Size(0, 32);
+            this.lbl_OrderComments.TabIndex = 12;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -468,7 +476,7 @@
             // lblKitchen_OrderTime
             // 
             this.lblKitchen_OrderTime.AutoSize = true;
-            this.lblKitchen_OrderTime.Location = new System.Drawing.Point(1302, 171);
+            this.lblKitchen_OrderTime.Location = new System.Drawing.Point(1263, 185);
             this.lblKitchen_OrderTime.Name = "lblKitchen_OrderTime";
             this.lblKitchen_OrderTime.Size = new System.Drawing.Size(0, 32);
             this.lblKitchen_OrderTime.TabIndex = 10;
@@ -476,7 +484,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(1198, 174);
+            this.label14.Location = new System.Drawing.Point(1178, 185);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(79, 32);
             this.label14.TabIndex = 10;
@@ -533,14 +541,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 101;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
-            // 
-            // lbl_OrderComments
-            // 
-            this.lbl_OrderComments.AutoSize = true;
-            this.lbl_OrderComments.Location = new System.Drawing.Point(257, 969);
-            this.lbl_OrderComments.Name = "lbl_OrderComments";
-            this.lbl_OrderComments.Size = new System.Drawing.Size(0, 32);
-            this.lbl_OrderComments.TabIndex = 12;
             // 
             // KitchenViewForm
             // 
