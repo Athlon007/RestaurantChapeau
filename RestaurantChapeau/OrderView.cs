@@ -23,6 +23,9 @@ namespace RestaurantChapeau
         Color activeButtonColor = Color.FromArgb(255, 67, 179, 215);
         Color activeButtonTextColor = Color.FromArgb(255, 255, 255, 255);
 
+        const int WindowWidth = 651;
+        const int WindowHeight = 830;
+
         /// <summary>
         /// Creates a new Order View. Both BILL for which the order is taken, and EMPLOYEE that takes the order must be specified!
         /// </summary>
@@ -45,8 +48,12 @@ namespace RestaurantChapeau
 
             this.bill = bill;
             this.employee = employee;
-
+            
             DPIScaler.Instance.UpdateToForm(this);
+
+            this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
+            this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
+
 
             // Hide tab view tabs.
             theTabControl.Appearance = TabAppearance.FlatButtons;
@@ -61,8 +68,6 @@ namespace RestaurantChapeau
 
             lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
             lblHeader.Text = "";
-
-            MessageBox.Show(this.AutoScaleDimensions.ToString());
         }
 
         private async void OrderView_Load(object sender, EventArgs e)
