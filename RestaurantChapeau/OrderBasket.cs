@@ -164,6 +164,9 @@ namespace RestaurantChapeau
             return itemsInBasket;
         }
 
+        /// <summary>
+        /// Total amount of items in the order (including multiple instances of an unique item).
+        /// </summary>
         public int Count
         {
             get
