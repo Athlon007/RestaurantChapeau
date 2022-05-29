@@ -13,6 +13,8 @@ namespace RestaurantChapeau
     public partial class OrderView : Form
     {
         OrderLogic orderLogic;
+        MenuLogic menuLogic;
+
         Bill bill;
         Employee employee;
 
@@ -35,11 +37,7 @@ namespace RestaurantChapeau
         public OrderView(Bill bill, Employee employee)
         {
             InitializeComponent();
-
-            if (bill == null)
-            {
-                throw new NullReferenceException("Bill must be provided!");
-            }
+            DPIScaler.Instance.UpdateToForm(this);
 
             if (employee == null)
             {
@@ -47,13 +45,11 @@ namespace RestaurantChapeau
             }
 
             this.bill = bill;
-            this.employee = employee;
-            
-            DPIScaler.Instance.UpdateToForm(this);
+            this.employee = employee;   
 
+            // Set form dimensions according constant values and scale it.
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
             this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
-
 
             // Hide tab view tabs.
             theTabControl.Appearance = TabAppearance.FlatButtons;
@@ -63,10 +59,13 @@ namespace RestaurantChapeau
             // Center the "tick" picture.
             picTick.Left = this.Width / 2 - picTick.Width / 2;
 
+            // Clear order basket.
             OrderBasket.Instance.Clear();
             OrderBasket.Instance.AddListener(this);
 
+            // Assign font to the top-bar "Order" test.
             lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
+
             lblHeader.Text = "";
         }
 
@@ -76,14 +75,18 @@ namespace RestaurantChapeau
             LoadGUI();
         }
 
+        /// <summary>
+        /// Asynchronously create menuLogic and orderLogic objects. Should slightly speed-up the load time.
+        /// </summary>
         private async Task ConnectToServer()
         {
-            orderLogic = await Task.Run(() =>
-            {
-                 return new OrderLogic();
-            });
+            orderLogic = await Task.Run(() => { return new OrderLogic(); });
+            menuLogic = await Task.Run(() => { return new MenuLogic(); });
         }
 
+        /// <summary>
+        /// Load MenuTypes and then the first (Lunch) menu.
+        /// </summary>
         private void LoadGUI()
         {
             try
@@ -101,10 +104,13 @@ namespace RestaurantChapeau
             }
         }
 
+        /// <summary>
+        /// Loads menu types, and creates buttons in the top nav-bar.
+        /// </summary>
         private void LoadMenuTypes()
         {
-            ClearMenuTypes();
-            List<MenuType> menuTypes = orderLogic.GetMenuTypes();
+            flwMenuItems.Controls.Clear();
+            List<MenuType> menuTypes = menuLogic.GetMenuTypes();
 
             // Buttons cannot be exactly the height (or width) of the flwMenuTypes,
             // otherwise they might get cut-off.
@@ -117,8 +123,6 @@ namespace RestaurantChapeau
                 Button menuTypeButton = new Button();
                 menuTypeButton.Tag = menuType;
                 menuTypeButton.Text = menuType.Name;
-
-
                 menuTypeButton.Height = flwMenuTypes.Height - widthHeighAdjust;
                 menuTypeButton.Width = flwMenuTypes.Width / menuTypes.Count - widthHeighAdjust;
                 menuTypeButton.Click += OnMenuTypeClick;
@@ -136,11 +140,9 @@ namespace RestaurantChapeau
             }
         }
 
-        private void ClearMenuTypes()
-        {
-            flwMenuTypes.Controls.Clear();
-        }
-
+        /// <summary>
+        /// An action executed when MenuType button is clicked.
+        /// </summary>
         private void OnMenuTypeClick(object sender, EventArgs e)
         {
             currentMenuType = (MenuType)(sender as Button).Tag;
@@ -155,6 +157,10 @@ namespace RestaurantChapeau
             }
         }
 
+        /// <summary>
+        /// Loads selected menu type.
+        /// </summary>
+        /// <param name="menuType">MenuType to load.</param>
         private async void LoadMenu(MenuType menuType)
         {
             // First we update the buttons of menu types.
@@ -163,10 +169,12 @@ namespace RestaurantChapeau
                 if (control is Button)
                 {
                     Button button = control as Button;
-                    Color backgroundColor = Color.White;
-                    Color textColor = Color.Black;
+                    Color backgroundColor = Color.White; // Unselected background button color.
+                    Color textColor = Color.Black; // Unselected font color.
                     if (button.Tag == menuType)
                     {
+                        // Is button the menu type that has been picked?
+                        // Set the colors of it to selected one.
                         backgroundColor = activeButtonColor;
                         textColor = activeButtonTextColor;
                     }
@@ -176,25 +184,26 @@ namespace RestaurantChapeau
                 }
             }
 
-            ClearMenuItems();
-            List<MenuCategory> menuCategories = await Task.Run(() => { return orderLogic.GetMenuCategories(menuType); });
+            // Clear controls in menu items.
+            flwMenuItems.Controls.Clear();
+
+            // Get menu categories of the menu type.
+            List<MenuCategory> menuCategories = await Task.Run(() => { return menuLogic.GetMenuCategories(menuType); });
 
             foreach (MenuCategory menuCategory in menuCategories)
             {
+                // Create new category separator.
                 new CategorySeparatorUI(flwMenuItems, menuCategory.Name);
 
+                // Get menu items of this menu type and category.
                 List<MenuItem> menuItems = await Task.Run(() => { return orderLogic.GetMenuItems(menuType, menuCategory); });
 
+                // Create UI stuff for menu items.
                 foreach (MenuItem menuItem in menuItems)
                 {
                     new MenuItemUI(flwMenuItems, menuItem, lblSub.Left);
                 }
             }
-        }
-
-        private void ClearMenuItems()
-        {
-            flwMenuItems.Controls.Clear();
         }
 
         private void btnPlaceOrder_Click(object sender, EventArgs e)
@@ -214,12 +223,17 @@ namespace RestaurantChapeau
             this.Close();
         }
 
+        /// <summary>
+        /// Loads the checkout menu.
+        /// </summary>
         private void LoadCheckout()
         {
             flwCheckout.Controls.Clear();
 
             if (OrderBasket.Instance.GetAll().Count == 0)
             {
+                // No menu items?
+                // Create label saying that no items are selected, and disable Finish button.
                 Label lblNothingPurchased = new Label();
                 lblNothingPurchased.Text = "No items selected!";
                 lblNothingPurchased.Font = new Font("Segoe UI", 18);
@@ -231,6 +245,7 @@ namespace RestaurantChapeau
             }
             else
             {
+                // ...otherwise load stuff from the basket.
                 int count = 1;
                 foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
                 {
@@ -242,14 +257,22 @@ namespace RestaurantChapeau
                 btnFinish.Enabled = true;
             }
 
+            // Switch tab and update header text.
             theTabControl.SelectedTab = tabPageCheckout;
             lblHeader.Text = "Summary";
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
+            if (bill == null)
+            {
+                // TODO: Create new bill, if one does not exist.
+                throw new NotImplementedException();
+            }
+            
             Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
 
+            // Add items to the new order.
             foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
             {
                 orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
@@ -257,12 +280,16 @@ namespace RestaurantChapeau
 
             orderLogic.RegisterOrderToBartender(employee, order);
 
+            // Clear basket, go go to "Success" tab.
             OrderBasket.Instance.Clear();
             theTabControl.SelectedTab = tabOrderSucceeded;
             lblHeader.Text = "";
             Task.Run(() => LoadOrderCompleted());
         }
 
+        /// <summary>
+        /// Waits 1 second to show the "Success" tab and closes the form.
+        /// </summary>
         private void LoadOrderCompleted()
         {
             Thread.Sleep(1000);
@@ -298,12 +325,19 @@ namespace RestaurantChapeau
             }
         }
 
+        /// <summary>
+        /// Called by basket, in order to update the btnPlaceOrder text.
+        /// </summary>
         public void UpdateUI()
         {
             btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
             btnFinish.Enabled = OrderBasket.Instance.Count > 0;
         }
 
+        /// <summary>
+        /// If something goes wrong, it replaced the first tab's text with an error.
+        /// </summary>
+        /// <param name="failReason">Fail reason that will be displayed</param>
         private void ShowFail(string failReason)
         {
             lblConnecting.Text = failReason;

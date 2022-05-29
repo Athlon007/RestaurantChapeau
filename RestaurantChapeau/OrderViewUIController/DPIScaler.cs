@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace RestaurantChapeau.OrderViewUIController
@@ -28,6 +25,9 @@ namespace RestaurantChapeau.OrderViewUIController
             }
         }
 
+        /// <summary>
+        /// Returns a window scale width-wise.
+        /// </summary>
         public float ScaleWidth
         {
             get
@@ -36,6 +36,9 @@ namespace RestaurantChapeau.OrderViewUIController
             }
         }
 
+        /// <summary>
+        /// Returns a window scale height-wise.
+        /// </summary>
         public float ScaleHeight
         {
             get
@@ -44,6 +47,10 @@ namespace RestaurantChapeau.OrderViewUIController
             }
         }
 
+        /// <summary>
+        /// Assigns the base scaling to be taken from specified form.
+        /// </summary>
+        /// <param name="form"></param>
         public void UpdateToForm(Form form)
         {
             formAutoScale = form.AutoScaleDimensions;
