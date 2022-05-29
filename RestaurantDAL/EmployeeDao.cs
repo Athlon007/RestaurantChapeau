@@ -21,7 +21,7 @@ namespace RestaurantDAL
         //getting the user from the db by the employeeName, in order to get the salt
         public Employee GetEmployeeByEmployeeName(string email)
         {
-            string query = $"SELECT id, firstName, lastName, email, passwordHash, passwordSalt FROM dbo.[Employee] WHERE email = @email";
+            string query = $"SELECT id, firstName, lastName, email, passwordHash, passwordSalt, employeeType FROM dbo.[Employee] WHERE email = @email";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@email", email)
@@ -32,7 +32,7 @@ namespace RestaurantDAL
         //getting a list of all the employees
         public List<Employee> GetAllEmployees()
         {
-            string query = $"SELECT firstName, lastName, email, passwordHash, passwordSalt FROM [Employee]";
+            string query = $"SELECT id, firstName, lastName, email, passwordHash, passwordSalt, employeeType FROM [Employee]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -47,13 +47,17 @@ namespace RestaurantDAL
                 //store each room with the following fields from the database
                 Employee employee = new Employee()
                 {
-                    id = Convert.ToInt32(dr["int"]),
+                    id = Convert.ToInt32(dr["id"]),
                     firstName = (string)(dr["firstName"]),
                     lastName = (string)(dr["lastName"]),
                     email = (string)(dr["email"]),
                     passwordHash = (string)(dr["passwordHash"]),
                     passwordSalt = (string)(dr["passwordSalt"])
-            };
+                };
+                if (!Convert.IsDBNull(dr["employeeType"]))
+                {
+                    employee.employeeType = (EmployeeType)Convert.ToInt32(dr["employeeType"]);
+                }
                 employees.Add(employee);
             }
             return employees;
@@ -66,21 +70,22 @@ namespace RestaurantDAL
             if (dataTable.Rows.Count > 0)
             {
                 DataRow dr = dataTable.Rows[0];
+                employee.id = Convert.ToInt32(dr["id"]);
                 employee.firstName = (string)(dr["firstName"]);
                 employee.lastName = (string)(dr["lastName"]);
                 employee.email = (string)(dr["email"]);
                 employee.passwordHash = (string)(dr["passwordHash"]);
                 employee.passwordSalt = (string)(dr["passwordSalt"]);
+                if (!Convert.IsDBNull(dr["employeeType"]))
+                {
+                    employee.employeeType = (EmployeeType)Convert.ToInt32(dr["employeeType"]);
+                }
             }
             else
             {
                 throw new Exception("There is no user with these credentials");
             }
             return employee;
-        }
-        public void GitHub()
-        {
-
-        }
+        }       
     }
 }

@@ -12,6 +12,6 @@ namespace RestaurantModel
         public string email;
         public string passwordHash;
         public string passwordSalt;
-        public string managerId;
+        public EmployeeType employeeType;
     }
 }
