@@ -70,15 +70,18 @@
             // 
             // txt_LoginPassword
             // 
+            this.txt_LoginPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_LoginPassword.Location = new System.Drawing.Point(146, 495);
             this.txt_LoginPassword.Multiline = true;
             this.txt_LoginPassword.Name = "txt_LoginPassword";
+            this.txt_LoginPassword.PasswordChar = '*';
             this.txt_LoginPassword.Size = new System.Drawing.Size(452, 58);
             this.txt_LoginPassword.TabIndex = 0;
             this.txt_LoginPassword.TextChanged += new System.EventHandler(this.txt_LoginPassword_TextChanged);
             // 
             // txt_LoginEmail
             // 
+            this.txt_LoginEmail.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_LoginEmail.Location = new System.Drawing.Point(146, 337);
             this.txt_LoginEmail.Multiline = true;
             this.txt_LoginEmail.Name = "txt_LoginEmail";
@@ -225,6 +228,7 @@
             // 
             // textBox3
             // 
+            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox3.Location = new System.Drawing.Point(146, 654);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
@@ -233,6 +237,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox2.Location = new System.Drawing.Point(146, 495);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -241,6 +246,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(146, 337);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -258,7 +264,6 @@
             // 
             // pnl_Register
             // 
-            this.pnl_Register.Controls.Add(this.pnl_ForgotPassword);
             this.pnl_Register.Controls.Add(this.lbl_RegisterPassword);
             this.pnl_Register.Controls.Add(this.txt_RegisterPassword);
             this.pnl_Register.Controls.Add(this.btn_RegisterLogin);
@@ -270,7 +275,6 @@
             this.pnl_Register.Controls.Add(this.txt_RegisterEmail);
             this.pnl_Register.Controls.Add(this.txt_RegisterLastName);
             this.pnl_Register.Controls.Add(this.txt_RegisterFirstName);
-            this.pnl_Register.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_Register.Location = new System.Drawing.Point(0, 0);
             this.pnl_Register.Name = "pnl_Register";
             this.pnl_Register.Size = new System.Drawing.Size(726, 1055);
@@ -288,6 +292,7 @@
             // 
             // txt_RegisterPassword
             // 
+            this.txt_RegisterPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterPassword.Location = new System.Drawing.Point(146, 631);
             this.txt_RegisterPassword.Multiline = true;
             this.txt_RegisterPassword.Name = "txt_RegisterPassword";
@@ -358,6 +363,7 @@
             // 
             // txt_RegisterEmail
             // 
+            this.txt_RegisterEmail.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterEmail.Location = new System.Drawing.Point(146, 532);
             this.txt_RegisterEmail.Multiline = true;
             this.txt_RegisterEmail.Name = "txt_RegisterEmail";
@@ -366,6 +372,7 @@
             // 
             // txt_RegisterLastName
             // 
+            this.txt_RegisterLastName.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterLastName.Location = new System.Drawing.Point(146, 430);
             this.txt_RegisterLastName.Multiline = true;
             this.txt_RegisterLastName.Name = "txt_RegisterLastName";
@@ -374,6 +381,7 @@
             // 
             // txt_RegisterFirstName
             // 
+            this.txt_RegisterFirstName.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterFirstName.Location = new System.Drawing.Point(146, 337);
             this.txt_RegisterFirstName.Multiline = true;
             this.txt_RegisterFirstName.Name = "txt_RegisterFirstName";
@@ -400,6 +408,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
+            this.Controls.Add(this.pnl_ForgotPassword);
             this.Controls.Add(this.pnl_Register);
             this.Controls.Add(this.btn_LoginRegister);
             this.Controls.Add(this.pictureBox1);

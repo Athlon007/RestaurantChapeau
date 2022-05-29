@@ -249,6 +249,8 @@ namespace RestaurantChapeau
         private void btn_ViewReservationGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
+            DisplayReservation();
+            CheckReservations();
         }
 
         private void btn_ViewReservationMake_Click(object sender, EventArgs e)
@@ -269,7 +271,6 @@ namespace RestaurantChapeau
                 Reservation reservation = new Reservation();
                 {
                     reservation.reservationID = int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);
-
                 };
 
                 //delete reservation
@@ -289,13 +290,11 @@ namespace RestaurantChapeau
             }
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
+        private void button1_Click_1(object sender, EventArgs e)
+        {            
+            this.Close();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
         }
     }
 }
