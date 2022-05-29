@@ -106,7 +106,7 @@
             this.flwMenuItems.Location = new System.Drawing.Point(4, 174);
             this.flwMenuItems.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flwMenuItems.Name = "flwMenuItems";
-            this.flwMenuItems.Size = new System.Drawing.Size(1155, 1144);
+            this.flwMenuItems.Size = new System.Drawing.Size(1155, 1118);
             this.flwMenuItems.TabIndex = 4;
             // 
             // lblName
@@ -142,7 +142,7 @@
             this.btnPlaceOrder.Location = new System.Drawing.Point(618, 19);
             this.btnPlaceOrder.Margin = new System.Windows.Forms.Padding(41, 19, 41, 19);
             this.btnPlaceOrder.Name = "btnPlaceOrder";
-            this.btnPlaceOrder.Size = new System.Drawing.Size(496, 75);
+            this.btnPlaceOrder.Size = new System.Drawing.Size(496, 101);
             this.btnPlaceOrder.TabIndex = 7;
             this.btnPlaceOrder.Text = "View Order";
             this.btnPlaceOrder.UseVisualStyleBackColor = false;
@@ -159,7 +159,7 @@
             this.btnCancel.Location = new System.Drawing.Point(41, 19);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(41, 19, 41, 19);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(495, 75);
+            this.btnCancel.Size = new System.Drawing.Size(495, 101);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -240,12 +240,12 @@
             this.tlpPlaceCancelOrder.Controls.Add(this.btnCancel, 0, 0);
             this.tlpPlaceCancelOrder.Controls.Add(this.btnPlaceOrder, 1, 0);
             this.tlpPlaceCancelOrder.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tlpPlaceCancelOrder.Location = new System.Drawing.Point(4, 1318);
+            this.tlpPlaceCancelOrder.Location = new System.Drawing.Point(4, 1292);
             this.tlpPlaceCancelOrder.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tlpPlaceCancelOrder.Name = "tlpPlaceCancelOrder";
             this.tlpPlaceCancelOrder.RowCount = 1;
             this.tlpPlaceCancelOrder.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpPlaceCancelOrder.Size = new System.Drawing.Size(1155, 113);
+            this.tlpPlaceCancelOrder.Size = new System.Drawing.Size(1155, 139);
             this.tlpPlaceCancelOrder.TabIndex = 10;
             // 
             // tabPageCheckout
@@ -272,7 +272,7 @@
             this.flwCheckout.Location = new System.Drawing.Point(4, 55);
             this.flwCheckout.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1155, 1017);
+            this.flwCheckout.Size = new System.Drawing.Size(1155, 991);
             this.flwCheckout.TabIndex = 11;
             // 
             // pnlColumnsCheckout
@@ -326,7 +326,7 @@
             this.lblComment.AutoSize = true;
             this.lblComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblComment.Location = new System.Drawing.Point(4, 1072);
+            this.lblComment.Location = new System.Drawing.Point(4, 1046);
             this.lblComment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(180, 45);
@@ -338,10 +338,10 @@
             this.pnlCommentTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
             this.pnlCommentTextBox.Controls.Add(this.txtComment);
             this.pnlCommentTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCommentTextBox.Location = new System.Drawing.Point(4, 1117);
+            this.pnlCommentTextBox.Location = new System.Drawing.Point(4, 1091);
             this.pnlCommentTextBox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.pnlCommentTextBox.Name = "pnlCommentTextBox";
-            this.pnlCommentTextBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCommentTextBox.Padding = new System.Windows.Forms.Padding(4);
             this.pnlCommentTextBox.Size = new System.Drawing.Size(1155, 201);
             this.pnlCommentTextBox.TabIndex = 14;
             // 
@@ -365,12 +365,12 @@
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnFinish, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 1318);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 1292);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1155, 113);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1155, 139);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // btnBack
@@ -383,7 +383,7 @@
             this.btnBack.Location = new System.Drawing.Point(41, 19);
             this.btnBack.Margin = new System.Windows.Forms.Padding(41, 19, 41, 19);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(495, 75);
+            this.btnBack.Size = new System.Drawing.Size(495, 101);
             this.btnBack.TabIndex = 8;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -400,7 +400,7 @@
             this.btnFinish.Location = new System.Drawing.Point(618, 19);
             this.btnFinish.Margin = new System.Windows.Forms.Padding(41, 19, 41, 19);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(496, 75);
+            this.btnFinish.Size = new System.Drawing.Size(496, 101);
             this.btnFinish.TabIndex = 7;
             this.btnFinish.Text = "Place Order";
             this.btnFinish.UseVisualStyleBackColor = false;

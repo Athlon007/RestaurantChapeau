@@ -116,7 +116,7 @@ namespace RestaurantChapeau.OrderViewUIController
             TextBox txt = new TextBox();
             txt.Font = txtboxFont;
             txt.TextAlign = HorizontalAlignment.Center;
-            txt.Margin = margin;
+            txt.MinimumSize = new Size(0, pnl.Height - Convert.ToInt32(DPIScaler.Instance.ScaleHeight * 6));
             txt.Dock = DockStyle.Fill;
             pnl.Controls.Add(txt);
 
