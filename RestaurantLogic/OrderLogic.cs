@@ -64,6 +64,11 @@ namespace RestaurantLogic
             return orderDao.GetOrdersToPrepare();
         }
 
+        /// <summary>
+        /// Registers the provided order to bartender (employee).
+        /// </summary>
+        /// <param name="employee">Bartender to which the order will be assigned.</param>
+        /// <param name="order">Order that will be assigned.</param>
         public void RegisterOrderToBartender(Employee employee, Order order)
         {
             orderDao.RegisterOrderToBartender(employee, order);
