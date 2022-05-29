@@ -261,7 +261,6 @@ namespace RestaurantChapeau
                             break;
                         //...
                     }
-
                 }
                 else
                     MessageBox.Show("Login failed.");
