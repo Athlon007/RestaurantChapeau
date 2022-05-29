@@ -15,8 +15,16 @@ namespace RestaurantDAL
         public void AddToReservation(string firstName, string lastName, string email,string isReserved, DateTime ReservationStart, string tableid)
         {
 
-            string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, isReserved, ReservationStart, tableid) VALUES ('{firstName}', '{lastName}', '{email}', '{isReserved}', '{ReservationStart}', '{tableid}');";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, isReserved, ReservationStart, tableid) VALUES (@firstName, @lastName, @email, @isReserved, @ReservationStart, @tableid);";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@firstName", firstName),
+                new SqlParameter("@lastName", lastName),
+                new SqlParameter("@email", email),
+                new SqlParameter("@isReserved", isReserved),
+                new SqlParameter("@ReservationStart", ReservationStart),
+                new SqlParameter("@tableid", tableid)
+            };
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the reservation from the db by the email
@@ -91,6 +99,27 @@ namespace RestaurantDAL
             string query = $"Select isReserved, tableid from Reservation where id={reservation.isReserved}, {reservation.tableid};";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public bool TableHasBill(int tableId)
+        {
+            string query = $"Select activeBill FROM [Table] WHERE id={tableId}";
+            return ReadTableHasBill(ExecuteSelectQuery(query));
+        }
+
+        private bool ReadTableHasBill(DataTable table)
+        {
+            if (table.Rows.Count == 0)
+            {
+                return false;
+            }
+
+            if (Convert.IsDBNull(table.Rows[0]["activeBill"]))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

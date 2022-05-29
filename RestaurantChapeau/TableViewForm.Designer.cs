@@ -187,7 +187,7 @@
             this.pnl_Reservation.Controls.Add(this.txt_ReservationEmail);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationTableID);
             this.pnl_Reservation.Controls.Add(this.btn_MakeReservation);
-            this.pnl_Reservation.Location = new System.Drawing.Point(687, 51);
+            this.pnl_Reservation.Location = new System.Drawing.Point(0, 0);
             this.pnl_Reservation.Name = "pnl_Reservation";
             this.pnl_Reservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Reservation.TabIndex = 32;
@@ -301,12 +301,11 @@
             // 
             // pnl_ViewReservation
             // 
-            this.pnl_ViewReservation.Controls.Add(this.pnl_Reservation);
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationCancel);
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationMake);
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationGoBack);
             this.pnl_ViewReservation.Controls.Add(this.lV_ReservationDisplay);
-            this.pnl_ViewReservation.Location = new System.Drawing.Point(641, 52);
+            this.pnl_ViewReservation.Location = new System.Drawing.Point(0, 0);
             this.pnl_ViewReservation.Name = "pnl_ViewReservation";
             this.pnl_ViewReservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ViewReservation.TabIndex = 33;
@@ -378,6 +377,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
+            this.Controls.Add(this.pnl_Reservation);
             this.Controls.Add(this.pnl_ViewReservation);
             this.Controls.Add(this.btn_TableViewManageReservation);
             this.Controls.Add(this.btn_test1);

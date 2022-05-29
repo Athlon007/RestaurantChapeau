@@ -35,5 +35,10 @@ namespace RestaurantLogic
         {
             reservationDb.CancelReservation(reservation);
         }
+
+        public bool TableHasBill(int tableId)
+        {
+            return reservationDb.TableHasBill(tableId);
+        }
     }
 }

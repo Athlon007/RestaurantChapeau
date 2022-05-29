@@ -15,18 +15,76 @@ namespace RestaurantChapeau
     {
         ReservationService reservationService = new ReservationService();
         Reservation reservation = new Reservation();
-        ReservationDao reservationDao = new ReservationDao();
         Employee currentEmployee;
+
+        Button[] tableButtons;
 
         public TableViewForm(Employee employee)
         {
             InitializeComponent();
             currentEmployee = employee;
-          
+
+            tableButtons = new Button[]
+            {
+                btn_Table1,
+                btn_Table2,
+                btn_Table3,
+                btn_Table4,
+                btn_Table5,
+                btn_Table6,
+                btn_Table7,
+                btn_Table8,
+                btn_Table9,
+                btn_Table10
+            };
+            CheckReservations();
         }
+
+        private void CheckReservations()
+        {
+            for (int i = 0; i < tableButtons.Length; i++)
+            {
+                Button button = tableButtons[i];
+                button.Image = Properties.Resources.screenshotTable;
+                button.Tag = null;
+
+                if (reservationService.TableHasBill(i + 1))
+                {
+                    button.Image = Properties.Resources.occupied;
+                }
+            }
+
+            List<Reservation> reservations = reservationService.GetAllReservations();
+            foreach (Reservation reservation in reservations)
+            {
+                tableButtons[reservation.tableid - 1].Tag = reservation;
+                if (reservation.isReserved)
+                {
+                    bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
+                    bool isTakenNow = DateTime.Now > reservation.ReservationStart;
+                    bool tableHasBill = reservationService.TableHasBill(reservation.tableid);
+                    if (isTakenNow && tableHasBill)
+                    {
+                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;
+                        
+                    }
+                    else if(isTableReserved)
+                    {
+                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.reserved;
+                    }
+                    else
+                    {
+                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
+                    }                    
+                }
+            }
+        }
+
         private void TableViewForm_Load(object sender, EventArgs e)
         {
             HidePanel();
+            dateTimePicker1.MinDate = DateTime.Now;
+            dateTimePicker1.Value = DateTime.Now;
         }
         public void HidePanel()
         {
@@ -96,6 +154,7 @@ namespace RestaurantChapeau
         private void button1_Click(object sender, EventArgs e)
         {
             btn_Table1.BackColor = Color.Red;
+            btn_Table1.Image = Properties.Resources.occupied;
 
             if (reservation.tableid == 2)
             {
