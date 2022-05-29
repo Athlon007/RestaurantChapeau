@@ -39,9 +39,14 @@ namespace RestaurantChapeau
             InitializeComponent();
             DPIScaler.Instance.UpdateToForm(this);
 
+            if (bill == null)
+            {
+                throw new ArgumentNullException("Bill must be provided");
+            }
+
             if (employee == null)
             {
-                throw new NullReferenceException("Employee must be provided");
+                throw new ArgumentNullException("Employee must be provided");
             }
 
             this.bill = bill;
@@ -263,13 +268,7 @@ namespace RestaurantChapeau
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
-        {
-            if (bill == null)
-            {
-                // TODO: Create new bill, if one does not exist.
-                throw new NotImplementedException();
-            }
-            
+        {            
             Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
 
             // Add items to the new order.
