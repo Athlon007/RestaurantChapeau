@@ -19,8 +19,7 @@ namespace RestaurantChapeau
             InitializeComponent();
             SetFonts();
             DisplayOrders();
-
-           // Timer();
+            //Timer();
         }
 
         public void DisplayOrders()
@@ -28,7 +27,7 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetOrdersToPrepare();
 
-            //clear the listview
+           // RemoveListViewItems(listViewNewOrders);
             foreach (Order order in orders)
             {
                 //create new listview item and add the items to the listview item
@@ -45,8 +44,6 @@ namespace RestaurantChapeau
                 {
                     listViewNewOrders.Items.Add(li);
                 }
-                //add items to the listview
-                
             }
         }
         private void DisplayOrderItems()
@@ -57,6 +54,7 @@ namespace RestaurantChapeau
 
             lblKitchenn_OrderNo.Text = orderItem.Id.ToString();
 
+            //get the order comment by the orderID
             Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
             lbl_OrderComments.Text = selectedOrder.Comment;
 
@@ -125,11 +123,10 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
-            
             orderItem.Status = OrderStatus.ReadyToServe;
 
             orderService.UpdateOrderStatus(orderItem);
-            listViewKitchen_CompleteOrders.Items.Add(orderItem.Id.ToString());
+
             MessageBox.Show($"Order {orderItem.Id} has been completed");
 
         }
@@ -162,11 +159,11 @@ namespace RestaurantChapeau
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            int ticks = 0;
-            lblKitchen_OrderTime.Text = ticks++.ToString();
-            // ticks++;
+            //int ticks = 0;
+            //ticks++;
+            //lblKitchen_OrderTime.Text = ticks.ToString();
             lblKitchen_OrderTime.Refresh();
-
+            pnlKitchen_ActiveOrder.Refresh();
         }
         public void SetFonts()
         {
