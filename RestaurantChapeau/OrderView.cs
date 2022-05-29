@@ -13,6 +13,8 @@ namespace RestaurantChapeau
     public partial class OrderView : Form
     {
         OrderLogic orderLogic;
+        MenuLogic menuLogic;
+
         Bill bill;
         Employee employee;
 
@@ -78,10 +80,8 @@ namespace RestaurantChapeau
 
         private async Task ConnectToServer()
         {
-            orderLogic = await Task.Run(() =>
-            {
-                 return new OrderLogic();
-            });
+            orderLogic = await Task.Run(() => { return new OrderLogic(); });
+            menuLogic = await Task.Run(() => { return new MenuLogic(); });
         }
 
         private void LoadGUI()
@@ -104,7 +104,7 @@ namespace RestaurantChapeau
         private void LoadMenuTypes()
         {
             ClearMenuTypes();
-            List<MenuType> menuTypes = orderLogic.GetMenuTypes();
+            List<MenuType> menuTypes = menuLogic.GetMenuTypes();
 
             // Buttons cannot be exactly the height (or width) of the flwMenuTypes,
             // otherwise they might get cut-off.
@@ -177,7 +177,7 @@ namespace RestaurantChapeau
             }
 
             ClearMenuItems();
-            List<MenuCategory> menuCategories = await Task.Run(() => { return orderLogic.GetMenuCategories(menuType); });
+            List<MenuCategory> menuCategories = await Task.Run(() => { return menuLogic.GetMenuCategories(menuType); });
 
             foreach (MenuCategory menuCategory in menuCategories)
             {

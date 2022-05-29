@@ -14,25 +14,6 @@ namespace RestaurantLogic
         }
 
         /// <summary>
-        /// Returns the list of all available menu types at the moment.
-        /// </summary>
-        /// <returns>List of menu types.</returns>
-        public List<MenuType> GetMenuTypes()
-        {
-            return orderDao.GetMenuTypes();
-        }
-
-        /// <summary>
-        /// Returns the list of all categories that match the menu type.
-        /// </summary>
-        /// <param name="menuType">Lunch, Dinner or Drinks</param>
-        /// <returns>List of menu categories.</returns>
-        public List<MenuCategory> GetMenuCategories(MenuType menuType)
-        {
-            return orderDao.GetMenuCategories(menuType);
-        }
-
-        /// <summary>
         /// Returns all menu items belonging to specific menu type and category.
         /// </summary>
         /// <param name="menuType">Menu type to filter for (Lunch, Dinner, Drinks).</param>
