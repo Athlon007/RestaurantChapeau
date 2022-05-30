@@ -38,8 +38,8 @@ namespace RestaurantLogic
         {
             paymentDb.UpdateBillStatus(billID, billStatus);
         }
-        public void CreateBill(int tableID) {
-            paymentDb.CreateBill(tableID);
+        public Bill CreateBill(int tableID) {
+            return paymentDb.CreateBill(tableID);
         }
         public void CreatePayment(int billId, DateTime dateTime, decimal amountPaid, string comment, decimal tip)
         {

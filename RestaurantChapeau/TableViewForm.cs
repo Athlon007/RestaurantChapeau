@@ -303,7 +303,7 @@ namespace RestaurantChapeau
             {
                 // Table has no bill?
                 // Show 
-                ShowOrderView();
+                ShowOrderView(tableId);
             }
             else
             {
@@ -319,9 +319,9 @@ namespace RestaurantChapeau
         /// Shows the order view (on top of the current window).
         /// </summary>
         /// <param name="bill">Bill that curently is served.</param>
-        private void ShowOrderView(Bill bill = null)
+        private void ShowOrderView(int tableID, Bill bill = null)
         {
-            OrderView order = new OrderView(currentEmployee, bill);
+            OrderView order = new OrderView(currentEmployee, bill, tableID);
             order.Location = this.Location; // Show OrderView right on top of this window.
             order.ShowDialog();
         }
@@ -403,7 +403,7 @@ namespace RestaurantChapeau
 
         private void btnNewOrder_Click(object sender, EventArgs e)
         {
-            ShowOrderView(currentBill);
+            ShowOrderView(currentTableNumber, currentBill);
         }
 
         private void TableViewForm_FormClosing(object sender, FormClosingEventArgs e)

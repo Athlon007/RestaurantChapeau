@@ -34,7 +34,7 @@ namespace RestaurantChapeau
             employee.email = "test@example.com";
             employee.id = 5;
 
-            OrderView orderView = new OrderView(employee, bill);
+            OrderView orderView = new OrderView(employee, bill, 1);
             orderView.ShowDialog();
         }
 

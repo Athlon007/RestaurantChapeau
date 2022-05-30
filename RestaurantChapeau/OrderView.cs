@@ -12,11 +12,12 @@ namespace RestaurantChapeau
 {
     public partial class OrderView : Form
     {
-        OrderLogic orderLogic;
-        MenuLogic menuLogic;
+        private OrderLogic orderLogic;
+        private MenuLogic menuLogic;
 
-        Bill bill;
-        Employee employee;
+        private Bill bill;
+        private Employee employee;
+        private int tableID;
 
         MenuType currentMenuType;
 
@@ -34,7 +35,7 @@ namespace RestaurantChapeau
         /// <param name="employee">Employee which takes the order</param>
         /// <param name="bill">Bill for wich the new order is created</param>
         /// <exception cref="ArgumentNullException">Employee cannot be null.</exception>
-        public OrderView(Employee employee, Bill bill)
+        public OrderView(Employee employee, Bill bill, int tableID)
         {
             InitializeComponent();
             DPIScaler.Instance.UpdateToForm(this);
@@ -266,8 +267,8 @@ namespace RestaurantChapeau
         {
             if (bill == null)
             {
-                // TODO: Create new bill, if one does not exist.
-                throw new NotImplementedException();
+                PaymentService payment = new PaymentService();
+                bill = payment.CreateBill(tableID);
             }
             
             Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
