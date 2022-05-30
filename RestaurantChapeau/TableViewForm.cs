@@ -128,16 +128,6 @@ namespace RestaurantChapeau
             form1.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            btn_Table1.BackColor = Color.Red;
-            btn_Table1.Image = Properties.Resources.occupied;
-
-            if (reservation.tableid == 2)
-            {
-            }
-        }
-
         private void btn_TableViewReservation_Click(object sender, EventArgs e)
         {
             theTabControl.SelectedTab = tabReservation;
