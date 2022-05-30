@@ -435,7 +435,7 @@
             this.picTick.Location = new System.Drawing.Point(355, 277);
             this.picTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.picTick.Name = "picTick";
-            this.picTick.Size = new System.Drawing.Size(453, 521);
+            this.picTick.Size = new System.Drawing.Size(453, 453);
             this.picTick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picTick.TabIndex = 0;
             this.picTick.TabStop = false;
