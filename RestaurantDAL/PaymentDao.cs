@@ -39,6 +39,12 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        public void CreateBill(int tableID)
+        {
+            string query = $"IF NOT EXISTS (SELECT * FROM dbo.Bill WHERE tableId = {tableID} AND status = 1) INSERT INTO dbo.Bill(tableId, status) OUTPUT INSERTED.id, INSERTED.tableId, INSERTED.status VALUES({tableID}, 1);";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
         public void CreatePayment(int billId, DateTime dateTime, decimal amountPaid, string comment, decimal tip)
         {
             string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip) VALUES ({billId}, CURRENT_TIMESTAMP, {amountPaid}, {comment}, {tip});";
