@@ -37,8 +37,10 @@ namespace RestaurantLogic
         public void UpdateBillStatus(int billID, int billStatus)
         {
             paymentDb.UpdateBillStatus(billID, billStatus);
-        } 
-        
+        }
+        public void CreateBill(int tableID) {
+            paymentDb.CreateBill(tableID);
+        }
         public void CreatePayment(int billId, DateTime dateTime, decimal amountPaid, string comment, decimal tip)
         {
             paymentDb.CreatePayment(billId, dateTime, amountPaid, comment, tip);
