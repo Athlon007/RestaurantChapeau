@@ -206,8 +206,7 @@ namespace RestaurantDAL
 
         public void UpdateOrderStatus(Order order)
         {
-            string command = (
-            "UPDATE dbo.[Order] SET status =@status  WHERE Id = @orderId");
+            string command = ("UPDATE dbo.[Order] SET status =@status  WHERE Id = @orderId");
             SqlParameter[] parameters = new SqlParameter[]
             {
                     new SqlParameter("@status", order.Status),

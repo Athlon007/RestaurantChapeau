@@ -348,7 +348,24 @@ namespace RestaurantChapeau
 
         private void picBackButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (theTabControl.SelectedTab == tabPageMenu || theTabControl.SelectedTab == tabConnecting)
+            {
+                this.Close();
+            }
+            else
+            {
+                theTabControl.SelectedTab = tabPageMenu;
+                lblHeader.Text = "Menu";
+
+                try
+                {
+                    LoadMenu(currentMenuType);
+                }
+                catch (Exception ex)
+                {
+                    ErrorLogger.Instance.WriteError(ex);
+                }
+            }
         }
     }
 }

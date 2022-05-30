@@ -332,49 +332,56 @@ namespace RestaurantChapeau
         /// </summary>
         /// <param name="tableId"></param>
         /// <param name="bill"></param>
-        private async void ShowTableDetails(int tableId, Bill bill)
+        private void ShowTableDetails(int tableId, Bill bill)
         {
-            // Clear up the items belonging to the flwMenuItems.
-            flwMenuItems.Controls.Clear();
-
-            // First we want the list of all orders for that bill.
-            List<Order> orders = await Task.Run(() => { return orderLogic.GetOrdersForBill(bill); });
-            int count = 1;
-            bool allOrdersServed = true;
-            decimal total = 0;
-            foreach (Order order in orders)
+            try
             {
-                // Show the UI separator.
-                new OrderSeparatorUI(flwMenuItems, $"Order #{count}", order, OnMarkOrderAsDelivered_Click);
-                count++;
+                // Clear up the items belonging to the flwMenuItems.
+                flwMenuItems.Controls.Clear();
 
-                // If any of the orders have status different than "Served", that means not all of them have been served.
-                if (order.Status != OrderStatus.Served)
+                // First we want the list of all orders for that bill.
+                List<Order> orders = orderLogic.GetOrdersForBill(bill);;
+                int count = 1;
+                bool allOrdersServed = true;
+                decimal total = 0;
+                foreach (Order order in orders)
                 {
-                    allOrdersServed = false;
+                    // Show the UI separator.
+                    new OrderSeparatorUI(flwMenuItems, $"Order #{count}", order, OnMarkOrderAsDelivered_Click);
+                    count++;
+
+                    // If any of the orders have status different than "Served", that means not all of them have been served.
+                    if (order.Status != OrderStatus.Served)
+                    {
+                        allOrdersServed = false;
+                    }
+
+                    // Now we want the menu items that belong to that order.
+                    List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                    foreach (MenuItem item in items)
+                    {
+                        new MenuItemTableDetailUI(flwMenuItems, item, lblSub.Left);
+                        total += item.Quantity * item.PriceBrutto;
+                    }
                 }
 
-                // Now we want the menu items that belong to that order.
-                List<MenuItem> items = await Task.Run(() => { return orderLogic.GetItemsForOrder(order); });
-                foreach (MenuItem item in items)
-                {
-                    new MenuItemTableDetailUI(flwMenuItems, item, lblSub.Left);
-                    total += item.Quantity * item.PriceBrutto;
-                }
+                lblTotal.Text = $"{total} €";
+
+                // Is any order not served yet?
+                // Then we disable the button.
+                btnCheckout.Enabled = allOrdersServed;
+
+                // Set the btnDummyTable picture and number according to the last button.
+                btnDummyTable.Text = tableId.ToString();
+                btnDummyTable.BackgroundImage = tableButtons[tableId - 1].Image;
+
+                // Finally, we can switch tabs.
+                theTabControl.SelectedTab = tabPageTableDetails;
             }
-
-            lblTotal.Text = $"{total} €";
-
-            // Is any order not served yet?
-            // Then we disable the button.
-            btnCheckout.Enabled = allOrdersServed;
-
-            // Set the btnDummyTable picture and number according to the last button.
-            btnDummyTable.Text = tableId.ToString();
-            btnDummyTable.BackgroundImage = tableButtons[tableId - 1].Image;
-
-            // Finally, we can switch tabs.
-            theTabControl.SelectedTab = tabPageTableDetails;
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex);
+            }
         }
 
         /// <summary>
