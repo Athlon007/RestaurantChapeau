@@ -14,9 +14,9 @@ namespace RestaurantChapeau
         [STAThread]
         static void Main(string[] args)
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetCompatibleTextRenderingDefault(true);
 
 #if DEBUG
             if (args.Length > 0)
@@ -28,7 +28,8 @@ namespace RestaurantChapeau
             }
             else
             {
-                Application.Run(new LoginForm());
+                // Application.Run(new LoginForm());
+                Application.Run(new Payment());
             }
 #else
             Application.Run(new LoginForm());

@@ -23,6 +23,9 @@ namespace RestaurantChapeau
         Color activeButtonColor = Color.FromArgb(255, 67, 179, 215);
         Color activeButtonTextColor = Color.FromArgb(255, 255, 255, 255);
 
+        const int WindowWidth = 651;
+        const int WindowHeight = 830;
+
         /// <summary>
         /// Creates a new Order View. Both BILL for which the order is taken, and EMPLOYEE that takes the order must be specified!
         /// </summary>
@@ -45,6 +48,12 @@ namespace RestaurantChapeau
 
             this.bill = bill;
             this.employee = employee;
+            
+            DPIScaler.Instance.UpdateToForm(this);
+
+            this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
+            this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
+
 
             // Hide tab view tabs.
             theTabControl.Appearance = TabAppearance.FlatButtons;
@@ -97,17 +106,25 @@ namespace RestaurantChapeau
             ClearMenuTypes();
             List<MenuType> menuTypes = orderLogic.GetMenuTypes();
 
+            // Buttons cannot be exactly the height (or width) of the flwMenuTypes,
+            // otherwise they might get cut-off.
+            // We also scale the button according to the current DPI, so it looks the same
+            // on 1920x1080 and 3600x2252.
+            int widthHeighAdjust = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * 11);
+
             foreach (MenuType menuType in menuTypes)
             {
                 Button menuTypeButton = new Button();
                 menuTypeButton.Tag = menuType;
                 menuTypeButton.Text = menuType.Name;
-                menuTypeButton.Height = flwMenuTypes.Height - 22;
-                menuTypeButton.Width = flwMenuTypes.Width / menuTypes.Count - 22;
+
+
+                menuTypeButton.Height = flwMenuTypes.Height - widthHeighAdjust;
+                menuTypeButton.Width = flwMenuTypes.Width / menuTypes.Count - widthHeighAdjust;
                 menuTypeButton.Click += OnMenuTypeClick;
                 menuTypeButton.TextAlign = ContentAlignment.MiddleCenter;
                 menuTypeButton.Font = fontMenuType;
-                menuTypeButton.Margin = new Padding(10, 10, 10, 10);
+                menuTypeButton.Margin = new Padding(Convert.ToInt32(DPIScaler.Instance.ScaleWidth * 5));
                 menuTypeButton.FlatStyle = FlatStyle.Flat;
                 menuTypeButton.FlatAppearance.BorderSize = 0; 
                 flwMenuTypes.Controls.Add(menuTypeButton);

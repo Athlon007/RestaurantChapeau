@@ -18,7 +18,6 @@ namespace RestaurantChapeau
     
     public partial class LoginForm : Form
     {
-        private Employee currentEmployee= null;
         public LoginForm()
         {
             InitializeComponent();
@@ -246,15 +245,22 @@ namespace RestaurantChapeau
                 {
                     MessageBox.Show("Login successful!");
 
-                    //the current employee becomes the entered employee
-                    currentEmployee = employee;
-
                     //hide the panels and form, display form of tableView
                     HidePanels();
                     this.Hide();
-                    TableViewForm tableView = new TableViewForm();
-                    tableView.Show();
 
+                    switch (employee.employeeType)
+                    {
+                        case EmployeeType.Waiter:
+                            TableViewForm tableView = new TableViewForm(employee);
+                            tableView.Show();
+                            break;
+                        case EmployeeType.KitchenStaff:
+                            KitchenViewForm kitchenView = new KitchenViewForm();
+                            kitchenView.Show();
+                            break;
+                        //...
+                    }
                 }
                 else
                     MessageBox.Show("Login failed.");
@@ -268,6 +274,11 @@ namespace RestaurantChapeau
                 txt_LoginPassword.Text = "";
 
             }
+
+        }
+
+        private void pnl_ForgotPassword_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
