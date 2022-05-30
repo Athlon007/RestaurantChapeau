@@ -172,12 +172,12 @@
             this.theTabControl.Controls.Add(this.tabPageCheckout);
             this.theTabControl.Controls.Add(this.tabOrderSucceeded);
             this.theTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.theTabControl.Location = new System.Drawing.Point(0, 72);
+            this.theTabControl.Location = new System.Drawing.Point(0, 200);
             this.theTabControl.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.theTabControl.Name = "theTabControl";
             this.theTabControl.Padding = new System.Drawing.Point(18, 3);
             this.theTabControl.SelectedIndex = 0;
-            this.theTabControl.Size = new System.Drawing.Size(1179, 1487);
+            this.theTabControl.Size = new System.Drawing.Size(1179, 1359);
             this.theTabControl.TabIndex = 9;
             // 
             // tabConnecting
@@ -186,7 +186,7 @@
             this.tabConnecting.Location = new System.Drawing.Point(8, 46);
             this.tabConnecting.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabConnecting.Name = "tabConnecting";
-            this.tabConnecting.Size = new System.Drawing.Size(1163, 1433);
+            this.tabConnecting.Size = new System.Drawing.Size(1163, 1305);
             this.tabConnecting.TabIndex = 2;
             this.tabConnecting.Text = "tabConnecting";
             this.tabConnecting.UseVisualStyleBackColor = true;
@@ -199,7 +199,7 @@
             this.lblConnecting.Location = new System.Drawing.Point(0, 0);
             this.lblConnecting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblConnecting.Name = "lblConnecting";
-            this.lblConnecting.Size = new System.Drawing.Size(1163, 1433);
+            this.lblConnecting.Size = new System.Drawing.Size(1163, 1305);
             this.lblConnecting.TabIndex = 0;
             this.lblConnecting.Text = "Getting menu...";
             this.lblConnecting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

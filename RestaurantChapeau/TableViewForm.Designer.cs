@@ -75,7 +75,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.picTick = new System.Windows.Forms.PictureBox();
+            this.btnDummyTable = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
@@ -115,7 +115,6 @@
             this.pnlColumns.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picTick)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -260,7 +259,6 @@
             this.pnl_Reservation.Name = "pnl_Reservation";
             this.pnl_Reservation.Size = new System.Drawing.Size(1156, 1499);
             this.pnl_Reservation.TabIndex = 32;
-            this.pnl_Reservation.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btn_MakeReservationGoBack
             // 
@@ -648,7 +646,7 @@
             this.lblSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSub.AutoSize = true;
             this.lblSub.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSub.Location = new System.Drawing.Point(912, 4);
+            this.lblSub.Location = new System.Drawing.Point(1007, 4);
             this.lblSub.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSub.Name = "lblSub";
             this.lblSub.Size = new System.Drawing.Size(149, 45);
@@ -690,7 +688,7 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.picTick);
+            this.panel4.Controls.Add(this.btnDummyTable);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(5);
@@ -698,16 +696,21 @@
             this.panel4.Size = new System.Drawing.Size(1164, 370);
             this.panel4.TabIndex = 33;
             // 
-            // picTick
+            // btnDummyTable
             // 
-            this.picTick.Image = global::RestaurantChapeau.Properties.Resources.screenshotTable;
-            this.picTick.Location = new System.Drawing.Point(422, 2);
-            this.picTick.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.picTick.Name = "picTick";
-            this.picTick.Size = new System.Drawing.Size(340, 362);
-            this.picTick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picTick.TabIndex = 1;
-            this.picTick.TabStop = false;
+            this.btnDummyTable.BackgroundImage = global::RestaurantChapeau.Properties.Resources.screenshotTable;
+            this.btnDummyTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDummyTable.Enabled = false;
+            this.btnDummyTable.FlatAppearance.BorderSize = 0;
+            this.btnDummyTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDummyTable.Font = new System.Drawing.Font("Segoe UI", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDummyTable.Location = new System.Drawing.Point(422, 0);
+            this.btnDummyTable.Margin = new System.Windows.Forms.Padding(5);
+            this.btnDummyTable.Name = "btnDummyTable";
+            this.btnDummyTable.Size = new System.Drawing.Size(370, 370);
+            this.btnDummyTable.TabIndex = 21;
+            this.btnDummyTable.Text = "1";
+            this.btnDummyTable.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -1023,6 +1026,7 @@
             this.picBackButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBackButton.TabIndex = 37;
             this.picBackButton.TabStop = false;
+            this.picBackButton.Click += new System.EventHandler(this.picBackButton_Click);
             // 
             // lblTopBarText
             // 
@@ -1079,7 +1083,6 @@
             this.pnlColumns.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picTick)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -1161,7 +1164,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TabPage tabPageTableDetails;
-        private System.Windows.Forms.PictureBox picTick;
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
@@ -1175,5 +1177,6 @@
         private System.Windows.Forms.Label lblTopBarText;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Button btnNewOrder;
+        private System.Windows.Forms.Button btnDummyTable;
     }
 }

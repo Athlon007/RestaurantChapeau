@@ -12,13 +12,17 @@ namespace RestaurantChapeau.OrderViewUIController
     {
         private Font orderFont = new Font("Segoe UI", 12, FontStyle.Bold | FontStyle.Italic);
         private Font statusFont = new Font("Segoe UI", 12, FontStyle.Italic);
+        private Font buttonFont = new Font("Segoe UI", 12);
 
-        const int ButtonWidth = 20;
+        private Color disabledButtonColor = Color.FromArgb(255, 209, 209, 209);
+        private Color disabledButtonTextColor = Color.FromArgb(255, 111, 111, 111);
+
+        const int ButtonWidth = 150;
 
         public OrderSeparatorUI(FlowLayoutPanel flow, string orderName, Order order, EventHandler OnMarkAsServedClick) : base(flow)
         {
             // Order name
-            Label lblName = AddLabelWithoutPanel(orderName, 20);
+            Label lblName = AddLabelWithoutPanel(orderName, 250);
             lblName.Font = orderFont;
 
             // Status
@@ -29,19 +33,26 @@ namespace RestaurantChapeau.OrderViewUIController
             }
             else if (order.Status == OrderStatus.ReadyToServe)
             {
-                statusText = "Ready To Serve";
+                statusText = "Ready-To-Serve";
             }
-            Label lblStatus = AddLabelWithoutPanel(statusText, 20);
+            statusText = "Status: " + statusText;
+            Label lblStatus = AddLabelWithoutPanel(statusText);
             lblStatus.Font = statusFont;
 
             // Button "mark as served".
             Button btnMarkAsServed = AddButton("Mark as Served", OnMarkAsServedClick);
-            btnMarkAsServed.Height = lblStatus.Height;
+            btnMarkAsServed.Font = buttonFont;
+            btnMarkAsServed.Height = lblStatus.Height / 2;
             btnMarkAsServed.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * ButtonWidth);
             btnMarkAsServed.Tag = order;
+            Padding btnPadding = btnMarkAsServed.Margin;
+            btnPadding.Top *= 3;
+            btnMarkAsServed.Margin = btnPadding;
             if (order.Status != OrderStatus.ReadyToServe)
             {
                 btnMarkAsServed.Enabled = false;
+                btnMarkAsServed.BackColor = disabledButtonColor;
+                btnMarkAsServed.ForeColor = disabledButtonTextColor;
             }
             else
             {
@@ -49,11 +60,12 @@ namespace RestaurantChapeau.OrderViewUIController
             }
 
             SetLineBreak(btnMarkAsServed);
-            
-            // Make status label take most of the width (and push the 
-            lblStatus.AutoSize = false;
+
+            // Make status label take most of the width.
+            int statusWidth = flow.Width - btnMarkAsServed.Width - Convert.ToInt32(DPIScaler.Instance.ScaleWidth * 170);
+            lblStatus.MaximumSize = new Size(statusWidth, lblName.Height);
             lblStatus.Height = lblName.Height;
-            lblStatus.Width = flow.Width - lblName.Width - Convert.ToInt32(DPIScaler.Instance.ScaleWidth * 10);
+            lblStatus.Width = statusWidth;
         }
     }
 }

@@ -26,8 +26,11 @@ namespace RestaurantChapeau
         const int WindowHeight = 830;
 
         OrderLogic orderLogic = new OrderLogic();
+        PaymentService paymentService = new PaymentService();
         Bill currentBill;
         int currentTableNumber;
+
+
 
         public TableViewForm(Employee employee)
         {
@@ -296,32 +299,19 @@ namespace RestaurantChapeau
         /// <param name="reservation">Reservation (if null, Bill is made and OrderView is loaded)</param>
         private void HandleTableButtonClick(int tableId, Reservation reservation = null)
         {
-            if (reservation == null)
+            if (!paymentService.HasBill(tableId))
             {
-                // Reservation null?
-                // Show order view.
-                // Order view will also generate new Bill and register it into the database.
+                // Table has no bill?
+                // Show 
                 ShowOrderView();
             }
             else
             {
                 // Get the bill for this table.
-                //Bill bill = billService.GetBill(tableId);
-                Bill bill = null;
-                if (reservation.isReserved && bill == null)
-                {
-                    // No bill, but table is reserved?
-                    // We handle that the same as if there is no reservation.
-                    ShowOrderView();
-                }
-                else if (bill != null)
-                {
-                    currentBill = bill;
-                    currentTableNumber = tableId;
-
-                    // We have the bill? Show table details and load table's information.
-                    ShowTableDetails(tableId, bill);
-                }
+                currentBill = paymentService.GetBill(tableId);
+                currentTableNumber = tableId;
+                // We have the bill? Show table details and load table's information.
+                ShowTableDetails(tableId, currentBill);
             }
         }
 
@@ -374,6 +364,10 @@ namespace RestaurantChapeau
             // Then we disable the button.
             btnCheckout.Enabled = allOrdersServed;
 
+            // Set the btnDummyTable picture and number according to the last button.
+            btnDummyTable.Text = tableId.ToString();
+            btnDummyTable.BackgroundImage = tableButtons[tableId - 1].Image;
+
             // Finally, we can switch tabs.
             theTabControl.SelectedTab = tabPageTableDetails;
         }
@@ -412,6 +406,18 @@ namespace RestaurantChapeau
         {
             // Should make it so the Login form also gets closed...
             Application.Exit();
+        }
+
+        private void picBackButton_Click(object sender, EventArgs e)
+        {
+            if (theTabControl.SelectedTab != tabPageMain)
+            {
+                theTabControl.SelectedTab = tabPageMain;
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }

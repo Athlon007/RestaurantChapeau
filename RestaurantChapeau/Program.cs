@@ -28,8 +28,7 @@ namespace RestaurantChapeau
             }
             else
             {
-                // Application.Run(new LoginForm());
-                Application.Run(new Payment());
+                Application.Run(new LoginForm());
             }
 #else
             Application.Run(new LoginForm());

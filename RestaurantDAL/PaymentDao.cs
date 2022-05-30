@@ -103,6 +103,13 @@ namespace RestaurantDAL
                 throw new Exception("There is no Bill for this table");
             }
             return bill;
-        }       
+        }
+
+        public bool HasBill(int tableID)
+        {
+            string query = $"Select id from dbo.Bill where tableId={tableID} and status=1";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace RestaurantChapeau.OrderViewUIController
 
             // Item Count
             Label lblCount = AddLabel(item.Quantity.ToString());
+            lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
             SetLineBreak(lblCount);
         }

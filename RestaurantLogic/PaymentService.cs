@@ -43,5 +43,10 @@ namespace RestaurantLogic
         {
             paymentDb.CreatePayment(billId, dateTime, amountPaid, comment, tip);
         }
+
+        public bool HasBill(int tableID)
+        {
+            return paymentDb.HasBill(tableID);
+        }
     }
 }

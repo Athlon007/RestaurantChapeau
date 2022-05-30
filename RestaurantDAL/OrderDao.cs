@@ -271,8 +271,12 @@ namespace RestaurantDAL
                 item.Name = row["name"].ToString();
                 item.PriceBrutto = Convert.ToDecimal(row["priceBrutto"]);
                 item.Vat = Convert.ToDecimal(row["vat"]);
-                item.IsDrink = Convert.ToBoolean(row["isDrink"]);
                 item.Quantity = Convert.ToInt32(row["quantity"]);
+                if (!Convert.IsDBNull(row["isDrink"]))
+                {
+                    item.IsDrink = Convert.ToBoolean(row["isDrink"]);
+                }
+
                 items.Add(item);
             }
 
