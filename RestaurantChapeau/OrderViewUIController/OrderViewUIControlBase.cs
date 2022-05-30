@@ -17,6 +17,8 @@ namespace RestaurantChapeau.OrderViewUIController
         private Padding margin = new Padding(2, 5, 2, 5);
         private Padding paddingTextBox = new Padding(3, 3, 3, 0);
 
+        //private Color colorButtonHover = Color.FromArgb(255, 230, 230, 230);
+
         const int RowSize = 54;
 
         private List<Control> controls;
@@ -51,6 +53,7 @@ namespace RestaurantChapeau.OrderViewUIController
             btn.BackColor = Color.White;
             btn.FlatAppearance.BorderSize = 4;
             btn.FlatAppearance.BorderColor = textBoxColor;
+            btn.FlatAppearance.MouseDownBackColor = textBoxColor;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             flow.Controls.Add(btn);
 

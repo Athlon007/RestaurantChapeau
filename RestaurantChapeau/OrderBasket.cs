@@ -181,6 +181,22 @@ namespace RestaurantChapeau
             }
         }
 
+        /// <summary>
+        /// Returns the total value of the basket.
+        /// </summary>
+        public decimal Value
+        {
+            get
+            {
+                decimal total = 0;
+                foreach (MenuItem item in itemsInBasket)
+                {
+                    total += item.Quantity * item.PriceBrutto;
+                }
+                return total;
+            }
+        }
+
         public void AddListener(OrderView view)
         {
             listeners.Add(view);

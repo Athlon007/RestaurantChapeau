@@ -334,6 +334,7 @@ namespace RestaurantChapeau
         {
             btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
             btnFinish.Enabled = OrderBasket.Instance.Count > 0;
+            lblTotal.Text = $"{OrderBasket.Instance.Value} €";
         }
 
         /// <summary>
