@@ -302,16 +302,27 @@ namespace RestaurantChapeau
             if (!paymentService.HasBill(tableId))
             {
                 // Table has no bill?
-                // Show 
+                // Go to order view.
                 ShowOrderView(tableId);
             }
             else
             {
                 // Get the bill for this table.
-                currentBill = paymentService.GetBill(tableId);
-                currentTableNumber = tableId;
-                // We have the bill? Show table details and load table's information.
-                ShowTableDetails(tableId, currentBill);
+                this.currentBill = paymentService.GetBill(tableId);
+                this.currentTableNumber = tableId;
+
+                if (!orderLogic.HasBillOrders(this.currentBill))
+                {
+                    // Bill has no orders?
+                    // Automatically go into order creation process.
+                    ShowOrderView(tableId, this.currentBill);
+                }
+                else
+                {
+                    // Bill has some orders?
+                    // Show table details and load table's information.
+                    ShowTableDetails(tableId, currentBill);
+                }
             }
         }
 
@@ -322,8 +333,8 @@ namespace RestaurantChapeau
         private void ShowOrderView(int tableID, Bill bill = null)
         {
             OrderView order = new OrderView(currentEmployee, bill, tableID);
+            order.ShowDialog(this);
             order.Location = this.Location; // Show OrderView right on top of this window.
-            order.ShowDialog();
         }
 
         /// <summary>

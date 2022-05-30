@@ -282,5 +282,21 @@ namespace RestaurantDAL
 
             return items;
         }
+
+        /// <summary>
+        /// Checks if bill has any order.
+        /// </summary>
+        /// <param name="bill"></param>
+        public bool HasBillOrders(Bill bill)
+        {
+            string query = "SELECT COUNT(o.id) [nOfItems] FROM [Order] o JOIN Bill b ON b.id = o.billId WHERE b.id = @BillId";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillId", bill.Id)
+            };
+
+            DataTable table = ExecuteSelectQuery(query, parameters);
+            return Convert.ToInt32(table.Rows[0]["nOfItems"]) > 0;
+        }
     }
 }

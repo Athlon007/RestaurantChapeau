@@ -101,6 +101,7 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        [Obsolete("Replaced by PaymentService.HasBill().")]
         public bool TableHasBill(int tableId)
         {
             string query = $"Select activeBill FROM [Table] WHERE id={tableId}";

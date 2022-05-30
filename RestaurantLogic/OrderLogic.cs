@@ -101,5 +101,14 @@ namespace RestaurantLogic
         {
             return orderDao.GetItemsForOrder(order);
         }
+
+        /// <summary>
+        /// Checks if bill has any order.
+        /// </summary>
+        /// <param name="bill">Bill to check.</param>
+        public bool HasBillOrders(Bill bill)
+        {
+            return orderDao.HasBillOrders(bill);
+        }
     }
 }
