@@ -14,12 +14,24 @@ namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
     {
+        int secs, mins,hours;
+        bool IsActive;
+
         public KitchenViewForm()
         {
             InitializeComponent();
             SetFonts();
             DisplayOrders();
             //Timer();
+ 
+            ResetTimer();
+        }
+
+        private  void ResetTimer()
+        {
+            secs = 0;
+            mins = 0;
+            hours = 0;
         }
 
         public void DisplayOrders()
@@ -36,6 +48,7 @@ namespace RestaurantChapeau
                 li.SubItems.Add(order.Status.ToString());
                 li.Tag = order;
 
+                //if order is ready add to completed orders page or add to new order page
                 if (order.Status==OrderStatus.ReadyToServe)
                 {
                     listViewKitchen_CompleteOrders.Items.Add(li);
@@ -72,7 +85,6 @@ namespace RestaurantChapeau
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
             }
-
         }
 
         #region Select item in new orders list view
@@ -81,6 +93,9 @@ namespace RestaurantChapeau
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
             DisplayOrderItems();
+
+            //Begin timer
+            IsActive = true;
         }
         #endregion
 
@@ -120,6 +135,10 @@ namespace RestaurantChapeau
         #region Ready Order Button
         private void btn_readyOrder_Click(object sender, EventArgs e)
         {
+            //reset the timer
+            ResetTimer();
+
+            //connect to logic layer
             OrderLogic orderService = new OrderLogic();
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
@@ -128,6 +147,7 @@ namespace RestaurantChapeau
             {
                 orderItem.Status = OrderStatus.ReadyToServe;
                 MessageBox.Show($"Order {orderItem.Id} has been completed");
+                IsActive = false;
             }
             else
             {
@@ -161,19 +181,29 @@ namespace RestaurantChapeau
 
         private void Timer()
         {
-            timer1 = new Timer();
-            timer1.Interval = (10 * 1000); // 30 secs
-            timer1.Tick += new EventHandler(timer1_Tick_1);
-            timer1.Start();
+            lblMins.Text = mins.ToString(":00");
+            lblSecs.Text = secs.ToString(":00");
+            lblHours.Text = hours.ToString("00");
         }
-
+        
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            //int ticks = 0;
-            //ticks++;
-            //lblKitchen_OrderTime.Text = ticks.ToString();
-            lblKitchen_OrderTime.Refresh();
-            pnlKitchen_ActiveOrder.Refresh();
+            if (IsActive)
+            {
+                secs++;
+                if (secs>=60)
+                {
+                    mins++;
+                    secs = 0;
+                    if (mins==60)
+                    {
+                        hours++;
+                        mins = 0;
+                    }
+                }
+            }
+
+            Timer();
         }
         public void SetFonts()
         {

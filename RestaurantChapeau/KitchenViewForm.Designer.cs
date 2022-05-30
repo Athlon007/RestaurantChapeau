@@ -63,6 +63,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.sidebarPanelCompleteOrder = new System.Windows.Forms.Panel();
             this.pnlKitchen_ActiveOrder = new System.Windows.Forms.Panel();
+            this.lblSecs = new System.Windows.Forms.Label();
+            this.lblHours = new System.Windows.Forms.Label();
+            this.lblMins = new System.Windows.Forms.Label();
             this.lbl_OrderComments = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -422,6 +425,9 @@
             // 
             // pnlKitchen_ActiveOrder
             // 
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblSecs);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblHours);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblMins);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.lbl_OrderComments);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label9);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.pictureBox1);
@@ -436,6 +442,33 @@
             this.pnlKitchen_ActiveOrder.Name = "pnlKitchen_ActiveOrder";
             this.pnlKitchen_ActiveOrder.Size = new System.Drawing.Size(1629, 1154);
             this.pnlKitchen_ActiveOrder.TabIndex = 10;
+            // 
+            // lblSecs
+            // 
+            this.lblSecs.AutoSize = true;
+            this.lblSecs.Location = new System.Drawing.Point(1329, 185);
+            this.lblSecs.Name = "lblSecs";
+            this.lblSecs.Size = new System.Drawing.Size(40, 32);
+            this.lblSecs.TabIndex = 13;
+            this.lblSecs.Text = "00";
+            // 
+            // lblHours
+            // 
+            this.lblHours.AutoSize = true;
+            this.lblHours.Location = new System.Drawing.Point(1263, 185);
+            this.lblHours.Name = "lblHours";
+            this.lblHours.Size = new System.Drawing.Size(40, 32);
+            this.lblHours.TabIndex = 13;
+            this.lblHours.Text = "00";
+            // 
+            // lblMins
+            // 
+            this.lblMins.AutoSize = true;
+            this.lblMins.Location = new System.Drawing.Point(1297, 185);
+            this.lblMins.Name = "lblMins";
+            this.lblMins.Size = new System.Drawing.Size(40, 32);
+            this.lblMins.TabIndex = 13;
+            this.lblMins.Text = "00";
             // 
             // lbl_OrderComments
             // 
@@ -539,7 +572,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 101;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // KitchenViewForm
@@ -622,5 +655,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lbl_OrderComments;
+        private System.Windows.Forms.Label lblSecs;
+        private System.Windows.Forms.Label lblMins;
+        private System.Windows.Forms.Label lblHours;
     }
 }
