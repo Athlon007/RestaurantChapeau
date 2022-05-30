@@ -172,7 +172,7 @@
             this.theTabControl.Controls.Add(this.tabPageCheckout);
             this.theTabControl.Controls.Add(this.tabOrderSucceeded);
             this.theTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.theTabControl.Location = new System.Drawing.Point(0, 200);
+            this.theTabControl.Location = new System.Drawing.Point(0, 72);
             this.theTabControl.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.theTabControl.Name = "theTabControl";
             this.theTabControl.Padding = new System.Drawing.Point(18, 3);
@@ -493,7 +493,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1179, 1687);
+            this.ClientSize = new System.Drawing.Size(1179, 1559);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.theTabControl);
