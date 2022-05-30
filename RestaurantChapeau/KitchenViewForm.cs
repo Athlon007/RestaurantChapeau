@@ -123,12 +123,22 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
-            orderItem.Status = OrderStatus.ReadyToServe;
-
+            //if all the items on the listview are selected, change status to ready else preparing
+            if (listViewKitchen_ActiveOrder.CheckedItems.Count==listViewKitchen_ActiveOrder.Items.Count)
+            {
+                orderItem.Status = OrderStatus.ReadyToServe;
+                MessageBox.Show($"Order {orderItem.Id} has been completed");
+            }
+            else
+            {
+                orderItem.Status = OrderStatus.Preparing;
+                MessageBox.Show($"{orderItem.ToString()} is now ready");
+            }
             orderService.UpdateOrderStatus(orderItem);
 
-            MessageBox.Show($"Order {orderItem.Id} has been completed");
-
+            //remove the items on the new order listview and update with new information
+            RemoveListViewItems(listViewNewOrders);
+            DisplayOrders();
         }
         #endregion
 
