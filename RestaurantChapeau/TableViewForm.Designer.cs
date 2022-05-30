@@ -65,13 +65,17 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPlaceOrder = new System.Windows.Forms.Button();
             this.tabPageTableDetails = new System.Windows.Forms.TabPage();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblTotalAmountText = new System.Windows.Forms.Label();
+            this.pnlColumns = new System.Windows.Forms.Panel();
+            this.lblSub = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.flwMenuItems = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnNewOrder = new System.Windows.Forms.Button();
             this.btnCheckout = new System.Windows.Forms.Button();
-            this.pnlColumns = new System.Windows.Forms.Panel();
-            this.lblSub = new System.Windows.Forms.Label();
-            this.lblName = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -111,8 +115,9 @@
             this.tabReservation.SuspendLayout();
             this.tlpPlaceCancelOrder.SuspendLayout();
             this.tabPageTableDetails.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.pnlColumns.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -560,8 +565,9 @@
             // 
             this.tabPageTableDetails.BackColor = System.Drawing.Color.White;
             this.tabPageTableDetails.Controls.Add(this.flwMenuItems);
-            this.tabPageTableDetails.Controls.Add(this.tableLayoutPanel1);
+            this.tabPageTableDetails.Controls.Add(this.panel6);
             this.tabPageTableDetails.Controls.Add(this.pnlColumns);
+            this.tabPageTableDetails.Controls.Add(this.tableLayoutPanel1);
             this.tabPageTableDetails.Controls.Add(this.panel5);
             this.tabPageTableDetails.Controls.Add(this.panel4);
             this.tabPageTableDetails.Location = new System.Drawing.Point(8, 46);
@@ -569,6 +575,88 @@
             this.tabPageTableDetails.Size = new System.Drawing.Size(1164, 1503);
             this.tabPageTableDetails.TabIndex = 3;
             this.tabPageTableDetails.Text = "tabPageTableDetails";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.Controls.Add(this.lblTotal);
+            this.panel6.Controls.Add(this.label1);
+            this.panel6.Controls.Add(this.lblTotalAmountText);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 1283);
+            this.panel6.Margin = new System.Windows.Forms.Padding(0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1164, 81);
+            this.panel6.TabIndex = 36;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTotal.Location = new System.Drawing.Point(783, 4);
+            this.lblTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(377, 74);
+            this.lblTotal.TabIndex = 7;
+            this.lblTotal.Text = "0€";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(1971, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(149, 45);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Quantity";
+            // 
+            // lblTotalAmountText
+            // 
+            this.lblTotalAmountText.AutoSize = true;
+            this.lblTotalAmountText.Font = new System.Drawing.Font("Segoe UI", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalAmountText.Location = new System.Drawing.Point(4, 4);
+            this.lblTotalAmountText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalAmountText.Name = "lblTotalAmountText";
+            this.lblTotalAmountText.Size = new System.Drawing.Size(377, 74);
+            this.lblTotalAmountText.TabIndex = 5;
+            this.lblTotalAmountText.Text = "Total Amount:";
+            // 
+            // pnlColumns
+            // 
+            this.pnlColumns.BackColor = System.Drawing.Color.White;
+            this.pnlColumns.Controls.Add(this.lblSub);
+            this.pnlColumns.Controls.Add(this.lblName);
+            this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlColumns.Location = new System.Drawing.Point(0, 457);
+            this.pnlColumns.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlColumns.Name = "pnlColumns";
+            this.pnlColumns.Size = new System.Drawing.Size(1164, 53);
+            this.pnlColumns.TabIndex = 35;
+            // 
+            // lblSub
+            // 
+            this.lblSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSub.AutoSize = true;
+            this.lblSub.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSub.Location = new System.Drawing.Point(1007, 4);
+            this.lblSub.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSub.Name = "lblSub";
+            this.lblSub.Size = new System.Drawing.Size(149, 45);
+            this.lblSub.TabIndex = 6;
+            this.lblSub.Text = "Quantity";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblName.Location = new System.Drawing.Point(4, 4);
+            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(108, 45);
+            this.lblName.TabIndex = 5;
+            this.lblName.Text = "Name";
             // 
             // flwMenuItems
             // 
@@ -578,7 +666,7 @@
             this.flwMenuItems.Location = new System.Drawing.Point(0, 510);
             this.flwMenuItems.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flwMenuItems.Name = "flwMenuItems";
-            this.flwMenuItems.Size = new System.Drawing.Size(1164, 854);
+            this.flwMenuItems.Size = new System.Drawing.Size(1164, 773);
             this.flwMenuItems.TabIndex = 37;
             // 
             // tableLayoutPanel1
@@ -628,41 +716,6 @@
             this.btnCheckout.TabIndex = 7;
             this.btnCheckout.Text = "Checkout";
             this.btnCheckout.UseVisualStyleBackColor = false;
-            // 
-            // pnlColumns
-            // 
-            this.pnlColumns.BackColor = System.Drawing.Color.White;
-            this.pnlColumns.Controls.Add(this.lblSub);
-            this.pnlColumns.Controls.Add(this.lblName);
-            this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlColumns.Location = new System.Drawing.Point(0, 457);
-            this.pnlColumns.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlColumns.Name = "pnlColumns";
-            this.pnlColumns.Size = new System.Drawing.Size(1164, 53);
-            this.pnlColumns.TabIndex = 35;
-            // 
-            // lblSub
-            // 
-            this.lblSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSub.AutoSize = true;
-            this.lblSub.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSub.Location = new System.Drawing.Point(1007, 4);
-            this.lblSub.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSub.Name = "lblSub";
-            this.lblSub.Size = new System.Drawing.Size(149, 45);
-            this.lblSub.TabIndex = 6;
-            this.lblSub.Text = "Quantity";
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblName.Location = new System.Drawing.Point(4, 4);
-            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(108, 45);
-            this.lblName.TabIndex = 5;
-            this.lblName.Text = "Name";
             // 
             // panel5
             // 
@@ -885,7 +938,7 @@
             this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 53);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(200, -199);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(200, 0);
             this.flowLayoutPanel3.TabIndex = 11;
             // 
             // panel2
@@ -1078,9 +1131,11 @@
             this.tabReservation.ResumeLayout(false);
             this.tlpPlaceCancelOrder.ResumeLayout(false);
             this.tabPageTableDetails.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.pnlColumns.ResumeLayout(false);
             this.pnlColumns.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -1178,5 +1233,9 @@
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Button btnNewOrder;
         private System.Windows.Forms.Button btnDummyTable;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTotalAmountText;
+        private System.Windows.Forms.Label lblTotal;
     }
 }

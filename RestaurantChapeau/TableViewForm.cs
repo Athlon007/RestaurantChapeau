@@ -284,7 +284,7 @@ namespace RestaurantChapeau
                     reservation = (Reservation)(sender as Button).Tag;
                 }
 
-                HandleTableButtonClick(id, reservation);
+                HandleTableButtonClick(id);
             }
             catch (Exception ex)
             {
@@ -297,7 +297,7 @@ namespace RestaurantChapeau
         /// </summary>
         /// <param name="tableId">Table number.</param>
         /// <param name="reservation">Reservation (if null, Bill is made and OrderView is loaded)</param>
-        private void HandleTableButtonClick(int tableId, Reservation reservation = null)
+        private void HandleTableButtonClick(int tableId)
         {
             if (!paymentService.HasBill(tableId))
             {
@@ -340,6 +340,7 @@ namespace RestaurantChapeau
             List<Order> orders = await Task.Run(() => { return orderLogic.GetOrdersForBill(bill); });
             int count = 1;
             bool allOrdersServed = true;
+            decimal total = 0;
             foreach (Order order in orders)
             {
                 // Show the UI separator.
@@ -357,8 +358,11 @@ namespace RestaurantChapeau
                 foreach (MenuItem item in items)
                 {
                     new MenuItemTableDetailUI(flwMenuItems, item, lblSub.Left);
+                    total += item.Quantity * item.PriceBrutto;
                 }
             }
+
+            lblTotal.Text = $"{total} €";
 
             // Is any order not served yet?
             // Then we disable the button.

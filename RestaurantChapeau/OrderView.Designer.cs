@@ -106,7 +106,7 @@
             this.flwMenuItems.Location = new System.Drawing.Point(4, 174);
             this.flwMenuItems.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flwMenuItems.Name = "flwMenuItems";
-            this.flwMenuItems.Size = new System.Drawing.Size(1155, 1118);
+            this.flwMenuItems.Size = new System.Drawing.Size(1155, 990);
             this.flwMenuItems.TabIndex = 4;
             // 
             // lblName
@@ -214,7 +214,7 @@
             this.tabPageMenu.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabPageMenu.Name = "tabPageMenu";
             this.tabPageMenu.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tabPageMenu.Size = new System.Drawing.Size(1163, 1433);
+            this.tabPageMenu.Size = new System.Drawing.Size(1163, 1305);
             this.tabPageMenu.TabIndex = 0;
             this.tabPageMenu.Text = "tabPageMenu";
             this.tabPageMenu.UseVisualStyleBackColor = true;
@@ -240,7 +240,7 @@
             this.tlpPlaceCancelOrder.Controls.Add(this.btnCancel, 0, 0);
             this.tlpPlaceCancelOrder.Controls.Add(this.btnPlaceOrder, 1, 0);
             this.tlpPlaceCancelOrder.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tlpPlaceCancelOrder.Location = new System.Drawing.Point(4, 1292);
+            this.tlpPlaceCancelOrder.Location = new System.Drawing.Point(4, 1164);
             this.tlpPlaceCancelOrder.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tlpPlaceCancelOrder.Name = "tlpPlaceCancelOrder";
             this.tlpPlaceCancelOrder.RowCount = 1;
@@ -260,7 +260,7 @@
             this.tabPageCheckout.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabPageCheckout.Name = "tabPageCheckout";
             this.tabPageCheckout.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tabPageCheckout.Size = new System.Drawing.Size(1163, 1433);
+            this.tabPageCheckout.Size = new System.Drawing.Size(1163, 1305);
             this.tabPageCheckout.TabIndex = 1;
             this.tabPageCheckout.Text = "tabPageCheckout";
             // 
@@ -272,7 +272,7 @@
             this.flwCheckout.Location = new System.Drawing.Point(4, 55);
             this.flwCheckout.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1155, 991);
+            this.flwCheckout.Size = new System.Drawing.Size(1155, 863);
             this.flwCheckout.TabIndex = 11;
             // 
             // pnlColumnsCheckout
@@ -326,7 +326,7 @@
             this.lblComment.AutoSize = true;
             this.lblComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblComment.Location = new System.Drawing.Point(4, 1046);
+            this.lblComment.Location = new System.Drawing.Point(4, 918);
             this.lblComment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(180, 45);
@@ -338,7 +338,7 @@
             this.pnlCommentTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
             this.pnlCommentTextBox.Controls.Add(this.txtComment);
             this.pnlCommentTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCommentTextBox.Location = new System.Drawing.Point(4, 1091);
+            this.pnlCommentTextBox.Location = new System.Drawing.Point(4, 963);
             this.pnlCommentTextBox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.pnlCommentTextBox.Name = "pnlCommentTextBox";
             this.pnlCommentTextBox.Padding = new System.Windows.Forms.Padding(4);
@@ -365,7 +365,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnFinish, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 1292);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 1164);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -414,7 +414,7 @@
             this.tabOrderSucceeded.Location = new System.Drawing.Point(8, 46);
             this.tabOrderSucceeded.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabOrderSucceeded.Name = "tabOrderSucceeded";
-            this.tabOrderSucceeded.Size = new System.Drawing.Size(1163, 1433);
+            this.tabOrderSucceeded.Size = new System.Drawing.Size(1163, 1305);
             this.tabOrderSucceeded.TabIndex = 3;
             this.tabOrderSucceeded.Text = "tabOrderSucceeded";
             // 
