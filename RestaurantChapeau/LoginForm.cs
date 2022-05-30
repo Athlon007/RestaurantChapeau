@@ -243,7 +243,7 @@ namespace RestaurantChapeau
                 //if the entered password matches the one in the db
                 if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
                 {
-                    MessageBox.Show("Login successful!");
+                    //MessageBox.Show("Login successful!");
 
                     //hide the panels and form, display form of tableView
                     HidePanels();

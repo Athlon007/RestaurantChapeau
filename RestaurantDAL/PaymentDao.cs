@@ -39,11 +39,11 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        public void CreateBill(int tableID)
+        public Bill CreateBill(int tableID)
         {
             string query = $"IF NOT EXISTS (SELECT * FROM dbo.Bill WHERE tableId = {tableID} AND status = 1) INSERT INTO dbo.Bill(tableId, status) OUTPUT INSERTED.id, INSERTED.tableId, INSERTED.status VALUES({tableID}, 1);";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            ExecuteEditQuery(query, sqlParameters);
+            return ReadBillTable(ExecuteEditAndSelectQuery(query, sqlParameters));
         }
         public void CreatePayment(int billId, DateTime dateTime, decimal amountPaid, string comment, decimal tip)
         {
@@ -109,6 +109,13 @@ namespace RestaurantDAL
                 throw new Exception("There is no Bill for this table");
             }
             return bill;
-        }       
+        }
+
+        public bool HasBill(int tableID)
+        {
+            string query = $"Select id from dbo.Bill where tableId={tableID} and status=1";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
+        }
     }
 }

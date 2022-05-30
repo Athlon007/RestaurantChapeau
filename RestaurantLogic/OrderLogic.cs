@@ -82,5 +82,33 @@ namespace RestaurantLogic
         {
             orderDao.UpdateOrderStatus(order);
         }
+
+        /// <summary>
+        /// Returns the list of all orders for specified bill.
+        /// </summary>
+        /// <param name="bill">Bill which we want to check.</param>
+        public List<Order> GetOrdersForBill(Bill bill)
+        {
+            return orderDao.GetOrdersForBill(bill);
+        }
+
+        /// <summary>
+        /// Returns the full list of all items belonging to a specified order.
+        /// </summary>
+        /// <param name="order">Order that we want to check the menu items of.</param>
+        /// <returns></returns>
+        public List<MenuItem> GetItemsForOrder(Order order)
+        {
+            return orderDao.GetItemsForOrder(order);
+        }
+
+        /// <summary>
+        /// Checks if bill has any order.
+        /// </summary>
+        /// <param name="bill">Bill to check.</param>
+        public bool HasBillOrders(Bill bill)
+        {
+            return orderDao.HasBillOrders(bill);
+        }
     }
 }

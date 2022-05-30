@@ -82,6 +82,7 @@ namespace RestaurantChapeau.OrderViewUIController
 
         public Label AddLabelWithoutPanel(string text, int width = -1, bool doNotAddToFlow = false)
         {
+            int labelWidth = width != -1 ? width : Convert.ToInt32(RowSize * DPIScaler.Instance.ScaleWidth);
             Label label = new Label();
             label.Text = text;
             label.Padding = new Padding(10, 0, 10, 0);
@@ -91,9 +92,9 @@ namespace RestaurantChapeau.OrderViewUIController
             label.BackColor = Color.Transparent;
             
             int height = Convert.ToInt32(RowSize * DPIScaler.Instance.ScaleHeight);
-            label.Width = width;
+            label.Width = labelWidth;
             label.Height = height;
-            label.MaximumSize = new Size(width, height);
+            label.MaximumSize = new Size(labelWidth, height);
 
             if (!doNotAddToFlow)
             {

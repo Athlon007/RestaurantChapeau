@@ -12,11 +12,12 @@ namespace RestaurantChapeau
 {
     public partial class OrderView : Form
     {
-        OrderLogic orderLogic;
-        MenuLogic menuLogic;
+        private OrderLogic orderLogic;
+        private MenuLogic menuLogic;
 
-        Bill bill;
-        Employee employee;
+        private Bill bill;
+        private Employee employee;
+        private int tableID;
 
         MenuType currentMenuType;
 
@@ -29,19 +30,19 @@ namespace RestaurantChapeau
         const int WindowHeight = 830;
 
         /// <summary>
-        /// Creates a new Order View. Both BILL for which the order is taken, and EMPLOYEE that takes the order must be specified!
+        /// Creates a new Order View. Employee that takes the order must be specified. Bill CAN be null.
         /// </summary>
-        /// <param name="bill">Bill for wich the new order is created</param>
         /// <param name="employee">Employee which takes the order</param>
-        /// <exception cref="NullReferenceException">Bill and Employee cannot be null.</exception>
-        public OrderView(Bill bill, Employee employee)
+        /// <param name="bill">Bill for wich the new order is created</param>
+        /// <exception cref="ArgumentNullException">Employee cannot be null.</exception>
+        public OrderView(Employee employee, Bill bill, int tableID)
         {
             InitializeComponent();
             DPIScaler.Instance.UpdateToForm(this);
 
             if (employee == null)
             {
-                throw new NullReferenceException("Employee must be provided");
+                throw new ArgumentNullException("Employee must be provided");
             }
 
             this.bill = bill;
@@ -266,8 +267,8 @@ namespace RestaurantChapeau
         {
             if (bill == null)
             {
-                // TODO: Create new bill, if one does not exist.
-                throw new NotImplementedException();
+                PaymentService payment = new PaymentService();
+                bill = payment.CreateBill(tableID);
             }
             
             Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
@@ -321,6 +322,7 @@ namespace RestaurantChapeau
                 if (dl == DialogResult.No)
                 {
                     e.Cancel = true;
+                    return;
                 }
             }
         }

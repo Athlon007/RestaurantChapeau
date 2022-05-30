@@ -36,6 +36,7 @@ namespace RestaurantLogic
             reservationDb.CancelReservation(reservation);
         }
 
+        [Obsolete("Replaced by PaymentService.HasBill().")]
         public bool TableHasBill(int tableId)
         {
             return reservationDb.TableHasBill(tableId);
