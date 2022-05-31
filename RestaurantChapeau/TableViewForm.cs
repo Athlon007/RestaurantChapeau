@@ -357,6 +357,8 @@ namespace RestaurantChapeau
             pnl_Reservation.Hide();
             pnl_ViewReservation.Hide();
         }        
+
+
         private void btn_TableViewOrder_Click(object sender, EventArgs e)
         {
             Form1 form1 = new Form1();
