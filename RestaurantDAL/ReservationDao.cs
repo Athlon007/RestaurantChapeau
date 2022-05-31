@@ -104,7 +104,7 @@ namespace RestaurantDAL
         [Obsolete("Replaced by PaymentService.HasBill().")]
         public bool TableHasBill(int tableId)
         {
-            string query = $"Select activeBill FROM [Table] WHERE id={tableId}";
+            string query = $"Select status FROM [Bill] WHERE tableId={tableId}";
             return ReadTableHasBill(ExecuteSelectQuery(query));
         }
 
@@ -115,7 +115,7 @@ namespace RestaurantDAL
                 return false;
             }
 
-            if (Convert.IsDBNull(table.Rows[0]["activeBill"]))
+            if (Convert.IsDBNull(table.Rows[0]["status"]))
             {
                 return false;
             }
