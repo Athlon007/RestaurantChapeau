@@ -494,6 +494,5 @@ namespace RestaurantChapeau
         {
 
         }
-
     }
 }
