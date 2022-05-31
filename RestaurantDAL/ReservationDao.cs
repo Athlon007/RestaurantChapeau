@@ -28,12 +28,12 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the reservation from the db by the email
-        public Reservation GetReservationByTableId(int tableId)
+        public Reservation GetReservationByTableId(int tableid)
         {
             string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM dbo.[Reservation] WHERE tableid = @tableid";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@tableid", tableId)
+                new SqlParameter("@tableid", tableid)
             };
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -101,6 +101,7 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        [Obsolete("Replaced by PaymentService.HasBill().")]
         public bool TableHasBill(int tableId)
         {
             string query = $"Select status FROM [Bill] WHERE tableId={tableId}";

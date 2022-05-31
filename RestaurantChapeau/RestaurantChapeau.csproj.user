@@ -13,8 +13,8 @@
     <Compile Update="OrderView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="OrderViewUIController\CustomControls\RoundedPanel.cs">
-      <SubType>Component</SubType>
+    <Compile Update="Payment.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="TableViewForm.cs">
       <SubType>Form</SubType>

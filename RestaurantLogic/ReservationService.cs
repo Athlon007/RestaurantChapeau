@@ -20,9 +20,9 @@ namespace RestaurantLogic
             reservationDb.AddToReservation(firstName, lastName, email,isReserved, ReservationStart, tableid);
         }
         //getting the reservation by its email
-        public Reservation GetReservationByTableId(int tableId)
+        public Reservation GetReservationByTableId(int tableid)
         {
-            return reservationDb.GetReservationByTableId(tableId);
+            return reservationDb.GetReservationByTableId(tableid);
         }
 
         //getting the list of all reservations
@@ -36,6 +36,7 @@ namespace RestaurantLogic
             reservationDb.CancelReservation(reservation);
         }
 
+        [Obsolete("Replaced by PaymentService.HasBill().")]
         public bool TableHasBill(int tableId)
         {
             return reservationDb.TableHasBill(tableId);
