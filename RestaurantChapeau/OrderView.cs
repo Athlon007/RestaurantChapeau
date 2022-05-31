@@ -46,7 +46,8 @@ namespace RestaurantChapeau
             }
 
             this.bill = bill;
-            this.employee = employee;   
+            this.employee = employee;
+            this.tableID = tableID;
 
             // Set form dimensions according constant values and scale it.
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
