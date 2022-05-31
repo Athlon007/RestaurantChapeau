@@ -15,7 +15,7 @@ namespace RestaurantChapeau.OrderViewUIController
         private Color backgroundColor = Color.FromArgb(56, 186, 186, 186);
         private Color textBoxColor = Color.FromArgb(255, 67, 179, 215);
         private Padding margin = new Padding(2, 2, 2, 2);
-        private Padding paddingTextBox = new Padding(3, 3, 3, 0);
+        private Padding paddingTextBox = new Padding(2, 2, 2, 0);
 
         //private Color colorButtonHover = Color.FromArgb(255, 230, 230, 230);
 
@@ -119,7 +119,7 @@ namespace RestaurantChapeau.OrderViewUIController
             TextBox txt = new TextBox();
             txt.Font = txtboxFont;
             txt.TextAlign = HorizontalAlignment.Center;
-            txt.MinimumSize = new Size(0, pnl.Height - Convert.ToInt32(DPIScaler.Instance.ScaleHeight * 6));
+            txt.MinimumSize = new Size(0, pnl.Height - Convert.ToInt32(DPIScaler.Instance.ScaleHeight + 1 * 6));
             txt.Dock = DockStyle.Fill;
             pnl.Controls.Add(txt);
 

@@ -144,6 +144,11 @@ namespace RestaurantChapeau
         /// </summary>
         private void OnMenuTypeClick(object sender, EventArgs e)
         {
+            if (currentMenuType == (MenuType)(sender as Button).Tag)
+            {
+                return;
+            }
+
             currentMenuType = (MenuType)(sender as Button).Tag;
 
             try

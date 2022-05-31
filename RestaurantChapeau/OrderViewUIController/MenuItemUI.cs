@@ -15,10 +15,6 @@ namespace RestaurantChapeau.OrderViewUIController
 
             // Item name label.
             Label lblName = AddLabel(menuItem.Name);
-            if (menuItem.Stock == 0)
-            {
-                lblName.Font = new System.Drawing.Font(lblName.Font, System.Drawing.FontStyle.Strikeout);
-            }
 
             // Subtract Button
             Button btnSubtract = AddButton("-", QuantitySubtractClick);
@@ -36,6 +32,17 @@ namespace RestaurantChapeau.OrderViewUIController
             lblName.Parent.Width = flow.Width - btnSubtract.Width * 2 - btnSubtract.Padding.Left * 4 - txtQuantity.Width * 2 - txtQuantity.Parent.Padding.Left * 2;
 
             SetLineBreak(btnAdd);
+
+            if (menuItem.Stock == 0)
+            {
+                lblName.Font = new System.Drawing.Font(lblName.Font, System.Drawing.FontStyle.Strikeout);
+                btnSubtract.BackColor = lblName.Parent.BackColor;
+                btnSubtract.Enabled = false;
+                btnAdd.BackColor = lblName.Parent.BackColor;
+                btnAdd.Enabled = false;
+                //txtQuantity.BackColor = lblName.Parent.BackColor;
+                txtQuantity.Enabled = false;
+            }
         }
 
         /// <summary>
