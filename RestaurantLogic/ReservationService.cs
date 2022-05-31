@@ -20,9 +20,9 @@ namespace RestaurantLogic
             reservationDb.AddToReservation(firstName, lastName, email,isReserved, ReservationStart, tableid);
         }
         //getting the reservation by its email
-        public Reservation GetReservationByEmail(string email)
+        public Reservation GetReservationByTableId(int tableId)
         {
-            return reservationDb.GetReservationByEmail(email);
+            return reservationDb.GetReservationByTableId(tableId);
         }
 
         //getting the list of all reservations

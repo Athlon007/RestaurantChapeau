@@ -28,12 +28,12 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the reservation from the db by the email
-        public Reservation GetReservationByEmail(string email)
+        public Reservation GetReservationByTableId(int tableId)
         {
-            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM dbo.[Reservation] WHERE email = @email";
+            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM dbo.[Reservation] WHERE tableid = @tableid";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@email", email)
+                new SqlParameter("@tableid", tableId)
             };
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }

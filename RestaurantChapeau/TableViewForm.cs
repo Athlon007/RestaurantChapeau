@@ -94,10 +94,38 @@ namespace RestaurantChapeau
         private void btn_Table1_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(1);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
+            if (reservation.isReserved)
+            {
+                if(isTableReserved)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
         private void btn_Table2_Click(object sender, EventArgs e)
         {
+            
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(2);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
+
+            if (reservation.isReserved)
+            {
+                if (isTableReserved)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
         private void btn_TableViewPnGoBack_Click(object sender, EventArgs e)
         {
@@ -108,41 +136,137 @@ namespace RestaurantChapeau
         private void btn_Table3_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(3);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 3)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_Table4_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(4);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 4)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_Table5_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(5);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 5)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_Table6_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(6);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 6)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_Table7_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(7);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 7)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_Table8_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(8);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 8)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_Table9_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(9);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 9)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_Table10_Click(object sender, EventArgs e)
         {
             HidePanel();
+            Reservation reservation = reservationService.GetReservationByTableId(10);
+            if (reservation.isReserved)
+            {
+                if (reservation.tableid == 10)
+                {
+                    MessageBox.Show("This table is currently reserved, you cannot add order(s)");
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_TableViewOrder_Click(object sender, EventArgs e)
@@ -183,10 +307,17 @@ namespace RestaurantChapeau
             DateTime reservationStart = dateTimePicker1.Value;
             string TableId = txt_ReservationTableID.Text;
 
-            //add the customer info for the reservation to the database
-            reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
-            MessageBox.Show("Succesfully made reservation!");
-
+            if(firstName == "" || lastName == "" || email == ""||reservationStart == null||TableId=="")
+            {
+                MessageBox.Show("please fill out text box");
+            }            
+            else
+            {
+                //add the customer info for the reservation to the database
+                reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
+                MessageBox.Show("Succesfully made reservation!");
+            }
+           
             //hide the panels and show the dashboard again
             HidePanel();
             pnl_Reservation.Show();
