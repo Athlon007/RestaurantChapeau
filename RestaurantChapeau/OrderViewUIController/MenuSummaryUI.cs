@@ -12,7 +12,7 @@ namespace RestaurantChapeau.OrderViewUIController
         private TextBox txtQuantity;
         private bool userInput;
 
-        public MenuSummaryUI(FlowLayoutPanel flow, MenuItem menuItem,  int rightAlignBeginX, int count) : base(flow)
+        public MenuSummaryUI(FlowLayoutPanel flow, MenuItem menuItem, int count) : base(flow)
         {
             this.menuItem = menuItem;
 
@@ -21,7 +21,7 @@ namespace RestaurantChapeau.OrderViewUIController
             lblCounter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
             // Item name label.
-            Label lblName = AddLabel(menuItem.Name, rightAlignBeginX - lblCounter.Width);
+            Label lblName = AddLabel(menuItem.Name);
 
             // Subtract Button
             Button btnSubtract = AddButton("-", QuantitySubtractClick);
@@ -34,6 +34,9 @@ namespace RestaurantChapeau.OrderViewUIController
 
             // Add Button
             Button btnAdd = AddButton("+", QuantityAddClick);
+
+            lblName.Parent.Width = flow.Width - lblCounter.Width - btnSubtract.Width * 2 - btnSubtract.Padding.Left * 4 - txtQuantity.Width * 2 - txtQuantity.Parent.Padding.Left * 2;
+
 
             SetLineBreak(btnAdd);
         }

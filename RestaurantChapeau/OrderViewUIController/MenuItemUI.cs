@@ -9,12 +9,12 @@ namespace RestaurantChapeau.OrderViewUIController
         private MenuItem menuItem;
         private TextBox txtQuantity;
 
-        public MenuItemUI(FlowLayoutPanel flow, MenuItem menuItem, int rightAlignBeginX) : base(flow)
+        public MenuItemUI(FlowLayoutPanel flow, MenuItem menuItem) : base(flow)
         {
             this.menuItem = menuItem;
 
             // Item name label.
-            Label lblName = AddLabel(menuItem.Name, rightAlignBeginX);
+            Label lblName = AddLabel(menuItem.Name);
             if (menuItem.Stock == 0)
             {
                 lblName.Font = new System.Drawing.Font(lblName.Font, System.Drawing.FontStyle.Strikeout);
@@ -31,6 +31,9 @@ namespace RestaurantChapeau.OrderViewUIController
 
             // Add Button
             Button btnAdd = AddButton("+", QuantityAddClick);
+
+            // resize the name label to occupy the most of the screen's width.
+            lblName.Parent.Width = flow.Width - btnSubtract.Width * 2 - btnSubtract.Padding.Left * 4 - txtQuantity.Width * 2 - txtQuantity.Parent.Padding.Left * 2;
 
             SetLineBreak(btnAdd);
         }

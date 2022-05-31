@@ -31,47 +31,33 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.flwMenuTypes = new System.Windows.Forms.FlowLayoutPanel();
             this.flwMenuItems = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lblSub = new System.Windows.Forms.Label();
             this.btnPlaceOrder = new System.Windows.Forms.Button();
             this.theTabControl = new System.Windows.Forms.TabControl();
             this.tabConnecting = new System.Windows.Forms.TabPage();
             this.lblConnecting = new System.Windows.Forms.Label();
             this.tabPageMenu = new System.Windows.Forms.TabPage();
-            this.pnlColumns = new System.Windows.Forms.Panel();
             this.tlpPlaceCancelOrder = new System.Windows.Forms.TableLayoutPanel();
             this.tabPageCheckout = new System.Windows.Forms.TabPage();
             this.flwCheckout = new System.Windows.Forms.FlowLayoutPanel();
             this.lblComment = new System.Windows.Forms.Label();
             this.pnlCommentTextBox = new System.Windows.Forms.Panel();
             this.txtComment = new System.Windows.Forms.TextBox();
-            this.panelTotal = new System.Windows.Forms.Panel();
-            this.lblTotal = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pnlColumnsCheckout = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblQuantityCheckout = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnFinish = new System.Windows.Forms.Button();
             this.tabOrderSucceeded = new System.Windows.Forms.TabPage();
             this.lblOrderPlaced = new System.Windows.Forms.Label();
             this.picTick = new System.Windows.Forms.PictureBox();
-            this.lblHeader = new System.Windows.Forms.Label();
+            this.lblQuantityCheckout = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.picBackButton = new System.Windows.Forms.PictureBox();
-            this.lblTopBarText = new System.Windows.Forms.Label();
+            this.lblHeader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.theTabControl.SuspendLayout();
             this.tabConnecting.SuspendLayout();
             this.tabPageMenu.SuspendLayout();
-            this.pnlColumns.SuspendLayout();
             this.tlpPlaceCancelOrder.SuspendLayout();
             this.tabPageCheckout.SuspendLayout();
             this.pnlCommentTextBox.SuspendLayout();
-            this.panelTotal.SuspendLayout();
-            this.pnlColumnsCheckout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabOrderSucceeded.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTick)).BeginInit();
@@ -106,34 +92,11 @@
             this.flwMenuItems.AutoScroll = true;
             this.flwMenuItems.BackColor = System.Drawing.Color.White;
             this.flwMenuItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flwMenuItems.Location = new System.Drawing.Point(4, 174);
+            this.flwMenuItems.Location = new System.Drawing.Point(4, 121);
             this.flwMenuItems.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flwMenuItems.Name = "flwMenuItems";
-            this.flwMenuItems.Size = new System.Drawing.Size(1155, 1119);
+            this.flwMenuItems.Size = new System.Drawing.Size(1155, 1238);
             this.flwMenuItems.TabIndex = 4;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblName.Location = new System.Drawing.Point(4, 4);
-            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(108, 45);
-            this.lblName.TabIndex = 5;
-            this.lblName.Text = "Name";
-            // 
-            // lblSub
-            // 
-            this.lblSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSub.AutoSize = true;
-            this.lblSub.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSub.Location = new System.Drawing.Point(778, 2);
-            this.lblSub.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSub.Name = "lblSub";
-            this.lblSub.Size = new System.Drawing.Size(149, 45);
-            this.lblSub.TabIndex = 6;
-            this.lblSub.Text = "Quantity";
             // 
             // btnPlaceOrder
             // 
@@ -160,12 +123,12 @@
             this.theTabControl.Controls.Add(this.tabPageMenu);
             this.theTabControl.Controls.Add(this.tabPageCheckout);
             this.theTabControl.Controls.Add(this.tabOrderSucceeded);
-            this.theTabControl.Location = new System.Drawing.Point(0, 200);
+            this.theTabControl.Location = new System.Drawing.Point(0, 134);
             this.theTabControl.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.theTabControl.Name = "theTabControl";
             this.theTabControl.Padding = new System.Drawing.Point(18, 3);
             this.theTabControl.SelectedIndex = 0;
-            this.theTabControl.Size = new System.Drawing.Size(1179, 1488);
+            this.theTabControl.Size = new System.Drawing.Size(1179, 1554);
             this.theTabControl.TabIndex = 9;
             // 
             // tabConnecting
@@ -174,7 +137,7 @@
             this.tabConnecting.Location = new System.Drawing.Point(8, 46);
             this.tabConnecting.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabConnecting.Name = "tabConnecting";
-            this.tabConnecting.Size = new System.Drawing.Size(1163, 1434);
+            this.tabConnecting.Size = new System.Drawing.Size(1163, 1500);
             this.tabConnecting.TabIndex = 2;
             this.tabConnecting.Text = "tabConnecting";
             this.tabConnecting.UseVisualStyleBackColor = true;
@@ -187,7 +150,7 @@
             this.lblConnecting.Location = new System.Drawing.Point(0, 0);
             this.lblConnecting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblConnecting.Name = "lblConnecting";
-            this.lblConnecting.Size = new System.Drawing.Size(1163, 1434);
+            this.lblConnecting.Size = new System.Drawing.Size(1163, 1500);
             this.lblConnecting.TabIndex = 0;
             this.lblConnecting.Text = "Getting menu...";
             this.lblConnecting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -195,29 +158,16 @@
             // tabPageMenu
             // 
             this.tabPageMenu.Controls.Add(this.flwMenuItems);
-            this.tabPageMenu.Controls.Add(this.pnlColumns);
             this.tabPageMenu.Controls.Add(this.tlpPlaceCancelOrder);
             this.tabPageMenu.Controls.Add(this.flwMenuTypes);
             this.tabPageMenu.Location = new System.Drawing.Point(8, 46);
             this.tabPageMenu.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabPageMenu.Name = "tabPageMenu";
             this.tabPageMenu.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tabPageMenu.Size = new System.Drawing.Size(1163, 1434);
+            this.tabPageMenu.Size = new System.Drawing.Size(1163, 1500);
             this.tabPageMenu.TabIndex = 0;
             this.tabPageMenu.Text = "tabPageMenu";
             this.tabPageMenu.UseVisualStyleBackColor = true;
-            // 
-            // pnlColumns
-            // 
-            this.pnlColumns.BackColor = System.Drawing.Color.White;
-            this.pnlColumns.Controls.Add(this.lblSub);
-            this.pnlColumns.Controls.Add(this.lblName);
-            this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlColumns.Location = new System.Drawing.Point(4, 121);
-            this.pnlColumns.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlColumns.Name = "pnlColumns";
-            this.pnlColumns.Size = new System.Drawing.Size(1155, 53);
-            this.pnlColumns.TabIndex = 10;
             // 
             // tlpPlaceCancelOrder
             // 
@@ -227,7 +177,7 @@
             this.tlpPlaceCancelOrder.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpPlaceCancelOrder.Controls.Add(this.btnPlaceOrder, 1, 0);
             this.tlpPlaceCancelOrder.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tlpPlaceCancelOrder.Location = new System.Drawing.Point(4, 1293);
+            this.tlpPlaceCancelOrder.Location = new System.Drawing.Point(4, 1359);
             this.tlpPlaceCancelOrder.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tlpPlaceCancelOrder.Name = "tlpPlaceCancelOrder";
             this.tlpPlaceCancelOrder.RowCount = 1;
@@ -241,14 +191,12 @@
             this.tabPageCheckout.Controls.Add(this.flwCheckout);
             this.tabPageCheckout.Controls.Add(this.lblComment);
             this.tabPageCheckout.Controls.Add(this.pnlCommentTextBox);
-            this.tabPageCheckout.Controls.Add(this.panelTotal);
-            this.tabPageCheckout.Controls.Add(this.pnlColumnsCheckout);
             this.tabPageCheckout.Controls.Add(this.tableLayoutPanel1);
             this.tabPageCheckout.Location = new System.Drawing.Point(8, 46);
             this.tabPageCheckout.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabPageCheckout.Name = "tabPageCheckout";
             this.tabPageCheckout.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tabPageCheckout.Size = new System.Drawing.Size(1163, 1434);
+            this.tabPageCheckout.Size = new System.Drawing.Size(1163, 1500);
             this.tabPageCheckout.TabIndex = 1;
             this.tabPageCheckout.Text = "tabPageCheckout";
             // 
@@ -257,10 +205,10 @@
             this.flwCheckout.AutoScroll = true;
             this.flwCheckout.BackColor = System.Drawing.Color.White;
             this.flwCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flwCheckout.Location = new System.Drawing.Point(4, 55);
+            this.flwCheckout.Location = new System.Drawing.Point(4, 2);
             this.flwCheckout.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1155, 911);
+            this.flwCheckout.Size = new System.Drawing.Size(1155, 1111);
             this.flwCheckout.TabIndex = 11;
             // 
             // lblComment
@@ -268,19 +216,19 @@
             this.lblComment.AutoSize = true;
             this.lblComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblComment.Location = new System.Drawing.Point(4, 966);
+            this.lblComment.Location = new System.Drawing.Point(4, 1113);
             this.lblComment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblComment.Name = "lblComment";
-            this.lblComment.Size = new System.Drawing.Size(180, 45);
+            this.lblComment.Size = new System.Drawing.Size(108, 45);
             this.lblComment.TabIndex = 11;
-            this.lblComment.Text = "Comments";
+            this.lblComment.Text = "Notes";
             // 
             // pnlCommentTextBox
             // 
             this.pnlCommentTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
             this.pnlCommentTextBox.Controls.Add(this.txtComment);
             this.pnlCommentTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCommentTextBox.Location = new System.Drawing.Point(4, 1011);
+            this.pnlCommentTextBox.Location = new System.Drawing.Point(4, 1158);
             this.pnlCommentTextBox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.pnlCommentTextBox.Name = "pnlCommentTextBox";
             this.pnlCommentTextBox.Padding = new System.Windows.Forms.Padding(4);
@@ -299,100 +247,6 @@
             this.txtComment.Size = new System.Drawing.Size(1147, 193);
             this.txtComment.TabIndex = 0;
             // 
-            // panelTotal
-            // 
-            this.panelTotal.BackColor = System.Drawing.Color.White;
-            this.panelTotal.Controls.Add(this.lblTotal);
-            this.panelTotal.Controls.Add(this.label3);
-            this.panelTotal.Controls.Add(this.label4);
-            this.panelTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelTotal.Location = new System.Drawing.Point(4, 1212);
-            this.panelTotal.Margin = new System.Windows.Forms.Padding(0);
-            this.panelTotal.Name = "panelTotal";
-            this.panelTotal.Size = new System.Drawing.Size(1155, 81);
-            this.panelTotal.TabIndex = 15;
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotal.Location = new System.Drawing.Point(624, 4);
-            this.lblTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(527, 74);
-            this.lblTotal.TabIndex = 7;
-            this.lblTotal.Text = "0 €";
-            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(1733, 2);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(149, 45);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Quantity";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(4, 4);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(369, 74);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Total amount:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pnlColumnsCheckout
-            // 
-            this.pnlColumnsCheckout.BackColor = System.Drawing.Color.White;
-            this.pnlColumnsCheckout.Controls.Add(this.label1);
-            this.pnlColumnsCheckout.Controls.Add(this.lblQuantityCheckout);
-            this.pnlColumnsCheckout.Controls.Add(this.label2);
-            this.pnlColumnsCheckout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlColumnsCheckout.Location = new System.Drawing.Point(4, 2);
-            this.pnlColumnsCheckout.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlColumnsCheckout.Name = "pnlColumnsCheckout";
-            this.pnlColumnsCheckout.Size = new System.Drawing.Size(1155, 53);
-            this.pnlColumnsCheckout.TabIndex = 12;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(108, 2);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 45);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Name";
-            // 
-            // lblQuantityCheckout
-            // 
-            this.lblQuantityCheckout.AutoSize = true;
-            this.lblQuantityCheckout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblQuantityCheckout.Location = new System.Drawing.Point(780, 2);
-            this.lblQuantityCheckout.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblQuantityCheckout.Name = "lblQuantityCheckout";
-            this.lblQuantityCheckout.Size = new System.Drawing.Size(149, 45);
-            this.lblQuantityCheckout.TabIndex = 6;
-            this.lblQuantityCheckout.Text = "Quantity";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(4, 2);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 45);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "No";
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -400,7 +254,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.btnFinish, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 1293);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 1359);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -433,7 +287,7 @@
             this.tabOrderSucceeded.Location = new System.Drawing.Point(8, 46);
             this.tabOrderSucceeded.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabOrderSucceeded.Name = "tabOrderSucceeded";
-            this.tabOrderSucceeded.Size = new System.Drawing.Size(1163, 1434);
+            this.tabOrderSucceeded.Size = new System.Drawing.Size(1163, 1500);
             this.tabOrderSucceeded.TabIndex = 3;
             this.tabOrderSucceeded.Text = "tabOrderSucceeded";
             // 
@@ -459,21 +313,21 @@
             this.picTick.TabIndex = 0;
             this.picTick.TabStop = false;
             // 
-            // lblHeader
+            // lblQuantityCheckout
             // 
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblHeader.Location = new System.Drawing.Point(0, 130);
-            this.lblHeader.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1179, 68);
-            this.lblHeader.TabIndex = 10;
-            this.lblHeader.Text = "Menu";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblQuantityCheckout.AutoSize = true;
+            this.lblQuantityCheckout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblQuantityCheckout.Location = new System.Drawing.Point(780, 85);
+            this.lblQuantityCheckout.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblQuantityCheckout.Name = "lblQuantityCheckout";
+            this.lblQuantityCheckout.Size = new System.Drawing.Size(0, 45);
+            this.lblQuantityCheckout.TabIndex = 6;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.picBackButton);
-            this.panel1.Controls.Add(this.lblTopBarText);
+            this.panel1.Controls.Add(this.lblQuantityCheckout);
+            this.panel1.Controls.Add(this.lblHeader);
             this.panel1.Controls.Add(this.picLogo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -495,17 +349,17 @@
             this.picBackButton.TabStop = false;
             this.picBackButton.Click += new System.EventHandler(this.picBackButton_Click);
             // 
-            // lblTopBarText
+            // lblHeader
             // 
-            this.lblTopBarText.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTopBarText.Location = new System.Drawing.Point(136, 0);
-            this.lblTopBarText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTopBarText.Name = "lblTopBarText";
-            this.lblTopBarText.Size = new System.Drawing.Size(860, 128);
-            this.lblTopBarText.TabIndex = 11;
-            this.lblTopBarText.Text = "Order";
-            this.lblTopBarText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTopBarText.UseCompatibleTextRendering = true;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblHeader.Location = new System.Drawing.Point(136, 0);
+            this.lblHeader.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(860, 128);
+            this.lblHeader.TabIndex = 11;
+            this.lblHeader.Text = "Order";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeader.UseCompatibleTextRendering = true;
             // 
             // OrderView
             // 
@@ -514,7 +368,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1180, 1688);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.theTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
@@ -526,21 +379,16 @@
             this.theTabControl.ResumeLayout(false);
             this.tabConnecting.ResumeLayout(false);
             this.tabPageMenu.ResumeLayout(false);
-            this.pnlColumns.ResumeLayout(false);
-            this.pnlColumns.PerformLayout();
             this.tlpPlaceCancelOrder.ResumeLayout(false);
             this.tabPageCheckout.ResumeLayout(false);
             this.tabPageCheckout.PerformLayout();
             this.pnlCommentTextBox.ResumeLayout(false);
             this.pnlCommentTextBox.PerformLayout();
-            this.panelTotal.ResumeLayout(false);
-            this.panelTotal.PerformLayout();
-            this.pnlColumnsCheckout.ResumeLayout(false);
-            this.pnlColumnsCheckout.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabOrderSucceeded.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picTick)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackButton)).EndInit();
             this.ResumeLayout(false);
 
@@ -550,36 +398,25 @@
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.FlowLayoutPanel flwMenuTypes;
         private System.Windows.Forms.FlowLayoutPanel flwMenuItems;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblSub;
         private System.Windows.Forms.Button btnPlaceOrder;
         private System.Windows.Forms.TabControl theTabControl;
         private System.Windows.Forms.TabPage tabPageMenu;
         private System.Windows.Forms.TabPage tabPageCheckout;
         private System.Windows.Forms.TableLayoutPanel tlpPlaceCancelOrder;
-        private System.Windows.Forms.Panel pnlColumns;
         private System.Windows.Forms.FlowLayoutPanel flwCheckout;
-        private System.Windows.Forms.Panel pnlColumnsCheckout;
         private System.Windows.Forms.Label lblQuantityCheckout;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnFinish;
-        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Label lblComment;
         private System.Windows.Forms.TabPage tabConnecting;
         private System.Windows.Forms.Label lblConnecting;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblTopBarText;
+        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.PictureBox picBackButton;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlCommentTextBox;
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.TabPage tabOrderSucceeded;
         private System.Windows.Forms.Label lblOrderPlaced;
         private System.Windows.Forms.PictureBox picTick;
-        private System.Windows.Forms.Panel panelTotal;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblTotal;
     }
 }
