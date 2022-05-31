@@ -277,6 +277,8 @@ namespace RestaurantChapeau
             foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
             {
                 orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
+                basketItem.Stock -= basketItem.Quantity;
+                orderLogic.SetItemQuantity(basketItem);
             }
 
             orderLogic.RegisterOrderToBartender(employee, order);

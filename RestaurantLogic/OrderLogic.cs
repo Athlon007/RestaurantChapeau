@@ -110,5 +110,14 @@ namespace RestaurantLogic
         {
             return orderDao.HasBillOrders(bill);
         }
+
+        /// <summary>
+        /// Updates the menu item quantity.
+        /// </summary>
+        /// <param name="item">Menu item to adjust.</param>
+        public void SetItemQuantity(MenuItem item)
+        {
+            orderDao.SetItemQuantity(item);
+        }
     }
 }

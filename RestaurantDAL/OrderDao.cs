@@ -15,7 +15,7 @@ namespace RestaurantDAL
         /// <param name="menuCategoryId">Menu category ID.</param>
         public List<MenuItem> GetMenuItems(int menuTypeId, int menuCategoryId)
         {
-            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
+            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink, mi.stock " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " +
                             "JOIN Menu m ON m.menuItemId = mi.id " +
@@ -46,7 +46,7 @@ namespace RestaurantDAL
         /// <param name="itemId">Item ID.</param>
         public MenuItem GetMenuItemById(int itemId)
         {
-            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
+            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink, mi.stock " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " +
                             "WHERE mi.[id] = @ItemId;";
@@ -81,6 +81,10 @@ namespace RestaurantDAL
             if (!Convert.IsDBNull(row["isDrink"]))
             {
                 menuItem.IsDrink = Convert.ToBoolean(row["isDrink"]);
+            }
+            if (!Convert.IsDBNull(row["stock"]))
+            {
+                menuItem.Stock = Convert.ToInt32(row["stock"]);
             }
 
             return menuItem;
@@ -177,7 +181,7 @@ namespace RestaurantDAL
         //Returns all the items in an order with a specific orderID
         public List<MenuItem> GetOrderFoodItems(int orderId)
         {
-            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink, mi.stock FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderId", orderId)
@@ -247,7 +251,7 @@ namespace RestaurantDAL
         /// <returns></returns>
         public List<MenuItem> GetItemsForOrder(Order order)
         {
-            string query =  "SELECT mi.id, mi.name, v.vat, mi.priceBrutto, mi.isDrink, po.quantity " +
+            string query =  "SELECT mi.id, mi.name, v.vat, mi.priceBrutto, mi.isDrink, po.quantity, mi.stock " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v on v.id = mi.vatId " +
                             "JOIN PartOf po ON po.menuItemId = mi.id " +
@@ -275,6 +279,10 @@ namespace RestaurantDAL
                 {
                     item.IsDrink = Convert.ToBoolean(row["isDrink"]);
                 }
+                if (!Convert.IsDBNull(row["stock"]))
+                {
+                    item.Stock = Convert.ToInt32(row["stock"]);
+                }
 
                 items.Add(item);
             }
@@ -296,6 +304,22 @@ namespace RestaurantDAL
 
             DataTable table = ExecuteSelectQuery(query, parameters);
             return Convert.ToInt32(table.Rows[0]["nOfItems"]) > 0;
+        }
+
+        /// <summary>
+        /// Updates the menu item quantity.
+        /// </summary>
+        /// <param name="item">Menu item to adjust.</param>
+        public void SetItemQuantity(MenuItem item)
+        {
+            string query = "UPDATE dbo.MenuItem SET stock = @ItemStock WHERE id = @ItemId";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@ItemId", item.Id),
+                new SqlParameter("@ItemStock", item.Stock)
+            };
+
+            ExecuteEditQuery(query, parameters);
         }
     }
 }

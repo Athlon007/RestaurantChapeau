@@ -15,6 +15,10 @@ namespace RestaurantChapeau.OrderViewUIController
 
             // Item name label.
             Label lblName = AddLabel(menuItem.Name, rightAlignBeginX);
+            if (menuItem.Stock == 0)
+            {
+                lblName.Font = new System.Drawing.Font(lblName.Font, System.Drawing.FontStyle.Strikeout);
+            }
 
             // Subtract Button
             Button btnSubtract = AddButton("-", QuantitySubtractClick);
