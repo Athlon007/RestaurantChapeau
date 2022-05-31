@@ -41,12 +41,7 @@ namespace RestaurantChapeau
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
             this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
 
-            // Hide tab view tabs.
-            theTabControl.Appearance = TabAppearance.FlatButtons;
-            theTabControl.ItemSize = new Size(0, 1);
-            theTabControl.SizeMode = TabSizeMode.Fixed;
-
-            lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
+            //lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
 
             tableButtons = new Button[]
             {
@@ -62,11 +57,6 @@ namespace RestaurantChapeau
                 btn_Table10
             };
             CheckReservations();
-
-            foreach (Button btn in tableButtons)
-            {
-                btn.Click += OnTableButtonClick;
-            }
         }
 
         private void CheckReservations()
@@ -130,8 +120,8 @@ namespace RestaurantChapeau
 
         private void btn_TableViewReservation_Click(object sender, EventArgs e)
         {
-            theTabControl.SelectedTab = tabReservation;
-            //pnl_ViewReservation.Show();
+            //theTabControl.SelectedTab = tabReservation;
+            pnl_ViewReservation.Show();
 
         }
 
@@ -149,7 +139,7 @@ namespace RestaurantChapeau
             MessageBox.Show("Succesfully made reservation!");
 
             //hide the panels and show the dashboard again
-            theTabControl.SelectedTab = tabPageMain;
+            //theTabControl.SelectedTab = tabPageMain;
             txt_ReservationFirstName.Clear();
             txt_ReservationLastName.Clear();
             txt_ReservationEmail.Clear();
@@ -164,7 +154,7 @@ namespace RestaurantChapeau
 
         private void btn_Test_Click(object sender, EventArgs e)
         {
-            theTabControl.SelectedTab = tabViewReservations;
+            //theTabControl.SelectedTab = tabViewReservations;
             try
             {
                 DisplayReservation();
@@ -199,21 +189,29 @@ namespace RestaurantChapeau
             }
         }
 
+        public void HidePanel()
+        {
+            pnl_Reservation.Hide();
+            pnl_ViewReservation.Hide();
+        }
+
         private void btn_MakeReservationGoBack_Click(object sender, EventArgs e)
         {
-            theTabControl.SelectedTab = tabViewReservations;
+            HidePanel();
+            pnl_ViewReservation.Show();
         }
 
         private void btn_ViewReservationGoBack_Click(object sender, EventArgs e)
         {
-            theTabControl.SelectedTab = tabPageMain;
+            HidePanel();
             DisplayReservation();
             CheckReservations();
         }
 
         private void btn_ViewReservationMake_Click(object sender, EventArgs e)
         {
-            theTabControl.SelectedTab = tabReservation;
+            HidePanel();
+            pnl_Reservation.Show();
         }
 
         private void btn_ViewReservationCancel_Click(object sender, EventArgs e)
@@ -236,8 +234,8 @@ namespace RestaurantChapeau
                 MessageBox.Show("Succeesfully cancel the reservation!");
                 //refresh panel
                 DisplayReservation();
-                theTabControl.SelectedTab = tabViewReservations;
-                
+                pnl_ViewReservation.Show();
+
             }
 
             //if the answer is no do nothing
@@ -256,187 +254,11 @@ namespace RestaurantChapeau
         {
         }
 
-        /// <summary>
-        /// The action executed on table button click.
-        /// </summary>
-        private void OnTableButtonClick(object sender, EventArgs e)
-        {
-            try
-            {
-
-                if (!int.TryParse((sender as Button).Text, out int id))
-                {
-                    throw new Exception("Could not read table ID.");
-                }
-
-                Reservation reservation = null;
-                if ((sender as Button).Tag != null)
-                {
-                    reservation = (Reservation)(sender as Button).Tag;
-                }
-
-                HandleTableButtonClick(id);
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex, true);
-            }
-            
         private void button1_Click_1(object sender, EventArgs e)
         {            
             this.Close();
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
-        }
-
-        /// <summary>
-        /// Loads table data.
-        /// </summary>
-        /// <param name="tableId">Table number.</param>
-        /// <param name="reservation">Reservation (if null, Bill is made and OrderView is loaded)</param>
-        private void HandleTableButtonClick(int tableId)
-        {
-            if (!paymentService.HasBill(tableId))
-            {
-                // Table has no bill?
-                // Go to order view.
-                ShowOrderView(tableId);
-            }
-            else
-            {
-                // Get the bill for this table.
-                this.currentBill = paymentService.GetBill(tableId);
-                this.currentTableNumber = tableId;
-
-                if (!orderLogic.HasBillOrders(this.currentBill))
-                {
-                    // Bill has no orders?
-                    // Automatically go into order creation process.
-                    ShowOrderView(tableId, this.currentBill);
-                }
-                else
-                {
-                    // Bill has some orders?
-                    // Show table details and load table's information.
-                    ShowTableDetails(tableId, currentBill);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Shows the order view (on top of the current window).
-        /// </summary>
-        /// <param name="bill">Bill that curently is served.</param>
-        private void ShowOrderView(int tableID, Bill bill = null)
-        {
-            OrderView order = new OrderView(currentEmployee, bill, tableID);
-            order.ShowDialog(this);
-            order.Location = this.Location; // Show OrderView right on top of this window.
-        }
-
-        /// <summary>
-        /// Loads the table bill information and shows the tabPageTableDetails.
-        /// </summary>
-        /// <param name="tableId"></param>
-        /// <param name="bill"></param>
-        private void ShowTableDetails(int tableId, Bill bill)
-        {
-            try
-            {
-                // Clear up the items belonging to the flwMenuItems.
-                flwMenuItems.Controls.Clear();
-
-                // First we want the list of all orders for that bill.
-                List<Order> orders = orderLogic.GetOrdersForBill(bill);;
-                int count = 1;
-                bool allOrdersServed = true;
-                decimal total = 0;
-                foreach (Order order in orders)
-                {
-                    // Show the UI separator.
-                    new OrderSeparatorUI(flwMenuItems, $"Order #{count}", order, OnMarkOrderAsDelivered_Click);
-                    count++;
-
-                    // If any of the orders have status different than "Served", that means not all of them have been served.
-                    if (order.Status != OrderStatus.Served)
-                    {
-                        allOrdersServed = false;
-                    }
-
-                    // Now we want the menu items that belong to that order.
-                    List<MenuItem> items = orderLogic.GetItemsForOrder(order);
-                    foreach (MenuItem item in items)
-                    {
-                        new MenuItemTableDetailUI(flwMenuItems, item, lblSub.Left);
-                        total += item.Quantity * item.PriceBrutto;
-                    }
-                }
-
-                lblTotal.Text = $"{total} €";
-
-                // Is any order not served yet?
-                // Then we disable the button.
-                btnCheckout.Enabled = allOrdersServed;
-
-                // Set the btnDummyTable picture and number according to the last button.
-                btnDummyTable.Text = tableId.ToString();
-                btnDummyTable.BackgroundImage = tableButtons[tableId - 1].Image;
-
-                // Finally, we can switch tabs.
-                theTabControl.SelectedTab = tabPageTableDetails;
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex);
-            }
-        }
-
-        /// <summary>
-        /// Action executed when user clicks "Mark as Served"
-        /// </summary>
-        private void OnMarkOrderAsDelivered_Click(object sender, EventArgs events)
-        {
-            try
-            {
-                if ((sender as Button).Tag == null)
-                {
-                    throw new NullReferenceException("Button has no Order attached to it.");
-                }
-
-                Order order = (Order)(sender as Button).Tag;
-                order.Status = OrderStatus.Served;
-                orderLogic.UpdateOrderStatus(order);
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex);
-            }
-
-            // Refresh the window.
-            ShowTableDetails(currentTableNumber, currentBill);
-        }
-
-        private void btnNewOrder_Click(object sender, EventArgs e)
-        {
-            ShowOrderView(currentTableNumber, currentBill);
-        }
-
-        private void TableViewForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // Should make it so the Login form also gets closed...
-            Application.Exit();
-        }
-
-        private void picBackButton_Click(object sender, EventArgs e)
-        {
-            if (theTabControl.SelectedTab != tabPageMain)
-            {
-                theTabControl.SelectedTab = tabPageMain;
-            }
-            else
-            {
-                this.Close();
-            }
         }
     }
 }
