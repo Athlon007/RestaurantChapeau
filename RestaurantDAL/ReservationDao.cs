@@ -84,7 +84,7 @@ namespace RestaurantDAL
             }
             else
             {
-                throw new Exception("There is no reservation");
+                
             }
             return reservation;
         }

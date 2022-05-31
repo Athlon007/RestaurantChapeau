@@ -105,7 +105,11 @@ namespace RestaurantChapeau
             }
             else
             {
-
+                Bill bill = new Bill();
+                Employee employee = new Employee();
+                OrderView orderView = new OrderView(bill,employee);
+                orderView.Show();
+                this.Close();
             }
         }
         private void btn_Table2_Click(object sender, EventArgs e)
@@ -114,7 +118,6 @@ namespace RestaurantChapeau
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(2);
             bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
-
             if (reservation.isReserved)
             {
                 if (isTableReserved)
@@ -124,7 +127,11 @@ namespace RestaurantChapeau
             }
             else
             {
-
+                Bill bill = new Bill();
+                Employee employee = new Employee();
+                OrderView orderView = new OrderView(bill, employee);
+                orderView.Show();
+                this.Close();
             }
         }
         private void btn_TableViewPnGoBack_Click(object sender, EventArgs e)
@@ -137,16 +144,21 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(3);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 3)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
             }
             else
             {
-
+                Bill bill = new Bill();
+                Employee employee = new Employee();
+                OrderView orderView = new OrderView(bill, employee);
+                orderView.Show();
+                this.Close();
             }
         }
 
@@ -154,9 +166,10 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(4);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 4)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
@@ -171,9 +184,10 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(5);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 5)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
@@ -188,9 +202,11 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(6);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
+
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 6)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
@@ -205,9 +221,10 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(7);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 7)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
@@ -222,9 +239,10 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(8);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 8)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
@@ -239,9 +257,10 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(9);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 9)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
@@ -256,9 +275,10 @@ namespace RestaurantChapeau
         {
             HidePanel();
             Reservation reservation = reservationService.GetReservationByTableId(10);
+            bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
             if (reservation.isReserved)
             {
-                if (reservation.tableid == 10)
+                if (isTableReserved)
                 {
                     MessageBox.Show("This table is currently reserved, you cannot add order(s)");
                 }
