@@ -436,7 +436,7 @@ namespace RestaurantChapeau
                 MessageBox.Show(ex.Message);
             }
         }
-
+        
         private void DisplayReservation()
         {
             List<Reservation> reservationList = reservationService.GetAllReservations();
