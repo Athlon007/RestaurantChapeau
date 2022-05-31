@@ -194,6 +194,7 @@ namespace RestaurantChapeau
             txt_ReservationLastName.Clear();
             txt_ReservationEmail.Clear();
             txt_ReservationTableID.Clear();
+            DisplayReservation();
 
         }
 
@@ -205,6 +206,7 @@ namespace RestaurantChapeau
         private void btn_Test_Click(object sender, EventArgs e)
         {
             HidePanel();
+            pbTableViewLogOut.Hide();
             pnl_ViewReservation.Show();
             try
             {
@@ -295,6 +297,36 @@ namespace RestaurantChapeau
             this.Close();
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
+        }
+
+        private void pbTableViewLogOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+        }
+
+        private void pbViewReservationGoBack_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+            DisplayReservation();
+            pbTableViewLogOut.Show();
+        }
+
+        private void pnl_ViewReservation_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void picBackButton_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+            pnl_ViewReservation.Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
