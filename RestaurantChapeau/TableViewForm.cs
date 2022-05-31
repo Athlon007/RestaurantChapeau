@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using RestaurantLogic;
 using RestaurantModel;
 using RestaurantDAL;
+using RestaurantChapeau.OrderViewUIController;
+using System.Threading.Tasks;
 
 namespace RestaurantChapeau
 {
@@ -19,10 +21,27 @@ namespace RestaurantChapeau
 
         Button[] tableButtons;
 
+        // For UI scaling
+        const int WindowWidth = 651;
+        const int WindowHeight = 830;
+
+        OrderLogic orderLogic = new OrderLogic();
+        PaymentService paymentService = new PaymentService();
+        Bill currentBill;
+        int currentTableNumber;
+
+
+
         public TableViewForm(Employee employee)
         {
             InitializeComponent();
             currentEmployee = employee;
+
+            DPIScaler.Instance.UpdateToForm(this);
+            this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
+            this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
+
+            //lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
 
             tableButtons = new Button[]
             {
@@ -82,7 +101,6 @@ namespace RestaurantChapeau
 
         private void TableViewForm_Load(object sender, EventArgs e)
         {
-            HidePanel();
             dateTimePicker1.MinDate = DateTime.Now;
             dateTimePicker1.Value = DateTime.Now;
         }
@@ -136,7 +154,6 @@ namespace RestaurantChapeau
         }
         private void btn_TableViewPnGoBack_Click(object sender, EventArgs e)
         {
-            HidePanel();
             TableViewForm_Load(sender, e);
         }
 
@@ -295,26 +312,10 @@ namespace RestaurantChapeau
             form1.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            btn_Table1.BackColor = Color.Red;
-            btn_Table1.Image = Properties.Resources.occupied;
-
-            if (reservation.tableid == 2)
-            {
-            }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btn_TableViewReservation_Click(object sender, EventArgs e)
         {
-            HidePanel();
-            pnl_Reservation.Show();
-            //pnl_ViewReservation.Show();
+            //theTabControl.SelectedTab = tabReservation;
+            pnl_ViewReservation.Show();
 
         }
 
@@ -339,8 +340,7 @@ namespace RestaurantChapeau
             }
            
             //hide the panels and show the dashboard again
-            HidePanel();
-            pnl_Reservation.Show();
+            //theTabControl.SelectedTab = tabPageMain;
             txt_ReservationFirstName.Clear();
             txt_ReservationLastName.Clear();
             txt_ReservationEmail.Clear();
@@ -393,6 +393,12 @@ namespace RestaurantChapeau
             }
         }
 
+        public void HidePanel()
+        {
+            pnl_Reservation.Hide();
+            pnl_ViewReservation.Hide();
+        }
+
         private void btn_MakeReservationGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
@@ -431,9 +437,9 @@ namespace RestaurantChapeau
                 // show that delete was successful
                 MessageBox.Show("Succeesfully cancel the reservation!");
                 //refresh panel
-                HidePanel();
                 DisplayReservation();
                 pnl_ViewReservation.Show();
+
             }
 
             //if the answer is no do nothing
@@ -441,6 +447,15 @@ namespace RestaurantChapeau
             {
                 return;
             }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
         }
 
         private void button1_Click_1(object sender, EventArgs e)

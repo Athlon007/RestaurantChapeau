@@ -83,7 +83,6 @@
             this.btn_Table1.TabIndex = 20;
             this.btn_Table1.Text = "1";
             this.btn_Table1.UseVisualStyleBackColor = true;
-            this.btn_Table1.Click += new System.EventHandler(this.btn_Table1_Click);
             // 
             // btn_Table2
             // 
@@ -95,7 +94,6 @@
             this.btn_Table2.TabIndex = 21;
             this.btn_Table2.Text = "2";
             this.btn_Table2.UseVisualStyleBackColor = true;
-            this.btn_Table2.Click += new System.EventHandler(this.btn_Table2_Click);
             // 
             // btn_Table3
             // 
@@ -106,7 +104,6 @@
             this.btn_Table3.TabIndex = 22;
             this.btn_Table3.Text = "3";
             this.btn_Table3.UseVisualStyleBackColor = true;
-            this.btn_Table3.Click += new System.EventHandler(this.btn_Table3_Click);
             // 
             // btn_Table4
             // 
@@ -117,7 +114,6 @@
             this.btn_Table4.TabIndex = 23;
             this.btn_Table4.Text = "4";
             this.btn_Table4.UseVisualStyleBackColor = true;
-            this.btn_Table4.Click += new System.EventHandler(this.btn_Table4_Click);
             // 
             // btn_Table5
             // 
@@ -128,7 +124,6 @@
             this.btn_Table5.TabIndex = 24;
             this.btn_Table5.Text = "5";
             this.btn_Table5.UseVisualStyleBackColor = true;
-            this.btn_Table5.Click += new System.EventHandler(this.btn_Table5_Click);
             // 
             // btn_Table6
             // 
@@ -139,7 +134,6 @@
             this.btn_Table6.TabIndex = 25;
             this.btn_Table6.Text = "6";
             this.btn_Table6.UseVisualStyleBackColor = true;
-            this.btn_Table6.Click += new System.EventHandler(this.btn_Table6_Click);
             // 
             // btn_Table7
             // 
@@ -150,7 +144,6 @@
             this.btn_Table7.TabIndex = 26;
             this.btn_Table7.Text = "7";
             this.btn_Table7.UseVisualStyleBackColor = true;
-            this.btn_Table7.Click += new System.EventHandler(this.btn_Table7_Click);
             // 
             // btn_Table8
             // 
@@ -161,7 +154,6 @@
             this.btn_Table8.TabIndex = 27;
             this.btn_Table8.Text = "8";
             this.btn_Table8.UseVisualStyleBackColor = true;
-            this.btn_Table8.Click += new System.EventHandler(this.btn_Table8_Click);
             // 
             // btn_Table9
             // 
@@ -172,7 +164,6 @@
             this.btn_Table9.TabIndex = 28;
             this.btn_Table9.Text = "9";
             this.btn_Table9.UseVisualStyleBackColor = true;
-            this.btn_Table9.Click += new System.EventHandler(this.btn_Table9_Click);
             // 
             // btn_Table10
             // 
@@ -183,7 +174,6 @@
             this.btn_Table10.TabIndex = 29;
             this.btn_Table10.Text = "10";
             this.btn_Table10.UseVisualStyleBackColor = true;
-            this.btn_Table10.Click += new System.EventHandler(this.btn_Table10_Click);
             // 
             // pnl_Reservation
             // 
@@ -205,7 +195,6 @@
             this.pnl_Reservation.Name = "pnl_Reservation";
             this.pnl_Reservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Reservation.TabIndex = 32;
-            this.pnl_Reservation.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // picBackButton
             // 
@@ -532,7 +521,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion

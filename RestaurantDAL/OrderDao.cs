@@ -8,62 +8,16 @@ namespace RestaurantDAL
 {
     public class OrderDao : BaseDao
     {
-        public List<MenuType> GetMenuTypes()
-        {
-            string query = "SELECT [id], [name] FROM dbo.MenuType;";
-            return ReadMenuTypes(ExecuteSelectQuery(query));
-        }
-
-        private List<MenuType> ReadMenuTypes(DataTable table)
-        {
-            List<MenuType> menuTypes = new List<MenuType>();
-            foreach (DataRow dr in table.Rows)
-            {
-                MenuType menuType = new MenuType();
-                menuType.Id = Convert.ToInt32(dr["id"]);
-                menuType.Name = dr["name"].ToString();
-
-                menuTypes.Add(menuType);
-            }
-
-            return menuTypes;
-        }
-
-        public List<MenuCategory> GetMenuCategories(MenuType menuType)
-        {
-            string query =  "SELECT mc.[id], mc.[name] " +
-                            "FROM dbo.MenuCategory mc " +
-                            "JOIN dbo.HasCategory hc ON mc.[id] = hc.menuCategoryId " +
-                            "WHERE hc.menuTypeId = @MenuTypeId;";
-
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@MenuTypeId", menuType.Id)
-            };
-
-            return ReadMenuCategories(ExecuteSelectQuery(query, parameters));
-        }
-
-        private List<MenuCategory> ReadMenuCategories(DataTable table)
-        {
-            List<MenuCategory> menuCategories = new List<MenuCategory>();
-            foreach (DataRow dr in table.Rows)
-            {
-                MenuCategory menuCategory = new MenuCategory();
-                menuCategory.Id = Convert.ToInt32(dr["id"]);
-                menuCategory.Name = dr["name"].ToString();
-
-                menuCategories.Add(menuCategory);
-            }
-
-            return menuCategories;
-        }
-
+        /// <summary>
+        /// Returns the list of all menu items for specific menu type and category.
+        /// </summary>
+        /// <param name="menuTypeId">Menu type ID.</param>
+        /// <param name="menuCategoryId">Menu category ID.</param>
         public List<MenuItem> GetMenuItems(int menuTypeId, int menuCategoryId)
         {
-            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
+            string query =  "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink, mi.stock " +
                             "FROM MenuItem mi " +
-                            "JOIN Vat v ON v.id = mi.vatId " + 
+                            "JOIN Vat v ON v.id = mi.vatId " +
                             "JOIN Menu m ON m.menuItemId = mi.id " +
                             "WHERE mi.categoryId = @CategoryId AND m.menuTypeId = @MenuTypeId;";
             SqlParameter[] parameters = new SqlParameter[]
@@ -86,9 +40,13 @@ namespace RestaurantDAL
             return menuItems;
         }
 
+        /// <summary>
+        /// Returns the menu item by its ID.
+        /// </summary>
+        /// <param name="itemId">Item ID.</param>
         public MenuItem GetMenuItemById(int itemId)
         {
-            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink " +
+            string query = "SELECT mi.[id], mi.[name], mi.priceBrutto, v.vat, mi.isDrink, mi.stock " +
                             "FROM MenuItem mi " +
                             "JOIN Vat v ON v.id = mi.vatId " +
                             "WHERE mi.[id] = @ItemId;";
@@ -124,6 +82,10 @@ namespace RestaurantDAL
             {
                 menuItem.IsDrink = Convert.ToBoolean(row["isDrink"]);
             }
+            if (!Convert.IsDBNull(row["stock"]))
+            {
+                menuItem.Stock = Convert.ToInt32(row["stock"]);
+            }
 
             return menuItem;
         }
@@ -144,24 +106,18 @@ namespace RestaurantDAL
                 new SqlParameter("@Comment", comment)
             };
 
-            return ReadOrder(ExecuteEditAndSelectQuery(query, parameters), bill);
+            return ReadOrder(ExecuteEditAndSelectQuery(query, parameters).Rows[0], bill);
         }
 
-        private Order ReadOrder(DataTable table, Bill bill)
+        private Order ReadOrder(DataRow row, Bill bill)
         {
             Order order = new Order();
-
-            if (table.Rows.Count == 0)
-            {
-                throw new NoNullAllowedException("Could not create a new order");
-            }
-
-            DataRow row = table.Rows[0];
+;
             order.Id = Convert.ToInt32(row["id"]);
             order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
             order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
             order.Bill = bill;
-            if (!Convert.IsDBNull(row["comment"]))
+            if (row.Table.Columns.Contains("comment") && !Convert.IsDBNull(row["comment"]))
             {
                 order.Comment = Convert.ToString(row["comment"]);
             }
@@ -177,7 +133,7 @@ namespace RestaurantDAL
         /// <param name="quantity">Quantity of that item.</param>
         public void AddItemToOrder(Order order, MenuItem item, int quantity)
         {
-            string query =  "INSERT INTO dbo.PartOf (orderId, menuItemId, quantity)" +
+            string query = "INSERT INTO dbo.PartOf (orderId, menuItemId, quantity)" +
                             "VALUES (@OrderId, @ItemId, @Quantity)";
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -194,7 +150,7 @@ namespace RestaurantDAL
         /// </summary>
         public List<Order> GetOrdersToPrepare()
         {
-            string query =  "SELECT o.[id], o.placedTime, o.status " +
+            string query = "SELECT o.[id], o.placedTime, o.status " +
                             "FROM[Order] o " +
                             "WHERE o.status <= 1;";
 
@@ -202,14 +158,14 @@ namespace RestaurantDAL
             List<Order> orders = new List<Order>();
             foreach (DataRow row in tableOrders.Rows)
             {
-                Order order = ReadOrder(tableOrders, null);
+                Order order = ReadOrder(row, null);
 
                 // Get all items belonging to that order.
                 string selectItemsQuery =   "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink " +
                                             "FROM PartOf po " +
                                             "JOIN MenuItem mi ON po.menuItemId = mi.id " +
                                             "JOIN Vat v ON mi.vatId = v.id " +
-                                            "WHERE orderId = @OrderId;";
+                                            "WHERE orderId = @OrderId AND mi.isDrink is null;";
                 SqlParameter[] parameters = new SqlParameter[]
                 {
                     new SqlParameter("@OrderId", order.Id)
@@ -222,7 +178,23 @@ namespace RestaurantDAL
 
             return orders;
         }
+        //Returns all the items in an order with a specific orderID
+        public List<MenuItem> GetOrderFoodItems(int orderId)
+        {
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink, mi.stock FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderId", orderId)
+            };
 
+            return ReadMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
+        }
+        
+        /// <summary>
+        /// Assigns order to specified employee.
+        /// </summary>
+        /// <param name="employee">Employee (bartender) to which the order is supposed to be assigned.</param>
+        /// <param name="order">Order to be assigned.</param>
         public void RegisterOrderToBartender(Employee employee, Order order)
         {
             string query =  "INSERT INTO dbo.[Bartender] (employeeId, orderId) " +
@@ -231,6 +203,120 @@ namespace RestaurantDAL
             {
                 new SqlParameter("@EmployeeId", employee.id),
                 new SqlParameter("@OrderId", order.Id)
+            };
+
+            ExecuteEditQuery(query, parameters);
+        }
+
+        public void UpdateOrderStatus(Order order)
+        {
+            string command = ("UPDATE dbo.[Order] SET status =@status  WHERE Id = @orderId");
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                    new SqlParameter("@status", order.Status),
+                    new SqlParameter("@OrderId", order.Id)
+            };
+            ExecuteEditQuery(command, parameters);
+        }
+
+        /// <summary>
+        /// Returns the list of orders for specified bill.
+        /// </summary>
+        /// <param name="bill">Bill which we want orders for.</param>
+        public List<Order> GetOrdersForBill(Bill bill)
+        {
+            string query =  "SELECT o.id, o.placedTime, o.status, o.comment " +
+                            "FROM [Order] o " +
+                            "JOIN Bill b ON b.id = o.billId " +
+                            "WHERE b.id = @BillId";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillId", bill.Id)
+            };
+
+            DataTable table = ExecuteSelectQuery(query, parameters);
+            List<Order> orders = new List<Order>();
+            foreach (DataRow row in table.Rows)
+            {
+                orders.Add(ReadOrder(row, bill));
+            }
+
+            return orders;
+        }
+
+        /// <summary>
+        /// Returns the full list of all items belonging to a specified order.
+        /// </summary>
+        /// <param name="order">Order that we want to check the menu items of.</param>
+        /// <returns></returns>
+        public List<MenuItem> GetItemsForOrder(Order order)
+        {
+            string query =  "SELECT mi.id, mi.name, v.vat, mi.priceBrutto, mi.isDrink, po.quantity, mi.stock " +
+                            "FROM MenuItem mi " +
+                            "JOIN Vat v on v.id = mi.vatId " +
+                            "JOIN PartOf po ON po.menuItemId = mi.id " +
+                            "WHERE po.orderId = @OrderId";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("OrderId", order.Id)
+            };
+
+            return ReadMenuItemsForOrder(ExecuteSelectQuery(query, parameters));
+        }
+
+        private List<MenuItem> ReadMenuItemsForOrder(DataTable table)
+        {
+            List<MenuItem> items = new List<MenuItem>();
+            foreach (DataRow row in table.Rows)
+            {
+                MenuItem item = new MenuItem();
+                item.Id = Convert.ToInt32(row["id"]);
+                item.Name = row["name"].ToString();
+                item.PriceBrutto = Convert.ToDecimal(row["priceBrutto"]);
+                item.Vat = Convert.ToDecimal(row["vat"]);
+                item.Quantity = Convert.ToInt32(row["quantity"]);
+                if (!Convert.IsDBNull(row["isDrink"]))
+                {
+                    item.IsDrink = Convert.ToBoolean(row["isDrink"]);
+                }
+                if (!Convert.IsDBNull(row["stock"]))
+                {
+                    item.Stock = Convert.ToInt32(row["stock"]);
+                }
+
+                items.Add(item);
+            }
+
+            return items;
+        }
+
+        /// <summary>
+        /// Checks if bill has any order.
+        /// </summary>
+        /// <param name="bill"></param>
+        public bool HasBillOrders(Bill bill)
+        {
+            string query = "SELECT COUNT(o.id) [nOfItems] FROM [Order] o JOIN Bill b ON b.id = o.billId WHERE b.id = @BillId";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillId", bill.Id)
+            };
+
+            DataTable table = ExecuteSelectQuery(query, parameters);
+            return Convert.ToInt32(table.Rows[0]["nOfItems"]) > 0;
+        }
+
+        /// <summary>
+        /// Updates the menu item quantity.
+        /// </summary>
+        /// <param name="item">Menu item to adjust.</param>
+        public void SetItemQuantity(MenuItem item)
+        {
+            string query = "UPDATE dbo.MenuItem SET stock = @ItemStock WHERE id = @ItemId";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@ItemId", item.Id),
+                new SqlParameter("@ItemStock", item.Stock)
             };
 
             ExecuteEditQuery(query, parameters);
