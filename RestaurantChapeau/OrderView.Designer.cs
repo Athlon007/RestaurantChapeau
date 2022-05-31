@@ -41,6 +41,7 @@
             this.pnlColumns = new System.Windows.Forms.Panel();
             this.tlpPlaceCancelOrder = new System.Windows.Forms.TableLayoutPanel();
             this.tabPageCheckout = new System.Windows.Forms.TabPage();
+            this.flwCheckout = new System.Windows.Forms.FlowLayoutPanel();
             this.lblComment = new System.Windows.Forms.Label();
             this.pnlCommentTextBox = new System.Windows.Forms.Panel();
             this.txtComment = new System.Windows.Forms.TextBox();
@@ -48,7 +49,6 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.flwCheckout = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlColumnsCheckout = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.lblQuantityCheckout = new System.Windows.Forms.Label();
@@ -252,6 +252,17 @@
             this.tabPageCheckout.TabIndex = 1;
             this.tabPageCheckout.Text = "tabPageCheckout";
             // 
+            // flwCheckout
+            // 
+            this.flwCheckout.AutoScroll = true;
+            this.flwCheckout.BackColor = System.Drawing.Color.White;
+            this.flwCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flwCheckout.Location = new System.Drawing.Point(4, 55);
+            this.flwCheckout.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.flwCheckout.Name = "flwCheckout";
+            this.flwCheckout.Size = new System.Drawing.Size(1155, 911);
+            this.flwCheckout.TabIndex = 11;
+            // 
             // lblComment
             // 
             this.lblComment.AutoSize = true;
@@ -335,17 +346,6 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Total amount:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // flwCheckout
-            // 
-            this.flwCheckout.AutoScroll = true;
-            this.flwCheckout.BackColor = System.Drawing.Color.White;
-            this.flwCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flwCheckout.Location = new System.Drawing.Point(4, 55);
-            this.flwCheckout.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.flwCheckout.Name = "flwCheckout";
-            this.flwCheckout.Size = new System.Drawing.Size(1155, 911);
-            this.flwCheckout.TabIndex = 11;
             // 
             // pnlColumnsCheckout
             // 

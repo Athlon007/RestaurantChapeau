@@ -23,8 +23,6 @@ namespace RestaurantChapeau
 
         private List<MenuItem> itemsInBasket = new List<MenuItem>();
 
-        const int MaximumQuantity = 99;
-
         private OrderBasket() { }
 
         private List<OrderView> listeners = new List<OrderView>();
@@ -41,7 +39,7 @@ namespace RestaurantChapeau
                 if (basketItem.Id == item.Id)
                 {
                     itemFound = true;
-                    if (basketItem.Quantity >= MaximumQuantity)
+                    if (basketItem.Quantity >= basketItem.Stock)
                     {
                         break;
                     }    
@@ -94,9 +92,9 @@ namespace RestaurantChapeau
         /// <param name="quantity"></param>
         public void Set(MenuItem item, int quantity)
         {
-            if (quantity > MaximumQuantity)
+            if (quantity > item.Stock)
             {
-                quantity = MaximumQuantity;
+                quantity = item.Stock;
             }
 
             bool itemFound = false;
@@ -107,9 +105,9 @@ namespace RestaurantChapeau
                     itemFound = true;
                     basketItem.Quantity = quantity;
 
-                    if (basketItem.Quantity > MaximumQuantity)
+                    if (basketItem.Quantity > item.Stock)
                     {
-                        basketItem.Quantity = MaximumQuantity;
+                        basketItem.Quantity = item.Stock;
                     }
                     else if (basketItem.Quantity == 0)
                     {
@@ -119,7 +117,7 @@ namespace RestaurantChapeau
                 }
             }
 
-            if (!itemFound && quantity > 0 && quantity <= MaximumQuantity)
+            if (!itemFound && quantity > 0 && quantity <= item.Stock)
             {
                 item.Quantity = quantity;
                 itemsInBasket.Add(item);
