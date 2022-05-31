@@ -41,7 +41,7 @@ namespace RestaurantDAL
 
         public Bill CreateBill(int tableID)
         {
-            string query = $"IF NOT EXISTS (SELECT * FROM dbo.Bill WHERE tableId = {tableID} AND status = 1) INSERT INTO dbo.Bill(tableId, status) OUTPUT INSERTED.id, INSERTED.tableId, INSERTED.status VALUES({tableID}, 1);";
+            string query = $"INSERT INTO dbo.Bill(tableId, status) OUTPUT INSERTED.id, INSERTED.tableId, INSERTED.status VALUES({tableID}, 1);";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadBillTable(ExecuteEditAndSelectQuery(query, sqlParameters));
         }

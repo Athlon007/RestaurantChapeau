@@ -34,7 +34,8 @@ namespace RestaurantDAL
             string query = "SELECT mc.[id], mc.[name] " +
                             "FROM dbo.MenuCategory mc " +
                             "JOIN dbo.HasCategory hc ON mc.[id] = hc.menuCategoryId " +
-                            "WHERE hc.menuTypeId = @MenuTypeId;";
+                            "WHERE hc.menuTypeId = @MenuTypeId " +
+                            "ORDER BY mc.displayOrder;";
 
             SqlParameter[] parameters = new SqlParameter[]
             {

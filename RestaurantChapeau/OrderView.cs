@@ -46,7 +46,8 @@ namespace RestaurantChapeau
             }
 
             this.bill = bill;
-            this.employee = employee;   
+            this.employee = employee;
+            this.tableID = tableID;
 
             // Set form dimensions according constant values and scale it.
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
@@ -65,9 +66,7 @@ namespace RestaurantChapeau
             OrderBasket.Instance.AddListener(this);
 
             // Assign font to the top-bar "Order" test.
-            lblTopBarText.Font = FontManager.Instance.ScriptMT(lblTopBarText.Font.Size);
-
-            lblHeader.Text = "";
+            lblHeader.Font = FontManager.Instance.ScriptMT(lblHeader.Font.Size);           
         }
 
         private async void OrderView_Load(object sender, EventArgs e)
@@ -146,6 +145,11 @@ namespace RestaurantChapeau
         /// </summary>
         private void OnMenuTypeClick(object sender, EventArgs e)
         {
+            if (currentMenuType == (MenuType)(sender as Button).Tag)
+            {
+                return;
+            }
+
             currentMenuType = (MenuType)(sender as Button).Tag;
 
             try
@@ -202,7 +206,7 @@ namespace RestaurantChapeau
                 // Create UI stuff for menu items.
                 foreach (MenuItem menuItem in menuItems)
                 {
-                    new MenuItemUI(flwMenuItems, menuItem, lblSub.Left);
+                    new MenuItemUI(flwMenuItems, menuItem);
                 }
             }
         }
@@ -250,7 +254,7 @@ namespace RestaurantChapeau
                 int count = 1;
                 foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
                 {
-                    MenuSummaryUI summaryButton = new MenuSummaryUI(flwCheckout, menuItem, lblQuantityCheckout.Left, count);
+                    MenuSummaryUI summaryButton = new MenuSummaryUI(flwCheckout, menuItem, count);
                     summaryButton.OnDeleteItem = LoadCheckout;
                     count++;
                 }
@@ -297,7 +301,7 @@ namespace RestaurantChapeau
         {
             Thread.Sleep(1000);
             Action safeLoad = delegate { this.Close(); };
-            this.Invoke(safeLoad);
+            Invoke(safeLoad);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -336,7 +340,6 @@ namespace RestaurantChapeau
         {
             btnPlaceOrder.Text = $"View Order ({OrderBasket.Instance.Count})";
             btnFinish.Enabled = OrderBasket.Instance.Count > 0;
-            lblTotal.Text = $"{OrderBasket.Instance.Value} €";
         }
 
         /// <summary>

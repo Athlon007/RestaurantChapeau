@@ -14,12 +14,12 @@ namespace RestaurantChapeau.OrderViewUIController
         private Font txtboxFont = new Font("Segoe UI", 24);
         private Color backgroundColor = Color.FromArgb(56, 186, 186, 186);
         private Color textBoxColor = Color.FromArgb(255, 67, 179, 215);
-        private Padding margin = new Padding(2, 5, 2, 5);
-        private Padding paddingTextBox = new Padding(3, 3, 3, 0);
+        private Padding margin = new Padding(2, 2, 2, 2);
+        private Padding paddingTextBox = new Padding(2, 2, 2, 0);
 
         //private Color colorButtonHover = Color.FromArgb(255, 230, 230, 230);
 
-        const int RowSize = 54;
+        const int RowSize = 48;
 
         private List<Control> controls;
 
@@ -88,7 +88,7 @@ namespace RestaurantChapeau.OrderViewUIController
             int labelWidth = width != -1 ? width : Convert.ToInt32(RowSize * DPIScaler.Instance.ScaleWidth);
             Label label = new Label();
             label.Text = text;
-            label.Padding = new Padding(10, 0, 10, 0);
+            label.Padding = new Padding(4, 0, 4, 0);
             label.Font = menuItemsFont;
             label.TextAlign = ContentAlignment.MiddleLeft;
             label.AutoSize = false;
@@ -97,7 +97,6 @@ namespace RestaurantChapeau.OrderViewUIController
             int height = Convert.ToInt32(RowSize * DPIScaler.Instance.ScaleHeight);
             label.Width = labelWidth;
             label.Height = height;
-            label.MaximumSize = new Size(labelWidth, height);
 
             if (!doNotAddToFlow)
             {
@@ -120,7 +119,7 @@ namespace RestaurantChapeau.OrderViewUIController
             TextBox txt = new TextBox();
             txt.Font = txtboxFont;
             txt.TextAlign = HorizontalAlignment.Center;
-            txt.MinimumSize = new Size(0, pnl.Height - Convert.ToInt32(DPIScaler.Instance.ScaleHeight * 6));
+            txt.MinimumSize = new Size(0, pnl.Height - Convert.ToInt32(DPIScaler.Instance.ScaleHeight + 1 * 6));
             txt.Dock = DockStyle.Fill;
             pnl.Controls.Add(txt);
 
