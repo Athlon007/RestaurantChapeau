@@ -373,6 +373,7 @@ namespace RestaurantChapeau
 
         private void lv_TableDetailView_SelectedIndexChanged(int tableId, Bill bill)
         {
+            lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
             List<Order> orders = orderLogic.GetOrdersForBill(bill);
             lv_TableDetailView.Clear();
             lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
@@ -433,6 +434,11 @@ namespace RestaurantChapeau
         private void pbTableDetailViewGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
-        }     
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

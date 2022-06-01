@@ -54,6 +54,7 @@
             this.txt_ReservationTableID = new System.Windows.Forms.TextBox();
             this.btn_MakeReservation = new System.Windows.Forms.Button();
             this.pnl_TableDetailView = new System.Windows.Forms.Panel();
+            this.lbl_DisplayTableNr = new System.Windows.Forms.Label();
             this.lv_TableDetailView = new System.Windows.Forms.ListView();
             this.pbTableDetailViewGoBack = new System.Windows.Forms.PictureBox();
             this.pnl_ViewReservation = new System.Windows.Forms.Panel();
@@ -350,6 +351,7 @@
             // 
             // pnl_TableDetailView
             // 
+            this.pnl_TableDetailView.Controls.Add(this.lbl_DisplayTableNr);
             this.pnl_TableDetailView.Controls.Add(this.lv_TableDetailView);
             this.pnl_TableDetailView.Controls.Add(this.pbTableDetailViewGoBack);
             this.pnl_TableDetailView.Location = new System.Drawing.Point(0, 0);
@@ -357,10 +359,23 @@
             this.pnl_TableDetailView.Size = new System.Drawing.Size(726, 1055);
             this.pnl_TableDetailView.TabIndex = 51;
             // 
+            // lbl_DisplayTableNr
+            // 
+            this.lbl_DisplayTableNr.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_DisplayTableNr.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbl_DisplayTableNr.Location = new System.Drawing.Point(84, 0);
+            this.lbl_DisplayTableNr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_DisplayTableNr.Name = "lbl_DisplayTableNr";
+            this.lbl_DisplayTableNr.Size = new System.Drawing.Size(529, 80);
+            this.lbl_DisplayTableNr.TabIndex = 50;
+            this.lbl_DisplayTableNr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_DisplayTableNr.UseCompatibleTextRendering = true;
+            this.lbl_DisplayTableNr.Click += new System.EventHandler(this.label3_Click);
+            // 
             // lv_TableDetailView
             // 
             this.lv_TableDetailView.HideSelection = false;
-            this.lv_TableDetailView.Location = new System.Drawing.Point(12, 74);
+            this.lv_TableDetailView.Location = new System.Drawing.Point(7, 92);
             this.lv_TableDetailView.Name = "lv_TableDetailView";
             this.lv_TableDetailView.Size = new System.Drawing.Size(700, 605);
             this.lv_TableDetailView.TabIndex = 49;
@@ -584,5 +599,6 @@
         private System.Windows.Forms.Panel pnl_TableDetailView;
         private System.Windows.Forms.PictureBox pbTableDetailViewGoBack;
         private System.Windows.Forms.ListView lv_TableDetailView;
+        private System.Windows.Forms.Label lbl_DisplayTableNr;
     }
 }
