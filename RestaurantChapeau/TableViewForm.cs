@@ -182,7 +182,7 @@ namespace RestaurantChapeau
             }
         }
 
-        
+
         private void DisplayReservation()
         {
             List<Reservation> reservationList = reservationService.GetAllReservations();
@@ -359,6 +359,7 @@ namespace RestaurantChapeau
                 {
                     // Bill has some orders?
                     // Show table details and load table's information.
+                    pnl_TableDetailView.Show();
                     lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
                 }
             }
@@ -373,81 +374,29 @@ namespace RestaurantChapeau
         private void lv_TableDetailView_SelectedIndexChanged(int tableId, Bill bill)
         {
             List<Order> orders = orderLogic.GetOrdersForBill(bill);
-
             lv_TableDetailView.Clear();
-            lv_TableDetailView.Columns.Add("Menu", 50, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Statue", 100, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Time", 100, HorizontalAlignment.Left);
-            lv_TableDetailView.View = View.Details;
+            lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Comment", 250, HorizontalAlignment.Left);
+
+            lv_TableDetailView.View = View.Details;            
             foreach (Order order in orders)
-            {
-                ListViewItem li = new ListViewItem(order.Status.ToString());
-                //li.SubItems.Add(order.Status.ToString());
-                li.SubItems.Add(order.PlacedTime.ToString());
-                lv_TableDetailView.Items.Add(li);
-            }
-        }
-        private void ShowTableDetails(int tableId, Bill bill)
-        {
-            try
-            {
-                // Clear up the items belonging to the flwMenuItems.
-                pnl_TableDetailView.Show();
-                lv_TableDetailView_SelectedIndexChanged(tableId, bill);
-
-                // First we want the list of all orders for that bill.
-                List<Order> orders = orderLogic.GetOrdersForBill(bill); 
-                int count = 1;
-                bool allOrdersServed = true;
-                decimal total = 0;
-                foreach (Order order in orders)
+            {               
+                List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
+                foreach (MenuItem item in menus)
                 {
-                    string statusText = order.Status.ToString();
-                    if (order.Status == OrderStatus.NotStarted)
-                    {
-                        statusText = "Not Started";
-                    }
-                    else if (order.Status == OrderStatus.ReadyToServe)
-                    {
-                        statusText = "Ready-To-Serve";
-                    }
-                    statusText = "Status: " + statusText;
-                    // Show the UI separator.
-                    
+                    ListViewItem li = new ListViewItem(order.Status.ToString());
+                    li.SubItems.Add(item.Name.ToString());
+                    li.SubItems.Add(item.Quantity.ToString());
+                    li.SubItems.Add(order.PlacedTime.ToString());
+                    li.SubItems.Add(order.Comment.ToString());
 
-                    // If any of the orders have status different than "Served", that means not all of them have been served.
-                    if (order.Status != OrderStatus.Served)
-                    {
-                        allOrdersServed = false;
-                    }
-
-                    // Now we want the menu items that belong to that order.
-                    List<MenuItem> items = orderLogic.GetItemsForOrder(order);
-                    //foreach (MenuItem item in items)
-                    //{
-                    //    //new MenuItemTableDetailUI(flwMenuItems, item, lblSub.Left);
-                    //    total += item.Quantity * item.PriceBrutto;
-                    //}
+                    lv_TableDetailView.Items.Add(li);
                 }
-
-                //lblTotal.Text = $"{total} €";
-
-                // Is any order not served yet?
-                // Then we disable the button.
-                //btnCheckout.Enabled = allOrdersServed;
-
-                // Set the btnDummyTable picture and number according to the last button.
-                //btnDummyTable.Text = tableId.ToString();
-                //btnDummyTable.BackgroundImage = tableButtons[tableId - 1].Image;
-
-                // Finally, we can switch tabs.
-                //theTabControl.SelectedTab = tabPageTableDetails;
             }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex);
-            }
-        }
+        }    
         private void OnMarkOrderAsDelivered_Click(object sender, EventArgs events)
         {
             try
@@ -467,7 +416,7 @@ namespace RestaurantChapeau
             }
 
             // Refresh the window.
-            lv_TableDetailView_SelectedIndexChanged(currentTableNumber,currentBill);
+            lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
         }
 
         private void btnNewOrder_Click(object sender, EventArgs e)
@@ -484,24 +433,6 @@ namespace RestaurantChapeau
         private void pbTableDetailViewGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
-        }
-
-       
-
-
-
-        //private void picBackButton_Click(object sender, EventArgs e)
-        //{
-        //    if (theTabControl.SelectedTab != tabPageMain)
-        //    {
-        //        theTabControl.SelectedTab = tabPageMain;
-        //    }
-        //    else
-        //    {
-        //        this.Close();
-        //    }
-        //}
-
-
+        }     
     }
 }

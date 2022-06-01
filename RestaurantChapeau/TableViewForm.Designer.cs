@@ -362,7 +362,7 @@
             this.lv_TableDetailView.HideSelection = false;
             this.lv_TableDetailView.Location = new System.Drawing.Point(12, 74);
             this.lv_TableDetailView.Name = "lv_TableDetailView";
-            this.lv_TableDetailView.Size = new System.Drawing.Size(700, 402);
+            this.lv_TableDetailView.Size = new System.Drawing.Size(700, 605);
             this.lv_TableDetailView.TabIndex = 49;
             this.lv_TableDetailView.UseCompatibleStateImageBehavior = false;
             // 
