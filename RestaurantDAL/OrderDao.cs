@@ -82,7 +82,7 @@ namespace RestaurantDAL
             {
                 menuItem.IsDrink = Convert.ToBoolean(row["isDrink"]);
             }
-            if (!Convert.IsDBNull(row["stock"]))
+            if (row.Table.Columns.Contains("stock") && !Convert.IsDBNull(row["stock"]))
             {
                 menuItem.Stock = Convert.ToInt32(row["stock"]);
             }
