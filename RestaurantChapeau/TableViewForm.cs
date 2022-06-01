@@ -360,7 +360,7 @@ namespace RestaurantChapeau
                     // Bill has some orders?
                     // Show table details and load table's information.
                     pnl_TableDetailView.Show();
-                    lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
+                    lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);                    
                 }
             }
         }
@@ -394,10 +394,11 @@ namespace RestaurantChapeau
                     li.SubItems.Add(order.PlacedTime.ToString());
                     li.SubItems.Add(order.Comment.ToString());
 
-                    lv_TableDetailView.Items.Add(li);
+                    lv_TableDetailView.Items.Add(li);                    
                 }
-            }
-        }    
+            }           
+
+        }
         private void OnMarkOrderAsDelivered_Click(object sender, EventArgs events)
         {
             try
@@ -439,6 +440,17 @@ namespace RestaurantChapeau
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pnl_ViewReservation_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }               
+
+        private void btn_TableDetailViewAddOrder_Click(object sender, EventArgs e)
+        {
+            OrderView orderView = new OrderView(currentEmployee, currentBill, currentTableNumber);
+            orderView.Show();
         }
     }
 }

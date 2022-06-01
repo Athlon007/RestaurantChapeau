@@ -373,5 +373,10 @@ namespace RestaurantChapeau
                 }
             }
         }
+
+        private void lblConnecting_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

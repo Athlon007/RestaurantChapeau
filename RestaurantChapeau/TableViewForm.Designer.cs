@@ -54,6 +54,9 @@
             this.txt_ReservationTableID = new System.Windows.Forms.TextBox();
             this.btn_MakeReservation = new System.Windows.Forms.Button();
             this.pnl_TableDetailView = new System.Windows.Forms.Panel();
+            this.btn_TableDetailViewCheckOut = new System.Windows.Forms.Button();
+            this.btn_TableDetailViewAddOrder = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lbl_DisplayTableNr = new System.Windows.Forms.Label();
             this.lv_TableDetailView = new System.Windows.Forms.ListView();
             this.pbTableDetailViewGoBack = new System.Windows.Forms.PictureBox();
@@ -67,15 +70,18 @@
             this.btn_TableViewManageReservation = new System.Windows.Forms.Button();
             this.pbTableViewLogOut = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pnl_Reservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMakeReservationGoBack)).BeginInit();
             this.pnl_TableDetailView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).BeginInit();
             this.pnl_ViewReservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTableViewLogOut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Table1
@@ -351,6 +357,9 @@
             // 
             // pnl_TableDetailView
             // 
+            this.pnl_TableDetailView.Controls.Add(this.btn_TableDetailViewCheckOut);
+            this.pnl_TableDetailView.Controls.Add(this.btn_TableDetailViewAddOrder);
+            this.pnl_TableDetailView.Controls.Add(this.pictureBox3);
             this.pnl_TableDetailView.Controls.Add(this.lbl_DisplayTableNr);
             this.pnl_TableDetailView.Controls.Add(this.lv_TableDetailView);
             this.pnl_TableDetailView.Controls.Add(this.pbTableDetailViewGoBack);
@@ -358,6 +367,37 @@
             this.pnl_TableDetailView.Name = "pnl_TableDetailView";
             this.pnl_TableDetailView.Size = new System.Drawing.Size(726, 1055);
             this.pnl_TableDetailView.TabIndex = 51;
+            // 
+            // btn_TableDetailViewCheckOut
+            // 
+            this.btn_TableDetailViewCheckOut.Location = new System.Drawing.Point(503, 807);
+            this.btn_TableDetailViewCheckOut.Name = "btn_TableDetailViewCheckOut";
+            this.btn_TableDetailViewCheckOut.Size = new System.Drawing.Size(94, 29);
+            this.btn_TableDetailViewCheckOut.TabIndex = 53;
+            this.btn_TableDetailViewCheckOut.Text = "Check out";
+            this.btn_TableDetailViewCheckOut.UseVisualStyleBackColor = true;
+            // 
+            // btn_TableDetailViewAddOrder
+            // 
+            this.btn_TableDetailViewAddOrder.Location = new System.Drawing.Point(99, 807);
+            this.btn_TableDetailViewAddOrder.Name = "btn_TableDetailViewAddOrder";
+            this.btn_TableDetailViewAddOrder.Size = new System.Drawing.Size(136, 29);
+            this.btn_TableDetailViewAddOrder.TabIndex = 52;
+            this.btn_TableDetailViewAddOrder.Text = "Add order(s)";
+            this.btn_TableDetailViewAddOrder.UseVisualStyleBackColor = true;
+            this.btn_TableDetailViewAddOrder.Click += new System.EventHandler(this.btn_TableDetailViewAddOrder_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Black;
+            this.pictureBox3.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox3.Location = new System.Drawing.Point(612, 0);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(116, 80);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 51;
+            this.pictureBox3.TabStop = false;
             // 
             // lbl_DisplayTableNr
             // 
@@ -406,6 +446,7 @@
             this.pnl_ViewReservation.Name = "pnl_ViewReservation";
             this.pnl_ViewReservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ViewReservation.TabIndex = 33;
+            this.pnl_ViewReservation.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_ViewReservation_Paint_1);
             // 
             // pictureBox2
             // 
@@ -520,6 +561,18 @@
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label2.UseCompatibleTextRendering = true;
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Black;
+            this.pictureBox4.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox4.Location = new System.Drawing.Point(612, 0);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(116, 80);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 51;
+            this.pictureBox4.TabStop = false;
+            // 
             // TableViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -528,6 +581,7 @@
             this.ClientSize = new System.Drawing.Size(726, 1055);
             this.Controls.Add(this.pnl_TableDetailView);
             this.Controls.Add(this.pnl_Reservation);
+            this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pbTableViewLogOut);
             this.Controls.Add(this.pnl_ViewReservation);
@@ -551,11 +605,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMakeReservationGoBack)).EndInit();
             this.pnl_TableDetailView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).EndInit();
             this.pnl_ViewReservation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTableViewLogOut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -600,5 +656,9 @@
         private System.Windows.Forms.PictureBox pbTableDetailViewGoBack;
         private System.Windows.Forms.ListView lv_TableDetailView;
         private System.Windows.Forms.Label lbl_DisplayTableNr;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Button btn_TableDetailViewCheckOut;
+        private System.Windows.Forms.Button btn_TableDetailViewAddOrder;
     }
 }
