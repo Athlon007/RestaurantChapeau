@@ -53,6 +53,9 @@
             this.txt_ReservationEmail = new System.Windows.Forms.TextBox();
             this.txt_ReservationTableID = new System.Windows.Forms.TextBox();
             this.btn_MakeReservation = new System.Windows.Forms.Button();
+            this.pnl_TableDetailView = new System.Windows.Forms.Panel();
+            this.lv_TableDetailView = new System.Windows.Forms.ListView();
+            this.pbTableDetailViewGoBack = new System.Windows.Forms.PictureBox();
             this.pnl_ViewReservation = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -66,6 +69,8 @@
             this.pnl_Reservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMakeReservationGoBack)).BeginInit();
+            this.pnl_TableDetailView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).BeginInit();
             this.pnl_ViewReservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -81,7 +86,6 @@
             this.btn_Table1.TabIndex = 20;
             this.btn_Table1.Text = "1";
             this.btn_Table1.UseVisualStyleBackColor = true;
-            this.btn_Table1.Click += new System.EventHandler(this.btn_Table1_Click_1);
             // 
             // btn_Table2
             // 
@@ -93,7 +97,6 @@
             this.btn_Table2.TabIndex = 21;
             this.btn_Table2.Text = "2";
             this.btn_Table2.UseVisualStyleBackColor = true;
-            this.btn_Table2.Click += new System.EventHandler(this.btn_Table2_Click_1);
             // 
             // btn_Table3
             // 
@@ -104,7 +107,6 @@
             this.btn_Table3.TabIndex = 22;
             this.btn_Table3.Text = "3";
             this.btn_Table3.UseVisualStyleBackColor = true;
-            this.btn_Table3.Click += new System.EventHandler(this.btn_Table3_Click_1);
             // 
             // btn_Table4
             // 
@@ -115,7 +117,6 @@
             this.btn_Table4.TabIndex = 23;
             this.btn_Table4.Text = "4";
             this.btn_Table4.UseVisualStyleBackColor = true;
-            this.btn_Table4.Click += new System.EventHandler(this.btn_Table4_Click_1);
             // 
             // btn_Table5
             // 
@@ -126,7 +127,6 @@
             this.btn_Table5.TabIndex = 24;
             this.btn_Table5.Text = "5";
             this.btn_Table5.UseVisualStyleBackColor = true;
-            this.btn_Table5.Click += new System.EventHandler(this.btn_Table5_Click_1);
             // 
             // btn_Table6
             // 
@@ -137,7 +137,6 @@
             this.btn_Table6.TabIndex = 25;
             this.btn_Table6.Text = "6";
             this.btn_Table6.UseVisualStyleBackColor = true;
-            this.btn_Table6.Click += new System.EventHandler(this.btn_Table6_Click_1);
             // 
             // btn_Table7
             // 
@@ -148,7 +147,6 @@
             this.btn_Table7.TabIndex = 26;
             this.btn_Table7.Text = "7";
             this.btn_Table7.UseVisualStyleBackColor = true;
-            this.btn_Table7.Click += new System.EventHandler(this.btn_Table7_Click_1);
             // 
             // btn_Table8
             // 
@@ -159,7 +157,6 @@
             this.btn_Table8.TabIndex = 27;
             this.btn_Table8.Text = "8";
             this.btn_Table8.UseVisualStyleBackColor = true;
-            this.btn_Table8.Click += new System.EventHandler(this.btn_Table8_Click_1);
             // 
             // btn_Table9
             // 
@@ -170,7 +167,6 @@
             this.btn_Table9.TabIndex = 28;
             this.btn_Table9.Text = "9";
             this.btn_Table9.UseVisualStyleBackColor = true;
-            this.btn_Table9.Click += new System.EventHandler(this.btn_Table9_Click_1);
             // 
             // btn_Table10
             // 
@@ -181,7 +177,6 @@
             this.btn_Table10.TabIndex = 29;
             this.btn_Table10.Text = "10";
             this.btn_Table10.UseVisualStyleBackColor = true;
-            this.btn_Table10.Click += new System.EventHandler(this.btn_Table10_Click_1);
             // 
             // pnl_Reservation
             // 
@@ -353,6 +348,37 @@
             this.btn_MakeReservation.UseVisualStyleBackColor = false;
             this.btn_MakeReservation.Click += new System.EventHandler(this.btn_MakeReservation_Click);
             // 
+            // pnl_TableDetailView
+            // 
+            this.pnl_TableDetailView.Controls.Add(this.lv_TableDetailView);
+            this.pnl_TableDetailView.Controls.Add(this.pbTableDetailViewGoBack);
+            this.pnl_TableDetailView.Location = new System.Drawing.Point(0, 0);
+            this.pnl_TableDetailView.Name = "pnl_TableDetailView";
+            this.pnl_TableDetailView.Size = new System.Drawing.Size(726, 1055);
+            this.pnl_TableDetailView.TabIndex = 51;
+            // 
+            // lv_TableDetailView
+            // 
+            this.lv_TableDetailView.HideSelection = false;
+            this.lv_TableDetailView.Location = new System.Drawing.Point(12, 74);
+            this.lv_TableDetailView.Name = "lv_TableDetailView";
+            this.lv_TableDetailView.Size = new System.Drawing.Size(700, 402);
+            this.lv_TableDetailView.TabIndex = 49;
+            this.lv_TableDetailView.UseCompatibleStateImageBehavior = false;
+            // 
+            // pbTableDetailViewGoBack
+            // 
+            this.pbTableDetailViewGoBack.BackColor = System.Drawing.Color.Transparent;
+            this.pbTableDetailViewGoBack.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
+            this.pbTableDetailViewGoBack.Location = new System.Drawing.Point(7, 8);
+            this.pbTableDetailViewGoBack.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pbTableDetailViewGoBack.Name = "pbTableDetailViewGoBack";
+            this.pbTableDetailViewGoBack.Size = new System.Drawing.Size(62, 62);
+            this.pbTableDetailViewGoBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbTableDetailViewGoBack.TabIndex = 48;
+            this.pbTableDetailViewGoBack.TabStop = false;
+            this.pbTableDetailViewGoBack.Click += new System.EventHandler(this.pbTableDetailViewGoBack_Click);
+            // 
             // pnl_ViewReservation
             // 
             this.pnl_ViewReservation.Controls.Add(this.pictureBox2);
@@ -485,6 +511,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
+            this.Controls.Add(this.pnl_TableDetailView);
             this.Controls.Add(this.pnl_Reservation);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pbTableViewLogOut);
@@ -508,6 +535,8 @@
             this.pnl_Reservation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMakeReservationGoBack)).EndInit();
+            this.pnl_TableDetailView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).EndInit();
             this.pnl_ViewReservation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -552,5 +581,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pbTableViewLogOut;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel pnl_TableDetailView;
+        private System.Windows.Forms.PictureBox pbTableDetailViewGoBack;
+        private System.Windows.Forms.ListView lv_TableDetailView;
     }
 }
