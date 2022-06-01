@@ -12,7 +12,7 @@ using RestaurantDAL;
 namespace RestaurantChapeau
 {
     public partial class TableViewForm : Form
-    {
+    {        
         ReservationService reservationService = new ReservationService();
         PaymentService paymentService = new PaymentService();
         Reservation reservation = new Reservation();
@@ -376,6 +376,7 @@ namespace RestaurantChapeau
             lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
             List<Order> orders = orderLogic.GetOrdersForBill(bill);
             lv_TableDetailView.Clear();
+            lv_TableDetailView.Columns.Add("ID", 80, HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
@@ -388,7 +389,8 @@ namespace RestaurantChapeau
                 List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
                 foreach (MenuItem item in menus)
                 {
-                    ListViewItem li = new ListViewItem(order.Status.ToString());
+                    ListViewItem li = new ListViewItem(order.Id.ToString());
+                    li.SubItems.Add(order.Status.ToString());
                     li.SubItems.Add(item.Name.ToString());
                     li.SubItems.Add(item.Quantity.ToString());
                     li.SubItems.Add(order.PlacedTime.ToString());
@@ -449,8 +451,19 @@ namespace RestaurantChapeau
 
         private void btn_TableDetailViewAddOrder_Click(object sender, EventArgs e)
         {
-            OrderView orderView = new OrderView(currentEmployee, currentBill, currentTableNumber);
-            orderView.Show();
+            ShowOrderView(currentTableNumber, currentBill);            
+        }
+
+        private void btn_TableDetailViewChangeStatus_Click(object sender, EventArgs e)
+        {
+            
+            OrderLogic orderLogic = new OrderLogic();
+
+            Order orderItem = (Order)lv_TableDetailView.SelectedItems[0].Tag;
+            
+            orderItem.Status = OrderStatus.Served;
+
+            orderLogic.UpdateOrderStatus(orderItem);
         }
     }
 }

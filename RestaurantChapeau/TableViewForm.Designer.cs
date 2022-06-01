@@ -54,6 +54,7 @@
             this.txt_ReservationTableID = new System.Windows.Forms.TextBox();
             this.btn_MakeReservation = new System.Windows.Forms.Button();
             this.pnl_TableDetailView = new System.Windows.Forms.Panel();
+            this.btn_TableDetailViewChangeStatus = new System.Windows.Forms.Button();
             this.btn_TableDetailViewCheckOut = new System.Windows.Forms.Button();
             this.btn_TableDetailViewAddOrder = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -357,6 +358,7 @@
             // 
             // pnl_TableDetailView
             // 
+            this.pnl_TableDetailView.Controls.Add(this.btn_TableDetailViewChangeStatus);
             this.pnl_TableDetailView.Controls.Add(this.btn_TableDetailViewCheckOut);
             this.pnl_TableDetailView.Controls.Add(this.btn_TableDetailViewAddOrder);
             this.pnl_TableDetailView.Controls.Add(this.pictureBox3);
@@ -367,6 +369,16 @@
             this.pnl_TableDetailView.Name = "pnl_TableDetailView";
             this.pnl_TableDetailView.Size = new System.Drawing.Size(726, 1055);
             this.pnl_TableDetailView.TabIndex = 51;
+            // 
+            // btn_TableDetailViewChangeStatus
+            // 
+            this.btn_TableDetailViewChangeStatus.Location = new System.Drawing.Point(238, 51);
+            this.btn_TableDetailViewChangeStatus.Name = "btn_TableDetailViewChangeStatus";
+            this.btn_TableDetailViewChangeStatus.Size = new System.Drawing.Size(188, 29);
+            this.btn_TableDetailViewChangeStatus.TabIndex = 54;
+            this.btn_TableDetailViewChangeStatus.Text = "Mark as served";
+            this.btn_TableDetailViewChangeStatus.UseVisualStyleBackColor = true;
+            this.btn_TableDetailViewChangeStatus.Click += new System.EventHandler(this.btn_TableDetailViewChangeStatus_Click);
             // 
             // btn_TableDetailViewCheckOut
             // 
@@ -660,5 +672,6 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Button btn_TableDetailViewCheckOut;
         private System.Windows.Forms.Button btn_TableDetailViewAddOrder;
+        private System.Windows.Forms.Button btn_TableDetailViewChangeStatus;
     }
 }
