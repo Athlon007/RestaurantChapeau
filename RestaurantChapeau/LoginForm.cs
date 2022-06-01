@@ -228,8 +228,8 @@ namespace RestaurantChapeau
 
         private void btn_LoginLogin_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 //create connection to employee layer
                 EmployeeService employeeService = new EmployeeService();
 
@@ -265,16 +265,16 @@ namespace RestaurantChapeau
                 }
                 else
                     MessageBox.Show("Login failed.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Login failed: {ex.Message}");
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Login failed: {ex.Message}");
 
-                //clear the text boxes
-                txt_LoginEmail.Text = "";
-                txt_LoginPassword.Text = "";
+            //    //clear the text boxes
+            //    txt_LoginEmail.Text = "";
+            //    txt_LoginPassword.Text = "";
 
-            }
+            //}
 
         }
 
