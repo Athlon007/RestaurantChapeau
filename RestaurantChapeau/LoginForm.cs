@@ -30,6 +30,7 @@ namespace RestaurantChapeau
         private void Form1_Load(object sender, EventArgs e)
         {
             HidePanels();
+            btn_LoginRegister.Show();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -165,54 +166,56 @@ namespace RestaurantChapeau
             string specialCharacters = "!#$%&()*+,-./:;<=>?@[]^_`{|}~";
 
             //the number of conditions to be met 
-            int goodConditions = 5;
+            //int goodConditions = 5;
+            int goodConditions = 1;
 
             //the current conditions
             int conditions = 0;
 
             //if the length of the password is greater than 8, add 1 to the current conditions
-            if (password.Length >= 8)
+            //if (password.Length >= 8)
+            if(password.Length == 4)
                 conditions++;
 
-            //if the password contains at least 1 lowercase character, add 1 to the current conditions
-            foreach (char c in password)
-            {
-                if (c >= 'a' && c <= 'z')
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 lowercase character, add 1 to the current conditions
+            //foreach (char c in password)
+            //{
+            //    if (c >= 'a' && c <= 'z')
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
-            //if the password contains at least 1 uppercase character, add 1 to the current conditions
-            foreach (char c in password)
-            {
-                if (c >= 'A' && c <= 'Z')
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 uppercase character, add 1 to the current conditions
+            //foreach (char c in password)
+            //{
+            //    if (c >= 'A' && c <= 'Z')
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
-            //if the password contains at least 1 number, add 1 to the current conditions
-            foreach (char c in password)
-            {
-                if (c >= '0' && c <= '9')
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 number, add 1 to the current conditions
+            //foreach (char c in password)
+            //{
+            //    if (c >= '0' && c <= '9')
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
-            //if the password contains at least 1 special character, add 1 to the current conditions
-            foreach (char c in specialCharacters)
-            {
-                if (password.Contains(c))
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 special character, add 1 to the current conditions
+            //foreach (char c in specialCharacters)
+            //{
+            //    if (password.Contains(c))
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
             //return true if the current conditions are the same as the goodconditions, false otherwise
             return conditions == goodConditions;

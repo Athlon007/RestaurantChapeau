@@ -167,7 +167,7 @@
             this.pnl_ForgotPassword.Controls.Add(this.textBox2);
             this.pnl_ForgotPassword.Controls.Add(this.textBox1);
             this.pnl_ForgotPassword.Controls.Add(this.pictureBox3);
-            this.pnl_ForgotPassword.Location = new System.Drawing.Point(0, 0);
+            this.pnl_ForgotPassword.Location = new System.Drawing.Point(559, 87);
             this.pnl_ForgotPassword.Name = "pnl_ForgotPassword";
             this.pnl_ForgotPassword.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ForgotPassword.TabIndex = 9;
@@ -264,6 +264,7 @@
             // 
             // pnl_Register
             // 
+            this.pnl_Register.Controls.Add(this.pnl_ForgotPassword);
             this.pnl_Register.Controls.Add(this.lbl_RegisterPassword);
             this.pnl_Register.Controls.Add(this.txt_RegisterPassword);
             this.pnl_Register.Controls.Add(this.btn_RegisterLogin);
@@ -275,7 +276,7 @@
             this.pnl_Register.Controls.Add(this.txt_RegisterEmail);
             this.pnl_Register.Controls.Add(this.txt_RegisterLastName);
             this.pnl_Register.Controls.Add(this.txt_RegisterFirstName);
-            this.pnl_Register.Location = new System.Drawing.Point(0, 0);
+            this.pnl_Register.Location = new System.Drawing.Point(523, 44);
             this.pnl_Register.Name = "pnl_Register";
             this.pnl_Register.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Register.TabIndex = 11;
@@ -408,7 +409,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
-            this.Controls.Add(this.pnl_ForgotPassword);
             this.Controls.Add(this.pnl_Register);
             this.Controls.Add(this.btn_LoginRegister);
             this.Controls.Add(this.pictureBox1);
