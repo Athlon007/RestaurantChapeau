@@ -16,6 +16,7 @@ namespace RestaurantChapeau
     {
         int secs, mins,hours;
         bool IsActive;
+        bool KitchenMode { get; set; }  
 
         public KitchenViewForm()
         {
@@ -27,12 +28,13 @@ namespace RestaurantChapeau
             ResetTimer();
         }
 
-      
-
+     
         public void DisplayOrders()
         {
+            //if false= bar view else kitchen view
+            KitchenMode = false;
             OrderLogic orderService = new OrderLogic();
-            List<Order> orders = orderService.GetOrdersToPrepare();
+            List<Order> orders = orderService.GetKitchenOrdersToPrepare();
 
            // RemoveListViewItems(listViewNewOrders);
             foreach (Order order in orders)
@@ -54,12 +56,17 @@ namespace RestaurantChapeau
                 }
             }
         }
+
+
         private void DisplayOrderItems()
         {
+            List<MenuItem> orderMenuItems;
             OrderLogic orderService = new OrderLogic();
             
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
+
+            // get table number from the database where orderid is selected item
             Table table = orderService.GetOrderTable(orderItem.Id);
             
             lblKitchenn_OrderNo.Text = orderItem.Id.ToString();
@@ -69,9 +76,17 @@ namespace RestaurantChapeau
             Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
             lbl_OrderComments.Text = selectedOrder.Comment;
 
-            // select from database which items have the order id of the id stated in the listview
-            List<MenuItem> orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
-
+           //if kitchenmode is true, display only kitchen items 
+           
+            if (KitchenMode)
+            {
+                orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
+            }
+            else // display bar items
+            {
+                orderMenuItems = orderService.GetBarOrderItemsByID(orderItem.Id);
+            }
+            
             // delete all the items in the listview before adding new ones
             RemoveListViewItems(listViewKitchen_ActiveOrder);
 

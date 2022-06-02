@@ -192,7 +192,7 @@ namespace RestaurantDAL
         /// <summary>
         /// Returns the list of orders that are either not started, or being prepared with all the items.
         /// </summary>
-        public List<Order> GetOrdersToPrepare()
+        public List<Order> GetKitchenOrdersToPrepare()
         {
             string query = "SELECT o.[id], o.placedTime, o.status, o.comment " +
                             "FROM[Order] o " +
@@ -202,10 +202,22 @@ namespace RestaurantDAL
 
         }
 
-        //Returns all the items in an order with a specific orderID
+        //Returns all the food items in an order with a specific orderID
         public List<MenuItem> GetOrderItemsByID(int orderId)
         {
             string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderId", orderId)
+            };
+
+            return ReadMenuItems(ExecuteSelectQuery(selectItemsQuery, parameters));
+        }
+
+        //Returns all the items in an order with a specific orderID
+        public List<MenuItem> GetBarOrderItemsByID(int orderId)
+        {
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is NOT null;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderId", orderId)
