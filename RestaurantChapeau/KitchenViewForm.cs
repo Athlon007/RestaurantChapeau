@@ -16,7 +16,8 @@ namespace RestaurantChapeau
     {
         int secs, mins, hours;
         bool IsActive;
-        bool KitchenMode { get; set; }
+        bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
+        bool kitchenMode;
 
         public KitchenViewForm()
         {
@@ -32,7 +33,8 @@ namespace RestaurantChapeau
         public void DisplayOrders()
         {
             //if false= bar view else kitchen view
-            KitchenMode = false;
+            kitchenMode = false;
+
             OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetKitchenOrdersToPrepare();
 
