@@ -16,8 +16,8 @@ namespace RestaurantChapeau
     {
         int secs, mins, hours;
         bool IsActive;
-        bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
-        bool kitchenMode;
+       public bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
+       private bool kitchenMode;
 
         public KitchenViewForm()
         {
@@ -29,7 +29,7 @@ namespace RestaurantChapeau
             ResetTimer();
         }
 
-
+        #region Display Orders
         public void DisplayOrders()
         {
             //if false= bar view else kitchen view
@@ -58,8 +58,9 @@ namespace RestaurantChapeau
                 }
             }
         }
+        #endregion
 
-
+        #region Display Order Items
         private void DisplayOrderItems()
         {
             List<MenuItem> orderMenuItems;
@@ -101,6 +102,7 @@ namespace RestaurantChapeau
                 listViewKitchen_ActiveOrder.Items.Add(li);
             }
         }
+        #endregion
 
         #region Select item in new orders list view
         private void listViewNewOrders_Click(object sender, EventArgs e)

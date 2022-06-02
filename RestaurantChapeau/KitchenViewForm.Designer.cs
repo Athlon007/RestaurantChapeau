@@ -40,7 +40,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pnlKitchen_CompleteOrders = new System.Windows.Forms.Panel();
             this.picLogo = new System.Windows.Forms.PictureBox();
-            this.btnKitchen_ClearOrders = new System.Windows.Forms.Button();
             this.lbl_completedOrders = new System.Windows.Forms.Label();
             this.listViewKitchen_CompleteOrders = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -160,7 +159,6 @@
             // pnlKitchen_CompleteOrders
             // 
             this.pnlKitchen_CompleteOrders.Controls.Add(this.picLogo);
-            this.pnlKitchen_CompleteOrders.Controls.Add(this.btnKitchen_ClearOrders);
             this.pnlKitchen_CompleteOrders.Controls.Add(this.lbl_completedOrders);
             this.pnlKitchen_CompleteOrders.Controls.Add(this.listViewKitchen_CompleteOrders);
             this.pnlKitchen_CompleteOrders.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -179,17 +177,6 @@
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picLogo.TabIndex = 10;
             this.picLogo.TabStop = false;
-            // 
-            // btnKitchen_ClearOrders
-            // 
-            this.btnKitchen_ClearOrders.BackColor = System.Drawing.Color.Salmon;
-            this.btnKitchen_ClearOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnKitchen_ClearOrders.Location = new System.Drawing.Point(1457, 1053);
-            this.btnKitchen_ClearOrders.Name = "btnKitchen_ClearOrders";
-            this.btnKitchen_ClearOrders.Size = new System.Drawing.Size(235, 46);
-            this.btnKitchen_ClearOrders.TabIndex = 9;
-            this.btnKitchen_ClearOrders.Text = "Clear Orders";
-            this.btnKitchen_ClearOrders.UseVisualStyleBackColor = false;
             // 
             // lbl_completedOrders
             // 
@@ -535,7 +522,6 @@
 
         private System.Windows.Forms.Panel pnlKitchen_NewOrders;
         private System.Windows.Forms.Panel pnlKitchen_CompleteOrders;
-        private System.Windows.Forms.Button btnKitchen_ClearOrders;
         private System.Windows.Forms.Label lbl_completedOrders;
         private System.Windows.Forms.ListView listViewKitchen_CompleteOrders;
         private System.Windows.Forms.ColumnHeader columnHeader1;
