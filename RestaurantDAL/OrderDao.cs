@@ -279,6 +279,27 @@ namespace RestaurantDAL
             return orders;
 
         }
+
+        public Table GetOrderTable(int orderId)
+        {
+            string selectItemsQuery = "select tableId from Bill join [Order] on Bill.id = [Order].billId where [Order].id=@OrderId;";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderId", orderId)
+            };
+
+            return ReadTable(ExecuteSelectQuery(selectItemsQuery, parameters));
+        }
+
+        private Table ReadTable(DataTable table)
+        {
+            DataRow row = table.Rows[0];
+            Table table1 = new Table
+            {
+                Id = Convert.ToInt32(row["tableId"]),
+            };
+            return table1;
+        }
     }
 }
 

@@ -27,12 +27,7 @@ namespace RestaurantChapeau
             ResetTimer();
         }
 
-        private  void ResetTimer()
-        {
-            secs = 0;
-            mins = 0;
-            hours = 0;
-        }
+      
 
         public void DisplayOrders()
         {
@@ -49,7 +44,7 @@ namespace RestaurantChapeau
                 li.Tag = order;
 
                 //if order is ready add to completed orders page or add to new order page
-                if (order.Status==OrderStatus.ReadyToServe)
+                if (order.Status>=OrderStatus.ReadyToServe)
                 {
                     listViewKitchen_CompleteOrders.Items.Add(li);
                 }
@@ -62,10 +57,13 @@ namespace RestaurantChapeau
         private void DisplayOrderItems()
         {
             OrderLogic orderService = new OrderLogic();
+            
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
-
+            Table table = orderService.GetOrderTable(orderItem.Id);
+            
             lblKitchenn_OrderNo.Text = orderItem.Id.ToString();
+            lbl_tableNo.Text = table.Id.ToString();
 
             //get the order comment by the orderID
             Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
@@ -131,7 +129,6 @@ namespace RestaurantChapeau
         }
         #endregion
 
-
         #region Ready Order Button
         private void btn_readyOrder_Click(object sender, EventArgs e)
         {
@@ -179,6 +176,7 @@ namespace RestaurantChapeau
         }
         #endregion
 
+        #region Timer 
         private void Timer()
         {
             lblMins.Text = mins.ToString(":00");
@@ -205,15 +203,33 @@ namespace RestaurantChapeau
 
             Timer();
         }
+
+        private void sidebarPanelCompleteOrder_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ResetTimer()
+        {
+            secs = 0;
+            mins = 0;
+            hours = 0;
+        }
+        #endregion
+
+        #region Fonts
         public void SetFonts()
         {
             lbl_activeOrder.Font = FontManager.Instance.ScriptMT(lbl_activeOrder.Font.Size);
             lbl_completedOrders.Font = FontManager.Instance.ScriptMT(lbl_completedOrders.Font.Size);
             lbl_newOrders.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
+            lblKitchenn_OrderNo.Font= FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
 
             lbl_activeOrder.UseCompatibleTextRendering = true;
             lbl_completedOrders.UseCompatibleTextRendering = true;
             lbl_newOrders.UseCompatibleTextRendering = true;
+            lblKitchenn_OrderNo.UseCompatibleTextRendering = true;
         }
+        #endregion  
     }
 }

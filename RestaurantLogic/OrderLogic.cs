@@ -100,5 +100,11 @@ namespace RestaurantLogic
         {
             return orderDao.GetOrderCommentByID(orderID);
         }
+
+        public Table GetOrderTable(int orderId)
+        {
+            return orderDao.GetOrderTable(orderId);
+        }
     }
+
 }
