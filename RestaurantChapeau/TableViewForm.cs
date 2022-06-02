@@ -22,10 +22,11 @@ namespace RestaurantChapeau
         OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
         int currentTableNumber;
+        Order order = new Order();
         public TableViewForm(Employee employee)
         {
             InitializeComponent();
-            currentEmployee = employee;
+            currentEmployee = employee;      
 
             tableButtons = new Button[]
             {
@@ -382,9 +383,9 @@ namespace RestaurantChapeau
             lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Comment", 250, HorizontalAlignment.Left);
 
-            lv_TableDetailView.View = View.Details;            
+            lv_TableDetailView.View = View.Details;
+
             foreach (Order order in orders)
             {               
                 List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
@@ -395,8 +396,7 @@ namespace RestaurantChapeau
                     li.SubItems.Add(item.Name.ToString());
                     li.SubItems.Add(item.Quantity.ToString());
                     li.SubItems.Add(order.PlacedTime.ToString());
-                    li.SubItems.Add(order.Comment.ToString());
-
+                    li.Tag = order;
                     lv_TableDetailView.Items.Add(li);                    
                 }
             }           
@@ -442,7 +442,8 @@ namespace RestaurantChapeau
             
             orderItem.Status = OrderStatus.Served;
 
-            orderLogic.UpdateOrderStatus(orderItem);                        
+            orderLogic.UpdateOrderStatus(orderItem);
+            lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
         }
     }
 }
