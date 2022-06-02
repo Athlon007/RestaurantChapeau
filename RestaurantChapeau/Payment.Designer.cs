@@ -79,6 +79,8 @@
             this.backPaymentType = new System.Windows.Forms.Label();
             this.LogoPayment3 = new System.Windows.Forms.PictureBox();
             this.pnlCashPayment = new System.Windows.Forms.Panel();
+            this.valueTipCash = new System.Windows.Forms.TextBox();
+            this.btnTipCash = new System.Windows.Forms.Button();
             this.ValueReturn = new System.Windows.Forms.Label();
             this.valueToPay = new System.Windows.Forms.Label();
             this.lblReturn = new System.Windows.Forms.Label();
@@ -95,6 +97,10 @@
             this.backInvoice = new System.Windows.Forms.Label();
             this.LogoPayment2 = new System.Windows.Forms.PictureBox();
             this.headingPaymentType = new System.Windows.Forms.Label();
+            this.pnlPaymentSucessful = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.lblSucess = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment1)).BeginInit();
             this.groupBoxMoreInfo.SuspendLayout();
@@ -108,6 +114,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).BeginInit();
+            this.pnlPaymentSucessful.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // paymentBackButton1
@@ -636,6 +645,8 @@
             // 
             // pnlCashPayment
             // 
+            this.pnlCashPayment.Controls.Add(this.valueTipCash);
+            this.pnlCashPayment.Controls.Add(this.btnTipCash);
             this.pnlCashPayment.Controls.Add(this.ValueReturn);
             this.pnlCashPayment.Controls.Add(this.valueToPay);
             this.pnlCashPayment.Controls.Add(this.lblReturn);
@@ -650,6 +661,30 @@
             this.pnlCashPayment.Name = "pnlCashPayment";
             this.pnlCashPayment.Size = new System.Drawing.Size(1135, 1364);
             this.pnlCashPayment.TabIndex = 34;
+            // 
+            // valueTipCash
+            // 
+            this.valueTipCash.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.valueTipCash.Location = new System.Drawing.Point(184, 209);
+            this.valueTipCash.MaximumSize = new System.Drawing.Size(700, 91);
+            this.valueTipCash.MinimumSize = new System.Drawing.Size(100, 91);
+            this.valueTipCash.Name = "valueTipCash";
+            this.valueTipCash.Size = new System.Drawing.Size(553, 65);
+            this.valueTipCash.TabIndex = 39;
+            // 
+            // btnTipCash
+            // 
+            this.btnTipCash.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnTipCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnTipCash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTipCash.Location = new System.Drawing.Point(736, 207);
+            this.btnTipCash.Margin = new System.Windows.Forms.Padding(5);
+            this.btnTipCash.Name = "btnTipCash";
+            this.btnTipCash.Size = new System.Drawing.Size(203, 93);
+            this.btnTipCash.TabIndex = 38;
+            this.btnTipCash.Text = "ADD TIP";
+            this.btnTipCash.UseVisualStyleBackColor = false;
+            this.btnTipCash.Click += new System.EventHandler(this.btnTipCash_Click);
             // 
             // ValueReturn
             // 
@@ -834,12 +869,53 @@
             this.headingPaymentType.Text = "Choose the payment type";
             this.headingPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pnlPaymentSucessful
+            // 
+            this.pnlPaymentSucessful.Controls.Add(this.pictureBox1);
+            this.pnlPaymentSucessful.Controls.Add(this.lblSucess);
+            this.pnlPaymentSucessful.Controls.Add(this.pictureBox2);
+            this.pnlPaymentSucessful.Location = new System.Drawing.Point(0, -1);
+            this.pnlPaymentSucessful.Name = "pnlPaymentSucessful";
+            this.pnlPaymentSucessful.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlPaymentSucessful.TabIndex = 29;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Black;
+            this.pictureBox2.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox2.Location = new System.Drawing.Point(381, 153);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(365, 232);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 17;
+            this.pictureBox2.TabStop = false;
+            // 
+            // lblSucess
+            // 
+            this.lblSucess.AutoSize = true;
+            this.lblSucess.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSucess.Location = new System.Drawing.Point(349, 823);
+            this.lblSucess.Name = "lblSucess";
+            this.lblSucess.Size = new System.Drawing.Size(441, 65);
+            this.lblSucess.TabIndex = 32;
+            this.lblSucess.Text = "Payment sucessful";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::RestaurantChapeau.Properties.Resources.tick;
+            this.pictureBox1.Location = new System.Drawing.Point(393, 435);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(333, 334);
+            this.pictureBox1.TabIndex = 33;
+            this.pictureBox1.TabStop = false;
+            // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1138, 1362);
+            this.Controls.Add(this.pnlPaymentSucessful);
             this.Controls.Add(this.pnlPaymentType);
             this.Controls.Add(this.groupBoxMoreInfo);
             this.Controls.Add(this.btnProcessPayment);
@@ -875,6 +951,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).EndInit();
+            this.pnlPaymentSucessful.ResumeLayout(false);
+            this.pnlPaymentSucessful.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -949,5 +1029,11 @@
         private System.Windows.Forms.PictureBox paymentBackButton4;
         private System.Windows.Forms.Label headingPaymentType2;
         private System.Windows.Forms.PictureBox LogoPayment4;
+        private System.Windows.Forms.TextBox valueTipCash;
+        private System.Windows.Forms.Button btnTipCash;
+        private System.Windows.Forms.Panel pnlPaymentSucessful;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblSucess;
     }
 }

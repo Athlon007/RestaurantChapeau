@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,12 +27,16 @@ namespace RestaurantChapeau
         const int WindowHeight = 830;
         decimal subtotal = 0;
         decimal tax = 0;
+        decimal tip = 0;
+        decimal totalPrice = 0;
         public Payment()
         {
             InitializeComponent();
             HideAllPanels();
             DPIScaler.Instance.UpdateToForm(this);
-            valueTip.KeyPress += valueTip_KeyPress;
+            valueTip.KeyPress += intInput_KeyPress;
+            PaidValue.KeyPress += intInput_KeyPress;
+            valueTipCash.KeyPress += intInput_KeyPress;
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
             this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
         }
@@ -43,6 +48,7 @@ namespace RestaurantChapeau
             lblPaymentHeader.Text = $"Table {bill.Table.Id.ToString()}";
             valueInvoiceDate.Text = DateTime.Now.ToString();
             valueTip.Text = "0.00";
+            valueTipCash.Text = "0.00";
             List<Order> orders = paymentService.GetAllOrdersInBill(bill.Id);
             List<MenuItem> items = new List<MenuItem>();
             foreach (Order order in orders)
@@ -74,6 +80,7 @@ namespace RestaurantChapeau
             SubtotalValue.Text = $"{subtotal} €";
             TaxValue.Text = $"{tax.ToString("#.##")} €";
             TotalValue.Text = $"{(subtotal + tax).ToString("#.##")} €";
+            totalPrice = Convert.ToDecimal(subtotal + tax + tip, new CultureInfo("en-US"));
         }
         private async Task ConnectToServer()
         {
@@ -98,29 +105,25 @@ namespace RestaurantChapeau
             pnlPaymentType.Hide();
             pnlCardDetails.Hide();
             pnlCashPayment.Hide();
+            pnlPaymentSucessful.Hide();
         }
 
         private void btnCard_Click(object sender, EventArgs e)
         {
             valueSubtotal2.Text = TotalValue.Text;
             valueTip2.Text = $"0,00 €";
-            valueTotal2.Text = $"{Convert.ToDecimal(subtotal + tax, new CultureInfo("en-US")).ToString("#.##")} €";
+            valueTotal2.Text = $"{totalPrice.ToString("#.##")} €";
             pnlCardDetails.Show();
         }
 
         private void paymentBackButton3_Click(object sender, EventArgs e)
         {
+            tip = 0;
+            valueTip.Text = "0.00";
             pnlCardDetails.Hide();
         }
 
-        private void btnTip_Click(object sender, EventArgs e)
-        {
-            decimal tip = Convert.ToDecimal(valueTip.Text, new CultureInfo("en-US"));
-            valueTip2.Text = $"{tip} €";
-            valueTotal2.Text = $"{Convert.ToDecimal(subtotal + tax + tip, new CultureInfo("en-US")).ToString("#.##")} €";
-        }
-
-        private void valueTip_KeyPress(object sender, KeyPressEventArgs e)
+        private void intInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
                 (e.KeyChar != '.'))
@@ -137,14 +140,54 @@ namespace RestaurantChapeau
 
         private void btnCash_Click(object sender, EventArgs e)
         {
-            valueToPay.Text = $"{Convert.ToDecimal(subtotal + tax, new CultureInfo("en-US")).ToString("#.##")} €";
+            tip = 0;
+            valueToPay.Text = $"{totalPrice.ToString("#.##")} €";
             pnlCashPayment.Show();
             
         }
 
         private void paymentBackButton4_Click(object sender, EventArgs e)
         {
+            tip = 0;
+            valueTipCash.Text = "0.00";
             pnlCashPayment.Hide();
+        }
+
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            ValueReturn.Text = Convert.ToDecimal(Convert.ToDecimal(PaidValue.Text, new CultureInfo("en-US")) - totalPrice).ToString("#.##");
+        }
+
+        private void btnTip_Click(object sender, EventArgs e)
+        {
+            tip = Convert.ToDecimal(valueTip.Text, new CultureInfo("en-US"));
+            totalPrice = Convert.ToDecimal(subtotal + tax + tip, new CultureInfo("en-US"));
+            valueTip2.Text = $"{tip} €";
+            valueTotal2.Text = $"{totalPrice.ToString("#.##")} €";
+        }
+        private void btnTipCash_Click(object sender, EventArgs e)
+        {
+            tip = Convert.ToDecimal(valueTipCash.Text, new CultureInfo("en-US"));
+            totalPrice = Convert.ToDecimal(subtotal + tax + tip, new CultureInfo("en-US"));
+            valueToPay.Text = $"{totalPrice.ToString("#.##")} €";
+        }
+
+        private void btnConfirmPayment_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConfirmCashPayment_Click(object sender, EventArgs e)
+        {
+            int billId = bill.Id;
+            string comment = valueComment.Text;
+            // paymentService.CreatePayment(billId, totalPrice, comment, tip);
+            HideAllPanels();
+            pnlPaymentSucessful.Show();
+            
+            // Thread.Sleep(3000);
+            // HideAllPanels();
+
         }
     }
 }
