@@ -14,9 +14,9 @@ namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
     {
-        int secs, mins,hours;
+        int secs, mins, hours;
         bool IsActive;
-        bool KitchenMode { get; set; }  
+        bool KitchenMode { get; set; }
 
         public KitchenViewForm()
         {
@@ -24,11 +24,11 @@ namespace RestaurantChapeau
             SetFonts();
             DisplayOrders();
             //Timer();
- 
+
             ResetTimer();
         }
 
-     
+
         public void DisplayOrders()
         {
             //if false= bar view else kitchen view
@@ -36,7 +36,7 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetKitchenOrdersToPrepare();
 
-           // RemoveListViewItems(listViewNewOrders);
+            // RemoveListViewItems(listViewNewOrders);
             foreach (Order order in orders)
             {
                 //create new listview item and add the items to the listview item
@@ -46,7 +46,7 @@ namespace RestaurantChapeau
                 li.Tag = order;
 
                 //if order is ready add to completed orders page or add to new order page
-                if (order.Status>=OrderStatus.ReadyToServe)
+                if (order.Status >= OrderStatus.ReadyToServe)
                 {
                     listViewKitchen_CompleteOrders.Items.Add(li);
                 }
@@ -62,13 +62,13 @@ namespace RestaurantChapeau
         {
             List<MenuItem> orderMenuItems;
             OrderLogic orderService = new OrderLogic();
-            
+
             //extract order item from the selected item in the listview
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
             // get table number from the database where orderid is selected item
             Table table = orderService.GetOrderTable(orderItem.Id);
-            
+
             lblKitchenn_OrderNo.Text = orderItem.Id.ToString();
             lbl_tableNo.Text = table.Id.ToString();
 
@@ -76,8 +76,8 @@ namespace RestaurantChapeau
             Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
             lbl_OrderComments.Text = selectedOrder.Comment;
 
-           //if kitchenmode is true, display only kitchen items 
-           
+            //if kitchenmode is true, display only kitchen items 
+
             if (KitchenMode)
             {
                 orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
@@ -86,7 +86,7 @@ namespace RestaurantChapeau
             {
                 orderMenuItems = orderService.GetBarOrderItemsByID(orderItem.Id);
             }
-            
+
             // delete all the items in the listview before adding new ones
             RemoveListViewItems(listViewKitchen_ActiveOrder);
 
@@ -154,18 +154,27 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
 
+            //save the name of the highlighted menu item into a string
+            string menuItem = listViewKitchen_ActiveOrder.FocusedItem.Text;
+
             //if all the items on the listview are selected, change status to ready else preparing
-            if (listViewKitchen_ActiveOrder.CheckedItems.Count==listViewKitchen_ActiveOrder.Items.Count)
+            if (listViewKitchen_ActiveOrder.CheckedItems.Count == listViewKitchen_ActiveOrder.Items.Count)
             {
                 orderItem.Status = OrderStatus.ReadyToServe;
-                MessageBox.Show($"Order {orderItem.Id} has been completed");
+                MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
                 IsActive = false;
+            }
+            else if (listViewKitchen_ActiveOrder.CheckedItems.Count == 0)
+            {
+                MessageBox.Show($"Please select an item to mark ready");
             }
             else
             {
                 orderItem.Status = OrderStatus.Preparing;
-                MessageBox.Show($"{orderItem.ToString()} is now ready");
+                listViewKitchen_ActiveOrder.FocusedItem.BackColor = Color.Green;
+                MessageBox.Show($"Item {menuItem} is now ready");
             }
+            // update the new order status with this new status
             orderService.UpdateOrderStatus(orderItem);
 
             //remove the items on the new order listview and update with new information
@@ -198,17 +207,17 @@ namespace RestaurantChapeau
             lblSecs.Text = secs.ToString(":00");
             lblHours.Text = hours.ToString("00");
         }
-        
+
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             if (IsActive)
             {
                 secs++;
-                if (secs>=60)
+                if (secs >= 60)
                 {
                     mins++;
                     secs = 0;
-                    if (mins==60)
+                    if (mins == 60)
                     {
                         hours++;
                         mins = 0;
@@ -238,7 +247,7 @@ namespace RestaurantChapeau
             lbl_activeOrder.Font = FontManager.Instance.ScriptMT(lbl_activeOrder.Font.Size);
             lbl_completedOrders.Font = FontManager.Instance.ScriptMT(lbl_completedOrders.Font.Size);
             lbl_newOrders.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
-            lblKitchenn_OrderNo.Font= FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
+            lblKitchenn_OrderNo.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
 
             lbl_activeOrder.UseCompatibleTextRendering = true;
             lbl_completedOrders.UseCompatibleTextRendering = true;
