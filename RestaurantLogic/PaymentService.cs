@@ -41,9 +41,9 @@ namespace RestaurantLogic
         public Bill CreateBill(int tableID) {
             return paymentDb.CreateBill(tableID);
         }
-        public void CreatePayment(int billId, DateTime dateTime, decimal amountPaid, string comment, decimal tip)
+        public void CreatePayment(int billId, decimal amountPaid, string comment, decimal tip)
         {
-            paymentDb.CreatePayment(billId, dateTime, amountPaid, comment, tip);
+            paymentDb.CreatePayment(billId, amountPaid, comment, tip);
         }
 
         public bool HasBill(int tableID)
