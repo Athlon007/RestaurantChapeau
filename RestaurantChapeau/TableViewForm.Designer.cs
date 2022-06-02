@@ -372,31 +372,36 @@
             // 
             // btn_TableDetailViewChangeStatus
             // 
-            this.btn_TableDetailViewChangeStatus.Location = new System.Drawing.Point(238, 51);
+            this.btn_TableDetailViewChangeStatus.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btn_TableDetailViewChangeStatus.Location = new System.Drawing.Point(57, 703);
             this.btn_TableDetailViewChangeStatus.Name = "btn_TableDetailViewChangeStatus";
-            this.btn_TableDetailViewChangeStatus.Size = new System.Drawing.Size(188, 29);
+            this.btn_TableDetailViewChangeStatus.Size = new System.Drawing.Size(148, 29);
             this.btn_TableDetailViewChangeStatus.TabIndex = 54;
             this.btn_TableDetailViewChangeStatus.Text = "Mark as served";
-            this.btn_TableDetailViewChangeStatus.UseVisualStyleBackColor = true;
+            this.btn_TableDetailViewChangeStatus.UseVisualStyleBackColor = false;
             this.btn_TableDetailViewChangeStatus.Click += new System.EventHandler(this.btn_TableDetailViewChangeStatus_Click);
             // 
             // btn_TableDetailViewCheckOut
             // 
-            this.btn_TableDetailViewCheckOut.Location = new System.Drawing.Point(503, 807);
+            this.btn_TableDetailViewCheckOut.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btn_TableDetailViewCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_TableDetailViewCheckOut.Location = new System.Drawing.Point(412, 886);
             this.btn_TableDetailViewCheckOut.Name = "btn_TableDetailViewCheckOut";
-            this.btn_TableDetailViewCheckOut.Size = new System.Drawing.Size(94, 29);
+            this.btn_TableDetailViewCheckOut.Size = new System.Drawing.Size(255, 58);
             this.btn_TableDetailViewCheckOut.TabIndex = 53;
             this.btn_TableDetailViewCheckOut.Text = "Check out";
-            this.btn_TableDetailViewCheckOut.UseVisualStyleBackColor = true;
+            this.btn_TableDetailViewCheckOut.UseVisualStyleBackColor = false;
             // 
             // btn_TableDetailViewAddOrder
             // 
-            this.btn_TableDetailViewAddOrder.Location = new System.Drawing.Point(99, 807);
+            this.btn_TableDetailViewAddOrder.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btn_TableDetailViewAddOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_TableDetailViewAddOrder.Location = new System.Drawing.Point(57, 886);
             this.btn_TableDetailViewAddOrder.Name = "btn_TableDetailViewAddOrder";
-            this.btn_TableDetailViewAddOrder.Size = new System.Drawing.Size(136, 29);
+            this.btn_TableDetailViewAddOrder.Size = new System.Drawing.Size(255, 58);
             this.btn_TableDetailViewAddOrder.TabIndex = 52;
             this.btn_TableDetailViewAddOrder.Text = "Add order(s)";
-            this.btn_TableDetailViewAddOrder.UseVisualStyleBackColor = true;
+            this.btn_TableDetailViewAddOrder.UseVisualStyleBackColor = false;
             this.btn_TableDetailViewAddOrder.Click += new System.EventHandler(this.btn_TableDetailViewAddOrder_Click);
             // 
             // pictureBox3

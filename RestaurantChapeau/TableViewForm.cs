@@ -17,7 +17,6 @@ namespace RestaurantChapeau
         PaymentService paymentService = new PaymentService();
         Reservation reservation = new Reservation();
         Employee currentEmployee;
-
         Button[] tableButtons;
         OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
@@ -27,7 +26,6 @@ namespace RestaurantChapeau
         {
             InitializeComponent();
             currentEmployee = employee;      
-
             tableButtons = new Button[]
             {
                 btn_Table1,
@@ -107,18 +105,7 @@ namespace RestaurantChapeau
         {
             Form1 form1 = new Form1();
             form1.Show();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            btn_Table1.BackColor = Color.Red;
-            btn_Table1.Image = Properties.Resources.occupied;
-
-            if (reservation.tableid == 2)
-            {
-            }
-        }
-
+        }        
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -373,8 +360,7 @@ namespace RestaurantChapeau
         }
 
         private void lv_TableDetailView_SelectedIndexChanged(int tableId, Bill bill)
-        {
-            
+        {            
             lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
             List<Order> orders = orderLogic.GetOrdersForBill(bill);
             lv_TableDetailView.Clear();
@@ -436,8 +422,6 @@ namespace RestaurantChapeau
         private void btn_TableDetailViewChangeStatus_Click(object sender, EventArgs e)
         {
             
-            //OrderLogic orderLogic = new OrderLogic();
-
             Order orderItem = (Order)lv_TableDetailView.SelectedItems[0].Tag;            
             
             orderItem.Status = OrderStatus.Served;
