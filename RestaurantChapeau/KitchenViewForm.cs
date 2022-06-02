@@ -24,7 +24,6 @@ namespace RestaurantChapeau
             InitializeComponent();
             SetFonts();
             DisplayOrders();
-            //Timer();
 
             ResetTimer();
         }
