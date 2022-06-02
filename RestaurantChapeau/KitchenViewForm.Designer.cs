@@ -65,13 +65,13 @@
             this.lblKitchenn_OrderNo = new System.Windows.Forms.Label();
             this.lblKitchen_OrderTime = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.lbl_tableNo = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.listViewKitchen_ActiveOrder = new System.Windows.Forms.ListView();
             this.Order_item = new System.Windows.Forms.ColumnHeader();
             this.Quantity = new System.Windows.Forms.ColumnHeader();
             this.lbl_activeOrder = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lbl_tableNo = new System.Windows.Forms.Label();
             this.pnlKitchen_NewOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlKitchen_CompleteOrders.SuspendLayout();
@@ -229,6 +229,7 @@
             // 
             // columnHeader3
             // 
+            this.columnHeader3.Text = "Status";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 500;
             // 
@@ -440,6 +441,14 @@
             this.label14.TabIndex = 10;
             this.label14.Text = "Time: ";
             // 
+            // lbl_tableNo
+            // 
+            this.lbl_tableNo.AutoSize = true;
+            this.lbl_tableNo.Location = new System.Drawing.Point(204, 120);
+            this.lbl_tableNo.Name = "lbl_tableNo";
+            this.lbl_tableNo.Size = new System.Drawing.Size(0, 32);
+            this.lbl_tableNo.TabIndex = 10;
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -491,14 +500,6 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
-            // lbl_tableNo
-            // 
-            this.lbl_tableNo.AutoSize = true;
-            this.lbl_tableNo.Location = new System.Drawing.Point(204, 120);
-            this.lbl_tableNo.Name = "lbl_tableNo";
-            this.lbl_tableNo.Size = new System.Drawing.Size(0, 32);
-            this.lbl_tableNo.TabIndex = 10;
-            // 
             // KitchenViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -507,9 +508,9 @@
             this.ClientSize = new System.Drawing.Size(1844, 1157);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
             this.Controls.Add(this.label10);
+            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Controls.Add(this.pnlKitchen_ActiveOrder);
             this.Controls.Add(this.pnlKitchen_NewOrders);
-            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";
