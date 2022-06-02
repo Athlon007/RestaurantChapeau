@@ -106,6 +106,8 @@ namespace RestaurantChapeau
             pnlCardDetails.Hide();
             pnlCashPayment.Hide();
             pnlPaymentSucessful.Hide();
+            pnlCardPay.Hide();
+            pnlPaymentError.Hide();
         }
 
         private void btnCard_Click(object sender, EventArgs e)
@@ -172,22 +174,37 @@ namespace RestaurantChapeau
             valueToPay.Text = $"{totalPrice.ToString("#.##")} €";
         }
 
-        private void btnConfirmPayment_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnConfirmCashPayment_Click(object sender, EventArgs e)
+      
+        private async void btnConfirmCashPayment_Click(object sender, EventArgs e)
         {
             int billId = bill.Id;
             string comment = valueComment.Text;
             // paymentService.CreatePayment(billId, totalPrice, comment, tip);
             HideAllPanels();
             pnlPaymentSucessful.Show();
-            
-            // Thread.Sleep(3000);
-            // HideAllPanels();
+            await Task.Run(() =>
+            {
+                Thread.Sleep(1000);
+            });
+            pnlPaymentSucessful.Hide();
+        }
 
+        private async void btnConfirmPayment_Click(object sender, EventArgs e)
+        {
+            finalValueCard.Text = $"€ {totalPrice.ToString("#.##")}";
+            pnlCardPay.Show();
+            Panel[] panels = new[] { pnlPaymentSucessful, pnlPaymentError };
+            Random r = new Random();
+            Panel result = panels[r.Next(panels.Length)];
+            Thread.Sleep(1000);
+            HideAllPanels();
+            result.Show();
+            await Task.Run(() =>
+            {    
+                Thread.Sleep(1000);
+            });
+            result.Hide();
+            pnlPaymentType.Show();
         }
     }
 }

@@ -98,9 +98,17 @@
             this.LogoPayment2 = new System.Windows.Forms.PictureBox();
             this.headingPaymentType = new System.Windows.Forms.Label();
             this.pnlPaymentSucessful = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.lblSucess = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblSucess = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pnlPaymentError = new System.Windows.Forms.Panel();
+            this.errorImg = new System.Windows.Forms.PictureBox();
+            this.lblErrorPayment = new System.Windows.Forms.Label();
+            this.logoErrorPayment = new System.Windows.Forms.PictureBox();
+            this.pnlCardPay = new System.Windows.Forms.Panel();
+            this.cardPaymentImg = new System.Windows.Forms.PictureBox();
+            this.finalValueCard = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment1)).BeginInit();
             this.groupBoxMoreInfo.SuspendLayout();
@@ -115,8 +123,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).BeginInit();
             this.pnlPaymentSucessful.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.pnlPaymentError.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoErrorPayment)).BeginInit();
+            this.pnlCardPay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cardPaymentImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // paymentBackButton1
@@ -434,7 +448,7 @@
             this.pnlCardDetails.Controls.Add(this.LogoPayment3);
             this.pnlCardDetails.Location = new System.Drawing.Point(0, 0);
             this.pnlCardDetails.Name = "pnlCardDetails";
-            this.pnlCardDetails.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlCardDetails.Size = new System.Drawing.Size(1138, 1361);
             this.pnlCardDetails.TabIndex = 28;
             // 
             // headingComment
@@ -575,6 +589,7 @@
             this.btnConfirmPayment.TabIndex = 31;
             this.btnConfirmPayment.Text = "Confirm Payment";
             this.btnConfirmPayment.UseVisualStyleBackColor = false;
+            this.btnConfirmPayment.Click += new System.EventHandler(this.btnConfirmPayment_Click);
             // 
             // valueComment
             // 
@@ -751,6 +766,7 @@
             this.btnConfirmCashPayment.TabIndex = 31;
             this.btnConfirmCashPayment.Text = "Confirm Payment";
             this.btnConfirmCashPayment.UseVisualStyleBackColor = false;
+            this.btnConfirmCashPayment.Click += new System.EventHandler(this.btnConfirmCashPayment_Click);
             // 
             // PaidValue
             // 
@@ -876,8 +892,27 @@
             this.pnlPaymentSucessful.Controls.Add(this.pictureBox2);
             this.pnlPaymentSucessful.Location = new System.Drawing.Point(0, -1);
             this.pnlPaymentSucessful.Name = "pnlPaymentSucessful";
-            this.pnlPaymentSucessful.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlPaymentSucessful.Size = new System.Drawing.Size(1138, 1362);
             this.pnlPaymentSucessful.TabIndex = 29;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::RestaurantChapeau.Properties.Resources.tick;
+            this.pictureBox1.Location = new System.Drawing.Point(393, 435);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(333, 334);
+            this.pictureBox1.TabIndex = 33;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lblSucess
+            // 
+            this.lblSucess.AutoSize = true;
+            this.lblSucess.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSucess.Location = new System.Drawing.Point(349, 823);
+            this.lblSucess.Name = "lblSucess";
+            this.lblSucess.Size = new System.Drawing.Size(441, 65);
+            this.lblSucess.TabIndex = 32;
+            this.lblSucess.Text = "Payment sucessful";
             // 
             // pictureBox2
             // 
@@ -890,24 +925,85 @@
             this.pictureBox2.TabIndex = 17;
             this.pictureBox2.TabStop = false;
             // 
-            // lblSucess
+            // pnlPaymentError
             // 
-            this.lblSucess.AutoSize = true;
-            this.lblSucess.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSucess.Location = new System.Drawing.Point(349, 823);
-            this.lblSucess.Name = "lblSucess";
-            this.lblSucess.Size = new System.Drawing.Size(441, 65);
-            this.lblSucess.TabIndex = 32;
-            this.lblSucess.Text = "Payment sucessful";
+            this.pnlPaymentError.Controls.Add(this.errorImg);
+            this.pnlPaymentError.Controls.Add(this.lblErrorPayment);
+            this.pnlPaymentError.Controls.Add(this.logoErrorPayment);
+            this.pnlPaymentError.Location = new System.Drawing.Point(0, 0);
+            this.pnlPaymentError.Name = "pnlPaymentError";
+            this.pnlPaymentError.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlPaymentError.TabIndex = 30;
             // 
-            // pictureBox1
+            // errorImg
             // 
-            this.pictureBox1.Image = global::RestaurantChapeau.Properties.Resources.tick;
-            this.pictureBox1.Location = new System.Drawing.Point(393, 435);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(333, 334);
-            this.pictureBox1.TabIndex = 33;
-            this.pictureBox1.TabStop = false;
+            this.errorImg.Image = global::RestaurantChapeau.Properties.Resources.error_icon_4;
+            this.errorImg.Location = new System.Drawing.Point(393, 435);
+            this.errorImg.Name = "errorImg";
+            this.errorImg.Size = new System.Drawing.Size(333, 334);
+            this.errorImg.TabIndex = 33;
+            this.errorImg.TabStop = false;
+            // 
+            // lblErrorPayment
+            // 
+            this.lblErrorPayment.AutoSize = true;
+            this.lblErrorPayment.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblErrorPayment.Location = new System.Drawing.Point(294, 821);
+            this.lblErrorPayment.Name = "lblErrorPayment";
+            this.lblErrorPayment.Size = new System.Drawing.Size(531, 65);
+            this.lblErrorPayment.TabIndex = 32;
+            this.lblErrorPayment.Text = "Payment not sucessful";
+            // 
+            // logoErrorPayment
+            // 
+            this.logoErrorPayment.BackColor = System.Drawing.Color.Black;
+            this.logoErrorPayment.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.logoErrorPayment.Location = new System.Drawing.Point(381, 153);
+            this.logoErrorPayment.Name = "logoErrorPayment";
+            this.logoErrorPayment.Size = new System.Drawing.Size(365, 232);
+            this.logoErrorPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logoErrorPayment.TabIndex = 17;
+            this.logoErrorPayment.TabStop = false;
+            // 
+            // pnlCardPay
+            // 
+            this.pnlCardPay.Controls.Add(this.cardPaymentImg);
+            this.pnlCardPay.Controls.Add(this.finalValueCard);
+            this.pnlCardPay.Controls.Add(this.pictureBox6);
+            this.pnlCardPay.Location = new System.Drawing.Point(0, -1);
+            this.pnlCardPay.Name = "pnlCardPay";
+            this.pnlCardPay.Size = new System.Drawing.Size(1138, 1365);
+            this.pnlCardPay.TabIndex = 31;
+            // 
+            // cardPaymentImg
+            // 
+            this.cardPaymentImg.Image = global::RestaurantChapeau.Properties.Resources.payment;
+            this.cardPaymentImg.Location = new System.Drawing.Point(283, 427);
+            this.cardPaymentImg.Name = "cardPaymentImg";
+            this.cardPaymentImg.Size = new System.Drawing.Size(542, 333);
+            this.cardPaymentImg.TabIndex = 33;
+            this.cardPaymentImg.TabStop = false;
+            // 
+            // finalValueCard
+            // 
+            this.finalValueCard.AutoSize = true;
+            this.finalValueCard.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.finalValueCard.Location = new System.Drawing.Point(529, 791);
+            this.finalValueCard.Name = "finalValueCard";
+            this.finalValueCard.Size = new System.Drawing.Size(0, 65);
+            this.finalValueCard.TabIndex = 32;
+            this.finalValueCard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Black;
+            this.pictureBox6.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox6.Location = new System.Drawing.Point(381, 153);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(365, 232);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 17;
+            this.pictureBox6.TabStop = false;
             // 
             // Payment
             // 
@@ -915,6 +1011,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1138, 1362);
+            this.Controls.Add(this.pnlCardPay);
+            this.Controls.Add(this.pnlPaymentError);
             this.Controls.Add(this.pnlPaymentSucessful);
             this.Controls.Add(this.pnlPaymentType);
             this.Controls.Add(this.groupBoxMoreInfo);
@@ -953,8 +1051,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).EndInit();
             this.pnlPaymentSucessful.ResumeLayout(false);
             this.pnlPaymentSucessful.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.pnlPaymentError.ResumeLayout(false);
+            this.pnlPaymentError.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoErrorPayment)).EndInit();
+            this.pnlCardPay.ResumeLayout(false);
+            this.pnlCardPay.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cardPaymentImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1035,5 +1141,13 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblSucess;
+        private System.Windows.Forms.Panel pnlPaymentError;
+        private System.Windows.Forms.PictureBox errorImg;
+        private System.Windows.Forms.Label lblErrorPayment;
+        private System.Windows.Forms.PictureBox logoErrorPayment;
+        private System.Windows.Forms.Panel pnlCardPay;
+        private System.Windows.Forms.Label finalValueCard;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox cardPaymentImg;
     }
 }
