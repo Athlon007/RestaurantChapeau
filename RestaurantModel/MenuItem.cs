@@ -9,5 +9,6 @@
         public int Quantity { get; set; }
         public bool IsDrink { get; set; }
         public int Stock { get; set; }
+        public OrderStatus Status { get; set; }
     }
 }

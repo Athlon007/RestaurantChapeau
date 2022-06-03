@@ -87,9 +87,14 @@ namespace RestaurantDAL
                 menuItem.Stock = Convert.ToInt32(row["stock"]);
             }
 
-            if (row.Table.Columns.Contains("quantity") && !Convert.IsDBNull("quantity"))
+            if (row.Table.Columns.Contains("quantity") && !Convert.IsDBNull(row["quantity"]))
             {
                 menuItem.Quantity = Convert.ToInt32(row["quantity"]);
+            }
+
+            if (row.Table.Columns.Contains("status") && !Convert.IsDBNull(row["status"]))
+            {
+                menuItem.Status = (OrderStatus)Convert.ToInt32(row["status"]);
             }
 
             return menuItem;

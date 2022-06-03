@@ -137,7 +137,7 @@
             this.tabConnecting.Location = new System.Drawing.Point(8, 46);
             this.tabConnecting.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabConnecting.Name = "tabConnecting";
-            this.tabConnecting.Size = new System.Drawing.Size(1163, 1500);
+            this.tabConnecting.Size = new System.Drawing.Size(1163, 692);
             this.tabConnecting.TabIndex = 2;
             this.tabConnecting.Text = "tabConnecting";
             this.tabConnecting.UseVisualStyleBackColor = true;
