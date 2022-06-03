@@ -38,12 +38,11 @@ namespace RestaurantChapeau
             orderView.ShowDialog();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e,Employee employee)
         {
-            KitchenViewForm kitchen = new KitchenViewForm();
+            KitchenViewForm kitchen = new KitchenViewForm(employee);
             kitchen.ShowDialog();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
