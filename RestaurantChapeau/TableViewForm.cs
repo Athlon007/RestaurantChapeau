@@ -67,6 +67,7 @@ namespace RestaurantChapeau
                 tableButtons[reservation.tableid - 1].Tag = reservation;
                 if (reservation.isReserved)
                 {
+                    bool reservationNoShowUp = DateTime.Now >= reservation.ReservationStart.AddHours(-1);
                     bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
                     bool isTakenNow = DateTime.Now > reservation.ReservationStart;
                     bool tableHasBill = reservationService.TableHasBill(reservation.tableid);
@@ -78,6 +79,10 @@ namespace RestaurantChapeau
                     else if (isTableReserved)
                     {
                         tableButtons[reservation.tableid - 1].Image = Properties.Resources.reserved;
+                    }
+                    else if (reservationNoShowUp)
+                    {
+                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
                     }
                     else
                     {
@@ -115,8 +120,6 @@ namespace RestaurantChapeau
         {
             HidePanel();
             pnl_Reservation.Show();
-            //pnl_ViewReservation.Show();
-
         }
 
         private void btn_MakeReservation_Click(object sender, EventArgs e)
@@ -425,11 +428,20 @@ namespace RestaurantChapeau
         {
             
             Order orderItem = (Order)lv_TableDetailView.SelectedItems[0].Tag;            
-            
-            orderItem.Status = OrderStatus.Served;
-
-            orderLogic.UpdateOrderStatus(orderItem);
-            lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
+            if(orderItem.Status == OrderStatus.NotStarted || orderItem.Status == OrderStatus.Preparing)
+            {
+                MessageBox.Show("You cannot change status yet");
+            }
+            else if(orderItem.Status == OrderStatus.ReadyToServe)
+            {
+                orderItem.Status = OrderStatus.Served;
+                orderLogic.UpdateOrderStatus(orderItem);
+                lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
+            }
+            else if(orderItem.Status == OrderStatus.Served)
+            {
+                MessageBox.Show("You already changed status");
+            }            
         }
     }
 }
