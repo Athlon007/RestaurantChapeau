@@ -15,7 +15,7 @@ using System.Security.Cryptography;
 
 namespace RestaurantChapeau
 {
-    
+
     public partial class LoginForm : Form
     {
         public LoginForm()
@@ -30,6 +30,7 @@ namespace RestaurantChapeau
         private void Form1_Load(object sender, EventArgs e)
         {
             HidePanels();
+            btn_LoginRegister.Show();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace RestaurantChapeau
 
         private void showPanel(string panelName)
         {
-            if(panelName == "tableView")
+            if (panelName == "tableView")
             {
                 HidePanels();
 
@@ -65,7 +66,7 @@ namespace RestaurantChapeau
                 txt_LoginEmail.Text = "";
                 txt_LoginPassword.Text = "";
             }
-        }        
+        }
         private void button3_Click(object sender, EventArgs e)
         {
 
@@ -111,7 +112,7 @@ namespace RestaurantChapeau
         private void pnl_Register_Paint(object sender, PaintEventArgs e)
         {
 
-        }       
+        }
         private void btn_LoginRegister_Click_1(object sender, EventArgs e)
         {
             HidePanels();
@@ -130,7 +131,7 @@ namespace RestaurantChapeau
             string email = txt_RegisterEmail.Text;
             string firstName = txt_RegisterFirstName.Text;
             string lastName = txt_RegisterLastName.Text;
-            string password = txt_RegisterPassword.Text;            
+            string password = txt_RegisterPassword.Text;
 
             //if both the password and employee name are valid add the user
             if (PasswordRequirements(password))
@@ -139,7 +140,7 @@ namespace RestaurantChapeau
                 HashWithSaltResult hashPassword = pwHasher.HashWithSalt(password, 64, SHA256.Create());
 
                 //add the username, hashed password, salt and the user role to the database
-                employeeService.AddToRegister(firstName, lastName,email, hashPassword.Digest, hashPassword.Salt);
+                employeeService.AddToRegister(firstName, lastName, email, hashPassword.Digest, hashPassword.Salt);
                 MessageBox.Show("Succesfully Registered! You can now login.");
 
                 //hide the panels and show the dashboard again
@@ -165,54 +166,56 @@ namespace RestaurantChapeau
             string specialCharacters = "!#$%&()*+,-./:;<=>?@[]^_`{|}~";
 
             //the number of conditions to be met 
-            int goodConditions = 5;
+            //int goodConditions = 5;
+            int goodConditions = 1;
 
             //the current conditions
             int conditions = 0;
 
             //if the length of the password is greater than 8, add 1 to the current conditions
-            if (password.Length >= 8)
+            //if (password.Length >= 8)
+            if (password.Length == 4)
                 conditions++;
 
-            //if the password contains at least 1 lowercase character, add 1 to the current conditions
-            foreach (char c in password)
-            {
-                if (c >= 'a' && c <= 'z')
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 lowercase character, add 1 to the current conditions
+            //foreach (char c in password)
+            //{
+            //    if (c >= 'a' && c <= 'z')
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
-            //if the password contains at least 1 uppercase character, add 1 to the current conditions
-            foreach (char c in password)
-            {
-                if (c >= 'A' && c <= 'Z')
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 uppercase character, add 1 to the current conditions
+            //foreach (char c in password)
+            //{
+            //    if (c >= 'A' && c <= 'Z')
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
-            //if the password contains at least 1 number, add 1 to the current conditions
-            foreach (char c in password)
-            {
-                if (c >= '0' && c <= '9')
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 number, add 1 to the current conditions
+            //foreach (char c in password)
+            //{
+            //    if (c >= '0' && c <= '9')
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
-            //if the password contains at least 1 special character, add 1 to the current conditions
-            foreach (char c in specialCharacters)
-            {
-                if (password.Contains(c))
-                {
-                    conditions++;
-                    break;
-                }
-            }
+            ////if the password contains at least 1 special character, add 1 to the current conditions
+            //foreach (char c in specialCharacters)
+            //{
+            //    if (password.Contains(c))
+            //    {
+            //        conditions++;
+            //        break;
+            //    }
+            //}
 
             //return true if the current conditions are the same as the goodconditions, false otherwise
             return conditions == goodConditions;
@@ -225,56 +228,53 @@ namespace RestaurantChapeau
 
         private void btn_LoginLogin_Click(object sender, EventArgs e)
         {
-            try
+            //try
+            //{
+            //create connection to employee layer
+            EmployeeService employeeService = new EmployeeService();
+
+            //store the entered username and password
+            string email = txt_LoginEmail.Text;
+            string enteredPassword = txt_LoginPassword.Text;
+
+            //get the user by the entered employeename
+            Employee employee = employeeService.GetEmployeeByEmployeeName(email);
+
+            //password hasher
+            PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
+
+            //if the entered password matches the one in the db
+            if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
             {
-                //create connection to employee layer
-                EmployeeService employeeService = new EmployeeService();
+                //hide the panels and form, display form of tableView
+                HidePanels();
+                this.Hide();
 
-                //store the entered username and password
-                string email = txt_LoginEmail.Text;
-                string enteredPassword = txt_LoginPassword.Text;
-
-                //get the user by the entered employeename
-                Employee employee = employeeService.GetEmployeeByEmployeeName(email);
-
-                //password hasher
-                PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
-
-                //if the entered password matches the one in the db
-                if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
+                switch (employee.employeeType)
                 {
-                    //hide the panels and form, display form of tableView
-                    HidePanels();
-                    this.Hide();
-
-                    switch (employee.employeeType)
-                    {
-                        case EmployeeType.Waiter:
-                            TableViewForm tableView = new TableViewForm(employee);
-                            tableView.Show();
-                            break;
-                        case EmployeeType.KitchenStaff:
-                            KitchenViewForm kitchenView = new KitchenViewForm();
-                            kitchenView.Show();
-                            break;
-                        case EmployeeType.Bartender:
-                            KitchenViewForm barView = new KitchenViewForm(false);
-                            barView.Show();
-                            break;
-                    }
+                    case EmployeeType.Waiter:
+                        TableViewForm tableView = new TableViewForm(employee);
+                        tableView.Show();
+                        break;
+                    case EmployeeType.KitchenStaff:
+                        KitchenViewForm kitchenView = new KitchenViewForm();
+                        kitchenView.Show();
+                        break;
+                        //...
                 }
-                else
-                    MessageBox.Show("Login failed.");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Login failed: {ex.Message}");
+            else
+                MessageBox.Show("Login failed.");
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Login failed: {ex.Message}");
 
-                //clear the text boxes
-                txt_LoginEmail.Text = "";
-                txt_LoginPassword.Text = "";
+            //    //clear the text boxes
+            //    txt_LoginEmail.Text = "";
+            //    txt_LoginPassword.Text = "";
 
-            }
+            //}
 
         }
 
