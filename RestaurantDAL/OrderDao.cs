@@ -160,12 +160,10 @@ namespace RestaurantDAL
         /// </summary>
         public List<Order> GetKitchenOrdersToPrepare()
         {
-            //string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
-            //                "FROM[Order] o " +
-            //            "WHERE o.complete = 0;";
             string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
-                "FROM [Order] o " +
-                "JOIN PartOf.";
+                            "FROM[Order] o " +
+                        "WHERE o.complete = 0;";
+
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderTables(ExecuteSelectQuery(query, sqlParameters));
         }
