@@ -19,6 +19,8 @@ namespace RestaurantChapeau
        public bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
        private bool kitchenMode;
 
+       private Order selectedOrder;
+
         public KitchenViewForm()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace RestaurantChapeau
         public void DisplayOrders()
         {
             //if false= bar view else kitchen view
-            kitchenMode = false;
+            kitchenMode = true;
 
             OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetKitchenOrdersToPrepare();
@@ -112,6 +114,8 @@ namespace RestaurantChapeau
 
             //Begin timer
             IsActive = true;
+
+            selectedOrder = (Order)listViewNewOrders.SelectedItems[0].Tag;
         }
         #endregion
 
@@ -146,7 +150,7 @@ namespace RestaurantChapeau
             pnlKitchen_CompleteOrders.Show();
         }
         #endregion
-
+        
         #region Ready Order Button
         private void btn_readyOrder_Click(object sender, EventArgs e)
         {
@@ -155,7 +159,7 @@ namespace RestaurantChapeau
 
             //connect to logic layer
             OrderLogic orderService = new OrderLogic();
-            Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
+            Order orderItem = selectedOrder;
 
             //save the name of the highlighted menu item into a string
             string menuItem = listViewKitchen_ActiveOrder.FocusedItem.Text;

@@ -495,9 +495,9 @@
             this.ClientSize = new System.Drawing.Size(1844, 1157);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.pnlKitchen_ActiveOrder);
             this.Controls.Add(this.pnlKitchen_NewOrders);
             this.Controls.Add(this.pnlKitchen_CompleteOrders);
+            this.Controls.Add(this.pnlKitchen_ActiveOrder);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";
