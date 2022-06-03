@@ -161,8 +161,7 @@ namespace RestaurantDAL
         public List<Order> GetKitchenOrdersToPrepare()
         {
             string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
-                            "FROM[Order] o " +
-                        "WHERE o.complete = 0;";
+                            "FROM[Order] o ";
 
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderTables(ExecuteSelectQuery(query, sqlParameters));

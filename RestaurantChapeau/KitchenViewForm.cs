@@ -56,8 +56,19 @@ namespace RestaurantChapeau
 
                 li.Tag = order;
 
+                List<MenuItem> items = orderService.GetItemsForOrder(order);
+                if (items.Count == 0)
+                    continue;
+
+                bool allItemsAboveReady = true;
+                foreach (MenuItem item in items)
+                {
+                    if (item.Status < OrderStatus.ReadyToServe)
+                        allItemsAboveReady = false;
+                }
+
                 //if order is ready add to completed orders page or add to new order page
-                if (order.Complete == true)
+                if (allItemsAboveReady == true)
                 {
                     listViewKitchen_CompleteOrders.Items.Add(li);
                 }
