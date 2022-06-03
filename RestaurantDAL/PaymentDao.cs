@@ -12,7 +12,7 @@ namespace RestaurantDAL
         //getting all orders within the bill
         public List<Order> GetAllOrdersInBill(int billID)
         {
-            string query = $"SELECT id, status, comment from dbo.[Order] where billId = {billID}";
+            string query = $"SELECT id, complete, comment from dbo.[Order] where billId = {billID}";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderTable(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -61,7 +61,7 @@ namespace RestaurantDAL
                 Order order = new Order()
                 {
                     Id = Convert.ToInt32(dr["id"]),
-                    Status = (OrderStatus)Convert.ToInt32(dr["status"]),
+                    Complete = Convert.ToBoolean(dr["complete"]),
                     Comment = (string)(dr["comment"]),
                  
                 };

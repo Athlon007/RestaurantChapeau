@@ -160,9 +160,9 @@ namespace RestaurantDAL
         /// </summary>
         public List<Order> GetKitchenOrdersToPrepare()
         {
-            string query = "SELECT o.[id], o.placedTime, o.status, o.comment " +
+            string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
                             "FROM[Order] o " +
-                        "WHERE o.status = 0 or o.status > 0;";
+                        "WHERE o.complete = 0;";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -297,7 +297,7 @@ namespace RestaurantDAL
         /// <param name="bill">Bill which we want orders for.</param>
         public List<Order> GetOrdersForBill(Bill bill)
         {
-            string query = "SELECT o.id, o.placedTime, o.status, o.comment " +
+            string query = "SELECT o.id, o.placedTime, o.complete, o.comment " +
                             "FROM [Order] o " +
                             "JOIN Bill b ON b.id = o.billId " +
                             "WHERE b.id = @BillId";
