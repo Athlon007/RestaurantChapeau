@@ -51,21 +51,29 @@ namespace RestaurantChapeau
                 {
                     li.SubItems.Add("Not ready");
                 }
-
-
+                //order tags become an order item
                 li.Tag = order;
 
+                //get all the items that belong to an order
                 List<MenuItem> items = orderService.GetItemsForOrder(order);
+                //if there are no items, do nothing
                 if (items.Count == 0)
                     continue;
 
+                // al lthe items above an item in a listview have a status of ready
                 bool allItemsAboveReady = true;
+
+                // for all theitems that belong to an order
                 foreach (MenuItem item in items)
                 {
+                    //if the order item is not ready to serve
                     if (item.Status < OrderStatus.ReadyToServe)
-                        allItemsAboveReady = false;
+                    {
+                        //this makes sure so that the bartender doesnt see orders which contain food orders and otherwise (prevents empty order items in the listview)
+                        if (((item.IsDrink && employee.employeeType == EmployeeType.Bartender) || (!item.IsDrink && employee.employeeType == EmployeeType.KitchenStaff)))
+                            allItemsAboveReady = false;
+                    }
                 }
-
                 //if order is ready add to completed orders page or add to new order page
                 if (allItemsAboveReady == true)
                 {
