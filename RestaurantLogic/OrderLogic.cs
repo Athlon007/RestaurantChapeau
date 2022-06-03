@@ -134,6 +134,23 @@ namespace RestaurantLogic
         {
             orderDao.SetItemQuantity(item);
         }
+
+        public void SetOrderItemStatus(MenuItem item, Order order)
+        {
+            orderDao.SetOrderItemStatus(item, order);
+
+            List<MenuItem> orderItems = GetItemsForOrder(order);
+            foreach (MenuItem itemItem in orderItems)
+            {
+                if (itemItem.Status != OrderStatus.Served)
+                {
+                    return;
+                }
+            }
+
+            order.Complete = true;
+            UpdateOrderStatus(order);
+        }
     }
 
 }

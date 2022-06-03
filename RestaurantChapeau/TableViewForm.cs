@@ -55,7 +55,7 @@ namespace RestaurantChapeau
                 button.Image = Properties.Resources.screenshotTable;
                 button.Tag = null;
 
-                if (reservationService.TableHasBill(i + 1))
+                if (paymentService.HasBill(i + 1))
                 {
                     button.Image = Properties.Resources.occupied;
                 }
@@ -70,7 +70,7 @@ namespace RestaurantChapeau
                     bool reservationNoShowUp = DateTime.Now >= reservation.ReservationStart.AddHours(-1);
                     bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
                     bool isTakenNow = DateTime.Now > reservation.ReservationStart;
-                    bool tableHasBill = reservationService.TableHasBill(reservation.tableid);
+                    bool tableHasBill = paymentService.HasBill(reservation.tableid);
                     if (isTakenNow && tableHasBill)
                     {
                         tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;
@@ -378,16 +378,27 @@ namespace RestaurantChapeau
                 foreach (MenuItem item in menus)
                 {
                     ListViewItem li = new ListViewItem(order.Id.ToString());
-                    li.SubItems.Add(order.Status.ToString());
+                    li.SubItems.Add(item.Status.ToString());
                     li.SubItems.Add(item.Name.ToString());
                     li.SubItems.Add(item.Quantity.ToString());
                     li.SubItems.Add(order.PlacedTime.ToString());
-                    li.Tag = order;
+                    TableDetailItem table = new TableDetailItem();
+                    table.Item = item;
+                    table.Order = order;
+                    li.Tag = table;
                     lv_TableDetailView.Items.Add(li);
                 }
             }
 
         }
+
+        struct TableDetailItem
+        {
+            public Order Order;
+            public MenuItem Item;
+        }
+
+
         private void btnNewOrder_Click(object sender, EventArgs e)
         {
             ShowOrderView(currentTableNumber, currentBill);
@@ -422,18 +433,18 @@ namespace RestaurantChapeau
         private void btn_TableDetailViewChangeStatus_Click(object sender, EventArgs e)
         {
 
-            Order orderItem = (Order)lv_TableDetailView.SelectedItems[0].Tag;
-            if (orderItem.Status == OrderStatus.NotStarted || orderItem.Status == OrderStatus.Preparing)
+            TableDetailItem orderItem = (TableDetailItem)lv_TableDetailView.SelectedItems[0].Tag;
+            if (orderItem.Item.Status == OrderStatus.NotStarted || orderItem.Item.Status == OrderStatus.Preparing)
             {
                 MessageBox.Show("You cannot change status yet");
             }
-            else if (orderItem.Status == OrderStatus.ReadyToServe)
+            else if (orderItem.Item.Status == OrderStatus.ReadyToServe)
             {
-                orderItem.Status = OrderStatus.Served;
-                orderLogic.UpdateOrderStatus(orderItem);
+                orderItem.Item.Status = OrderStatus.Served;
+                orderLogic.SetOrderItemStatus(orderItem.Item, orderItem.Order);
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             }
-            else if (orderItem.Status == OrderStatus.Served)
+            else if (orderItem.Item.Status == OrderStatus.Served)
             {
                 MessageBox.Show("You already changed status");
             }
