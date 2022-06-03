@@ -87,7 +87,7 @@
             // 
             // btn_Table1
             // 
-            this.btn_Table1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table1.Image = global::RestaurantChapeau.Properties.Resources.screenshotTable;
             this.btn_Table1.Location = new System.Drawing.Point(126, 80);
             this.btn_Table1.Name = "btn_Table1";
@@ -98,7 +98,7 @@
             // 
             // btn_Table2
             // 
-            this.btn_Table2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table2.Image = global::RestaurantChapeau.Properties.Resources.screenshotTable;
             this.btn_Table2.Location = new System.Drawing.Point(488, 80);
             this.btn_Table2.Name = "btn_Table2";
@@ -110,7 +110,7 @@
             // 
             // btn_Table3
             // 
-            this.btn_Table3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table3.Image = global::RestaurantChapeau.Properties.Resources.screenshotTable;
             this.btn_Table3.Location = new System.Drawing.Point(126, 252);
             this.btn_Table3.Name = "btn_Table3";
@@ -122,7 +122,7 @@
             // btn_Table4
             // 
             this.btn_Table4.BackgroundImage = global::RestaurantChapeau.Properties.Resources.screenshotTable;
-            this.btn_Table4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table4.Location = new System.Drawing.Point(488, 252);
             this.btn_Table4.Name = "btn_Table4";
             this.btn_Table4.Size = new System.Drawing.Size(109, 101);
@@ -133,7 +133,7 @@
             // btn_Table5
             // 
             this.btn_Table5.BackgroundImage = global::RestaurantChapeau.Properties.Resources.screenshotTable;
-            this.btn_Table5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table5.Location = new System.Drawing.Point(126, 423);
             this.btn_Table5.Name = "btn_Table5";
             this.btn_Table5.Size = new System.Drawing.Size(109, 101);
@@ -144,7 +144,7 @@
             // btn_Table6
             // 
             this.btn_Table6.BackgroundImage = global::RestaurantChapeau.Properties.Resources.screenshotTable;
-            this.btn_Table6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table6.Location = new System.Drawing.Point(488, 423);
             this.btn_Table6.Name = "btn_Table6";
             this.btn_Table6.Size = new System.Drawing.Size(109, 101);
@@ -155,7 +155,7 @@
             // btn_Table7
             // 
             this.btn_Table7.BackgroundImage = global::RestaurantChapeau.Properties.Resources.screenshotTable;
-            this.btn_Table7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table7.Location = new System.Drawing.Point(126, 594);
             this.btn_Table7.Name = "btn_Table7";
             this.btn_Table7.Size = new System.Drawing.Size(109, 101);
@@ -166,7 +166,7 @@
             // btn_Table8
             // 
             this.btn_Table8.BackgroundImage = global::RestaurantChapeau.Properties.Resources.screenshotTable;
-            this.btn_Table8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table8.Location = new System.Drawing.Point(488, 594);
             this.btn_Table8.Name = "btn_Table8";
             this.btn_Table8.Size = new System.Drawing.Size(109, 101);
@@ -176,7 +176,7 @@
             // 
             // btn_Table9
             // 
-            this.btn_Table9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table9.Image = global::RestaurantChapeau.Properties.Resources.screenshotTable;
             this.btn_Table9.Location = new System.Drawing.Point(126, 761);
             this.btn_Table9.Name = "btn_Table9";
@@ -188,7 +188,7 @@
             // btn_Table10
             // 
             this.btn_Table10.BackgroundImage = global::RestaurantChapeau.Properties.Resources.screenshotTable;
-            this.btn_Table10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Table10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_Table10.Location = new System.Drawing.Point(488, 761);
             this.btn_Table10.Name = "btn_Table10";
             this.btn_Table10.Size = new System.Drawing.Size(109, 101);
@@ -626,6 +626,7 @@
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Name = "TableViewForm";
             this.Text = "TableViewForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TableViewForm_FormClosed);
             this.Load += new System.EventHandler(this.TableViewForm_Load);
             this.pnl_Reservation.ResumeLayout(false);
             this.pnl_Reservation.PerformLayout();

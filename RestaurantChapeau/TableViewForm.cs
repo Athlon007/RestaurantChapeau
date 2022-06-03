@@ -302,8 +302,6 @@ namespace RestaurantChapeau
         private void pbTableViewLogOut_Click_1(object sender, EventArgs e)
         {
             this.Close();
-            LoginForm loginForm = new LoginForm();
-            loginForm.Show();
         }
         private void OnTableButtonClick(object sender, EventArgs e)
         {
@@ -442,6 +440,12 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show("You already changed status");
             }
+        }
+
+        private void TableViewForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
         }
     }
 }

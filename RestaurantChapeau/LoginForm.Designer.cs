@@ -420,6 +420,7 @@
             this.Controls.Add(this.txt_LoginPassword);
             this.Name = "LoginForm";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnl_ForgotPassword.ResumeLayout(false);
