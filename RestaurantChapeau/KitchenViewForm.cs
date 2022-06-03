@@ -81,7 +81,6 @@ namespace RestaurantChapeau
             lbl_OrderComments.Text = selectedOrder.Comment;
 
             //if kitchenmode is true, display only kitchen items 
-
             if (KitchenMode)
             {
                 orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);

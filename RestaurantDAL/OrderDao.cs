@@ -125,6 +125,11 @@ namespace RestaurantDAL
                 menuItem.IsDrink = Convert.ToBoolean(row["isDrink"]);
             }
 
+            if (row.Table.Columns.Contains("quantity") && !Convert.IsDBNull("quantity"))
+            {
+                menuItem.Quantity = Convert.ToInt32(row["quantity"]);
+            }
+
             return menuItem;
         }
 
