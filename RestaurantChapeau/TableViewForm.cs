@@ -236,6 +236,7 @@ namespace RestaurantChapeau
                 HidePanel();
                 DisplayReservation();
                 pnl_ViewReservation.Show();
+                CheckReservations();
             }
 
             //if the answer is no do nothing
@@ -292,6 +293,7 @@ namespace RestaurantChapeau
         {
             HidePanel();
             pbTableViewLogOut.Show();
+            CheckReservations();
         }
 
         private void pbTableViewLogOut_Click_1(object sender, EventArgs e)
