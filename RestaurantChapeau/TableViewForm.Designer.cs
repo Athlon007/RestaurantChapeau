@@ -72,6 +72,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.btn_LogOut = new System.Windows.Forms.Button();
+            this.lbl_Table5Notification = new System.Windows.Forms.Label();
+            this.lbl_Table10Notification = new System.Windows.Forms.Label();
+            this.lbl_Table1Notification = new System.Windows.Forms.Label();
+            this.lbl_Table2Notification = new System.Windows.Forms.Label();
+            this.lbl_Table3Notification = new System.Windows.Forms.Label();
+            this.lbl_Table4Notification = new System.Windows.Forms.Label();
+            this.lbl_Table9Notification = new System.Windows.Forms.Label();
+            this.lbl_Table6Notification = new System.Windows.Forms.Label();
+            this.lbl_Table7Notification = new System.Windows.Forms.Label();
+            this.lbl_Table8Notification = new System.Windows.Forms.Label();
             this.pnl_Reservation.SuspendLayout();
             this.pnl_ViewReservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -597,6 +607,96 @@
             this.btn_LogOut.UseVisualStyleBackColor = false;
             this.btn_LogOut.Click += new System.EventHandler(this.btn_LogOut_Click);
             // 
+            // lbl_Table5Notification
+            // 
+            this.lbl_Table5Notification.AutoSize = true;
+            this.lbl_Table5Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table5Notification.Location = new System.Drawing.Point(70, 423);
+            this.lbl_Table5Notification.Name = "lbl_Table5Notification";
+            this.lbl_Table5Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table5Notification.TabIndex = 53;
+            // 
+            // lbl_Table10Notification
+            // 
+            this.lbl_Table10Notification.AutoSize = true;
+            this.lbl_Table10Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table10Notification.Location = new System.Drawing.Point(432, 761);
+            this.lbl_Table10Notification.Name = "lbl_Table10Notification";
+            this.lbl_Table10Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table10Notification.TabIndex = 54;
+            // 
+            // lbl_Table1Notification
+            // 
+            this.lbl_Table1Notification.AutoSize = true;
+            this.lbl_Table1Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table1Notification.Location = new System.Drawing.Point(70, 80);
+            this.lbl_Table1Notification.Name = "lbl_Table1Notification";
+            this.lbl_Table1Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table1Notification.TabIndex = 55;
+            // 
+            // lbl_Table2Notification
+            // 
+            this.lbl_Table2Notification.AutoSize = true;
+            this.lbl_Table2Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table2Notification.Location = new System.Drawing.Point(432, 80);
+            this.lbl_Table2Notification.Name = "lbl_Table2Notification";
+            this.lbl_Table2Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table2Notification.TabIndex = 56;
+            // 
+            // lbl_Table3Notification
+            // 
+            this.lbl_Table3Notification.AutoSize = true;
+            this.lbl_Table3Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table3Notification.Location = new System.Drawing.Point(70, 252);
+            this.lbl_Table3Notification.Name = "lbl_Table3Notification";
+            this.lbl_Table3Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table3Notification.TabIndex = 57;
+            // 
+            // lbl_Table4Notification
+            // 
+            this.lbl_Table4Notification.AutoSize = true;
+            this.lbl_Table4Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table4Notification.Location = new System.Drawing.Point(432, 251);
+            this.lbl_Table4Notification.Name = "lbl_Table4Notification";
+            this.lbl_Table4Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table4Notification.TabIndex = 58;
+            // 
+            // lbl_Table9Notification
+            // 
+            this.lbl_Table9Notification.AutoSize = true;
+            this.lbl_Table9Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table9Notification.Location = new System.Drawing.Point(70, 761);
+            this.lbl_Table9Notification.Name = "lbl_Table9Notification";
+            this.lbl_Table9Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table9Notification.TabIndex = 59;
+            // 
+            // lbl_Table6Notification
+            // 
+            this.lbl_Table6Notification.AutoSize = true;
+            this.lbl_Table6Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table6Notification.Location = new System.Drawing.Point(424, 423);
+            this.lbl_Table6Notification.Name = "lbl_Table6Notification";
+            this.lbl_Table6Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table6Notification.TabIndex = 60;
+            // 
+            // lbl_Table7Notification
+            // 
+            this.lbl_Table7Notification.AutoSize = true;
+            this.lbl_Table7Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table7Notification.Location = new System.Drawing.Point(62, 594);
+            this.lbl_Table7Notification.Name = "lbl_Table7Notification";
+            this.lbl_Table7Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table7Notification.TabIndex = 61;
+            // 
+            // lbl_Table8Notification
+            // 
+            this.lbl_Table8Notification.AutoSize = true;
+            this.lbl_Table8Notification.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Table8Notification.Location = new System.Drawing.Point(424, 594);
+            this.lbl_Table8Notification.Name = "lbl_Table8Notification";
+            this.lbl_Table8Notification.Size = new System.Drawing.Size(0, 20);
+            this.lbl_Table8Notification.TabIndex = 62;
+            // 
             // TableViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -605,6 +705,16 @@
             this.ClientSize = new System.Drawing.Size(726, 1055);
             this.Controls.Add(this.pnl_ViewReservation);
             this.Controls.Add(this.pnl_Reservation);
+            this.Controls.Add(this.lbl_Table8Notification);
+            this.Controls.Add(this.lbl_Table7Notification);
+            this.Controls.Add(this.lbl_Table6Notification);
+            this.Controls.Add(this.lbl_Table9Notification);
+            this.Controls.Add(this.lbl_Table4Notification);
+            this.Controls.Add(this.lbl_Table3Notification);
+            this.Controls.Add(this.lbl_Table2Notification);
+            this.Controls.Add(this.lbl_Table1Notification);
+            this.Controls.Add(this.lbl_Table10Notification);
+            this.Controls.Add(this.lbl_Table5Notification);
             this.Controls.Add(this.pnl_TableDetailView);
             this.Controls.Add(this.btn_LogOut);
             this.Controls.Add(this.pictureBox4);
@@ -637,6 +747,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -685,5 +796,15 @@
         private System.Windows.Forms.Button btn_TableDetailViewAddOrder;
         private System.Windows.Forms.Button btn_TableDetailViewChangeStatus;
         private System.Windows.Forms.Button btn_LogOut;
+        private System.Windows.Forms.Label lbl_Table5Notification;
+        private System.Windows.Forms.Label lbl_Table10Notification;
+        private System.Windows.Forms.Label lbl_Table1Notification;
+        private System.Windows.Forms.Label lbl_Table2Notification;
+        private System.Windows.Forms.Label lbl_Table3Notification;
+        private System.Windows.Forms.Label lbl_Table4Notification;
+        private System.Windows.Forms.Label lbl_Table9Notification;
+        private System.Windows.Forms.Label lbl_Table6Notification;
+        private System.Windows.Forms.Label lbl_Table7Notification;
+        private System.Windows.Forms.Label lbl_Table8Notification;
     }
 }

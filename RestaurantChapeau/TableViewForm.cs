@@ -18,10 +18,13 @@ namespace RestaurantChapeau
         Reservation reservation = new Reservation();
         Employee currentEmployee;
         Button[] tableButtons;
+        Label[] notificationLabels;
         OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
         int currentTableNumber;
         Order order = new Order();
+
+        Timer timer;
         public TableViewForm(Employee employee)
         {
             InitializeComponent();
@@ -41,12 +44,65 @@ namespace RestaurantChapeau
             };
             CheckReservations();
 
+            notificationLabels = new Label[]
+            {
+                lbl_Table1Notification,
+                lbl_Table2Notification,
+                lbl_Table3Notification,
+                lbl_Table4Notification,
+                lbl_Table5Notification,
+                lbl_Table6Notification,
+                lbl_Table7Notification,
+                lbl_Table8Notification,
+                lbl_Table9Notification,
+                lbl_Table10Notification
+            };
+
             foreach (Button btn in tableButtons)
             {
                 btn.Click += OnTableButtonClick;
             }
+
+            timer = new Timer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = 10000;
+            timer.Start();
         }
 
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (currentBill != null)
+                lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
+            CheckNotification();
+        }
+        private void CheckNotification()
+        {
+            for (int i = 0; i < notificationLabels.Length; i++)
+            {
+                Label label = notificationLabels[i];
+                label.Text = "";
+                if (paymentService.HasBill(i + 1))
+                {
+                    Bill bill = paymentService.GetBill(i + 1);
+                    List<Order> orders = orderLogic.GetOrdersForBill(bill);
+
+                    int readyCount = 0;
+                    foreach (Order order in orders)
+                    {
+                        List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                        foreach (MenuItem item in items)
+                        {
+                            if (item.Status == OrderStatus.ReadyToServe)
+                            {
+                                readyCount++;
+                            }
+                        }
+                    }
+
+                    label.Text = $"{readyCount}";
+                }        
+            }
+        }
         private void CheckReservations()
         {
             for (int i = 0; i < tableButtons.Length; i++)
@@ -375,6 +431,7 @@ namespace RestaurantChapeau
             foreach (Order order in orders)
             {
                 List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
+                lv_TableDetailView.Tag = order;
                 foreach (MenuItem item in menus)
                 {
                     ListViewItem li = new ListViewItem(order.Id.ToString());
@@ -382,22 +439,12 @@ namespace RestaurantChapeau
                     li.SubItems.Add(item.Name.ToString());
                     li.SubItems.Add(item.Quantity.ToString());
                     li.SubItems.Add(order.PlacedTime.ToString());
-                    TableDetailItem table = new TableDetailItem();
-                    table.Item = item;
-                    table.Order = order;
-                    li.Tag = table;
+                    li.Tag = item;
                     lv_TableDetailView.Items.Add(li);
                 }
             }
 
         }
-
-        struct TableDetailItem
-        {
-            public Order Order;
-            public MenuItem Item;
-        }
-
 
         private void btnNewOrder_Click(object sender, EventArgs e)
         {
@@ -433,18 +480,20 @@ namespace RestaurantChapeau
         private void btn_TableDetailViewChangeStatus_Click(object sender, EventArgs e)
         {
 
-            TableDetailItem orderItem = (TableDetailItem)lv_TableDetailView.SelectedItems[0].Tag;
-            if (orderItem.Item.Status == OrderStatus.NotStarted || orderItem.Item.Status == OrderStatus.Preparing)
+            //TableDetailItem orderItem = (TableDetailItem)lv_TableDetailView.SelectedItems[0].Tag;
+            Order order = (Order)lv_TableDetailView.Tag;
+            MenuItem item = (MenuItem)lv_TableDetailView.SelectedItems[0].Tag;
+            if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
             {
                 MessageBox.Show("You cannot change status yet");
             }
-            else if (orderItem.Item.Status == OrderStatus.ReadyToServe)
+            else if (item.Status == OrderStatus.ReadyToServe)
             {
-                orderItem.Item.Status = OrderStatus.Served;
-                orderLogic.SetOrderItemStatus(orderItem.Item, orderItem.Order);
+                item.Status = OrderStatus.Served;
+                orderLogic.SetOrderItemStatus(item, order);
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             }
-            else if (orderItem.Item.Status == OrderStatus.Served)
+            else if (item.Status == OrderStatus.Served)
             {
                 MessageBox.Show("You already changed status");
             }
