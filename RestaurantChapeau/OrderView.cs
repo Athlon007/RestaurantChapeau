@@ -162,13 +162,8 @@ namespace RestaurantChapeau
             }
         }
 
-        /// <summary>
-        /// Loads selected menu type.
-        /// </summary>
-        /// <param name="menuType">MenuType to load.</param>
-        private async void LoadMenu(MenuType menuType)
+        private void UpdateSelectedMenuType(MenuType menuType)
         {
-            // First we update the buttons of menu types.
             foreach (Control control in flwMenuTypes.Controls)
             {
                 if (control is Button)
@@ -188,6 +183,16 @@ namespace RestaurantChapeau
                     button.ForeColor = textColor;
                 }
             }
+        }
+
+        /// <summary>
+        /// Loads selected menu type.
+        /// </summary>
+        /// <param name="menuType">MenuType to load.</param>
+        private async void LoadMenu(MenuType menuType)
+        {
+            // First we update the buttons of menu types.
+            UpdateSelectedMenuType(menuType);
 
             // Clear controls in menu items.
             flwMenuItems.Controls.Clear();
