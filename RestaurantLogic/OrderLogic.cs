@@ -59,9 +59,9 @@ namespace RestaurantLogic
         /// <summary>
         /// Returns the list of all orders that are either not started, or being prepared, with all of its items.
         /// </summary>
-        public List<Order> GetOrdersToPrepare()
+        public List<Order> GetKitchenOrdersToPrepare()
         {
-            return orderDao.GetOrdersToPrepare();
+            return orderDao.GetKitchenOrdersToPrepare();
         }
 
         /// <summary>
@@ -74,13 +74,28 @@ namespace RestaurantLogic
             orderDao.RegisterOrderToBartender(employee, order);
         }
       
-        public List<MenuItem> GetOrderFoodItems(int orderID)
+        public List<MenuItem> GetOrderItemsByID(int orderID)
         {
-            return orderDao.GetOrderFoodItems(orderID);
+            return orderDao.GetOrderItemsByID(orderID);
+        }
+
+        public List<MenuItem> GetBarOrderItemsByID(int orderID)
+        {
+            return orderDao.GetBarOrderItemsByID(orderID);
         }
         public void UpdateOrderStatus(Order order)
         {
             orderDao.UpdateOrderStatus(order);
+        }
+
+        public Order GetOrderCommentByID(int orderID)
+        {
+            return orderDao.GetOrderCommentByID(orderID);
+        }
+
+        public Table GetOrderTable(int orderId)
+        {
+            return orderDao.GetOrderTable(orderId);
         }
 
         /// <summary>
@@ -120,4 +135,5 @@ namespace RestaurantLogic
             orderDao.SetItemQuantity(item);
         }
     }
+
 }

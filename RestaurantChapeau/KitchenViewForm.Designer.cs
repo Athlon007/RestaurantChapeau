@@ -31,22 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitchenViewForm));
             this.pnlKitchen_NewOrders = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btn_completeOrders = new System.Windows.Forms.Button();
-            this.btn_ActiveOrders = new System.Windows.Forms.Button();
-            this.btn_newOrders = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.listViewNewOrders = new System.Windows.Forms.ListView();
             this.colHeadOrders = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderTime = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderTable = new System.Windows.Forms.ColumnHeader();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbl_newOrders = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlKitchen_CompleteOrders = new System.Windows.Forms.Panel();
-            this.btnKitchen_ClearOrders = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.lbl_completedOrders = new System.Windows.Forms.Label();
             this.listViewKitchen_CompleteOrders = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -61,27 +55,36 @@
             this.label6 = new System.Windows.Forms.Label();
             this.sidebarPanelCompleteOrder = new System.Windows.Forms.Panel();
             this.pnlKitchen_ActiveOrder = new System.Windows.Forms.Panel();
+            this.lblSecs = new System.Windows.Forms.Label();
+            this.lblHours = new System.Windows.Forms.Label();
+            this.lblMins = new System.Windows.Forms.Label();
+            this.lbl_OrderComments = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblKitchenn_OrderNo = new System.Windows.Forms.Label();
             this.lblKitchen_OrderTime = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.lbl_tableNo = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.listViewKitchen_ActiveOrder = new System.Windows.Forms.ListView();
             this.Order_item = new System.Windows.Forms.ColumnHeader();
             this.Quantity = new System.Windows.Forms.ColumnHeader();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lbl_activeOrder = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlKitchen_NewOrders.SuspendLayout();
-            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlKitchen_CompleteOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.sidebarPanelCompleteOrder.SuspendLayout();
             this.pnlKitchen_ActiveOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlKitchen_NewOrders
             // 
-            this.pnlKitchen_NewOrders.Controls.Add(this.panel1);
+            this.pnlKitchen_NewOrders.Controls.Add(this.pictureBox2);
             this.pnlKitchen_NewOrders.Controls.Add(this.listViewNewOrders);
-            this.pnlKitchen_NewOrders.Controls.Add(this.label5);
+            this.pnlKitchen_NewOrders.Controls.Add(this.lbl_newOrders);
             this.pnlKitchen_NewOrders.Controls.Add(this.label4);
             this.pnlKitchen_NewOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlKitchen_NewOrders.Location = new System.Drawing.Point(0, 0);
@@ -89,83 +92,16 @@
             this.pnlKitchen_NewOrders.Size = new System.Drawing.Size(1844, 1157);
             this.pnlKitchen_NewOrders.TabIndex = 0;
             // 
-            // panel1
+            // pictureBox2
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btn_completeOrders);
-            this.panel1.Controls.Add(this.btn_ActiveOrders);
-            this.panel1.Controls.Add(this.btn_newOrders);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(208, 1157);
-            this.panel1.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 885);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(196, 32);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Complete Orders";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 597);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(147, 32);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Active Order";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 319);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 32);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "New Orders";
-            // 
-            // btn_completeOrders
-            // 
-            this.btn_completeOrders.BackColor = System.Drawing.Color.White;
-            this.btn_completeOrders.Image = ((System.Drawing.Image)(resources.GetObject("btn_completeOrders.Image")));
-            this.btn_completeOrders.Location = new System.Drawing.Point(35, 740);
-            this.btn_completeOrders.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_completeOrders.Name = "btn_completeOrders";
-            this.btn_completeOrders.Size = new System.Drawing.Size(145, 141);
-            this.btn_completeOrders.TabIndex = 1;
-            this.btn_completeOrders.UseVisualStyleBackColor = false;
-            // 
-            // btn_ActiveOrders
-            // 
-            this.btn_ActiveOrders.BackColor = System.Drawing.Color.White;
-            this.btn_ActiveOrders.Image = ((System.Drawing.Image)(resources.GetObject("btn_ActiveOrders.Image")));
-            this.btn_ActiveOrders.Location = new System.Drawing.Point(35, 453);
-            this.btn_ActiveOrders.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_ActiveOrders.Name = "btn_ActiveOrders";
-            this.btn_ActiveOrders.Size = new System.Drawing.Size(145, 141);
-            this.btn_ActiveOrders.TabIndex = 1;
-            this.btn_ActiveOrders.UseVisualStyleBackColor = false;
-            // 
-            // btn_newOrders
-            // 
-            this.btn_newOrders.BackColor = System.Drawing.Color.White;
-            this.btn_newOrders.Image = ((System.Drawing.Image)(resources.GetObject("btn_newOrders.Image")));
-            this.btn_newOrders.Location = new System.Drawing.Point(35, 174);
-            this.btn_newOrders.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_newOrders.Name = "btn_newOrders";
-            this.btn_newOrders.Size = new System.Drawing.Size(145, 141);
-            this.btn_newOrders.TabIndex = 1;
-            this.btn_newOrders.UseVisualStyleBackColor = false;
+            this.pictureBox2.BackColor = System.Drawing.Color.Black;
+            this.pictureBox2.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox2.Location = new System.Drawing.Point(1657, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(187, 127);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 11;
+            this.pictureBox2.TabStop = false;
             // 
             // listViewNewOrders
             // 
@@ -201,15 +137,15 @@
             this.columnHeaderTable.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeaderTable.Width = 500;
             // 
-            // label5
+            // lbl_newOrders
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(764, 66);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(358, 87);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "New Orders";
+            this.lbl_newOrders.AutoSize = true;
+            this.lbl_newOrders.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lbl_newOrders.Location = new System.Drawing.Point(764, 66);
+            this.lbl_newOrders.Name = "lbl_newOrders";
+            this.lbl_newOrders.Size = new System.Drawing.Size(358, 87);
+            this.lbl_newOrders.TabIndex = 7;
+            this.lbl_newOrders.Text = "New Orders";
             // 
             // label4
             // 
@@ -222,8 +158,8 @@
             // 
             // pnlKitchen_CompleteOrders
             // 
-            this.pnlKitchen_CompleteOrders.Controls.Add(this.btnKitchen_ClearOrders);
-            this.pnlKitchen_CompleteOrders.Controls.Add(this.label12);
+            this.pnlKitchen_CompleteOrders.Controls.Add(this.picLogo);
+            this.pnlKitchen_CompleteOrders.Controls.Add(this.lbl_completedOrders);
             this.pnlKitchen_CompleteOrders.Controls.Add(this.listViewKitchen_CompleteOrders);
             this.pnlKitchen_CompleteOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlKitchen_CompleteOrders.Location = new System.Drawing.Point(0, 0);
@@ -231,26 +167,26 @@
             this.pnlKitchen_CompleteOrders.Size = new System.Drawing.Size(1844, 1157);
             this.pnlKitchen_CompleteOrders.TabIndex = 10;
             // 
-            // btnKitchen_ClearOrders
+            // picLogo
             // 
-            this.btnKitchen_ClearOrders.BackColor = System.Drawing.Color.Salmon;
-            this.btnKitchen_ClearOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnKitchen_ClearOrders.Location = new System.Drawing.Point(1457, 1053);
-            this.btnKitchen_ClearOrders.Name = "btnKitchen_ClearOrders";
-            this.btnKitchen_ClearOrders.Size = new System.Drawing.Size(235, 46);
-            this.btnKitchen_ClearOrders.TabIndex = 9;
-            this.btnKitchen_ClearOrders.Text = "Clear Orders";
-            this.btnKitchen_ClearOrders.UseVisualStyleBackColor = false;
+            this.picLogo.BackColor = System.Drawing.Color.Black;
+            this.picLogo.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.picLogo.Location = new System.Drawing.Point(1657, 0);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(187, 127);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLogo.TabIndex = 10;
+            this.picLogo.TabStop = false;
             // 
-            // label12
+            // lbl_completedOrders
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(816, 46);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(500, 87);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "Complete Orders";
+            this.lbl_completedOrders.AutoSize = true;
+            this.lbl_completedOrders.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lbl_completedOrders.Location = new System.Drawing.Point(816, 46);
+            this.lbl_completedOrders.Name = "lbl_completedOrders";
+            this.lbl_completedOrders.Size = new System.Drawing.Size(500, 87);
+            this.lbl_completedOrders.TabIndex = 8;
+            this.lbl_completedOrders.Text = "Complete Orders";
             // 
             // listViewKitchen_CompleteOrders
             // 
@@ -280,6 +216,7 @@
             // 
             // columnHeader3
             // 
+            this.columnHeader3.Text = "Status";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 500;
             // 
@@ -387,33 +324,97 @@
             this.sidebarPanelCompleteOrder.Name = "sidebarPanelCompleteOrder";
             this.sidebarPanelCompleteOrder.Size = new System.Drawing.Size(208, 1157);
             this.sidebarPanelCompleteOrder.TabIndex = 5;
+            this.sidebarPanelCompleteOrder.Paint += new System.Windows.Forms.PaintEventHandler(this.sidebarPanelCompleteOrder_Paint);
             // 
             // pnlKitchen_ActiveOrder
             // 
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblSecs);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblHours);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lblMins);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lbl_OrderComments);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.label9);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.pictureBox1);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.btn_readyOrder);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.lblKitchenn_OrderNo);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.lblKitchen_OrderTime);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label14);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lbl_tableNo);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.label13);
             this.pnlKitchen_ActiveOrder.Controls.Add(this.listViewKitchen_ActiveOrder);
-            this.pnlKitchen_ActiveOrder.Controls.Add(this.label11);
+            this.pnlKitchen_ActiveOrder.Controls.Add(this.lbl_activeOrder);
             this.pnlKitchen_ActiveOrder.Location = new System.Drawing.Point(215, 3);
             this.pnlKitchen_ActiveOrder.Name = "pnlKitchen_ActiveOrder";
             this.pnlKitchen_ActiveOrder.Size = new System.Drawing.Size(1629, 1154);
             this.pnlKitchen_ActiveOrder.TabIndex = 10;
             // 
+            // lblSecs
+            // 
+            this.lblSecs.AutoSize = true;
+            this.lblSecs.Location = new System.Drawing.Point(1340, 134);
+            this.lblSecs.Name = "lblSecs";
+            this.lblSecs.Size = new System.Drawing.Size(40, 32);
+            this.lblSecs.TabIndex = 13;
+            this.lblSecs.Text = "00";
+            // 
+            // lblHours
+            // 
+            this.lblHours.AutoSize = true;
+            this.lblHours.Location = new System.Drawing.Point(1269, 134);
+            this.lblHours.Name = "lblHours";
+            this.lblHours.Size = new System.Drawing.Size(40, 32);
+            this.lblHours.TabIndex = 13;
+            this.lblHours.Text = "00";
+            // 
+            // lblMins
+            // 
+            this.lblMins.AutoSize = true;
+            this.lblMins.Location = new System.Drawing.Point(1303, 134);
+            this.lblMins.Name = "lblMins";
+            this.lblMins.Size = new System.Drawing.Size(40, 32);
+            this.lblMins.TabIndex = 13;
+            this.lblMins.Text = "00";
+            // 
+            // lbl_OrderComments
+            // 
+            this.lbl_OrderComments.AutoSize = true;
+            this.lbl_OrderComments.Location = new System.Drawing.Point(257, 969);
+            this.lbl_OrderComments.Name = "lbl_OrderComments";
+            this.lbl_OrderComments.Size = new System.Drawing.Size(0, 32);
+            this.lbl_OrderComments.TabIndex = 12;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(109, 969);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(142, 32);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Comments: ";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox1.Location = new System.Drawing.Point(1442, -3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(187, 127);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
             // lblKitchenn_OrderNo
             // 
             this.lblKitchenn_OrderNo.AutoSize = true;
-            this.lblKitchenn_OrderNo.Location = new System.Drawing.Point(251, 171);
+            this.lblKitchenn_OrderNo.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblKitchenn_OrderNo.Location = new System.Drawing.Point(692, 67);
             this.lblKitchenn_OrderNo.Name = "lblKitchenn_OrderNo";
-            this.lblKitchenn_OrderNo.Size = new System.Drawing.Size(0, 32);
+            this.lblKitchenn_OrderNo.Size = new System.Drawing.Size(0, 72);
             this.lblKitchenn_OrderNo.TabIndex = 10;
             // 
             // lblKitchen_OrderTime
             // 
             this.lblKitchen_OrderTime.AutoSize = true;
-            this.lblKitchen_OrderTime.Location = new System.Drawing.Point(1302, 171);
+            this.lblKitchen_OrderTime.Location = new System.Drawing.Point(1269, 134);
             this.lblKitchen_OrderTime.Name = "lblKitchen_OrderTime";
             this.lblKitchen_OrderTime.Size = new System.Drawing.Size(0, 32);
             this.lblKitchen_OrderTime.TabIndex = 10;
@@ -421,20 +422,28 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(1198, 174);
+            this.label14.Location = new System.Drawing.Point(1184, 134);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(79, 32);
             this.label14.TabIndex = 10;
             this.label14.Text = "Time: ";
             // 
+            // lbl_tableNo
+            // 
+            this.lbl_tableNo.AutoSize = true;
+            this.lbl_tableNo.Location = new System.Drawing.Point(204, 120);
+            this.lbl_tableNo.Name = "lbl_tableNo";
+            this.lbl_tableNo.Size = new System.Drawing.Size(0, 32);
+            this.lbl_tableNo.TabIndex = 10;
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(118, 171);
+            this.label13.Location = new System.Drawing.Point(124, 120);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(80, 32);
+            this.label13.Size = new System.Drawing.Size(74, 32);
             this.label13.TabIndex = 10;
-            this.label13.Text = "Order:";
+            this.label13.Text = "Table:";
             // 
             // listViewKitchen_ActiveOrder
             // 
@@ -445,9 +454,9 @@
             this.listViewKitchen_ActiveOrder.FullRowSelect = true;
             this.listViewKitchen_ActiveOrder.GridLines = true;
             this.listViewKitchen_ActiveOrder.HideSelection = false;
-            this.listViewKitchen_ActiveOrder.Location = new System.Drawing.Point(197, 303);
+            this.listViewKitchen_ActiveOrder.Location = new System.Drawing.Point(124, 174);
             this.listViewKitchen_ActiveOrder.Name = "listViewKitchen_ActiveOrder";
-            this.listViewKitchen_ActiveOrder.Size = new System.Drawing.Size(1202, 687);
+            this.listViewKitchen_ActiveOrder.Size = new System.Drawing.Size(1401, 685);
             this.listViewKitchen_ActiveOrder.TabIndex = 9;
             this.listViewKitchen_ActiveOrder.UseCompatibleStateImageBehavior = false;
             this.listViewKitchen_ActiveOrder.View = System.Windows.Forms.View.Details;
@@ -462,21 +471,20 @@
             this.Quantity.Text = "Quantity";
             this.Quantity.Width = 600;
             // 
-            // label11
+            // lbl_activeOrder
             // 
-            this.label11.AutoSize = true;
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label11.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(530, 46);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(396, 89);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Active order";
+            this.lbl_activeOrder.AutoSize = true;
+            this.lbl_activeOrder.Font = new System.Drawing.Font("Segoe Script", 19.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lbl_activeOrder.Location = new System.Drawing.Point(539, 63);
+            this.lbl_activeOrder.Name = "lbl_activeOrder";
+            this.lbl_activeOrder.Size = new System.Drawing.Size(202, 87);
+            this.lbl_activeOrder.TabIndex = 8;
+            this.lbl_activeOrder.Text = "Order";
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 101;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // KitchenViewForm
@@ -487,23 +495,24 @@
             this.ClientSize = new System.Drawing.Size(1844, 1157);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
             this.Controls.Add(this.label10);
+            this.Controls.Add(this.pnlKitchen_NewOrders);
             this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Controls.Add(this.pnlKitchen_ActiveOrder);
-            this.Controls.Add(this.pnlKitchen_NewOrders);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";
             this.Load += new System.EventHandler(this.KitchenViewForm_Load);
             this.pnlKitchen_NewOrders.ResumeLayout(false);
             this.pnlKitchen_NewOrders.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlKitchen_CompleteOrders.ResumeLayout(false);
             this.pnlKitchen_CompleteOrders.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.sidebarPanelCompleteOrder.ResumeLayout(false);
             this.sidebarPanelCompleteOrder.PerformLayout();
             this.pnlKitchen_ActiveOrder.ResumeLayout(false);
             this.pnlKitchen_ActiveOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -513,24 +522,16 @@
 
         private System.Windows.Forms.Panel pnlKitchen_NewOrders;
         private System.Windows.Forms.Panel pnlKitchen_CompleteOrders;
-        private System.Windows.Forms.Button btnKitchen_ClearOrders;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lbl_completedOrders;
         private System.Windows.Forms.ListView listViewKitchen_CompleteOrders;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_completeOrders;
-        private System.Windows.Forms.Button btn_ActiveOrders;
-        private System.Windows.Forms.Button btn_newOrders;
         private System.Windows.Forms.ListView listViewNewOrders;
         private System.Windows.Forms.ColumnHeader colHeadOrders;
         private System.Windows.Forms.ColumnHeader columnHeaderTime;
         private System.Windows.Forms.ColumnHeader columnHeaderTable;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbl_newOrders;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn_readyOrder;
         private System.Windows.Forms.Label label10;
@@ -543,7 +544,7 @@
         private System.Windows.Forms.Panel sidebarPanelCompleteOrder;
         private System.Windows.Forms.Panel pnlKitchen_ActiveOrder;
         private System.Windows.Forms.ListView listViewKitchen_ActiveOrder;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbl_activeOrder;
         private System.Windows.Forms.Label lblKitchenn_OrderNo;
         private System.Windows.Forms.Label lblKitchen_OrderTime;
         private System.Windows.Forms.Label label14;
@@ -551,5 +552,14 @@
         private System.Windows.Forms.ColumnHeader Order_item;
         private System.Windows.Forms.ColumnHeader Quantity;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox picLogo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lbl_OrderComments;
+        private System.Windows.Forms.Label lblSecs;
+        private System.Windows.Forms.Label lblMins;
+        private System.Windows.Forms.Label lblHours;
+        private System.Windows.Forms.Label lbl_tableNo;
     }
 }
