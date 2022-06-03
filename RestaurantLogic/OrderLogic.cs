@@ -92,7 +92,10 @@ namespace RestaurantLogic
         {
             return orderDao.GetOrderCommentByID(orderID);
         }
-
+        public void UpdateMenuItemStatus(MenuItem item)
+        {
+             orderDao.UpdateMenuItemStatus(item);
+        }
         public Table GetOrderTable(int orderId)
         {
             return orderDao.GetOrderTable(orderId);

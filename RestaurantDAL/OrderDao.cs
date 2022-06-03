@@ -219,6 +219,16 @@ namespace RestaurantDAL
             };
             ExecuteEditQuery(command, parameters);
         }
+        public void UpdateMenuItemStatus( MenuItem item)
+        {
+            string command = ("UPDATE dbo.[PartOf] SET status =@status  WHERE itemId = @menuItemId");
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                    new SqlParameter("@status", item.Status),
+                    new SqlParameter("@menuItemId", item.Id)
+            };
+            ExecuteEditQuery(command, parameters);
+        }
 
         public Order GetOrderCommentByID(int OrderID)
         {

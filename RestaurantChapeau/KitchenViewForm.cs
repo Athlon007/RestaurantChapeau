@@ -20,6 +20,7 @@ namespace RestaurantChapeau
        private bool kitchenMode;
 
        private Order selectedOrder;
+        private MenuItem selectedItem;
 
         public KitchenViewForm(bool kitchenMode = true)
         {
@@ -96,6 +97,7 @@ namespace RestaurantChapeau
             {
                 ListViewItem li = new ListViewItem(item.Name.ToString());
                 li.SubItems.Add(item.Quantity.ToString());
+                li.SubItems.Add(item.Status.ToString());
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
             }
@@ -159,7 +161,7 @@ namespace RestaurantChapeau
             Order orderItem = selectedOrder;
 
             //save the name of the highlighted menu item into a string
-            string menuItem = listViewKitchen_ActiveOrder.FocusedItem.Text;
+             selectedItem =(MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
 
             //if all the items on the listview are selected, change status to ready else preparing
             if (listViewKitchen_ActiveOrder.CheckedItems.Count == listViewKitchen_ActiveOrder.Items.Count)
@@ -174,9 +176,9 @@ namespace RestaurantChapeau
             }
             else
             {
-                orderItem.Status = OrderStatus.Preparing;
+                orderService.UpdateMenuItemStatus(selectedItem);
                 listViewKitchen_ActiveOrder.FocusedItem.BackColor = Color.Green;
-                MessageBox.Show($"Item {menuItem} is now ready");
+                MessageBox.Show($"Item {selectedItem.Name} is now ready");
             }
             // update the new order status with this new status
             orderService.UpdateOrderStatus(orderItem);
