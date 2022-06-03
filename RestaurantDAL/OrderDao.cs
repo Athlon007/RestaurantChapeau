@@ -125,7 +125,7 @@ namespace RestaurantDAL
             ;
             order.Id = Convert.ToInt32(row["id"]);
             order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
-            order.Status = (OrderStatus)Convert.ToInt32(row["status"]);
+            order.Complete = Convert.ToBoolean(row["complete"]);
             order.Bill = bill;
             if (row.Table.Columns.Contains("comment") && !Convert.IsDBNull(row["comment"]))
             {
@@ -211,10 +211,10 @@ namespace RestaurantDAL
 
         public void UpdateOrderStatus(Order order)
         {
-            string command = ("UPDATE dbo.[Order] SET status =@status  WHERE Id = @orderId");
+            string command = ("UPDATE dbo.[Order] SET complete = @complete  WHERE Id = @orderId");
             SqlParameter[] parameters = new SqlParameter[]
             {
-                    new SqlParameter("@status", order.Status),
+                    new SqlParameter("@complete", order.Complete),
                     new SqlParameter("@OrderId", order.Id)
             };
             ExecuteEditQuery(command, parameters);
@@ -253,7 +253,7 @@ namespace RestaurantDAL
                 {
                     Id = Convert.ToInt32(dr["id"]),
                     PlacedTime = Convert.ToDateTime(dr["placedTime"]),
-                    Status = (OrderStatus)Convert.ToInt32(dr["status"])
+                    Complete = Convert.ToBoolean(dr["complete"])
                 };
                 orders.Add(order);
             }

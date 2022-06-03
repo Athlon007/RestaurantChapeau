@@ -55,7 +55,7 @@ namespace RestaurantChapeau
                 button.Image = Properties.Resources.screenshotTable;
                 button.Tag = null;
 
-                if (reservationService.TableHasBill(i + 1))
+                if (paymentService.HasBill(i + 1))
                 {
                     button.Image = Properties.Resources.occupied;
                 }
@@ -70,7 +70,7 @@ namespace RestaurantChapeau
                     bool reservationNoShowUp = DateTime.Now >= reservation.ReservationStart.AddHours(-1);
                     bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
                     bool isTakenNow = DateTime.Now > reservation.ReservationStart;
-                    bool tableHasBill = reservationService.TableHasBill(reservation.tableid);
+                    bool tableHasBill = paymentService.HasBill(reservation.tableid);
                     if (isTakenNow && tableHasBill)
                     {
                         tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;

@@ -43,7 +43,7 @@ namespace RestaurantChapeau
                 //create new listview item and add the items to the listview item
                 ListViewItem li = new ListViewItem(order.Id.ToString());
                 li.SubItems.Add(order.PlacedTime.ToString());
-                li.SubItems.Add(order.Status.ToString());
+                li.SubItems.Add(order.Complete.ToString());
                 li.Tag = order;
 
                 //if order is ready add to completed orders page or add to new order page

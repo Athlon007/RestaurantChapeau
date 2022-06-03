@@ -148,7 +148,7 @@ namespace RestaurantLogic
                 }
             }
 
-            order.Status = OrderStatus.Served;
+            order.Complete = true;
             UpdateOrderStatus(order);
         }
     }
