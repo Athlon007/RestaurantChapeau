@@ -39,7 +39,7 @@ namespace RestaurantChapeau
 
             if (displayError)
             {
-                MessageBox.Show($"Something went wrong: {ex.Message}");
+                MessageBox.Show($"Something went wrong: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

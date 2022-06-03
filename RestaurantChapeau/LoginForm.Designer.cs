@@ -70,15 +70,18 @@
             // 
             // txt_LoginPassword
             // 
+            this.txt_LoginPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_LoginPassword.Location = new System.Drawing.Point(146, 495);
             this.txt_LoginPassword.Multiline = true;
             this.txt_LoginPassword.Name = "txt_LoginPassword";
+            this.txt_LoginPassword.PasswordChar = '*';
             this.txt_LoginPassword.Size = new System.Drawing.Size(452, 58);
             this.txt_LoginPassword.TabIndex = 0;
             this.txt_LoginPassword.TextChanged += new System.EventHandler(this.txt_LoginPassword_TextChanged);
             // 
             // txt_LoginEmail
             // 
+            this.txt_LoginEmail.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_LoginEmail.Location = new System.Drawing.Point(146, 337);
             this.txt_LoginEmail.Multiline = true;
             this.txt_LoginEmail.Name = "txt_LoginEmail";
@@ -110,6 +113,7 @@
             this.btn_LoginForgot.TabIndex = 3;
             this.btn_LoginForgot.Text = "Forgot password";
             this.btn_LoginForgot.UseVisualStyleBackColor = false;
+            this.btn_LoginForgot.Visible = false;
             this.btn_LoginForgot.Click += new System.EventHandler(this.btn_forgotPassword_Click);
             // 
             // label3
@@ -117,9 +121,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(146, 314);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 20);
+            this.label3.Size = new System.Drawing.Size(24, 20);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Email";
+            this.label3.Text = "ID";
             // 
             // label4
             // 
@@ -167,6 +171,7 @@
             this.pnl_ForgotPassword.Name = "pnl_ForgotPassword";
             this.pnl_ForgotPassword.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ForgotPassword.TabIndex = 9;
+            this.pnl_ForgotPassword.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_ForgotPassword_Paint);
             // 
             // lbl_ForgotConfirm
             // 
@@ -223,6 +228,7 @@
             // 
             // textBox3
             // 
+            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox3.Location = new System.Drawing.Point(146, 654);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
@@ -231,6 +237,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox2.Location = new System.Drawing.Point(146, 495);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -239,6 +246,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(146, 337);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -284,6 +292,7 @@
             // 
             // txt_RegisterPassword
             // 
+            this.txt_RegisterPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterPassword.Location = new System.Drawing.Point(146, 631);
             this.txt_RegisterPassword.Multiline = true;
             this.txt_RegisterPassword.Name = "txt_RegisterPassword";
@@ -321,9 +330,9 @@
             this.lbl_RegisterEmail.AutoSize = true;
             this.lbl_RegisterEmail.Location = new System.Drawing.Point(146, 509);
             this.lbl_RegisterEmail.Name = "lbl_RegisterEmail";
-            this.lbl_RegisterEmail.Size = new System.Drawing.Size(46, 20);
+            this.lbl_RegisterEmail.Size = new System.Drawing.Size(24, 20);
             this.lbl_RegisterEmail.TabIndex = 14;
-            this.lbl_RegisterEmail.Text = "Email";
+            this.lbl_RegisterEmail.Text = "ID";
             // 
             // lbl_RegisterLastName
             // 
@@ -354,6 +363,7 @@
             // 
             // txt_RegisterEmail
             // 
+            this.txt_RegisterEmail.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterEmail.Location = new System.Drawing.Point(146, 532);
             this.txt_RegisterEmail.Multiline = true;
             this.txt_RegisterEmail.Name = "txt_RegisterEmail";
@@ -362,6 +372,7 @@
             // 
             // txt_RegisterLastName
             // 
+            this.txt_RegisterLastName.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterLastName.Location = new System.Drawing.Point(146, 430);
             this.txt_RegisterLastName.Multiline = true;
             this.txt_RegisterLastName.Name = "txt_RegisterLastName";
@@ -370,6 +381,7 @@
             // 
             // txt_RegisterFirstName
             // 
+            this.txt_RegisterFirstName.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txt_RegisterFirstName.Location = new System.Drawing.Point(146, 337);
             this.txt_RegisterFirstName.Multiline = true;
             this.txt_RegisterFirstName.Name = "txt_RegisterFirstName";
@@ -387,6 +399,7 @@
             this.btn_LoginRegister.TabIndex = 12;
             this.btn_LoginRegister.Text = "Register";
             this.btn_LoginRegister.UseVisualStyleBackColor = false;
+            this.btn_LoginRegister.Visible = false;
             this.btn_LoginRegister.Click += new System.EventHandler(this.btn_LoginRegister_Click_1);
             // 
             // LoginForm
