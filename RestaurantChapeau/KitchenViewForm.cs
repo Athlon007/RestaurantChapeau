@@ -37,12 +37,13 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetKitchenOrdersToPrepare();
 
-            // RemoveListViewItems(listViewNewOrders);
             foreach (Order order in orders)
             {
                 //create new listview item and add the items to the listview item
                 ListViewItem li = new ListViewItem(order.Id.ToString());
                 li.SubItems.Add(order.PlacedTime.ToString());
+
+                // if the item is complete, display status is ready or else not ready in the listview
                 if (order.Complete == true)
                 {
                     li.SubItems.Add("Ready");
@@ -60,10 +61,10 @@ namespace RestaurantChapeau
                 if (items.Count == 0)
                     continue;
 
-                // al lthe items above an item in a listview have a status of ready
+                // all lthe items above an item in a listview have a status of ready
                 bool allItemsAboveReady = true;
 
-                // for all theitems that belong to an order
+                // for all the items that belong to an order
                 foreach (MenuItem item in items)
                 {
                     //if the order item is not ready to serve
@@ -203,18 +204,18 @@ namespace RestaurantChapeau
             }
             else
             {
+                // set the selected item to ready
                 selectedItem.Status = OrderStatus.ReadyToServe;
                 orderService.SetOrderItemStatus(selectedItem, orderItem);
                 listViewKitchen_ActiveOrder.FocusedItem.BackColor = Color.Green;
                 MessageBox.Show($"Item {selectedItem.Name} is now ready");
             }
-            // update the new order status with this new status
-            //orderService.UpdateOrderStatus(orderItem);
 
             //remove the items on the new order listview and update with new information
             RemoveListViewItems(listViewNewOrders);
             DisplayOrders();
 
+            //remove all the item in the listview and display again 
             RemoveListViewItems(listViewKitchen_ActiveOrder);
             DisplayOrderItems();
         }
