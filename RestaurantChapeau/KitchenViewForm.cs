@@ -48,7 +48,7 @@ namespace RestaurantChapeau
                 li.Tag = order;
 
                 //if order is ready add to completed orders page or add to new order page
-                if (order.Status >= OrderStatus.ReadyToServe)
+                if (order.Complete == true)
                 {
                     listViewKitchen_CompleteOrders.Items.Add(li);
                 }
@@ -166,7 +166,7 @@ namespace RestaurantChapeau
             //if all the items on the listview are selected, change status to ready else preparing
             if (listViewKitchen_ActiveOrder.CheckedItems.Count == listViewKitchen_ActiveOrder.Items.Count)
             {
-                orderItem.Status = OrderStatus.ReadyToServe;
+                orderItem.Complete = true;
                 MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
                 IsActive = false;
             }
