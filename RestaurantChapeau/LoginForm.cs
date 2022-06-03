@@ -257,7 +257,10 @@ namespace RestaurantChapeau
                             KitchenViewForm kitchenView = new KitchenViewForm();
                             kitchenView.Show();
                             break;
-                        //...
+                        case EmployeeType.Bartender:
+                            KitchenViewForm barView = new KitchenViewForm(false);
+                            barView.Show();
+                            break;
                     }
                 }
                 else

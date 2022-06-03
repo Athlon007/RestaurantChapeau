@@ -21,8 +21,9 @@ namespace RestaurantChapeau
 
        private Order selectedOrder;
 
-        public KitchenViewForm()
+        public KitchenViewForm(bool kitchenMode = true)
         {
+            this.kitchenMode = kitchenMode; ;
             InitializeComponent();
             SetFonts();
             DisplayOrders();
@@ -33,9 +34,6 @@ namespace RestaurantChapeau
         #region Display Orders
         public void DisplayOrders()
         {
-            //if false= bar view else kitchen view
-            kitchenMode = true;
-
             OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetKitchenOrdersToPrepare();
 
