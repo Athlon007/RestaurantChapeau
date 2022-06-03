@@ -161,7 +161,6 @@ namespace RestaurantChapeau
         private void btn_Test_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pbTableViewLogOut.Hide();
             pnl_ViewReservation.Show();
             try
             {
@@ -267,7 +266,6 @@ namespace RestaurantChapeau
         {
             HidePanel();
             DisplayReservation();
-            pbTableViewLogOut.Show();
         }
 
         private void pnl_ViewReservation_Paint(object sender, PaintEventArgs e)
@@ -295,7 +293,6 @@ namespace RestaurantChapeau
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             HidePanel();
-            pbTableViewLogOut.Show();
             CheckReservations();
         }
 
@@ -446,6 +443,13 @@ namespace RestaurantChapeau
         {
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
+        }
+
+        private void btn_LogOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            //LoginForm loginForm = new LoginForm();
+            //loginForm.Show();
         }
     }
 }

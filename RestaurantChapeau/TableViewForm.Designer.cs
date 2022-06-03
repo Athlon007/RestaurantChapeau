@@ -69,9 +69,9 @@
             this.btn_ViewReservationMake = new System.Windows.Forms.Button();
             this.lV_ReservationDisplay = new System.Windows.Forms.ListView();
             this.btn_TableViewManageReservation = new System.Windows.Forms.Button();
-            this.pbTableViewLogOut = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.btn_LogOut = new System.Windows.Forms.Button();
             this.pnl_Reservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMakeReservationGoBack)).BeginInit();
@@ -81,7 +81,6 @@
             this.pnl_ViewReservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTableViewLogOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
@@ -212,7 +211,7 @@
             this.pnl_Reservation.Controls.Add(this.txt_ReservationEmail);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationTableID);
             this.pnl_Reservation.Controls.Add(this.btn_MakeReservation);
-            this.pnl_Reservation.Location = new System.Drawing.Point(0, 0);
+            this.pnl_Reservation.Location = new System.Drawing.Point(406, 94);
             this.pnl_Reservation.Name = "pnl_Reservation";
             this.pnl_Reservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Reservation.TabIndex = 32;
@@ -469,7 +468,7 @@
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationCancel);
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationMake);
             this.pnl_ViewReservation.Controls.Add(this.lV_ReservationDisplay);
-            this.pnl_ViewReservation.Location = new System.Drawing.Point(0, 0);
+            this.pnl_ViewReservation.Location = new System.Drawing.Point(438, 102);
             this.pnl_ViewReservation.Name = "pnl_ViewReservation";
             this.pnl_ViewReservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ViewReservation.TabIndex = 33;
@@ -543,7 +542,7 @@
             // 
             this.lV_ReservationDisplay.FullRowSelect = true;
             this.lV_ReservationDisplay.HideSelection = false;
-            this.lV_ReservationDisplay.Location = new System.Drawing.Point(35, 113);
+            this.lV_ReservationDisplay.Location = new System.Drawing.Point(0, 0);
             this.lV_ReservationDisplay.Name = "lV_ReservationDisplay";
             this.lV_ReservationDisplay.Size = new System.Drawing.Size(677, 439);
             this.lV_ReservationDisplay.TabIndex = 0;
@@ -561,19 +560,6 @@
             this.btn_TableViewManageReservation.Text = "Manage reservation";
             this.btn_TableViewManageReservation.UseVisualStyleBackColor = false;
             this.btn_TableViewManageReservation.Click += new System.EventHandler(this.btn_Test_Click);
-            // 
-            // pbTableViewLogOut
-            // 
-            this.pbTableViewLogOut.BackColor = System.Drawing.Color.Transparent;
-            this.pbTableViewLogOut.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.pbTableViewLogOut.Location = new System.Drawing.Point(7, 8);
-            this.pbTableViewLogOut.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.pbTableViewLogOut.Name = "pbTableViewLogOut";
-            this.pbTableViewLogOut.Size = new System.Drawing.Size(62, 62);
-            this.pbTableViewLogOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbTableViewLogOut.TabIndex = 49;
-            this.pbTableViewLogOut.TabStop = false;
-            this.pbTableViewLogOut.Click += new System.EventHandler(this.pbTableViewLogOut_Click_1);
             // 
             // label2
             // 
@@ -600,15 +586,27 @@
             this.pictureBox4.TabIndex = 51;
             this.pictureBox4.TabStop = false;
             // 
+            // btn_LogOut
+            // 
+            this.btn_LogOut.Location = new System.Drawing.Point(9, 12);
+            this.btn_LogOut.Name = "btn_LogOut";
+            this.btn_LogOut.Size = new System.Drawing.Size(70, 68);
+            this.btn_LogOut.TabIndex = 52;
+            this.btn_LogOut.Text = "Log out";
+            this.btn_LogOut.UseVisualStyleBackColor = true;
+            this.btn_LogOut.Click += new System.EventHandler(this.btn_LogOut_Click);
+            // 
             // TableViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
+            this.Controls.Add(this.pnl_TableDetailView);
+            this.Controls.Add(this.pnl_Reservation);
+            this.Controls.Add(this.btn_LogOut);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.pbTableViewLogOut);
             this.Controls.Add(this.btn_TableViewManageReservation);
             this.Controls.Add(this.btn_Table10);
             this.Controls.Add(this.btn_Table9);
@@ -620,8 +618,6 @@
             this.Controls.Add(this.btn_Table3);
             this.Controls.Add(this.btn_Table2);
             this.Controls.Add(this.btn_Table1);
-            this.Controls.Add(this.pnl_TableDetailView);
-            this.Controls.Add(this.pnl_Reservation);
             this.Controls.Add(this.pnl_ViewReservation);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Name = "TableViewForm";
@@ -638,7 +634,6 @@
             this.pnl_ViewReservation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTableViewLogOut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
@@ -678,7 +673,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pbMakeReservationGoBack;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pbTableViewLogOut;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel pnl_TableDetailView;
         private System.Windows.Forms.PictureBox pbTableDetailViewGoBack;
@@ -689,5 +683,6 @@
         private System.Windows.Forms.Button btn_TableDetailViewCheckOut;
         private System.Windows.Forms.Button btn_TableDetailViewAddOrder;
         private System.Windows.Forms.Button btn_TableDetailViewChangeStatus;
+        private System.Windows.Forms.Button btn_LogOut;
     }
 }
