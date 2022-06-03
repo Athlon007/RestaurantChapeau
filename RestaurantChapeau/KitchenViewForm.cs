@@ -16,10 +16,10 @@ namespace RestaurantChapeau
     {
         int secs, mins, hours;
         bool IsActive;
-       public bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
-       private bool kitchenMode;
+        public bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
+        private bool kitchenMode;
 
-       private Order selectedOrder;
+        private Order selectedOrder;
         private MenuItem selectedItem;
 
         public KitchenViewForm(bool kitchenMode = true)
@@ -44,7 +44,16 @@ namespace RestaurantChapeau
                 //create new listview item and add the items to the listview item
                 ListViewItem li = new ListViewItem(order.Id.ToString());
                 li.SubItems.Add(order.PlacedTime.ToString());
-                li.SubItems.Add(order.Complete.ToString());
+                if (order.Complete == true)
+                {
+                    li.SubItems.Add("Ready");
+                }
+                else
+                {
+                    li.SubItems.Add("Not ready");
+                }
+
+
                 li.Tag = order;
 
                 //if order is ready add to completed orders page or add to new order page
@@ -67,7 +76,7 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
 
             //extract order item from the selected item in the listview
-            Order orderItem = (Order)listViewNewOrders.SelectedItems[0].Tag;
+            Order orderItem = listViewNewOrders.SelectedItems.Count == 0 ? this.selectedOrder : (Order)listViewNewOrders.SelectedItems[0].Tag;
 
             // get table number from the database where orderid is selected item
             Table table = orderService.GetOrderTable(orderItem.Id);
@@ -96,6 +105,7 @@ namespace RestaurantChapeau
             foreach (MenuItem item in orderMenuItems)
             {
                 ListViewItem li = new ListViewItem(item.Name.ToString());
+                li.Tag = item;
                 li.SubItems.Add(item.Quantity.ToString());
                 li.SubItems.Add(item.Status.ToString());
 
@@ -149,7 +159,7 @@ namespace RestaurantChapeau
             pnlKitchen_CompleteOrders.Show();
         }
         #endregion
-        
+
         #region Ready Order Button
         private void btn_readyOrder_Click(object sender, EventArgs e)
         {
@@ -161,7 +171,7 @@ namespace RestaurantChapeau
             Order orderItem = selectedOrder;
 
             //save the name of the highlighted menu item into a string
-             selectedItem =(MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
+            selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
 
             //if all the items on the listview are selected, change status to ready else preparing
             if (listViewKitchen_ActiveOrder.CheckedItems.Count == listViewKitchen_ActiveOrder.Items.Count)
@@ -176,16 +186,20 @@ namespace RestaurantChapeau
             }
             else
             {
-                orderService.UpdateMenuItemStatus(selectedItem);
+                selectedItem.Status = OrderStatus.ReadyToServe;
+                orderService.SetOrderItemStatus(selectedItem, orderItem);
                 listViewKitchen_ActiveOrder.FocusedItem.BackColor = Color.Green;
                 MessageBox.Show($"Item {selectedItem.Name} is now ready");
             }
             // update the new order status with this new status
-            orderService.UpdateOrderStatus(orderItem);
+            //orderService.UpdateOrderStatus(orderItem);
 
             //remove the items on the new order listview and update with new information
             RemoveListViewItems(listViewNewOrders);
             DisplayOrders();
+
+            RemoveListViewItems(listViewKitchen_ActiveOrder);
+            DisplayOrderItems();
         }
         #endregion
 

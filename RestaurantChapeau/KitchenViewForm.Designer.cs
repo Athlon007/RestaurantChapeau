@@ -69,9 +69,9 @@
             this.listViewKitchen_ActiveOrder = new System.Windows.Forms.ListView();
             this.Order_item = new System.Windows.Forms.ColumnHeader();
             this.Quantity = new System.Windows.Forms.ColumnHeader();
+            this.colMenuItemStatus = new System.Windows.Forms.ColumnHeader();
             this.lbl_activeOrder = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.colMenuItemStatus = new System.Windows.Forms.ColumnHeader();
             this.pnlKitchen_NewOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlKitchen_CompleteOrders.SuspendLayout();
@@ -473,6 +473,11 @@
             this.Quantity.Text = "Quantity";
             this.Quantity.Width = 300;
             // 
+            // colMenuItemStatus
+            // 
+            this.colMenuItemStatus.Text = "Status";
+            this.colMenuItemStatus.Width = 600;
+            // 
             // lbl_activeOrder
             // 
             this.lbl_activeOrder.AutoSize = true;
@@ -488,11 +493,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
-            // 
-            // colMenuItemStatus
-            // 
-            this.colMenuItemStatus.Text = "Status";
-            this.colMenuItemStatus.Width = 600;
             // 
             // KitchenViewForm
             // 

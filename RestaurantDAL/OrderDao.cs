@@ -160,9 +160,12 @@ namespace RestaurantDAL
         /// </summary>
         public List<Order> GetKitchenOrdersToPrepare()
         {
+            //string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
+            //                "FROM[Order] o " +
+            //            "WHERE o.complete = 0;";
             string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
-                            "FROM[Order] o " +
-                        "WHERE o.complete = 0;";
+                "FROM [Order] o " +
+                "JOIN PartOf.";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -170,7 +173,7 @@ namespace RestaurantDAL
         //Returns all the food items in an order with a specific orderID
         public List<MenuItem> GetOrderItemsByID(int orderId)
         {
-            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, po.status, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderId", orderId)
@@ -219,17 +222,7 @@ namespace RestaurantDAL
             };
             ExecuteEditQuery(command, parameters);
         }
-        public void UpdateMenuItemStatus( MenuItem item)
-        {
-            string command = ("UPDATE dbo.[PartOf] SET status =@status  WHERE itemId = @menuItemId");
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                    new SqlParameter("@status", item.Status),
-                    new SqlParameter("@menuItemId", item.Id)
-            };
-            ExecuteEditQuery(command, parameters);
-        }
-
+      
         public Order GetOrderCommentByID(int OrderID)
         {
             string command = (
