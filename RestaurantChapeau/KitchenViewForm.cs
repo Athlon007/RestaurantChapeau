@@ -16,14 +16,14 @@ namespace RestaurantChapeau
     {
         int secs, mins, hours;
         bool IsActive;
-       public bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
-       private bool kitchenMode;
+
+        Employee employee;
 
        private Order selectedOrder;
 
-        public KitchenViewForm(bool kitchenMode = true)
+        public KitchenViewForm(Employee employee)
         {
-            this.kitchenMode = kitchenMode; ;
+            this.employee = employee;
             InitializeComponent();
             SetFonts();
             DisplayOrders();
@@ -62,7 +62,7 @@ namespace RestaurantChapeau
         #region Display Order Items
         private void DisplayOrderItems()
         {
-            List<MenuItem> orderMenuItems;
+            List<MenuItem> orderMenuItems = new List<MenuItem>();
             OrderLogic orderService = new OrderLogic();
 
             //extract order item from the selected item in the listview
@@ -79,15 +79,14 @@ namespace RestaurantChapeau
             lbl_OrderComments.Text = selectedOrder.Comment;
 
             //if kitchenmode is true, display only kitchen items 
-            if (KitchenMode)
+            if (employee.employeeType == EmployeeType.KitchenStaff)
             {
                 orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
             }
-            else // display bar items
+            else if(employee.employeeType==EmployeeType.Bartender)          
             {
                 orderMenuItems = orderService.GetBarOrderItemsByID(orderItem.Id);
             }
-
             // delete all the items in the listview before adding new ones
             RemoveListViewItems(listViewKitchen_ActiveOrder);
 
