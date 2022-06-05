@@ -107,9 +107,10 @@ namespace RestaurantChapeau
             {
                 Label label = notificationLabels[i];
                 label.Text = "";
-                if (paymentService.HasBill(i + 1))
+                int tableNumber = i + 1;
+                if (paymentService.HasBill(tableNumber))
                 {
-                    Bill bill = paymentService.GetBill(i + 1);
+                    Bill bill = paymentService.GetBill(tableNumber);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
 
                     int readyCount = 0;
@@ -459,7 +460,6 @@ namespace RestaurantChapeau
             foreach (Order order in orders)
             {
                 List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
-                lv_TableDetailView.Tag = order;
                 foreach (MenuItem item in menus)
                 {
                     ListViewItem li = new ListViewItem(order.Id.ToString());
@@ -467,7 +467,12 @@ namespace RestaurantChapeau
                     li.SubItems.Add(item.Name.ToString());
                     li.SubItems.Add(item.Quantity.ToString());
                     li.SubItems.Add(order.PlacedTime.ToString());
-                    li.Tag = item;
+                    ListItem listItem = new ListItem()
+                    {
+                        Order = order,
+                        MenuItem = item
+                    };
+                    li.Tag = listItem;
                     if(item.Status == OrderStatus.ReadyToServe)
                     {
                         li.ForeColor = Color.Blue;
@@ -476,6 +481,12 @@ namespace RestaurantChapeau
                 }
             }
 
+        }
+
+        struct ListItem
+        {
+            public Order Order;
+            public MenuItem MenuItem;
         }
 
         private void btnNewOrder_Click(object sender, EventArgs e)
@@ -512,8 +523,11 @@ namespace RestaurantChapeau
 
         private void btn_TableDetailViewChangeStatus_Click(object sender, EventArgs e)
         {
-            Order order = (Order)lv_TableDetailView.Tag;
-            MenuItem item = (MenuItem)lv_TableDetailView.SelectedItems[0].Tag;
+            if (lv_TableDetailView.FocusedItem.Tag == null) return;
+
+            ListItem listItem = (ListItem)lv_TableDetailView.FocusedItem.Tag;
+            Order order = listItem.Order;
+            MenuItem item = listItem.MenuItem;
             if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
             {
                 MessageBox.Show("You cannot change status yet");
