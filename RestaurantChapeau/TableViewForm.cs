@@ -75,15 +75,42 @@ namespace RestaurantChapeau
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             CheckNotification();
         }
+        private void ShowNotification()
+        {
+            lbl_Table1Notification.Show();
+            lbl_Table2Notification.Show();
+            lbl_Table3Notification.Show();
+            lbl_Table4Notification.Show();
+            lbl_Table5Notification.Show();
+            lbl_Table6Notification.Show();
+            lbl_Table7Notification.Show();
+            lbl_Table8Notification.Show();
+            lbl_Table9Notification.Show();
+            lbl_Table10Notification.Show();
+        }
+        private void HideNotification()
+        {
+            lbl_Table1Notification.Hide();
+            lbl_Table2Notification.Hide();
+            lbl_Table3Notification.Hide();
+            lbl_Table4Notification.Hide();
+            lbl_Table5Notification.Hide();
+            lbl_Table6Notification.Hide();
+            lbl_Table7Notification.Hide();
+            lbl_Table8Notification.Hide();
+            lbl_Table9Notification.Hide();
+            lbl_Table10Notification.Hide();
+        }
         private void CheckNotification()
         {
             for (int i = 0; i < notificationLabels.Length; i++)
             {
                 Label label = notificationLabels[i];
                 label.Text = "";
-                if (paymentService.HasBill(i + 1))
+                int tableNumber = i + 1;
+                if (paymentService.HasBill(tableNumber))
                 {
-                    Bill bill = paymentService.GetBill(i + 1);
+                    Bill bill = paymentService.GetBill(tableNumber);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
 
                     int readyCount = 0;
@@ -98,7 +125,6 @@ namespace RestaurantChapeau
                             }
                         }
                     }
-
                     label.Text = $"{readyCount}";
                 }        
             }
@@ -386,6 +412,7 @@ namespace RestaurantChapeau
                 // Table has no bill?
                 // Go to order view.
                 ShowOrderView(tableId);
+                HideNotification();
             }
             else
             {
@@ -398,6 +425,7 @@ namespace RestaurantChapeau
                     // Bill has no orders?
                     // Automatically go into order creation process.
                     ShowOrderView(tableId, this.currentBill);
+                    HideNotification();
                 }
                 else
                 {
@@ -405,6 +433,7 @@ namespace RestaurantChapeau
                     // Show table details and load table's information.
                     pnl_TableDetailView.Show();
                     lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
+                    HideNotification();
                 }
             }
         }
@@ -431,7 +460,6 @@ namespace RestaurantChapeau
             foreach (Order order in orders)
             {
                 List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
-                lv_TableDetailView.Tag = order;
                 foreach (MenuItem item in menus)
                 {
                     ListViewItem li = new ListViewItem(order.Id.ToString());
@@ -439,11 +467,26 @@ namespace RestaurantChapeau
                     li.SubItems.Add(item.Name.ToString());
                     li.SubItems.Add(item.Quantity.ToString());
                     li.SubItems.Add(order.PlacedTime.ToString());
-                    li.Tag = item;
-                    lv_TableDetailView.Items.Add(li);
+                    ListItem listItem = new ListItem()
+                    {
+                        Order = order,
+                        MenuItem = item
+                    };
+                    li.Tag = listItem;
+                    if(item.Status == OrderStatus.ReadyToServe)
+                    {
+                        li.ForeColor = Color.Blue;
+                    }
+                    lv_TableDetailView.Items.Add(li);                    
                 }
             }
 
+        }
+
+        struct ListItem
+        {
+            public Order Order;
+            public MenuItem MenuItem;
         }
 
         private void btnNewOrder_Click(object sender, EventArgs e)
@@ -460,6 +503,7 @@ namespace RestaurantChapeau
         private void pbTableDetailViewGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
+            ShowNotification();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -479,10 +523,11 @@ namespace RestaurantChapeau
 
         private void btn_TableDetailViewChangeStatus_Click(object sender, EventArgs e)
         {
+            if (lv_TableDetailView.FocusedItem.Tag == null) return;
 
-            //TableDetailItem orderItem = (TableDetailItem)lv_TableDetailView.SelectedItems[0].Tag;
-            Order order = (Order)lv_TableDetailView.Tag;
-            MenuItem item = (MenuItem)lv_TableDetailView.SelectedItems[0].Tag;
+            ListItem listItem = (ListItem)lv_TableDetailView.FocusedItem.Tag;
+            Order order = listItem.Order;
+            MenuItem item = listItem.MenuItem;
             if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
             {
                 MessageBox.Show("You cannot change status yet");
@@ -507,9 +552,7 @@ namespace RestaurantChapeau
 
         private void btn_LogOut_Click(object sender, EventArgs e)
         {
-            this.Close();
-            //LoginForm loginForm = new LoginForm();
-            //loginForm.Show();
+            this.Close();            
         }
     }
 }
