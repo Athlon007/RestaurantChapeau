@@ -179,6 +179,7 @@ namespace RestaurantChapeau
 
             HidePanels();
             RemoveListViewItems(listViewKitchen_CompleteOrders);
+            DisplayOrders();
             pnlKitchen_CompleteOrders.Show();
         }
         #endregion
