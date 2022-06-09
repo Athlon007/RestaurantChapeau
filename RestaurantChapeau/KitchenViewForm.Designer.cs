@@ -325,7 +325,6 @@
             this.sidebarPanelCompleteOrder.Name = "sidebarPanelCompleteOrder";
             this.sidebarPanelCompleteOrder.Size = new System.Drawing.Size(208, 1157);
             this.sidebarPanelCompleteOrder.TabIndex = 5;
-            this.sidebarPanelCompleteOrder.Paint += new System.Windows.Forms.PaintEventHandler(this.sidebarPanelCompleteOrder_Paint);
             // 
             // pnlKitchen_ActiveOrder
             // 
