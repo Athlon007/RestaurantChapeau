@@ -78,6 +78,7 @@ namespace RestaurantChapeau
                 //if order is ready add to completed orders page or add to new order page
                 if (allItemsAboveReady == true)
                 {
+                  
                     listViewKitchen_CompleteOrders.Items.Add(li);
                 }
                 else
@@ -176,10 +177,7 @@ namespace RestaurantChapeau
         private void btnKitchen_CompleteOrders_Click(object sender, EventArgs e)
         {
             // hide all panels and show complete orders 
-
             HidePanels();
-            RemoveListViewItems(listViewKitchen_CompleteOrders);
-            DisplayOrders();
             pnlKitchen_CompleteOrders.Show();
         }
         #endregion

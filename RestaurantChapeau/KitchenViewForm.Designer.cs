@@ -457,7 +457,7 @@
             this.listViewKitchen_ActiveOrder.HideSelection = false;
             this.listViewKitchen_ActiveOrder.Location = new System.Drawing.Point(124, 174);
             this.listViewKitchen_ActiveOrder.Name = "listViewKitchen_ActiveOrder";
-            this.listViewKitchen_ActiveOrder.Size = new System.Drawing.Size(1401, 685);
+            this.listViewKitchen_ActiveOrder.Size = new System.Drawing.Size(1401, 743);
             this.listViewKitchen_ActiveOrder.TabIndex = 9;
             this.listViewKitchen_ActiveOrder.UseCompatibleStateImageBehavior = false;
             this.listViewKitchen_ActiveOrder.View = System.Windows.Forms.View.Details;
