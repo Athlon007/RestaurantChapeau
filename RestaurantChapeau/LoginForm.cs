@@ -121,45 +121,53 @@ namespace RestaurantChapeau
 
         private void btn_RegisterRegister_Click(object sender, EventArgs e)
         {
-            //create connection to user layer
-            EmployeeService employeeService = new EmployeeService();
-
-            //password hasher
-            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-
-            //store the employee name and password
-            string email = txt_RegisterEmail.Text;
-            string firstName = txt_RegisterFirstName.Text;
-            string lastName = txt_RegisterLastName.Text;
-            string password = txt_RegisterPassword.Text;
-
-            //if both the password and employee name are valid add the user
-            if (PasswordRequirements(password))
+            try
             {
-                //this hashes the password
-                HashWithSaltResult hashPassword = pwHasher.HashWithSalt(password, 64, SHA256.Create());
+                //create connection to user layer
+                EmployeeService employeeService = new EmployeeService();
 
-                //add the username, hashed password, salt and the user role to the database
-                employeeService.AddToRegister(firstName, lastName, email, hashPassword.Digest, hashPassword.Salt);
-                MessageBox.Show("Succesfully Registered! You can now login.");
+                //password hasher
+                PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
 
-                //hide the panels and show the dashboard again
-                HidePanels();
-                txt_RegisterFirstName.Clear();
-                txt_RegisterLastName.Clear();
-                txt_RegisterEmail.Clear();
+                //store the employee name and password
+                string email = txt_RegisterEmail.Text;
+                string firstName = txt_RegisterFirstName.Text;
+                string lastName = txt_RegisterLastName.Text;
+                string password = txt_RegisterPassword.Text;
+
+                //if both the password and employee name are valid add the user
+                if (PasswordRequirements(password))
+                {
+                    //this hashes the password
+                    HashWithSaltResult hashPassword = pwHasher.HashWithSalt(password, 64, SHA256.Create());
+
+                    //add the username, hashed password, salt and the user role to the database
+                    employeeService.AddToRegister(firstName, lastName, email, hashPassword.Digest, hashPassword.Salt);
+                    MessageBox.Show("Succesfully Registered! You can now login.");
+
+                    //hide the panels and show the dashboard again
+                    HidePanels();
+                    txt_RegisterFirstName.Clear();
+                    txt_RegisterLastName.Clear();
+                    txt_RegisterEmail.Clear();
+                }
+                else if (!PasswordRequirements(password)) //if the password does not meet the requirements inform the user
+                {
+                    MessageBox.Show("The password does not meet the requirements");
+                }
+                else //if the username is taken inform the user
+                {
+                    MessageBox.Show("The employeename is already in use");
+                    txt_RegisterFirstName.Clear();
+                    txt_RegisterLastName.Clear();
+                }
+                txt_RegisterPassword.Clear();
             }
-            else if (!PasswordRequirements(password)) //if the password does not meet the requirements inform the user
+            catch(Exception ex)
             {
-                MessageBox.Show("The password does not meet the requirements");
+                MessageBox.Show($"Unable to register: {ex.Message}");
             }
-            else //if the username is taken inform the user
-            {
-                MessageBox.Show("The employeename is already in use");
-                txt_RegisterFirstName.Clear();
-                txt_RegisterLastName.Clear();
-            }
-            txt_RegisterPassword.Clear();
+            
         }
         private bool PasswordRequirements(string password)
         {
@@ -275,11 +283,11 @@ namespace RestaurantChapeau
                     }
                 }
                 else
-                    MessageBox.Show("Login failed.");
+                    MessageBox.Show("Login unabled.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Login failed: {ex.Message}");
+                MessageBox.Show($"Login unabled: {ex.Message}");
 
                 //clear the text boxes
                 txt_LoginEmail.Text = "";
