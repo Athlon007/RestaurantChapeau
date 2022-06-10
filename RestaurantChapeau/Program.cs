@@ -17,23 +17,7 @@ namespace RestaurantChapeau
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
-
-#if DEBUG
-            if (args.Length > 0)
-            {
-                if (args[0] == "debugui")
-                {
-                    Application.Run(new Form1());
-                }
-            }
-            else
-            {
-                // Application.Run(new LoginForm());
-               Application.Run(new Payment(3));
-            }
-#else
             Application.Run(new LoginForm());
-#endif
         }
     }
 }
