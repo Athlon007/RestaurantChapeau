@@ -78,7 +78,6 @@ namespace RestaurantChapeau
                 //if order is ready add to completed orders page or add to new order page
                 if (allItemsAboveReady == true)
                 {
-                  
                     listViewKitchen_CompleteOrders.Items.Add(li);
                 }
                 else
@@ -129,6 +128,12 @@ namespace RestaurantChapeau
                 li.SubItems.Add(item.Status.ToString());
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
+
+                //set the background of the item to green if its ready to serve
+                if (item.Status >= OrderStatus.ReadyToServe)
+                {
+                    li.BackColor = Color.Green;
+                }
             }
         }
         #endregion
