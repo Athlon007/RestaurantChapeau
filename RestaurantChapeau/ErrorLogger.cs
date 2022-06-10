@@ -29,9 +29,9 @@ namespace RestaurantChapeau
         /// </summary>
         /// <param name="ex">Exception to pass on.</param>
         /// <param name="displayError">If set to false, message box won't appear.</param>
-        public void WriteError(Exception ex, bool displayError = true)
+        public void WriteError(Exception ex, string message, bool displayError = true)
         {
-            string error = $"({DateTime.Now:yyyy-MM-dd HH:mm:ss}) {ex.Message}\n    {ex.StackTrace}\n";
+            string error = $"({DateTime.Now:yyyy-MM-dd HH:mm:ss}) {message}:  {ex.Message}\n    {ex.StackTrace}\n";
             StreamWriter sw = new StreamWriter(LogFileName, true);
             sw.WriteLine(error);
             sw.Close();
@@ -39,7 +39,7 @@ namespace RestaurantChapeau
 
             if (displayError)
             {
-                MessageBox.Show($"Something went wrong: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
