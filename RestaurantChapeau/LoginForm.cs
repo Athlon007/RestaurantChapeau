@@ -265,7 +265,7 @@ namespace RestaurantChapeau
                             tableView.Show();
                             break;
                         case EmployeeType.KitchenStaff:
-                            KitchenViewForm kitchenView = new KitchenViewForm();
+                            KitchenViewForm kitchenView = new KitchenViewForm(employee);
                             kitchenView.Show();
                             break;
                             //...
