@@ -185,6 +185,9 @@ namespace RestaurantChapeau
             // hide all panels and show 
             HidePanels();
             pnlKitchen_NewOrders.Show();
+
+            RemoveListViewItems(listViewNewOrders);
+            DisplayOrders();
         }
         #endregion
 
@@ -216,31 +219,52 @@ namespace RestaurantChapeau
 
                 //connect to logic layer
                 orderService = new OrderLogic();
-               
+
                 Order orderItem = selectedOrder;
 
                 //save the name of the highlighted menu item into a menuitem
                 selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
 
                 //if all the items on the listview are selected, change status to ready else preparing
-                if (listViewKitchen_ActiveOrder.CheckedItems.Count == listViewKitchen_ActiveOrder.Items.Count)
-                {
-                    orderItem.Complete = true;
-                    MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
-                    orderService.UpdateOrderStatus(orderItem);
-                    // stop the timer
-                    IsActive = false;
-                }
-                else if (listViewKitchen_ActiveOrder.CheckedItems.Count == 0)
+                if (listViewKitchen_ActiveOrder.CheckedItems.Count == 0)
                 {
                     MessageBox.Show($"Please select an item to mark ready");
                 }
                 else
                 {
-                    // set the selected item to ready
-                    selectedItem.Status = OrderStatus.ReadyToServe;
-                    orderService.SetOrderItemStatus(selectedItem, orderItem);
-                    MessageBox.Show($"Item {selectedItem.Name} is now ready");
+                    foreach (ListViewItem item in listViewKitchen_ActiveOrder.CheckedItems)
+                    {
+                        //set menu item to item in the listview
+                        MenuItem menuItem = (MenuItem)item.Tag;
+                        menuItem.Status = OrderStatus.ReadyToServe;
+                        orderService.SetOrderItemStatus(menuItem, orderItem);
+                    }
+
+                    // assume all items are ready
+                    bool allItemsDone = true;
+
+                    // for each checked item in the listview
+                    foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
+                    {
+                        MenuItem menuItem = (MenuItem)item.Tag;
+                        // if status is not ready to serve, then all the items are not done
+                        if (menuItem.Status < OrderStatus.ReadyToServe)
+                        {
+                            allItemsDone = false;
+                            break;
+                        }
+                    }
+
+                    //if all the items are done and are selected, change status to ready else preparing
+                    if (allItemsDone)
+                    {
+                        orderItem.Complete = true;
+                        MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
+                        orderService.UpdateOrderStatus(orderItem);
+
+                        // stop the timer
+                        IsActive = false;
+                    }
                 }
 
                 //remove the items on the new order listview and update with new information
@@ -255,8 +279,8 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"There was a problem readying the order: {ex.Message}");
             }
-       
-          
+
+
         }
         #endregion
 
@@ -325,8 +349,8 @@ namespace RestaurantChapeau
             login.Show();
         }
 
-       
-        #endregion  
+
+        #endregion
 
         #region Fonts
         public void SetFonts()
