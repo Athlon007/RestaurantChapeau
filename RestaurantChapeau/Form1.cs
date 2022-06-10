@@ -40,7 +40,9 @@ namespace RestaurantChapeau
 
         private void button2_Click(object sender, EventArgs e)
         {
-            KitchenViewForm kitchen = new KitchenViewForm();
+            Employee emp = new Employee();
+            emp.employeeType = EmployeeType.KitchenStaff;
+            KitchenViewForm kitchen = new KitchenViewForm(emp);
             kitchen.ShowDialog();
         }
 

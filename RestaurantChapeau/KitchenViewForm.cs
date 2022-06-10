@@ -16,15 +16,14 @@ namespace RestaurantChapeau
     {
         int secs, mins, hours;
         bool IsActive;
-        public bool KitchenMode { get { return kitchenMode; } set { kitchenMode = value; } }
-        private bool kitchenMode;
 
+        Employee employee;
         private Order selectedOrder;
         private MenuItem selectedItem;
 
-        public KitchenViewForm(bool kitchenMode = true)
+        public KitchenViewForm(Employee employee)
         {
-            this.kitchenMode = kitchenMode; ;
+            this.employee = employee;
             InitializeComponent();
             SetFonts();
             DisplayOrders();
@@ -38,12 +37,13 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             List<Order> orders = orderService.GetKitchenOrdersToPrepare();
 
-            // RemoveListViewItems(listViewNewOrders);
             foreach (Order order in orders)
             {
                 //create new listview item and add the items to the listview item
                 ListViewItem li = new ListViewItem(order.Id.ToString());
                 li.SubItems.Add(order.PlacedTime.ToString());
+
+                // if the item is complete, display status is ready or else not ready in the listview
                 if (order.Complete == true)
                 {
                     li.SubItems.Add("Ready");
@@ -52,12 +52,31 @@ namespace RestaurantChapeau
                 {
                     li.SubItems.Add("Not ready");
                 }
-
-
+                //order tags become an order item
                 li.Tag = order;
 
+                //get all the items that belong to an order
+                List<MenuItem> items = orderService.GetItemsForOrder(order);
+                //if there are no items, do nothing
+                if (items.Count == 0)
+                    continue;
+
+                // all lthe items above an item in a listview have a status of ready
+                bool allItemsAboveReady = true;
+
+                // for all the items that belong to an order
+                foreach (MenuItem item in items)
+                {
+                    //if the order item is not ready to serve
+                    if (item.Status < OrderStatus.ReadyToServe)
+                    {
+                        //this makes sure so that the bartender doesnt see orders which contain food orders and otherwise (prevents empty order items in the listview)
+                        if (((item.IsDrink && employee.employeeType == EmployeeType.Bartender) || (!item.IsDrink && employee.employeeType == EmployeeType.KitchenStaff)))
+                            allItemsAboveReady = false;
+                    }
+                }
                 //if order is ready add to completed orders page or add to new order page
-                if (order.Complete == true)
+                if (allItemsAboveReady == true)
                 {
                     listViewKitchen_CompleteOrders.Items.Add(li);
                 }
@@ -72,7 +91,7 @@ namespace RestaurantChapeau
         #region Display Order Items
         private void DisplayOrderItems()
         {
-            List<MenuItem> orderMenuItems;
+            List<MenuItem> orderMenuItems = new List<MenuItem>();
             OrderLogic orderService = new OrderLogic();
 
             //extract order item from the selected item in the listview
@@ -89,15 +108,14 @@ namespace RestaurantChapeau
             lbl_OrderComments.Text = selectedOrder.Comment;
 
             //if kitchenmode is true, display only kitchen items 
-            if (KitchenMode)
+            if (employee.employeeType == EmployeeType.KitchenStaff)
             {
                 orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
             }
-            else // display bar items
+            else if(employee.employeeType==EmployeeType.Bartender)          
             {
                 orderMenuItems = orderService.GetBarOrderItemsByID(orderItem.Id);
             }
-
             // delete all the items in the listview before adding new ones
             RemoveListViewItems(listViewKitchen_ActiveOrder);
 
@@ -186,18 +204,18 @@ namespace RestaurantChapeau
             }
             else
             {
+                // set the selected item to ready
                 selectedItem.Status = OrderStatus.ReadyToServe;
                 orderService.SetOrderItemStatus(selectedItem, orderItem);
                 listViewKitchen_ActiveOrder.FocusedItem.BackColor = Color.Green;
                 MessageBox.Show($"Item {selectedItem.Name} is now ready");
             }
-            // update the new order status with this new status
-            //orderService.UpdateOrderStatus(orderItem);
 
             //remove the items on the new order listview and update with new information
             RemoveListViewItems(listViewNewOrders);
             DisplayOrders();
 
+            //remove all the item in the listview and display again 
             RemoveListViewItems(listViewKitchen_ActiveOrder);
             DisplayOrderItems();
         }
