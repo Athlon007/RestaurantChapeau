@@ -107,7 +107,7 @@ namespace RestaurantDAL
         public Order CreateNewOrderForBill(Bill bill, string comment)
         {
             string query = "INSERT INTO dbo.[Order] (placedTime, complete, billId, comment) " +
-                            "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.billId, Inserted.comment " +
+                            "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.comment, Inserted.complete " +
                             "VALUES (@Now, 0, @BillId, @Comment)";
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -122,7 +122,6 @@ namespace RestaurantDAL
         private Order ReadOrder(DataRow row, Bill bill)
         {
             Order order = new Order();
-            ;
             order.Id = Convert.ToInt32(row["id"]);
             order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
             order.Complete = Convert.ToBoolean(row["complete"]);
