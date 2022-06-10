@@ -128,6 +128,12 @@ namespace RestaurantChapeau
                 li.SubItems.Add(item.Status.ToString());
 
                 listViewKitchen_ActiveOrder.Items.Add(li);
+
+                //set the background of the item to green if its ready to serve
+                if (item.Status >= OrderStatus.ReadyToServe)
+                {
+                    li.BackColor = Color.Green;
+                }
             }
         }
         #endregion
@@ -157,6 +163,7 @@ namespace RestaurantChapeau
         #region New Order button
         private void btnKitchen_newOrders_Click(object sender, EventArgs e)
         {
+            // hide all panels and show 
             HidePanels();
             pnlKitchen_NewOrders.Show();
         }
@@ -165,6 +172,7 @@ namespace RestaurantChapeau
         #region Active order button
         private void btnKitchen_ActiveOrder_Click(object sender, EventArgs e)
         {
+            // hide all panels annd show active order
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
         }
@@ -173,6 +181,7 @@ namespace RestaurantChapeau
         #region Complete Orders button 
         private void btnKitchen_CompleteOrders_Click(object sender, EventArgs e)
         {
+            // hide all panels and show complete orders 
             HidePanels();
             pnlKitchen_CompleteOrders.Show();
         }
@@ -188,7 +197,7 @@ namespace RestaurantChapeau
             OrderLogic orderService = new OrderLogic();
             Order orderItem = selectedOrder;
 
-            //save the name of the highlighted menu item into a string
+            //save the name of the highlighted menu item into a menuitem
             selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
 
             //if all the items on the listview are selected, change status to ready else preparing
@@ -196,6 +205,8 @@ namespace RestaurantChapeau
             {
                 orderItem.Complete = true;
                 MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
+                orderService.UpdateOrderStatus( orderItem);
+                // stop the timer
                 IsActive = false;
             }
             else if (listViewKitchen_ActiveOrder.CheckedItems.Count == 0)
@@ -207,7 +218,6 @@ namespace RestaurantChapeau
                 // set the selected item to ready
                 selectedItem.Status = OrderStatus.ReadyToServe;
                 orderService.SetOrderItemStatus(selectedItem, orderItem);
-                listViewKitchen_ActiveOrder.FocusedItem.BackColor = Color.Green;
                 MessageBox.Show($"Item {selectedItem.Name} is now ready");
             }
 
@@ -215,7 +225,7 @@ namespace RestaurantChapeau
             RemoveListViewItems(listViewNewOrders);
             DisplayOrders();
 
-            //remove all the item in the listview and display again 
+            //remove all the item in the active order listview and display again 
             RemoveListViewItems(listViewKitchen_ActiveOrder);
             DisplayOrderItems();
         }
@@ -224,8 +234,11 @@ namespace RestaurantChapeau
         #region Hide Panels
         private void HidePanels()
         {
+            // hide new orders panel
             pnlKitchen_NewOrders.Hide();
+            //hide complete orders panel
             pnlKitchen_CompleteOrders.Hide();
+            //hide actice orer panel
             pnlKitchen_ActiveOrder.Hide();
         }
         #endregion
@@ -259,17 +272,15 @@ namespace RestaurantChapeau
                     {
                         hours++;
                         mins = 0;
+                        secs = 0;
                     }
                 }
             }
 
+            //link the timer to the labels in the form
             Timer();
         }
 
-        private void sidebarPanelCompleteOrder_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void ResetTimer()
         {
@@ -282,11 +293,13 @@ namespace RestaurantChapeau
         #region Fonts
         public void SetFonts()
         {
+            // set the labels to the form of the chapeau lettering with the font size of the labe before
             lbl_activeOrder.Font = FontManager.Instance.ScriptMT(lbl_activeOrder.Font.Size);
             lbl_completedOrders.Font = FontManager.Instance.ScriptMT(lbl_completedOrders.Font.Size);
             lbl_newOrders.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
             lblKitchenn_OrderNo.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
 
+            // 
             lbl_activeOrder.UseCompatibleTextRendering = true;
             lbl_completedOrders.UseCompatibleTextRendering = true;
             lbl_newOrders.UseCompatibleTextRendering = true;
