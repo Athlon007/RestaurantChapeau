@@ -541,6 +541,7 @@
             // 
             // lv_TableDetailView
             // 
+            this.lv_TableDetailView.FullRowSelect = true;
             this.lv_TableDetailView.HideSelection = false;
             this.lv_TableDetailView.Location = new System.Drawing.Point(7, 92);
             this.lv_TableDetailView.Name = "lv_TableDetailView";
