@@ -366,7 +366,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1180, 1688);
+            this.ClientSize = new System.Drawing.Size(1180, 1559);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.theTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
