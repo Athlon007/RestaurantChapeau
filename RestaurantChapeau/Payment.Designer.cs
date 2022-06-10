@@ -34,7 +34,6 @@
             this.lblPaymentHeader = new System.Windows.Forms.Label();
             this.lblInvoice = new System.Windows.Forms.Label();
             this.lblInvoiceDate = new System.Windows.Forms.Label();
-            this.lblInvoiceID = new System.Windows.Forms.Label();
             this.valueInvoiceID = new System.Windows.Forms.Label();
             this.valueInvoiceDate = new System.Windows.Forms.Label();
             this.lblPayTo = new System.Windows.Forms.Label();
@@ -47,7 +46,7 @@
             this.headerVat = new System.Windows.Forms.ColumnHeader();
             this.btnProcessPayment = new System.Windows.Forms.Button();
             this.groupBoxMoreInfo = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblLine2 = new System.Windows.Forms.Label();
             this.TotalValue = new System.Windows.Forms.Label();
             this.TaxValue = new System.Windows.Forms.Label();
             this.SubtotalValue = new System.Windows.Forms.Label();
@@ -58,6 +57,14 @@
             this.lblTotals = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
             this.pnlPaymentType = new System.Windows.Forms.Panel();
+            this.pnlBills = new System.Windows.Forms.FlowLayoutPanel();
+            this.paymentNumber = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblBillHeading = new System.Windows.Forms.Label();
+            this.paymentBackButton2 = new System.Windows.Forms.PictureBox();
+            this.backInvoice = new System.Windows.Forms.Label();
+            this.LogoPayment2 = new System.Windows.Forms.PictureBox();
+            this.headingPaymentType = new System.Windows.Forms.Label();
             this.pnlCardDetails = new System.Windows.Forms.Panel();
             this.headingComment = new System.Windows.Forms.Label();
             this.groupBoxPayment2 = new System.Windows.Forms.GroupBox();
@@ -79,8 +86,7 @@
             this.backPaymentType = new System.Windows.Forms.Label();
             this.LogoPayment3 = new System.Windows.Forms.PictureBox();
             this.pnlCashPayment = new System.Windows.Forms.Panel();
-            this.valueTipCash = new System.Windows.Forms.TextBox();
-            this.btnTipCash = new System.Windows.Forms.Button();
+            this.btnCalculate = new System.Windows.Forms.Button();
             this.ValueReturn = new System.Windows.Forms.Label();
             this.valueToPay = new System.Windows.Forms.Label();
             this.lblReturn = new System.Windows.Forms.Label();
@@ -91,12 +97,6 @@
             this.paymentBackButton4 = new System.Windows.Forms.PictureBox();
             this.headingPaymentType2 = new System.Windows.Forms.Label();
             this.LogoPayment4 = new System.Windows.Forms.PictureBox();
-            this.btnCash = new System.Windows.Forms.Button();
-            this.btnCard = new System.Windows.Forms.Button();
-            this.paymentBackButton2 = new System.Windows.Forms.PictureBox();
-            this.backInvoice = new System.Windows.Forms.Label();
-            this.LogoPayment2 = new System.Windows.Forms.PictureBox();
-            this.headingPaymentType = new System.Windows.Forms.Label();
             this.pnlPaymentSucessful = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblSucess = new System.Windows.Forms.Label();
@@ -113,15 +113,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment1)).BeginInit();
             this.groupBoxMoreInfo.SuspendLayout();
             this.pnlPaymentType.SuspendLayout();
-            this.pnlCardDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).BeginInit();
             this.groupBoxPayment2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment3)).BeginInit();
             this.pnlCashPayment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).BeginInit();
             this.pnlPaymentSucessful.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -146,7 +145,7 @@
             // 
             // lblPaymentTopBarText
             // 
-            this.lblPaymentTopBarText.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPaymentTopBarText.Font = new System.Drawing.Font("Script MT Bold", 22.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblPaymentTopBarText.Location = new System.Drawing.Point(116, 0);
             this.lblPaymentTopBarText.Name = "lblPaymentTopBarText";
             this.lblPaymentTopBarText.Size = new System.Drawing.Size(839, 127);
@@ -194,16 +193,6 @@
             this.lblInvoiceDate.Size = new System.Drawing.Size(85, 37);
             this.lblInvoiceDate.TabIndex = 18;
             this.lblInvoiceDate.Text = "Date:";
-            // 
-            // lblInvoiceID
-            // 
-            this.lblInvoiceID.AutoSize = true;
-            this.lblInvoiceID.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblInvoiceID.Location = new System.Drawing.Point(134, 315);
-            this.lblInvoiceID.Name = "lblInvoiceID";
-            this.lblInvoiceID.Size = new System.Drawing.Size(117, 37);
-            this.lblInvoiceID.TabIndex = 19;
-            this.lblInvoiceID.Text = "Invoice:";
             // 
             // valueInvoiceID
             // 
@@ -293,7 +282,8 @@
             // 
             // btnProcessPayment
             // 
-            this.btnProcessPayment.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnProcessPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btnProcessPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProcessPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnProcessPayment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProcessPayment.Location = new System.Drawing.Point(393, 1227);
@@ -309,7 +299,7 @@
             // 
             this.groupBoxMoreInfo.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.groupBoxMoreInfo.BackColor = System.Drawing.Color.Gainsboro;
-            this.groupBoxMoreInfo.Controls.Add(this.label4);
+            this.groupBoxMoreInfo.Controls.Add(this.lblLine2);
             this.groupBoxMoreInfo.Controls.Add(this.TotalValue);
             this.groupBoxMoreInfo.Controls.Add(this.TaxValue);
             this.groupBoxMoreInfo.Controls.Add(this.SubtotalValue);
@@ -325,14 +315,14 @@
             this.groupBoxMoreInfo.TabIndex = 26;
             this.groupBoxMoreInfo.TabStop = false;
             // 
-            // label4
+            // lblLine2
             // 
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(26, 216);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(816, 2);
-            this.label4.TabIndex = 35;
+            this.lblLine2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLine2.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblLine2.Location = new System.Drawing.Point(26, 216);
+            this.lblLine2.Name = "lblLine2";
+            this.lblLine2.Size = new System.Drawing.Size(816, 2);
+            this.lblLine2.TabIndex = 35;
             // 
             // TotalValue
             // 
@@ -422,34 +412,110 @@
             // 
             // pnlPaymentType
             // 
-            this.pnlPaymentType.Controls.Add(this.pnlCardDetails);
-            this.pnlPaymentType.Controls.Add(this.pnlCashPayment);
-            this.pnlPaymentType.Controls.Add(this.btnCash);
-            this.pnlPaymentType.Controls.Add(this.btnCard);
+            this.pnlPaymentType.Controls.Add(this.pnlBills);
+            this.pnlPaymentType.Controls.Add(this.paymentNumber);
+            this.pnlPaymentType.Controls.Add(this.label1);
+            this.pnlPaymentType.Controls.Add(this.lblBillHeading);
             this.pnlPaymentType.Controls.Add(this.paymentBackButton2);
             this.pnlPaymentType.Controls.Add(this.backInvoice);
             this.pnlPaymentType.Controls.Add(this.LogoPayment2);
             this.pnlPaymentType.Controls.Add(this.headingPaymentType);
             this.pnlPaymentType.Location = new System.Drawing.Point(0, 0);
             this.pnlPaymentType.Name = "pnlPaymentType";
-            this.pnlPaymentType.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlPaymentType.Size = new System.Drawing.Size(1138, 1360);
             this.pnlPaymentType.TabIndex = 27;
+            // 
+            // pnlBills
+            // 
+            this.pnlBills.Location = new System.Drawing.Point(0, 355);
+            this.pnlBills.Name = "pnlBills";
+            this.pnlBills.Size = new System.Drawing.Size(1135, 1002);
+            this.pnlBills.TabIndex = 24;
+            // 
+            // paymentNumber
+            // 
+            this.paymentNumber.BackColor = System.Drawing.Color.White;
+            this.paymentNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.paymentNumber.Location = new System.Drawing.Point(504, 278);
+            this.paymentNumber.Name = "paymentNumber";
+            this.paymentNumber.Size = new System.Drawing.Size(200, 57);
+            this.paymentNumber.TabIndex = 21;
+            this.paymentNumber.Text = "1";
+            this.paymentNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.paymentNumber.TextChanged += new System.EventHandler(this.paymentNumber_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(747, 278);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(170, 50);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "payment";
+            // 
+            // lblBillHeading
+            // 
+            this.lblBillHeading.AutoSize = true;
+            this.lblBillHeading.BackColor = System.Drawing.Color.White;
+            this.lblBillHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblBillHeading.Location = new System.Drawing.Point(224, 278);
+            this.lblBillHeading.Name = "lblBillHeading";
+            this.lblBillHeading.Size = new System.Drawing.Size(246, 50);
+            this.lblBillHeading.TabIndex = 22;
+            this.lblBillHeading.Text = "Split Bill # to ";
+            // 
+            // paymentBackButton2
+            // 
+            this.paymentBackButton2.BackColor = System.Drawing.Color.Transparent;
+            this.paymentBackButton2.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
+            this.paymentBackButton2.Location = new System.Drawing.Point(10, 12);
+            this.paymentBackButton2.Name = "paymentBackButton2";
+            this.paymentBackButton2.Size = new System.Drawing.Size(100, 100);
+            this.paymentBackButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.paymentBackButton2.TabIndex = 20;
+            this.paymentBackButton2.TabStop = false;
+            this.paymentBackButton2.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // backInvoice
+            // 
+            this.backInvoice.Font = new System.Drawing.Font("Script MT Bold", 22.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.backInvoice.Location = new System.Drawing.Point(116, 0);
+            this.backInvoice.Name = "backInvoice";
+            this.backInvoice.Size = new System.Drawing.Size(839, 127);
+            this.backInvoice.TabIndex = 19;
+            this.backInvoice.Text = "Invoice";
+            this.backInvoice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.backInvoice.UseCompatibleTextRendering = true;
+            // 
+            // LogoPayment2
+            // 
+            this.LogoPayment2.BackColor = System.Drawing.Color.Black;
+            this.LogoPayment2.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.LogoPayment2.Location = new System.Drawing.Point(951, 0);
+            this.LogoPayment2.Name = "LogoPayment2";
+            this.LogoPayment2.Size = new System.Drawing.Size(187, 127);
+            this.LogoPayment2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.LogoPayment2.TabIndex = 17;
+            this.LogoPayment2.TabStop = false;
+            // 
+            // headingPaymentType
+            // 
+            this.headingPaymentType.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.headingPaymentType.Location = new System.Drawing.Point(0, 139);
+            this.headingPaymentType.Name = "headingPaymentType";
+            this.headingPaymentType.Size = new System.Drawing.Size(1138, 68);
+            this.headingPaymentType.TabIndex = 18;
+            this.headingPaymentType.Text = "Choose the payment type";
+            this.headingPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlCardDetails
             // 
-            this.pnlCardDetails.Controls.Add(this.headingComment);
-            this.pnlCardDetails.Controls.Add(this.groupBoxPayment2);
-            this.pnlCardDetails.Controls.Add(this.btnConfirmPayment);
-            this.pnlCardDetails.Controls.Add(this.valueComment);
-            this.pnlCardDetails.Controls.Add(this.valueTip);
-            this.pnlCardDetails.Controls.Add(this.btnTip);
-            this.pnlCardDetails.Controls.Add(this.paymentBackButton3);
-            this.pnlCardDetails.Controls.Add(this.backPaymentType);
-            this.pnlCardDetails.Controls.Add(this.LogoPayment3);
             this.pnlCardDetails.Location = new System.Drawing.Point(0, 0);
             this.pnlCardDetails.Name = "pnlCardDetails";
-            this.pnlCardDetails.Size = new System.Drawing.Size(1138, 1361);
-            this.pnlCardDetails.TabIndex = 28;
+            this.pnlCardDetails.Size = new System.Drawing.Size(200, 100);
+            this.pnlCardDetails.TabIndex = 0;
             // 
             // headingComment
             // 
@@ -607,22 +673,15 @@
             this.valueTip.MaximumSize = new System.Drawing.Size(700, 91);
             this.valueTip.MinimumSize = new System.Drawing.Size(100, 91);
             this.valueTip.Name = "valueTip";
-            this.valueTip.Size = new System.Drawing.Size(553, 65);
+            this.valueTip.Size = new System.Drawing.Size(553, 91);
             this.valueTip.TabIndex = 27;
             // 
             // btnTip
             // 
-            this.btnTip.BackColor = System.Drawing.Color.SandyBrown;
-            this.btnTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnTip.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTip.Location = new System.Drawing.Point(736, 174);
-            this.btnTip.Margin = new System.Windows.Forms.Padding(5);
+            this.btnTip.Location = new System.Drawing.Point(0, 0);
             this.btnTip.Name = "btnTip";
-            this.btnTip.Size = new System.Drawing.Size(203, 93);
-            this.btnTip.TabIndex = 26;
-            this.btnTip.Text = "ADD TIP";
-            this.btnTip.UseVisualStyleBackColor = false;
-            this.btnTip.Click += new System.EventHandler(this.btnTip_Click);
+            this.btnTip.Size = new System.Drawing.Size(75, 23);
+            this.btnTip.TabIndex = 0;
             // 
             // paymentBackButton3
             // 
@@ -660,8 +719,7 @@
             // 
             // pnlCashPayment
             // 
-            this.pnlCashPayment.Controls.Add(this.valueTipCash);
-            this.pnlCashPayment.Controls.Add(this.btnTipCash);
+            this.pnlCashPayment.Controls.Add(this.btnCalculate);
             this.pnlCashPayment.Controls.Add(this.ValueReturn);
             this.pnlCashPayment.Controls.Add(this.valueToPay);
             this.pnlCashPayment.Controls.Add(this.lblReturn);
@@ -674,32 +732,22 @@
             this.pnlCashPayment.Controls.Add(this.LogoPayment4);
             this.pnlCashPayment.Location = new System.Drawing.Point(0, 0);
             this.pnlCashPayment.Name = "pnlCashPayment";
-            this.pnlCashPayment.Size = new System.Drawing.Size(1135, 1364);
+            this.pnlCashPayment.Size = new System.Drawing.Size(1135, 1363);
             this.pnlCashPayment.TabIndex = 34;
             // 
-            // valueTipCash
+            // btnCalculate
             // 
-            this.valueTipCash.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.valueTipCash.Location = new System.Drawing.Point(184, 209);
-            this.valueTipCash.MaximumSize = new System.Drawing.Size(700, 91);
-            this.valueTipCash.MinimumSize = new System.Drawing.Size(100, 91);
-            this.valueTipCash.Name = "valueTipCash";
-            this.valueTipCash.Size = new System.Drawing.Size(553, 65);
-            this.valueTipCash.TabIndex = 39;
-            // 
-            // btnTipCash
-            // 
-            this.btnTipCash.BackColor = System.Drawing.Color.SandyBrown;
-            this.btnTipCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnTipCash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTipCash.Location = new System.Drawing.Point(736, 207);
-            this.btnTipCash.Margin = new System.Windows.Forms.Padding(5);
-            this.btnTipCash.Name = "btnTipCash";
-            this.btnTipCash.Size = new System.Drawing.Size(203, 93);
-            this.btnTipCash.TabIndex = 38;
-            this.btnTipCash.Text = "ADD TIP";
-            this.btnTipCash.UseVisualStyleBackColor = false;
-            this.btnTipCash.Click += new System.EventHandler(this.btnTipCash_Click);
+            this.btnCalculate.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnCalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCalculate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCalculate.Location = new System.Drawing.Point(396, 915);
+            this.btnCalculate.Margin = new System.Windows.Forms.Padding(5);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(317, 95);
+            this.btnCalculate.TabIndex = 38;
+            this.btnCalculate.Text = "Calculate";
+            this.btnCalculate.UseVisualStyleBackColor = false;
+            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
             // 
             // ValueReturn
             // 
@@ -813,78 +861,6 @@
             this.LogoPayment4.TabIndex = 17;
             this.LogoPayment4.TabStop = false;
             // 
-            // btnCash
-            // 
-            this.btnCash.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCash.Location = new System.Drawing.Point(393, 631);
-            this.btnCash.Margin = new System.Windows.Forms.Padding(5);
-            this.btnCash.Name = "btnCash";
-            this.btnCash.Size = new System.Drawing.Size(320, 93);
-            this.btnCash.TabIndex = 27;
-            this.btnCash.Text = "Cash";
-            this.btnCash.UseVisualStyleBackColor = false;
-            this.btnCash.Click += new System.EventHandler(this.btnCash_Click);
-            // 
-            // btnCard
-            // 
-            this.btnCard.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCard.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCard.Location = new System.Drawing.Point(393, 428);
-            this.btnCard.Margin = new System.Windows.Forms.Padding(5);
-            this.btnCard.Name = "btnCard";
-            this.btnCard.Size = new System.Drawing.Size(320, 93);
-            this.btnCard.TabIndex = 26;
-            this.btnCard.Text = "Card";
-            this.btnCard.UseVisualStyleBackColor = false;
-            this.btnCard.Click += new System.EventHandler(this.btnCard_Click);
-            // 
-            // paymentBackButton2
-            // 
-            this.paymentBackButton2.BackColor = System.Drawing.Color.Transparent;
-            this.paymentBackButton2.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.paymentBackButton2.Location = new System.Drawing.Point(10, 12);
-            this.paymentBackButton2.Name = "paymentBackButton2";
-            this.paymentBackButton2.Size = new System.Drawing.Size(100, 100);
-            this.paymentBackButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.paymentBackButton2.TabIndex = 20;
-            this.paymentBackButton2.TabStop = false;
-            this.paymentBackButton2.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // backInvoice
-            // 
-            this.backInvoice.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.backInvoice.Location = new System.Drawing.Point(116, 0);
-            this.backInvoice.Name = "backInvoice";
-            this.backInvoice.Size = new System.Drawing.Size(839, 127);
-            this.backInvoice.TabIndex = 19;
-            this.backInvoice.Text = "Invoice";
-            this.backInvoice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.backInvoice.UseCompatibleTextRendering = true;
-            // 
-            // LogoPayment2
-            // 
-            this.LogoPayment2.BackColor = System.Drawing.Color.Black;
-            this.LogoPayment2.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.LogoPayment2.Location = new System.Drawing.Point(951, 0);
-            this.LogoPayment2.Name = "LogoPayment2";
-            this.LogoPayment2.Size = new System.Drawing.Size(187, 127);
-            this.LogoPayment2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.LogoPayment2.TabIndex = 17;
-            this.LogoPayment2.TabStop = false;
-            // 
-            // headingPaymentType
-            // 
-            this.headingPaymentType.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.headingPaymentType.Location = new System.Drawing.Point(0, 139);
-            this.headingPaymentType.Name = "headingPaymentType";
-            this.headingPaymentType.Size = new System.Drawing.Size(1138, 68);
-            this.headingPaymentType.TabIndex = 18;
-            this.headingPaymentType.Text = "Choose the payment type";
-            this.headingPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // pnlPaymentSucessful
             // 
             this.pnlPaymentSucessful.Controls.Add(this.pictureBox1);
@@ -892,7 +868,7 @@
             this.pnlPaymentSucessful.Controls.Add(this.pictureBox2);
             this.pnlPaymentSucessful.Location = new System.Drawing.Point(0, -1);
             this.pnlPaymentSucessful.Name = "pnlPaymentSucessful";
-            this.pnlPaymentSucessful.Size = new System.Drawing.Size(1138, 1362);
+            this.pnlPaymentSucessful.Size = new System.Drawing.Size(1138, 1364);
             this.pnlPaymentSucessful.TabIndex = 29;
             // 
             // pictureBox1
@@ -932,7 +908,7 @@
             this.pnlPaymentError.Controls.Add(this.logoErrorPayment);
             this.pnlPaymentError.Location = new System.Drawing.Point(0, 0);
             this.pnlPaymentError.Name = "pnlPaymentError";
-            this.pnlPaymentError.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlPaymentError.Size = new System.Drawing.Size(1138, 1363);
             this.pnlPaymentError.TabIndex = 30;
             // 
             // errorImg
@@ -972,7 +948,7 @@
             this.pnlCardPay.Controls.Add(this.pictureBox6);
             this.pnlCardPay.Location = new System.Drawing.Point(0, -1);
             this.pnlCardPay.Name = "pnlCardPay";
-            this.pnlCardPay.Size = new System.Drawing.Size(1138, 1365);
+            this.pnlCardPay.Size = new System.Drawing.Size(1138, 1364);
             this.pnlCardPay.TabIndex = 31;
             // 
             // cardPaymentImg
@@ -1011,10 +987,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1138, 1362);
-            this.Controls.Add(this.pnlCardPay);
+            this.Controls.Add(this.pnlCashPayment);
+            this.Controls.Add(this.pnlPaymentType);
             this.Controls.Add(this.pnlPaymentError);
             this.Controls.Add(this.pnlPaymentSucessful);
-            this.Controls.Add(this.pnlPaymentType);
+            this.Controls.Add(this.pnlCardPay);
             this.Controls.Add(this.groupBoxMoreInfo);
             this.Controls.Add(this.btnProcessPayment);
             this.Controls.Add(this.listViewInvoice);
@@ -1022,7 +999,6 @@
             this.Controls.Add(this.lblPayTo);
             this.Controls.Add(this.valueInvoiceID);
             this.Controls.Add(this.valueInvoiceDate);
-            this.Controls.Add(this.lblInvoiceID);
             this.Controls.Add(this.lblInvoiceDate);
             this.Controls.Add(this.lblInvoice);
             this.Controls.Add(this.paymentBackButton1);
@@ -1037,8 +1013,9 @@
             this.groupBoxMoreInfo.ResumeLayout(false);
             this.groupBoxMoreInfo.PerformLayout();
             this.pnlPaymentType.ResumeLayout(false);
-            this.pnlCardDetails.ResumeLayout(false);
-            this.pnlCardDetails.PerformLayout();
+            this.pnlPaymentType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).EndInit();
             this.groupBoxPayment2.ResumeLayout(false);
             this.groupBoxPayment2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton3)).EndInit();
@@ -1047,8 +1024,6 @@
             this.pnlCashPayment.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).EndInit();
             this.pnlPaymentSucessful.ResumeLayout(false);
             this.pnlPaymentSucessful.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1074,7 +1049,6 @@
         private System.Windows.Forms.Label lblPaymentHeader;
         private System.Windows.Forms.Label lblInvoice;
         private System.Windows.Forms.Label lblInvoiceDate;
-        private System.Windows.Forms.Label lblInvoiceID;
         private System.Windows.Forms.Label valueInvoiceID;
         private System.Windows.Forms.Label valueInvoiceDate;
         private System.Windows.Forms.Label lblPayTo;
@@ -1086,7 +1060,7 @@
         private System.Windows.Forms.ColumnHeader headerSubtotal;
         private System.Windows.Forms.Button btnProcessPayment;
         private System.Windows.Forms.GroupBox groupBoxMoreInfo;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblLine2;
         private System.Windows.Forms.Label TotalValue;
         private System.Windows.Forms.Label TaxValue;
         private System.Windows.Forms.Label SubtotalValue;
@@ -1102,8 +1076,6 @@
         private System.Windows.Forms.Label backInvoice;
         private System.Windows.Forms.PictureBox LogoPayment2;
         private System.Windows.Forms.Label headingPaymentType;
-        private System.Windows.Forms.Button btnCash;
-        private System.Windows.Forms.Button btnCard;
         private System.Windows.Forms.Panel pnlCardDetails;
         private System.Windows.Forms.Button btnTip;
         private System.Windows.Forms.PictureBox paymentBackButton3;
@@ -1135,8 +1107,6 @@
         private System.Windows.Forms.PictureBox paymentBackButton4;
         private System.Windows.Forms.Label headingPaymentType2;
         private System.Windows.Forms.PictureBox LogoPayment4;
-        private System.Windows.Forms.TextBox valueTipCash;
-        private System.Windows.Forms.Button btnTipCash;
         private System.Windows.Forms.Panel pnlPaymentSucessful;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -1149,5 +1119,10 @@
         private System.Windows.Forms.Label finalValueCard;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox cardPaymentImg;
+        private System.Windows.Forms.Label lblBillHeading;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox paymentNumber;
+        private System.Windows.Forms.FlowLayoutPanel pnlBills;
+        private System.Windows.Forms.Button btnCalculate;
     }
 }

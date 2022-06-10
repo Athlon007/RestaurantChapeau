@@ -624,5 +624,11 @@ namespace RestaurantChapeau
         {
             this.Close();            
         }
+
+        private void btn_TableDetailViewCheckOut_Click(object sender, EventArgs e)
+        {
+            Payment payment = new Payment(currentTableNumber);
+            payment.Show();
+        }
     }
 }
