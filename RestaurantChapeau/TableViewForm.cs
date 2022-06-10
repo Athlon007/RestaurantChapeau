@@ -413,6 +413,7 @@ namespace RestaurantChapeau
                 // Go to order view.
                 ShowOrderView(tableId);
                 HideNotification();
+                pb_TableAgenda.Hide();
             }
             else
             {
@@ -426,6 +427,7 @@ namespace RestaurantChapeau
                     // Automatically go into order creation process.
                     ShowOrderView(tableId, this.currentBill);
                     HideNotification();
+                    pb_TableAgenda.Hide();
                 }
                 else
                 {
@@ -434,6 +436,7 @@ namespace RestaurantChapeau
                     pnl_TableDetailView.Show();
                     lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
                     HideNotification();
+                    pb_TableAgenda.Hide();
                 }
             }
         }
@@ -504,6 +507,7 @@ namespace RestaurantChapeau
         {
             HidePanel();
             ShowNotification();
+            pb_TableAgenda.Show();
         }
 
         private void label3_Click(object sender, EventArgs e)

@@ -147,6 +147,7 @@ namespace RestaurantChapeau
                 HidePanels();
                 txt_RegisterFirstName.Clear();
                 txt_RegisterLastName.Clear();
+                txt_RegisterEmail.Clear();
             }
             else if (!PasswordRequirements(password)) //if the password does not meet the requirements inform the user
             {
@@ -228,54 +229,63 @@ namespace RestaurantChapeau
 
         private void btn_LoginLogin_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //create connection to employee layer
-            EmployeeService employeeService = new EmployeeService();
+            Login();
 
-            //store the entered username and password
-            string email = txt_LoginEmail.Text;
-            string enteredPassword = txt_LoginPassword.Text;
+        }
 
-            //get the user by the entered employeename
-            Employee employee = employeeService.GetEmployeeByEmployeeName(email);
-
-            //password hasher
-            PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
-
-            //if the entered password matches the one in the db
-            if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
+        private void Login()
+        {
+            try
             {
-                //hide the panels and form, display form of tableView
-                HidePanels();
-                this.Hide();
+                //create connection to employee layer
+                EmployeeService employeeService = new EmployeeService();
 
-                switch (employee.employeeType)
+                //store the entered username and password
+                string email = txt_LoginEmail.Text;
+                string enteredPassword = txt_LoginPassword.Text;
+
+                //get the user by the entered employeename
+                Employee employee = employeeService.GetEmployeeByEmployeeName(email);
+
+                //password hasher
+                PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
+
+                
+                //if the entered password matches the one in the db
+                if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
                 {
-                    case EmployeeType.Waiter:
-                        TableViewForm tableView = new TableViewForm(employee);
-                        tableView.Show();
-                        break;
-                    case EmployeeType.KitchenStaff:
-                        KitchenViewForm kitchenView = new KitchenViewForm(employee);
-                        kitchenView.Show();
-                        break;
-                        //...
+                    //hide the panels and form, display form of tableView
+                    HidePanels();
+                    this.Hide();
+
+                    switch (employee.employeeType)
+                    {
+                        case EmployeeType.Waiter:
+                            TableViewForm tableView = new TableViewForm(employee);
+                            tableView.Show();
+                            break;
+                        case EmployeeType.KitchenStaff:
+                            KitchenViewForm kitchenView = new KitchenViewForm(employee);
+                            kitchenView.Show();
+                            break;
+                        case EmployeeType.Bartender:
+                            KitchenViewForm kitchenView2 = new KitchenViewForm(employee);
+                            kitchenView2.Show();
+                            break;
+                    }
                 }
+                else
+                    MessageBox.Show("Login failed.");
             }
-            else
-                MessageBox.Show("Login failed.");
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Login failed: {ex.Message}");
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Login failed: {ex.Message}");
 
-            //    //clear the text boxes
-            //    txt_LoginEmail.Text = "";
-            //    txt_LoginPassword.Text = "";
+                //clear the text boxes
+                txt_LoginEmail.Text = "";
+                txt_LoginPassword.Text = "";
 
-            //}
-
+            }
         }
 
         private void pnl_ForgotPassword_Paint(object sender, PaintEventArgs e)
@@ -286,6 +296,22 @@ namespace RestaurantChapeau
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txt_LoginPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Login();
+            }
+        }
+
+        private void txt_LoginEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Login();
+            }
         }
     }
 }
