@@ -507,6 +507,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.KitchenViewForm_FormClosed);
             this.Load += new System.EventHandler(this.KitchenViewForm_Load);
             this.pnlKitchen_NewOrders.ResumeLayout(false);
             this.pnlKitchen_NewOrders.PerformLayout();

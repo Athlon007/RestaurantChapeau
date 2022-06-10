@@ -14,6 +14,7 @@ namespace RestaurantChapeau
 {
     public partial class KitchenViewForm : Form
     {
+        // timer information
         int secs, mins, hours;
         bool IsActive;
 
@@ -308,8 +309,6 @@ namespace RestaurantChapeau
             //link the timer to the labels in the form
             Timer();
         }
-
-
         private void ResetTimer()
         {
             secs = 0;
@@ -317,6 +316,17 @@ namespace RestaurantChapeau
             hours = 0;
         }
         #endregion
+
+        #region Close Form
+        private void KitchenViewForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // show the login form
+            LoginForm login = new LoginForm();
+            login.Show();
+        }
+
+       
+        #endregion  
 
         #region Fonts
         public void SetFonts()
