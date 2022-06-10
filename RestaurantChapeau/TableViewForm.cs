@@ -501,6 +501,7 @@ namespace RestaurantChapeau
         {
             try
             {
+                int lastSelected = lv_TableDetailView.SelectedItems.Count > 0 ? lv_TableDetailView.SelectedItems[0].Index : -1;
                 lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
                 List<Order> orders = orderLogic.GetOrdersForBill(bill);
                 lv_TableDetailView.Items.Clear();
@@ -530,8 +531,14 @@ namespace RestaurantChapeau
                         lv_TableDetailView.Items.Add(li);
                     }
                 }
+
+                if (lastSelected != -1)
+                {
+                    lv_TableDetailView.Items[lastSelected].Selected = true;
+                    lv_TableDetailView.Items[lastSelected].Focused = true;
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Something went wrong while loading listview: {ex.Message}");
             }
