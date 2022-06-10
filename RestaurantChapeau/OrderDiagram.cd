@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RestaurantChapeau.OrderView" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAYyAAAQCSSCQAIAQCoCMQCBCQAGQhgCRBAEQUACCg=</HashCode>
+      <FileName>OrderView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="orderLogic" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RestaurantModel.Order">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantDAL.OrderDao">
+    <Position X="4.75" Y="2.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantDAL.BaseDao">
+    <Position X="5" Y="9" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantLogic.OrderLogic">
+    <Position X="9" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantLogic.MenuLogic">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantDAL.MenuDao" Collapsed="true">
+    <Position X="7.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantModel.MenuItem" Collapsed="true">
+    <Position X="12.5" Y="7" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantModel.MenuType" Collapsed="true">
+    <Position X="12" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantModel.MenuCategory" Collapsed="true">
+    <Position X="12.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
