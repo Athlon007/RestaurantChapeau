@@ -191,10 +191,10 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong while checking reservation: {ex.Message}");
             }
-            
+
         }
 
-        private void TableViewForm_Load(object sender, EventArgs e)
+        private void TableViewForm1234_Load(object sender, EventArgs e)
         {
             HidePanel();
             dateTimePicker1.MinDate = DateTime.Now;
@@ -207,12 +207,6 @@ namespace RestaurantChapeau
             pnl_TableDetailView.Hide();
         }
 
-
-        private void btn_TableViewOrder_Click(object sender, EventArgs e)
-        {
-            Form1 form1 = new Form1();
-            form1.Show();
-        }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -258,7 +252,7 @@ namespace RestaurantChapeau
             catch(Exception ex)
             {
                 MessageBox.Show($"something went wrong with this button: {ex.Message}");
-            }           
+            }
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -310,7 +304,7 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong with the disyplay reseravtion: {ex.Message}");
             }
-            
+
         }
 
         private void btn_MakeReservationGoBack_Click(object sender, EventArgs e)
@@ -369,7 +363,7 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong with the reservation system: {ex.Message}");
             }
-           
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -488,7 +482,7 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong with the button: {ex.Message}");
             }
-            
+
         }
         private void ShowOrderView(int tableID, Bill bill = null)
         {
@@ -622,7 +616,7 @@ namespace RestaurantChapeau
 
         private void btn_LogOut_Click(object sender, EventArgs e)
         {
-            this.Close();            
+            this.Close();
         }
 
         private void btn_TableDetailViewCheckOut_Click(object sender, EventArgs e)
