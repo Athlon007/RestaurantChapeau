@@ -194,7 +194,7 @@ namespace RestaurantChapeau
 
         }
 
-        private void TableViewForm1234_Load(object sender, EventArgs e)
+        private void TableViewForm_Load(object sender, EventArgs e)
         {
             HidePanel();
             dateTimePicker1.MinDate = DateTime.Now;
