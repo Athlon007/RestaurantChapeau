@@ -69,19 +69,20 @@ namespace RestaurantChapeau
             lblHeader.Font = FontManager.Instance.ScriptMT(lblHeader.Font.Size);           
         }
 
-        private async void OrderView_Load(object sender, EventArgs e)
+        private void OrderView_Load(object sender, EventArgs e)
         {
-            await Task.Run(ConnectToServer);
-            LoadGUI();
-        }
+            // create menuLogic and orderLogic objects. Should slightly speed-up the load time.
+            try
+            {
+                orderLogic = new OrderLogic();
+                menuLogic = new MenuLogic();
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while connecting to the database.");
+            }
 
-        /// <summary>
-        /// Asynchronously create menuLogic and orderLogic objects. Should slightly speed-up the load time.
-        /// </summary>
-        private async Task ConnectToServer()
-        {
-            orderLogic = await Task.Run(() => { return new OrderLogic(); });
-            menuLogic = await Task.Run(() => { return new MenuLogic(); });
+            LoadGUI();
         }
 
         /// <summary>
@@ -99,7 +100,7 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             {
-                ErrorLogger.Instance.WriteError(ex, false);
+                ErrorLogger.Instance.WriteError(ex, "Sometihng went wrong while loading menu types and categories.");
                 ShowFail("Can't obtain menu info :(");
             }
         }
@@ -158,7 +159,7 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             {
-                ErrorLogger.Instance.WriteError(ex);
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while loading the menu.");
             }
         }
 
@@ -189,7 +190,7 @@ namespace RestaurantChapeau
         /// Loads selected menu type.
         /// </summary>
         /// <param name="menuType">MenuType to load.</param>
-        private async void LoadMenu(MenuType menuType)
+        private void LoadMenu(MenuType menuType)
         {
             // First we update the buttons of menu types.
             UpdateSelectedMenuType(menuType);
@@ -198,34 +199,34 @@ namespace RestaurantChapeau
             flwMenuItems.Controls.Clear();
 
             // Get menu categories of the menu type.
-            List<MenuCategory> menuCategories = await Task.Run(() => { return menuLogic.GetMenuCategories(menuType); });
-
-            foreach (MenuCategory menuCategory in menuCategories)
+            try
             {
-                // Create new category separator.
-                new CategorySeparatorUI(flwMenuItems, menuCategory.Name);
+                List<MenuCategory> menuCategories = menuLogic.GetMenuCategories(menuType);
 
-                // Get menu items of this menu type and category.
-                List<MenuItem> menuItems = await Task.Run(() => { return orderLogic.GetMenuItems(menuType, menuCategory); });
-
-                // Create UI stuff for menu items.
-                foreach (MenuItem menuItem in menuItems)
+                foreach (MenuCategory menuCategory in menuCategories)
                 {
-                    new MenuItemUI(flwMenuItems, menuItem);
+                    // Create new category separator.
+                    new CategorySeparatorUI(flwMenuItems, menuCategory.Name);
+
+                    // Get menu items of this menu type and category.
+                    List<MenuItem> menuItems = orderLogic.GetMenuItems(menuType, menuCategory);
+
+                    // Create UI stuff for menu items.
+                    foreach (MenuItem menuItem in menuItems)
+                    {
+                        new MenuItemUI(flwMenuItems, menuItem);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while loading the menu.");
             }
         }
 
         private void btnPlaceOrder_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadCheckout();
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex);
-            }
+            LoadCheckout();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -238,65 +239,82 @@ namespace RestaurantChapeau
         /// </summary>
         private void LoadCheckout()
         {
-            flwCheckout.Controls.Clear();
+            try
+            {
+                flwCheckout.Controls.Clear();
 
-            if (OrderBasket.Instance.GetAll().Count == 0)
-            {
-                // No menu items?
-                // Create label saying that no items are selected, and disable Finish button.
-                Label lblNothingPurchased = new Label();
-                lblNothingPurchased.Text = "No items selected!";
-                lblNothingPurchased.Font = new Font("Segoe UI", 18);
-                lblNothingPurchased.TextAlign = ContentAlignment.MiddleCenter;
-                lblNothingPurchased.Width = flwCheckout.Width - 10;
-                lblNothingPurchased.Height = flwCheckout.Height - 10;
-                flwCheckout.Controls.Add(lblNothingPurchased);
-                btnFinish.Enabled = false;
-            }
-            else
-            {
-                // ...otherwise load stuff from the basket.
-                int count = 1;
-                foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
+                if (OrderBasket.Instance.GetAll().Count == 0)
                 {
-                    MenuSummaryUI summaryButton = new MenuSummaryUI(flwCheckout, menuItem, count);
-                    summaryButton.OnDeleteItem = LoadCheckout;
-                    count++;
+                    // No menu items?
+                    // Create label saying that no items are selected, and disable Finish button.
+                    Label lblNothingPurchased = new Label();
+                    lblNothingPurchased.Text = "No items selected!";
+                    lblNothingPurchased.Font = new Font("Segoe UI", 18);
+                    lblNothingPurchased.TextAlign = ContentAlignment.MiddleCenter;
+                    lblNothingPurchased.Width = flwCheckout.Width - 10;
+                    lblNothingPurchased.Height = flwCheckout.Height - 10;
+                    flwCheckout.Controls.Add(lblNothingPurchased);
+                    btnFinish.Enabled = false;
+                }
+                else
+                {
+                    // ...otherwise load stuff from the basket.
+                    int count = 1;
+                    foreach (MenuItem menuItem in OrderBasket.Instance.GetAll())
+                    {
+                        MenuSummaryUI summaryButton = new MenuSummaryUI(flwCheckout, menuItem, count);
+                        summaryButton.OnDeleteItem = LoadCheckout;
+                        count++;
+                    }
+
+                    btnFinish.Enabled = true;
                 }
 
-                btnFinish.Enabled = true;
+                // Switch tab and update header text.
+                theTabControl.SelectedTab = tabPageCheckout;
+                lblHeader.Text = "Summary";
             }
-
-            // Switch tab and update header text.
-            theTabControl.SelectedTab = tabPageCheckout;
-            lblHeader.Text = "Summary";
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while loading the checkout.");
+            }
         }
 
+        /// <summary>
+        /// The "Place Order" button.
+        /// </summary>
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            if (bill == null)
+            try
             {
-                PaymentService payment = new PaymentService();
-                bill = payment.CreateBill(tableID);
-            }
-            
-            Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
+                if (bill == null)
+                {
+                    PaymentService payment = new PaymentService();
+                    bill = payment.CreateBill(tableID);
+                }
 
-            // Add items to the new order.
-            foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
+                Order order = orderLogic.CreateNewOrderForBill(bill, txtComment.Text);
+
+                // Add items to the new order.
+                foreach (MenuItem basketItem in OrderBasket.Instance.GetAll())
+                {
+                    orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
+                    basketItem.Stock -= basketItem.Quantity;
+                    orderLogic.SetItemQuantity(basketItem);
+                }
+
+                orderLogic.RegisterOrderToBartender(employee, order);
+
+                // Clear basket, go go to "Success" tab.
+                OrderBasket.Instance.Clear();
+                theTabControl.SelectedTab = tabOrderSucceeded;
+                lblHeader.Text = "";
+                Task.Run(() => LoadOrderCompleted());
+            }
+            catch (Exception ex)
             {
-                orderLogic.AddItemToOrder(order, basketItem, basketItem.Quantity);
-                basketItem.Stock -= basketItem.Quantity;
-                orderLogic.SetItemQuantity(basketItem);
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while placing the order.");
             }
-
-            orderLogic.RegisterOrderToBartender(employee, order);
-
-            // Clear basket, go go to "Success" tab.
-            OrderBasket.Instance.Clear();
-            theTabControl.SelectedTab = tabOrderSucceeded;
-            lblHeader.Text = "";
-            Task.Run(() => LoadOrderCompleted());
         }
 
         /// <summary>
@@ -320,7 +338,7 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             {
-                ErrorLogger.Instance.WriteError(ex);
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening the menu.");
             }
         }
 
@@ -374,7 +392,7 @@ namespace RestaurantChapeau
                 }
                 catch (Exception ex)
                 {
-                    ErrorLogger.Instance.WriteError(ex);
+                    ErrorLogger.Instance.WriteError(ex, "Something went wrong while loading menu type.");
                 }
             }
         }

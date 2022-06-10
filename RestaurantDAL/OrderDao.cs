@@ -107,7 +107,7 @@ namespace RestaurantDAL
         public Order CreateNewOrderForBill(Bill bill, string comment)
         {
             string query = "INSERT INTO dbo.[Order] (placedTime, complete, billId, comment) " +
-                            "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.billId, Inserted.comment " +
+                            "OUTPUT Inserted.[id], Inserted.placedTime, Inserted.status, Inserted.comment, Inserted.complete " +
                             "VALUES (@Now, 0, @BillId, @Comment)";
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -122,7 +122,6 @@ namespace RestaurantDAL
         private Order ReadOrder(DataRow row, Bill bill)
         {
             Order order = new Order();
-            ;
             order.Id = Convert.ToInt32(row["id"]);
             order.PlacedTime = Convert.ToDateTime(row["placedTime"]);
             order.Complete = Convert.ToBoolean(row["complete"]);
@@ -182,7 +181,7 @@ namespace RestaurantDAL
         //Returns all the items in an order with a specific orderID
         public List<MenuItem> GetBarOrderItemsByID(int orderId)
         {
-            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is NOT null;";
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, po.status, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is NOT null;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderId", orderId)
@@ -209,17 +208,19 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, parameters);
         }
 
+        // update the order status of an order to another order
         public void UpdateOrderStatus(Order order)
         {
-            string command = ("UPDATE dbo.[Order] SET complete = @complete  WHERE Id = @orderId");
+            string command = ("UPDATE dbo.[Order] SET complete = @complete WHERE Id = @orderId");
             SqlParameter[] parameters = new SqlParameter[]
             {
                     new SqlParameter("@complete", order.Complete),
-                    new SqlParameter("@OrderId", order.Id)
+                    new SqlParameter("@orderId", order.Id)
             };
             ExecuteEditQuery(command, parameters);
         }
       
+        // get the comment which is attached to an order 
         public Order GetOrderCommentByID(int OrderID)
         {
             string command = (
@@ -326,6 +327,7 @@ namespace RestaurantDAL
             return ReadMenuItemsForOrder(ExecuteSelectQuery(query, parameters));
         }
 
+        // get the items for an order from the databse
         private List<MenuItem> ReadMenuItemsForOrder(DataTable table)
         {
             List<MenuItem> items = new List<MenuItem>();
@@ -385,17 +387,27 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, parameters);
         }
 
+        // sets order status to a status
         public void SetOrderItemStatus(MenuItem item, Order order)
         {
-            string query = "UPDATE dbo.PartOf SET status = @ItemStatus WHERE orderId = @OrderId AND menuItemId = @ItemId";
-            SqlParameter[] parameters = new SqlParameter[]
+            try
             {
+                string query = "UPDATE dbo.PartOf SET status = @ItemStatus WHERE orderId = @OrderId AND menuItemId = @ItemId";
+                SqlParameter[] parameters = new SqlParameter[]
+                {
                 new SqlParameter("@ItemId", item.Id),
                 new SqlParameter("@ItemStatus", item.Status),
                 new SqlParameter("@OrderId", order.Id)
-            };
+                };
 
-            ExecuteEditQuery(query, parameters);
+                ExecuteEditQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
+            }
+            
         }
     }
 }

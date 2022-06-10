@@ -67,6 +67,11 @@ namespace RestaurantChapeau
             timer.Tick += Timer_Tick;
             timer.Interval = 10000;
             timer.Start();
+            lv_TableDetailView.Columns.Add("ID", 80, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -75,77 +80,118 @@ namespace RestaurantChapeau
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             CheckNotification();
         }
+        private void ShowNotification()
+        {
+            lbl_Table1Notification.Show();
+            lbl_Table2Notification.Show();
+            lbl_Table3Notification.Show();
+            lbl_Table4Notification.Show();
+            lbl_Table5Notification.Show();
+            lbl_Table6Notification.Show();
+            lbl_Table7Notification.Show();
+            lbl_Table8Notification.Show();
+            lbl_Table9Notification.Show();
+            lbl_Table10Notification.Show();
+        }
+        private void HideNotification()
+        {
+            lbl_Table1Notification.Hide();
+            lbl_Table2Notification.Hide();
+            lbl_Table3Notification.Hide();
+            lbl_Table4Notification.Hide();
+            lbl_Table5Notification.Hide();
+            lbl_Table6Notification.Hide();
+            lbl_Table7Notification.Hide();
+            lbl_Table8Notification.Hide();
+            lbl_Table9Notification.Hide();
+            lbl_Table10Notification.Hide();
+        }
         private void CheckNotification()
         {
-            for (int i = 0; i < notificationLabels.Length; i++)
+            try
             {
-                Label label = notificationLabels[i];
-                label.Text = "";
-                if (paymentService.HasBill(i + 1))
+                for (int i = 0; i < notificationLabels.Length; i++)
                 {
-                    Bill bill = paymentService.GetBill(i + 1);
-                    List<Order> orders = orderLogic.GetOrdersForBill(bill);
-
-                    int readyCount = 0;
-                    foreach (Order order in orders)
+                    Label label = notificationLabels[i];
+                    label.Text = "";
+                    int tableNumber = i + 1;
+                    if (paymentService.HasBill(tableNumber))
                     {
-                        List<MenuItem> items = orderLogic.GetItemsForOrder(order);
-                        foreach (MenuItem item in items)
+                        Bill bill = paymentService.GetBill(tableNumber);
+                        List<Order> orders = orderLogic.GetOrdersForBill(bill);
+
+                        int readyCount = 0;
+                        foreach (Order order in orders)
                         {
-                            if (item.Status == OrderStatus.ReadyToServe)
+                            List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                            foreach (MenuItem item in items)
                             {
-                                readyCount++;
+                                if (item.Status == OrderStatus.ReadyToServe)
+                                {
+                                    readyCount++;
+                                }
                             }
                         }
+                        label.Text = $"{readyCount}";
                     }
-
-                    label.Text = $"{readyCount}";
-                }        
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Something went wrong with notifycation: {ex.Message}");
             }
         }
         private void CheckReservations()
         {
-            for (int i = 0; i < tableButtons.Length; i++)
+            try
             {
-                Button button = tableButtons[i];
-                button.Image = Properties.Resources.screenshotTable;
-                button.Tag = null;
-
-                if (paymentService.HasBill(i + 1))
+                for (int i = 0; i < tableButtons.Length; i++)
                 {
-                    button.Image = Properties.Resources.occupied;
-                }
-            }
+                    Button button = tableButtons[i];
+                    button.Image = Properties.Resources.screenshotTable;
+                    button.Tag = null;
 
-            List<Reservation> reservations = reservationService.GetAllReservations();
-            foreach (Reservation reservation in reservations)
-            {
-                tableButtons[reservation.tableid - 1].Tag = reservation;
-                if (reservation.isReserved)
-                {
-                    bool reservationNoShowUp = DateTime.Now >= reservation.ReservationStart.AddHours(-1);
-                    bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
-                    bool isTakenNow = DateTime.Now > reservation.ReservationStart;
-                    bool tableHasBill = paymentService.HasBill(reservation.tableid);
-                    if (isTakenNow && tableHasBill)
+                    if (paymentService.HasBill(i + 1))
                     {
-                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;
-
-                    }
-                    else if (isTableReserved)
-                    {
-                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.reserved;
-                    }
-                    else if (reservationNoShowUp)
-                    {
-                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
-                    }
-                    else
-                    {
-                        tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
+                        button.Image = Properties.Resources.occupied;
                     }
                 }
+
+                List<Reservation> reservations = reservationService.GetAllReservations();
+                foreach (Reservation reservation in reservations)
+                {
+                    tableButtons[reservation.tableid - 1].Tag = reservation;
+                    if (reservation.isReserved)
+                    {
+                        bool reservationNoShowUp = DateTime.Now >= reservation.ReservationStart.AddHours(-1);
+                        bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
+                        bool isTakenNow = DateTime.Now > reservation.ReservationStart;
+                        bool tableHasBill = paymentService.HasBill(reservation.tableid);
+                        if (isTakenNow && tableHasBill)
+                        {
+                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;
+
+                        }
+                        else if (isTableReserved)
+                        {
+                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.reserved;
+                        }
+                        else if (reservationNoShowUp)
+                        {
+                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
+                        }
+                        else
+                        {
+                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
+                        }
+                    }
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Something went wrong while checking reservation: {ex.Message}");
+            }
+            
         }
 
         private void TableViewForm_Load(object sender, EventArgs e)
@@ -180,33 +226,39 @@ namespace RestaurantChapeau
 
         private void btn_MakeReservation_Click(object sender, EventArgs e)
         {
-            ReservationService reservationService = new ReservationService();
-            string firstName = txt_ReservationFirstName.Text;
-            string lastName = txt_ReservationLastName.Text;
-            string email = txt_ReservationEmail.Text;
-            DateTime reservationStart = dateTimePicker1.Value;
-            string TableId = txt_ReservationTableID.Text;
-
-            if (firstName == "" || lastName == "" || email == "" || reservationStart == null || TableId == "")
+            try
             {
-                MessageBox.Show("please fill out text box");
+                ReservationService reservationService = new ReservationService();
+                string firstName = txt_ReservationFirstName.Text;
+                string lastName = txt_ReservationLastName.Text;
+                string email = txt_ReservationEmail.Text;
+                DateTime reservationStart = dateTimePicker1.Value;
+                string TableId = txt_ReservationTableID.Text;
+
+                if (firstName == "" || lastName == "" || email == "" || reservationStart == null || TableId == "")
+                {
+                    MessageBox.Show("please fill out text box");
+                }
+                else
+                {
+                    //add the customer info for the reservation to the database
+                    reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
+                    MessageBox.Show("Succesfully made reservation!");
+                }
+
+                //hide the panels and show the dashboard again
+                HidePanel();
+                pnl_Reservation.Show();
+                txt_ReservationFirstName.Clear();
+                txt_ReservationLastName.Clear();
+                txt_ReservationEmail.Clear();
+                txt_ReservationTableID.Clear();
+                DisplayReservation();
             }
-            else
+            catch(Exception ex)
             {
-                //add the customer info for the reservation to the database
-                reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
-                MessageBox.Show("Succesfully made reservation!");
-            }
-
-            //hide the panels and show the dashboard again
-            HidePanel();
-            pnl_Reservation.Show();
-            txt_ReservationFirstName.Clear();
-            txt_ReservationLastName.Clear();
-            txt_ReservationEmail.Clear();
-            txt_ReservationTableID.Clear();
-            DisplayReservation();
-
+                MessageBox.Show($"something went wrong with this button: {ex.Message}");
+            }           
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -231,26 +283,34 @@ namespace RestaurantChapeau
 
         private void DisplayReservation()
         {
-            List<Reservation> reservationList = reservationService.GetAllReservations();
-
-            lV_ReservationDisplay.Clear();
-            lV_ReservationDisplay.Columns.Add("ID", 50, HorizontalAlignment.Left);
-            lV_ReservationDisplay.Columns.Add("First Name", 90, HorizontalAlignment.Left);
-            lV_ReservationDisplay.Columns.Add("Last Name", 90, HorizontalAlignment.Left);
-            lV_ReservationDisplay.Columns.Add("Email", 150, HorizontalAlignment.Left);
-            lV_ReservationDisplay.Columns.Add("Time", 150, HorizontalAlignment.Left);
-            lV_ReservationDisplay.Columns.Add("Table number", 150, HorizontalAlignment.Left);
-            lV_ReservationDisplay.View = View.Details;
-            foreach (Reservation r in reservationList)
+            try
             {
-                ListViewItem li = new ListViewItem(r.reservationID.ToString());
-                li.SubItems.Add(r.firstName);
-                li.SubItems.Add(r.lastName);
-                li.SubItems.Add(r.email);
-                li.SubItems.Add(r.ReservationStart.ToString());
-                li.SubItems.Add(r.tableid.ToString());
-                lV_ReservationDisplay.Items.Add(li);
+                List<Reservation> reservationList = reservationService.GetAllReservations();
+
+                lV_ReservationDisplay.Clear();
+                lV_ReservationDisplay.Columns.Add("ID", 50, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("First Name", 90, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Last Name", 90, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Email", 150, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Time", 150, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Table number", 150, HorizontalAlignment.Left);
+                lV_ReservationDisplay.View = View.Details;
+                foreach (Reservation r in reservationList)
+                {
+                    ListViewItem li = new ListViewItem(r.reservationID.ToString());
+                    li.SubItems.Add(r.firstName);
+                    li.SubItems.Add(r.lastName);
+                    li.SubItems.Add(r.email);
+                    li.SubItems.Add(r.ReservationStart.ToString());
+                    li.SubItems.Add(r.tableid.ToString());
+                    lV_ReservationDisplay.Items.Add(li);
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Something went wrong with the disyplay reseravtion: {ex.Message}");
+            }
+            
         }
 
         private void btn_MakeReservationGoBack_Click(object sender, EventArgs e)
@@ -274,34 +334,42 @@ namespace RestaurantChapeau
 
         private void btn_ViewReservationCancel_Click(object sender, EventArgs e)
         {
-            //dialog pop up asking the user if he is sure of the action
-            DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Cancel reservation", MessageBoxButtons.YesNo);
-
-            //if the answer is yes proceed to remove activity
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                //create activity object
-                Reservation reservation = new Reservation();
+                //dialog pop up asking the user if he is sure of the action
+                DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Cancel reservation", MessageBoxButtons.YesNo);
+
+                //if the answer is yes proceed to remove activity
+                if (dialogResult == DialogResult.Yes)
                 {
-                    reservation.reservationID = int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);
-                };
+                    //create activity object
+                    Reservation reservation = new Reservation();
+                    {
+                        reservation.reservationID = int.Parse(lV_ReservationDisplay.SelectedItems[0].SubItems[0].Text);
+                    };
 
-                //delete reservation
-                reservationService.CancelReservation(reservation);
-                // show that delete was successful
-                MessageBox.Show("Succeesfully cancel the reservation!");
-                //refresh panel
-                HidePanel();
-                DisplayReservation();
-                pnl_ViewReservation.Show();
-                CheckReservations();
+                    //delete reservation
+                    reservationService.CancelReservation(reservation);
+                    // show that delete was successful
+                    MessageBox.Show("Succeesfully cancel the reservation!");
+                    //refresh panel
+                    HidePanel();
+                    DisplayReservation();
+                    pnl_ViewReservation.Show();
+                    CheckReservations();
+                }
+
+                //if the answer is no do nothing
+                else if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
             }
-
-            //if the answer is no do nothing
-            else if (dialogResult == DialogResult.No)
+            catch(Exception ex)
             {
-                return;
+                MessageBox.Show($"Something went wrong with the reservation system: {ex.Message}");
             }
+           
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -376,37 +444,51 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             {
-                ErrorLogger.Instance.WriteError(ex, true);
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
             }
         }
         private void HandleTableButtonClick(int tableId)
         {
-            if (!paymentService.HasBill(tableId))
+            try
             {
-                // Table has no bill?
-                // Go to order view.
-                ShowOrderView(tableId);
-            }
-            else
-            {
-                // Get the bill for this table.
-                this.currentBill = paymentService.GetBill(tableId);
-                this.currentTableNumber = tableId;
-
-                if (!orderLogic.HasBillOrders(this.currentBill))
+                if (!paymentService.HasBill(tableId))
                 {
-                    // Bill has no orders?
-                    // Automatically go into order creation process.
-                    ShowOrderView(tableId, this.currentBill);
+                    // Table has no bill?
+                    // Go to order view.
+                    ShowOrderView(tableId);
+                    HideNotification();
+                    pb_TableAgenda.Hide();
                 }
                 else
                 {
-                    // Bill has some orders?
-                    // Show table details and load table's information.
-                    pnl_TableDetailView.Show();
-                    lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
+                    // Get the bill for this table.
+                    this.currentBill = paymentService.GetBill(tableId);
+                    this.currentTableNumber = tableId;
+
+                    if (!orderLogic.HasBillOrders(this.currentBill))
+                    {
+                        // Bill has no orders?
+                        // Automatically go into order creation process.
+                        ShowOrderView(tableId, this.currentBill);
+                        HideNotification();
+                        pb_TableAgenda.Hide();
+                    }
+                    else
+                    {
+                        // Bill has some orders?
+                        // Show table details and load table's information.
+                        pnl_TableDetailView.Show();
+                        lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
+                        HideNotification();
+                        pb_TableAgenda.Hide();
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Something went wrong with the button: {ex.Message}");
+            }
+            
         }
         private void ShowOrderView(int tableID, Bill bill = null)
         {
@@ -417,33 +499,56 @@ namespace RestaurantChapeau
 
         private void lv_TableDetailView_SelectedIndexChanged(int tableId, Bill bill)
         {
-            lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
-            List<Order> orders = orderLogic.GetOrdersForBill(bill);
-            lv_TableDetailView.Clear();
-            lv_TableDetailView.Columns.Add("ID", 80, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
-
-            lv_TableDetailView.View = View.Details;
-
-            foreach (Order order in orders)
+            try
             {
-                List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
-                lv_TableDetailView.Tag = order;
-                foreach (MenuItem item in menus)
+                int lastSelected = lv_TableDetailView.SelectedItems.Count > 0 ? lv_TableDetailView.SelectedItems[0].Index : -1;
+                lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
+                List<Order> orders = orderLogic.GetOrdersForBill(bill);
+                lv_TableDetailView.Items.Clear();
+
+                lv_TableDetailView.View = View.Details;
+
+                foreach (Order order in orders)
                 {
-                    ListViewItem li = new ListViewItem(order.Id.ToString());
-                    li.SubItems.Add(item.Status.ToString());
-                    li.SubItems.Add(item.Name.ToString());
-                    li.SubItems.Add(item.Quantity.ToString());
-                    li.SubItems.Add(order.PlacedTime.ToString());
-                    li.Tag = item;
-                    lv_TableDetailView.Items.Add(li);
+                    List<MenuItem> menus = orderLogic.GetItemsForOrder(order);
+                    foreach (MenuItem item in menus)
+                    {
+                        ListViewItem li = new ListViewItem(order.Id.ToString());
+                        li.SubItems.Add(item.Status.ToString());
+                        li.SubItems.Add(item.Name.ToString());
+                        li.SubItems.Add(item.Quantity.ToString());
+                        li.SubItems.Add(order.PlacedTime.ToString());
+                        ListItem listItem = new ListItem()
+                        {
+                            Order = order,
+                            MenuItem = item
+                        };
+                        li.Tag = listItem;
+                        if (item.Status == OrderStatus.ReadyToServe)
+                        {
+                            li.ForeColor = Color.Blue;
+                        }
+                        lv_TableDetailView.Items.Add(li);
+                    }
+                }
+
+                if (lastSelected != -1)
+                {
+                    lv_TableDetailView.Items[lastSelected].Selected = true;
+                    lv_TableDetailView.Items[lastSelected].Focused = true;
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Something went wrong while loading listview: {ex.Message}");
+            }
 
+        }
+
+        struct ListItem
+        {
+            public Order Order;
+            public MenuItem MenuItem;
         }
 
         private void btnNewOrder_Click(object sender, EventArgs e)
@@ -460,6 +565,8 @@ namespace RestaurantChapeau
         private void pbTableDetailViewGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
+            ShowNotification();
+            pb_TableAgenda.Show();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -479,23 +586,31 @@ namespace RestaurantChapeau
 
         private void btn_TableDetailViewChangeStatus_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (lv_TableDetailView.FocusedItem.Tag == null) return;
 
-            //TableDetailItem orderItem = (TableDetailItem)lv_TableDetailView.SelectedItems[0].Tag;
-            Order order = (Order)lv_TableDetailView.Tag;
-            MenuItem item = (MenuItem)lv_TableDetailView.SelectedItems[0].Tag;
-            if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
-            {
-                MessageBox.Show("You cannot change status yet");
+                ListItem listItem = (ListItem)lv_TableDetailView.FocusedItem.Tag;
+                Order order = listItem.Order;
+                MenuItem item = listItem.MenuItem;
+                if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
+                {
+                    MessageBox.Show("You cannot change status yet");
+                }
+                else if (item.Status == OrderStatus.ReadyToServe)
+                {
+                    item.Status = OrderStatus.Served;
+                    orderLogic.SetOrderItemStatus(item, order);
+                    lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
+                }
+                else if (item.Status == OrderStatus.Served)
+                {
+                    MessageBox.Show("You already changed status");
+                }
             }
-            else if (item.Status == OrderStatus.ReadyToServe)
+            catch(Exception ex)
             {
-                item.Status = OrderStatus.Served;
-                orderLogic.SetOrderItemStatus(item, order);
-                lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
-            }
-            else if (item.Status == OrderStatus.Served)
-            {
-                MessageBox.Show("You already changed status");
+                MessageBox.Show($"Something went wrong while executing button: {ex.Message}");
             }
         }
 
@@ -507,9 +622,7 @@ namespace RestaurantChapeau
 
         private void btn_LogOut_Click(object sender, EventArgs e)
         {
-            this.Close();
-            //LoginForm loginForm = new LoginForm();
-            //loginForm.Show();
+            this.Close();            
         }
 
         private void btn_TableDetailViewCheckOut_Click(object sender, EventArgs e)

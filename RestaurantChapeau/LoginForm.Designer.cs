@@ -76,8 +76,9 @@
             this.txt_LoginPassword.Name = "txt_LoginPassword";
             this.txt_LoginPassword.PasswordChar = '*';
             this.txt_LoginPassword.Size = new System.Drawing.Size(452, 58);
-            this.txt_LoginPassword.TabIndex = 0;
+            this.txt_LoginPassword.TabIndex = 2;
             this.txt_LoginPassword.TextChanged += new System.EventHandler(this.txt_LoginPassword_TextChanged);
+            this.txt_LoginPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_LoginPassword_KeyDown);
             // 
             // txt_LoginEmail
             // 
@@ -88,6 +89,7 @@
             this.txt_LoginEmail.Size = new System.Drawing.Size(452, 58);
             this.txt_LoginEmail.TabIndex = 1;
             this.txt_LoginEmail.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txt_LoginEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_LoginEmail_KeyDown);
             // 
             // btn_LoginLogin
             // 
@@ -97,7 +99,7 @@
             this.btn_LoginLogin.Location = new System.Drawing.Point(146, 654);
             this.btn_LoginLogin.Name = "btn_LoginLogin";
             this.btn_LoginLogin.Size = new System.Drawing.Size(452, 58);
-            this.btn_LoginLogin.TabIndex = 2;
+            this.btn_LoginLogin.TabIndex = 3;
             this.btn_LoginLogin.Text = "Login";
             this.btn_LoginLogin.UseVisualStyleBackColor = false;
             this.btn_LoginLogin.Click += new System.EventHandler(this.btn_LoginLogin_Click);
@@ -153,6 +155,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(171, 34);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(401, 221);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
@@ -167,9 +170,9 @@
             this.pnl_ForgotPassword.Controls.Add(this.textBox2);
             this.pnl_ForgotPassword.Controls.Add(this.textBox1);
             this.pnl_ForgotPassword.Controls.Add(this.pictureBox3);
-            this.pnl_ForgotPassword.Location = new System.Drawing.Point(0, 0);
+            this.pnl_ForgotPassword.Location = new System.Drawing.Point(93, 25);
             this.pnl_ForgotPassword.Name = "pnl_ForgotPassword";
-            this.pnl_ForgotPassword.Size = new System.Drawing.Size(726, 1055);
+            this.pnl_ForgotPassword.Size = new System.Drawing.Size(0, 0);
             this.pnl_ForgotPassword.TabIndex = 9;
             this.pnl_ForgotPassword.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_ForgotPassword_Paint);
             // 
@@ -259,6 +262,7 @@
             this.pictureBox3.Location = new System.Drawing.Point(171, 34);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(401, 221);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
@@ -296,8 +300,9 @@
             this.txt_RegisterPassword.Location = new System.Drawing.Point(146, 631);
             this.txt_RegisterPassword.Multiline = true;
             this.txt_RegisterPassword.Name = "txt_RegisterPassword";
+            this.txt_RegisterPassword.PasswordChar = '*';
             this.txt_RegisterPassword.Size = new System.Drawing.Size(452, 58);
-            this.txt_RegisterPassword.TabIndex = 16;
+            this.txt_RegisterPassword.TabIndex = 3;
             // 
             // btn_RegisterLogin
             // 
@@ -307,7 +312,7 @@
             this.btn_RegisterLogin.Location = new System.Drawing.Point(146, 871);
             this.btn_RegisterLogin.Name = "btn_RegisterLogin";
             this.btn_RegisterLogin.Size = new System.Drawing.Size(452, 58);
-            this.btn_RegisterLogin.TabIndex = 15;
+            this.btn_RegisterLogin.TabIndex = 5;
             this.btn_RegisterLogin.Text = "Go back to login";
             this.btn_RegisterLogin.UseVisualStyleBackColor = false;
             this.btn_RegisterLogin.Click += new System.EventHandler(this.btn_RegisterLogin_Click);
@@ -320,7 +325,7 @@
             this.btn_RegisterRegister.Location = new System.Drawing.Point(146, 770);
             this.btn_RegisterRegister.Name = "btn_RegisterRegister";
             this.btn_RegisterRegister.Size = new System.Drawing.Size(452, 58);
-            this.btn_RegisterRegister.TabIndex = 12;
+            this.btn_RegisterRegister.TabIndex = 4;
             this.btn_RegisterRegister.Text = "Register";
             this.btn_RegisterRegister.UseVisualStyleBackColor = false;
             this.btn_RegisterRegister.Click += new System.EventHandler(this.btn_RegisterRegister_Click);
@@ -358,6 +363,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(171, 34);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(401, 221);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
             // 

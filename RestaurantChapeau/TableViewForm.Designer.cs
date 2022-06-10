@@ -82,6 +82,7 @@
             this.lbl_Table6Notification = new System.Windows.Forms.Label();
             this.lbl_Table7Notification = new System.Windows.Forms.Label();
             this.lbl_Table8Notification = new System.Windows.Forms.Label();
+            this.pb_TableAgenda = new System.Windows.Forms.PictureBox();
             this.pnl_Reservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMakeReservationGoBack)).BeginInit();
@@ -92,6 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_TableAgenda)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Table1
@@ -283,8 +285,8 @@
             this.dateTimePicker1.MaxDate = new System.DateTime(2022, 12, 31, 0, 0, 0, 0);
             this.dateTimePicker1.MinDate = new System.DateTime(2022, 5, 25, 23, 59, 59, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(362, 39);
-            this.dateTimePicker1.TabIndex = 34;
+            this.dateTimePicker1.Size = new System.Drawing.Size(224, 27);
+            this.dateTimePicker1.TabIndex = 3;
             this.dateTimePicker1.Value = new System.DateTime(2022, 5, 25, 23, 59, 59, 0);
             // 
             // lbl_ReservationIsReserved
@@ -349,8 +351,8 @@
             this.txt_ReservationFirstName.Margin = new System.Windows.Forms.Padding(5);
             this.txt_ReservationFirstName.Multiline = true;
             this.txt_ReservationFirstName.Name = "txt_ReservationFirstName";
-            this.txt_ReservationFirstName.Size = new System.Drawing.Size(732, 90);
-            this.txt_ReservationFirstName.TabIndex = 33;
+            this.txt_ReservationFirstName.Size = new System.Drawing.Size(452, 58);
+            this.txt_ReservationFirstName.TabIndex = 0;
             // 
             // txt_ReservationLastName
             // 
@@ -359,8 +361,8 @@
             this.txt_ReservationLastName.Margin = new System.Windows.Forms.Padding(5);
             this.txt_ReservationLastName.Multiline = true;
             this.txt_ReservationLastName.Name = "txt_ReservationLastName";
-            this.txt_ReservationLastName.Size = new System.Drawing.Size(732, 90);
-            this.txt_ReservationLastName.TabIndex = 34;
+            this.txt_ReservationLastName.Size = new System.Drawing.Size(452, 58);
+            this.txt_ReservationLastName.TabIndex = 1;
             // 
             // txt_ReservationEmail
             // 
@@ -369,8 +371,8 @@
             this.txt_ReservationEmail.Margin = new System.Windows.Forms.Padding(5);
             this.txt_ReservationEmail.Multiline = true;
             this.txt_ReservationEmail.Name = "txt_ReservationEmail";
-            this.txt_ReservationEmail.Size = new System.Drawing.Size(732, 90);
-            this.txt_ReservationEmail.TabIndex = 35;
+            this.txt_ReservationEmail.Size = new System.Drawing.Size(452, 58);
+            this.txt_ReservationEmail.TabIndex = 2;
             // 
             // txt_ReservationTableID
             // 
@@ -379,8 +381,8 @@
             this.txt_ReservationTableID.Margin = new System.Windows.Forms.Padding(5);
             this.txt_ReservationTableID.Multiline = true;
             this.txt_ReservationTableID.Name = "txt_ReservationTableID";
-            this.txt_ReservationTableID.Size = new System.Drawing.Size(732, 90);
-            this.txt_ReservationTableID.TabIndex = 37;
+            this.txt_ReservationTableID.Size = new System.Drawing.Size(452, 58);
+            this.txt_ReservationTableID.TabIndex = 4;
             // 
             // btn_MakeReservation
             // 
@@ -390,8 +392,8 @@
             this.btn_MakeReservation.Location = new System.Drawing.Point(236, 1170);
             this.btn_MakeReservation.Margin = new System.Windows.Forms.Padding(5);
             this.btn_MakeReservation.Name = "btn_MakeReservation";
-            this.btn_MakeReservation.Size = new System.Drawing.Size(734, 93);
-            this.btn_MakeReservation.TabIndex = 0;
+            this.btn_MakeReservation.Size = new System.Drawing.Size(452, 58);
+            this.btn_MakeReservation.TabIndex = 5;
             this.btn_MakeReservation.Text = "Make Reservation";
             this.btn_MakeReservation.UseVisualStyleBackColor = false;
             this.btn_MakeReservation.Click += new System.EventHandler(this.btn_MakeReservation_Click);
@@ -405,9 +407,8 @@
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationMake);
             this.pnl_ViewReservation.Controls.Add(this.lV_ReservationDisplay);
             this.pnl_ViewReservation.Location = new System.Drawing.Point(0, 0);
-            this.pnl_ViewReservation.Margin = new System.Windows.Forms.Padding(5);
             this.pnl_ViewReservation.Name = "pnl_ViewReservation";
-            this.pnl_ViewReservation.Size = new System.Drawing.Size(1180, 1688);
+            this.pnl_ViewReservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ViewReservation.TabIndex = 33;
             this.pnl_ViewReservation.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_ViewReservation_Paint_1);
             // 
@@ -415,10 +416,10 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Black;
             this.pictureBox2.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.pictureBox2.Location = new System.Drawing.Point(994, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(612, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(188, 128);
+            this.pictureBox2.Size = new System.Drawing.Size(116, 80);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 50;
             this.pictureBox2.TabStop = false;
@@ -427,9 +428,10 @@
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(136, 0);
+            this.label1.Location = new System.Drawing.Point(84, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(860, 128);
+            this.label1.Size = new System.Drawing.Size(529, 80);
             this.label1.TabIndex = 49;
             this.label1.Text = "Reservation";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -439,10 +441,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.pictureBox1.Location = new System.Drawing.Point(11, 13);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 8);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(101, 99);
+            this.pictureBox1.Size = new System.Drawing.Size(62, 62);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 48;
             this.pictureBox1.TabStop = false;
@@ -453,10 +455,9 @@
             this.btn_ViewReservationCancel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btn_ViewReservationCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_ViewReservationCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_ViewReservationCancel.Location = new System.Drawing.Point(236, 1365);
-            this.btn_ViewReservationCancel.Margin = new System.Windows.Forms.Padding(5);
+            this.btn_ViewReservationCancel.Location = new System.Drawing.Point(145, 853);
             this.btn_ViewReservationCancel.Name = "btn_ViewReservationCancel";
-            this.btn_ViewReservationCancel.Size = new System.Drawing.Size(734, 93);
+            this.btn_ViewReservationCancel.Size = new System.Drawing.Size(452, 58);
             this.btn_ViewReservationCancel.TabIndex = 35;
             this.btn_ViewReservationCancel.Text = "Cancel reservation";
             this.btn_ViewReservationCancel.UseVisualStyleBackColor = false;
@@ -467,10 +468,9 @@
             this.btn_ViewReservationMake.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btn_ViewReservationMake.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_ViewReservationMake.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_ViewReservationMake.Location = new System.Drawing.Point(236, 1170);
-            this.btn_ViewReservationMake.Margin = new System.Windows.Forms.Padding(5);
+            this.btn_ViewReservationMake.Location = new System.Drawing.Point(145, 731);
             this.btn_ViewReservationMake.Name = "btn_ViewReservationMake";
-            this.btn_ViewReservationMake.Size = new System.Drawing.Size(734, 93);
+            this.btn_ViewReservationMake.Size = new System.Drawing.Size(452, 58);
             this.btn_ViewReservationMake.TabIndex = 34;
             this.btn_ViewReservationMake.Text = "Make reservation";
             this.btn_ViewReservationMake.UseVisualStyleBackColor = false;
@@ -480,10 +480,9 @@
             // 
             this.lV_ReservationDisplay.FullRowSelect = true;
             this.lV_ReservationDisplay.HideSelection = false;
-            this.lV_ReservationDisplay.Location = new System.Drawing.Point(49, 147);
-            this.lV_ReservationDisplay.Margin = new System.Windows.Forms.Padding(5);
+            this.lV_ReservationDisplay.Location = new System.Drawing.Point(30, 92);
             this.lV_ReservationDisplay.Name = "lV_ReservationDisplay";
-            this.lV_ReservationDisplay.Size = new System.Drawing.Size(1098, 700);
+            this.lV_ReservationDisplay.Size = new System.Drawing.Size(677, 439);
             this.lV_ReservationDisplay.TabIndex = 0;
             this.lV_ReservationDisplay.UseCompatibleStateImageBehavior = false;
             this.lV_ReservationDisplay.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -567,6 +566,7 @@
             // 
             // lv_TableDetailView
             // 
+            this.lv_TableDetailView.FullRowSelect = true;
             this.lv_TableDetailView.HideSelection = false;
             this.lv_TableDetailView.Location = new System.Drawing.Point(11, 147);
             this.lv_TableDetailView.Margin = new System.Windows.Forms.Padding(5);
@@ -737,6 +737,16 @@
             this.lbl_Table8Notification.Size = new System.Drawing.Size(0, 32);
             this.lbl_Table8Notification.TabIndex = 62;
             // 
+            // pb_TableAgenda
+            // 
+            this.pb_TableAgenda.Image = global::RestaurantChapeau.Properties.Resources.Agenda;
+            this.pb_TableAgenda.Location = new System.Drawing.Point(301, 83);
+            this.pb_TableAgenda.Name = "pb_TableAgenda";
+            this.pb_TableAgenda.Size = new System.Drawing.Size(125, 75);
+            this.pb_TableAgenda.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_TableAgenda.TabIndex = 63;
+            this.pb_TableAgenda.TabStop = false;
+            // 
             // TableViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -745,6 +755,7 @@
             this.ClientSize = new System.Drawing.Size(1180, 1559);
             this.Controls.Add(this.pnl_ViewReservation);
             this.Controls.Add(this.pnl_Reservation);
+            this.Controls.Add(this.pb_TableAgenda);
             this.Controls.Add(this.lbl_Table8Notification);
             this.Controls.Add(this.lbl_Table7Notification);
             this.Controls.Add(this.lbl_Table6Notification);
@@ -787,6 +798,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_TableAgenda)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -847,5 +859,6 @@
         private System.Windows.Forms.Label lbl_Table6Notification;
         private System.Windows.Forms.Label lbl_Table7Notification;
         private System.Windows.Forms.Label lbl_Table8Notification;
+        private System.Windows.Forms.PictureBox pb_TableAgenda;
     }
 }

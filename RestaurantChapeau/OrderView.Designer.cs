@@ -116,19 +116,17 @@
             // 
             // theTabControl
             // 
-            this.theTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.theTabControl.Controls.Add(this.tabConnecting);
             this.theTabControl.Controls.Add(this.tabPageMenu);
             this.theTabControl.Controls.Add(this.tabPageCheckout);
             this.theTabControl.Controls.Add(this.tabOrderSucceeded);
-            this.theTabControl.Location = new System.Drawing.Point(0, 134);
+            this.theTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.theTabControl.Location = new System.Drawing.Point(0, 130);
             this.theTabControl.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.theTabControl.Name = "theTabControl";
             this.theTabControl.Padding = new System.Drawing.Point(18, 3);
             this.theTabControl.SelectedIndex = 0;
-            this.theTabControl.Size = new System.Drawing.Size(1179, 1554);
+            this.theTabControl.Size = new System.Drawing.Size(1180, 1558);
             this.theTabControl.TabIndex = 9;
             // 
             // tabConnecting
@@ -137,7 +135,7 @@
             this.tabConnecting.Location = new System.Drawing.Point(8, 46);
             this.tabConnecting.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabConnecting.Name = "tabConnecting";
-            this.tabConnecting.Size = new System.Drawing.Size(1163, 1500);
+            this.tabConnecting.Size = new System.Drawing.Size(1164, 1504);
             this.tabConnecting.TabIndex = 2;
             this.tabConnecting.Text = "tabConnecting";
             this.tabConnecting.UseVisualStyleBackColor = true;
@@ -150,7 +148,7 @@
             this.lblConnecting.Location = new System.Drawing.Point(0, 0);
             this.lblConnecting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblConnecting.Name = "lblConnecting";
-            this.lblConnecting.Size = new System.Drawing.Size(1163, 1500);
+            this.lblConnecting.Size = new System.Drawing.Size(1164, 1504);
             this.lblConnecting.TabIndex = 0;
             this.lblConnecting.Text = "Getting menu...";
             this.lblConnecting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -366,9 +364,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1180, 1559);
+            this.ClientSize = new System.Drawing.Size(1180, 1688);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.theTabControl);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "OrderView";
