@@ -402,7 +402,7 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             {
-                ErrorLogger.Instance.WriteError(ex, true);
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
             }
         }
         private void HandleTableButtonClick(int tableId)
