@@ -18,6 +18,7 @@ namespace RestaurantChapeau
 
     public partial class LoginForm : Form
     {
+        private EmployeeService employeeService;
         public LoginForm()
         {
             InitializeComponent();
@@ -124,7 +125,7 @@ namespace RestaurantChapeau
             try
             {
                 //create connection to user layer
-                EmployeeService employeeService = new EmployeeService();
+                employeeService = new EmployeeService();
 
                 //password hasher
                 PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
@@ -246,7 +247,7 @@ namespace RestaurantChapeau
             try
             {
                 //create connection to employee layer
-                EmployeeService employeeService = new EmployeeService();
+                employeeService = new EmployeeService();
 
                 //store the entered username and password
                 string email = txt_LoginEmail.Text;

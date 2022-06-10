@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RestaurantModel.Employee">
+    <Position X="8" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="employeeType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RestaurantModel.EmployeeType">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantLogic.EmployeeService">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantChapeau.LoginForm">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IDAgJBQIACFAghACBgCGCMhCQIkMAAICGJ00gARQIBI=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="employeeService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RestaurantChapeau.TableViewForm">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="RestaurantChapeau.TableViewForm.ListItem" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TableViewForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ZDQAYt+RACgAARBHwqGixJEDAEGADD5CyABS3/dNgwg=</HashCode>
+      <FileName>TableViewForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="currentBill" />
+      <Field Name="currentEmployee" />
+      <Field Name="order" />
+      <Field Name="paymentService" />
+      <Field Name="orderLogic" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RestaurantModel.Bill">
+    <Position X="15" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantModel.Order">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantLogic.PaymentService">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantLogic.OrderLogic">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

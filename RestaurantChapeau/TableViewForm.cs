@@ -67,6 +67,11 @@ namespace RestaurantChapeau
             timer.Tick += Timer_Tick;
             timer.Interval = 10000;
             timer.Start();
+            lv_TableDetailView.Columns.Add("ID", 80, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -498,12 +503,7 @@ namespace RestaurantChapeau
             {
                 lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
                 List<Order> orders = orderLogic.GetOrdersForBill(bill);
-                lv_TableDetailView.Clear();
-                lv_TableDetailView.Columns.Add("ID", 80, HorizontalAlignment.Left);
-                lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
-                lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
-                lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
-                lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
+                lv_TableDetailView.Items.Clear();
 
                 lv_TableDetailView.View = View.Details;
 
