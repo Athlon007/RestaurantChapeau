@@ -17,9 +17,10 @@ namespace RestaurantChapeau
         int secs, mins, hours;
         bool IsActive;
 
-        Employee employee;
+        private Employee employee;
         private Order selectedOrder;
         private MenuItem selectedItem;
+        private OrderLogic orderService;
 
         public KitchenViewForm(Employee employee)
         {
@@ -34,106 +35,121 @@ namespace RestaurantChapeau
         #region Display Orders
         public void DisplayOrders()
         {
-            OrderLogic orderService = new OrderLogic();
-            List<Order> orders = orderService.GetKitchenOrdersToPrepare();
-
-            foreach (Order order in orders)
+            try
             {
-                //create new listview item and add the items to the listview item
-                ListViewItem li = new ListViewItem(order.Id.ToString());
-                li.SubItems.Add(order.PlacedTime.ToString());
+                orderService = new OrderLogic();
+                List<Order> orders = orderService.GetKitchenOrdersToPrepare();
 
-                // if the item is complete, display status is ready or else not ready in the listview
-                if (order.Complete == true)
+                foreach (Order order in orders)
                 {
-                    li.SubItems.Add("Ready");
-                }
-                else
-                {
-                    li.SubItems.Add("Not ready");
-                }
-                //order tags become an order item
-                li.Tag = order;
+                    //create new listview item and add the items to the listview item
+                    ListViewItem li = new ListViewItem(order.Id.ToString());
+                    li.SubItems.Add(order.PlacedTime.ToString());
 
-                //get all the items that belong to an order
-                List<MenuItem> items = orderService.GetItemsForOrder(order);
-                //if there are no items, do nothing
-                if (items.Count == 0)
-                    continue;
-
-                // all lthe items above an item in a listview have a status of ready
-                bool allItemsAboveReady = true;
-
-                // for all the items that belong to an order
-                foreach (MenuItem item in items)
-                {
-                    //if the order item is not ready to serve
-                    if (item.Status < OrderStatus.ReadyToServe)
+                    // if the item is complete, display status is ready or else not ready in the listview
+                    if (order.Complete == true)
                     {
-                        //this makes sure so that the bartender doesnt see orders which contain food orders and otherwise (prevents empty order items in the listview)
-                        if (((item.IsDrink && employee.employeeType == EmployeeType.Bartender) || (!item.IsDrink && employee.employeeType == EmployeeType.KitchenStaff)))
-                            allItemsAboveReady = false;
+                        li.SubItems.Add("Ready");
+                    }
+                    else
+                    {
+                        li.SubItems.Add("Not ready");
+                    }
+                    //order tags become an order item
+                    li.Tag = order;
+
+                    //get all the items that belong to an order
+                    List<MenuItem> items = orderService.GetItemsForOrder(order);
+
+                    //if there are no items, do nothing
+                    if (items.Count == 0)
+                        continue;
+
+                    // all lthe items above an item in a listview have a status of ready
+                    bool allItemsAboveReady = true;
+                    foreach (MenuItem item in items)
+                    {
+                        //if the order item is not ready to serve
+                        if (item.Status < OrderStatus.ReadyToServe)
+                        {
+                            //this makes sure so that the bartender doesnt see orders which contain food orders and otherwise (prevents empty order items in the listview)
+                            if (((item.IsDrink && employee.employeeType == EmployeeType.Bartender) || (!item.IsDrink && employee.employeeType == EmployeeType.KitchenStaff)))
+                                allItemsAboveReady = false;
+                        }
+                    }
+                    //if order is ready add to completed orders page or add to new order page
+                    if (allItemsAboveReady == true)
+                    {
+                        listViewKitchen_CompleteOrders.Items.Add(li);
+                    }
+                    else
+                    {
+                        listViewNewOrders.Items.Add(li);
                     }
                 }
-                //if order is ready add to completed orders page or add to new order page
-                if (allItemsAboveReady == true)
-                {
-                    listViewKitchen_CompleteOrders.Items.Add(li);
-                }
-                else
-                {
-                    listViewNewOrders.Items.Add(li);
-                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error! There was a problem fetching orders from the database: {ex.Message}");
+            }
+
         }
         #endregion
 
         #region Display Order Items
         private void DisplayOrderItems()
         {
-            List<MenuItem> orderMenuItems = new List<MenuItem>();
-            OrderLogic orderService = new OrderLogic();
-
-            //extract order item from the selected item in the listview
-            Order orderItem = listViewNewOrders.SelectedItems.Count == 0 ? this.selectedOrder : (Order)listViewNewOrders.SelectedItems[0].Tag;
-
-            // get table number from the database where orderid is selected item
-            Table table = orderService.GetOrderTable(orderItem.Id);
-
-            lblKitchenn_OrderNo.Text = orderItem.Id.ToString();
-            lbl_tableNo.Text = table.Id.ToString();
-
-            //get the order comment by the orderID
-            Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
-            lbl_OrderComments.Text = selectedOrder.Comment;
-
-            //if kitchenmode is true, display only kitchen items 
-            if (employee.employeeType == EmployeeType.KitchenStaff)
+            try
             {
-                orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
-            }
-            else if(employee.employeeType==EmployeeType.Bartender)          
-            {
-                orderMenuItems = orderService.GetBarOrderItemsByID(orderItem.Id);
-            }
-            // delete all the items in the listview before adding new ones
-            RemoveListViewItems(listViewKitchen_ActiveOrder);
+                List<MenuItem> orderMenuItems = new List<MenuItem>();
+                orderService = new OrderLogic();
 
-            //foreach item in the list acquired from the db, add the name to the active order 
-            foreach (MenuItem item in orderMenuItems)
-            {
-                ListViewItem li = new ListViewItem(item.Name.ToString());
-                li.Tag = item;
-                li.SubItems.Add(item.Quantity.ToString());
-                li.SubItems.Add(item.Status.ToString());
+                //extract order item from the selected item in the listview
+                Order orderItem = listViewNewOrders.SelectedItems.Count == 0 ? this.selectedOrder : (Order)listViewNewOrders.SelectedItems[0].Tag;
 
-                listViewKitchen_ActiveOrder.Items.Add(li);
+                // get table number from the database where orderid is selected item
+                Table table = orderService.GetOrderTable(orderItem.Id);
 
-                //set the background of the item to green if its ready to serve
-                if (item.Status >= OrderStatus.ReadyToServe)
+                lblKitchenn_OrderNo.Text = orderItem.Id.ToString();
+                lbl_tableNo.Text = table.Id.ToString();
+
+                //get the order comment by the orderID
+                Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
+                lbl_OrderComments.Text = selectedOrder.Comment;
+
+                //if kitchenmode is true, display only kitchen items 
+                if (employee.employeeType == EmployeeType.KitchenStaff)
                 {
-                    li.BackColor = Color.Green;
+                    orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
                 }
+                else if (employee.employeeType == EmployeeType.Bartender)
+                {
+                    orderMenuItems = orderService.GetBarOrderItemsByID(orderItem.Id);
+                }
+                // delete all the items in the listview before adding new ones
+                RemoveListViewItems(listViewKitchen_ActiveOrder);
+
+                //foreach item in the list acquired from the db, add the name to the active order 
+                foreach (MenuItem item in orderMenuItems)
+                {
+                    ListViewItem li = new ListViewItem(item.Name.ToString());
+                    li.Tag = item;
+                    li.SubItems.Add(item.Quantity.ToString());
+                    li.SubItems.Add(item.Status.ToString());
+
+                    // add all items to the listview active order
+                    listViewKitchen_ActiveOrder.Items.Add(li);
+
+                    //set the background of the item to green if its ready to serve
+                    if (item.Status >= OrderStatus.ReadyToServe)
+                    {
+                        li.BackColor = Color.Green;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"There was a problem fetching the items belonging to the order: { ex.Message}");
             }
         }
         #endregion
@@ -148,6 +164,8 @@ namespace RestaurantChapeau
             //Begin timer
             IsActive = true;
 
+            // the selected order is the order that has been selected in the new orderlistview
+            // makes sure that the order is not null when you make an order ready and doesnt break the program
             selectedOrder = (Order)listViewNewOrders.SelectedItems[0].Tag;
         }
         #endregion
@@ -190,44 +208,54 @@ namespace RestaurantChapeau
         #region Ready Order Button
         private void btn_readyOrder_Click(object sender, EventArgs e)
         {
-            //reset the timer
-            ResetTimer();
-
-            //connect to logic layer
-            OrderLogic orderService = new OrderLogic();
-            Order orderItem = selectedOrder;
-
-            //save the name of the highlighted menu item into a menuitem
-            selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
-
-            //if all the items on the listview are selected, change status to ready else preparing
-            if (listViewKitchen_ActiveOrder.CheckedItems.Count == listViewKitchen_ActiveOrder.Items.Count)
+            try
             {
-                orderItem.Complete = true;
-                MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
-                orderService.UpdateOrderStatus( orderItem);
-                // stop the timer
-                IsActive = false;
-            }
-            else if (listViewKitchen_ActiveOrder.CheckedItems.Count == 0)
-            {
-                MessageBox.Show($"Please select an item to mark ready");
-            }
-            else
-            {
-                // set the selected item to ready
-                selectedItem.Status = OrderStatus.ReadyToServe;
-                orderService.SetOrderItemStatus(selectedItem, orderItem);
-                MessageBox.Show($"Item {selectedItem.Name} is now ready");
-            }
+                //reset the timer
+                ResetTimer();
 
-            //remove the items on the new order listview and update with new information
-            RemoveListViewItems(listViewNewOrders);
-            DisplayOrders();
+                //connect to logic layer
+                orderService = new OrderLogic();
+               
+                Order orderItem = selectedOrder;
 
-            //remove all the item in the active order listview and display again 
-            RemoveListViewItems(listViewKitchen_ActiveOrder);
-            DisplayOrderItems();
+                //save the name of the highlighted menu item into a menuitem
+                selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
+
+                //if all the items on the listview are selected, change status to ready else preparing
+                if (listViewKitchen_ActiveOrder.CheckedItems.Count == listViewKitchen_ActiveOrder.Items.Count)
+                {
+                    orderItem.Complete = true;
+                    MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
+                    orderService.UpdateOrderStatus(orderItem);
+                    // stop the timer
+                    IsActive = false;
+                }
+                else if (listViewKitchen_ActiveOrder.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show($"Please select an item to mark ready");
+                }
+                else
+                {
+                    // set the selected item to ready
+                    selectedItem.Status = OrderStatus.ReadyToServe;
+                    orderService.SetOrderItemStatus(selectedItem, orderItem);
+                    MessageBox.Show($"Item {selectedItem.Name} is now ready");
+                }
+
+                //remove the items on the new order listview and update with new information
+                RemoveListViewItems(listViewNewOrders);
+                DisplayOrders();
+
+                //remove all the item in the active order listview and display again 
+                RemoveListViewItems(listViewKitchen_ActiveOrder);
+                DisplayOrderItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"There was a problem readying the order: {ex.Message}");
+            }
+       
+          
         }
         #endregion
 

@@ -386,15 +386,24 @@ namespace RestaurantDAL
 
         public void SetOrderItemStatus(MenuItem item, Order order)
         {
-            string query = "UPDATE dbo.PartOf SET status = @ItemStatus WHERE orderId = @OrderId AND menuItemId = @ItemId";
-            SqlParameter[] parameters = new SqlParameter[]
+            try
             {
+                string query = "UPDATE dbo.PartOf SET status = @ItemStatus WHERE orderId = @OrderId AND menuItemId = @ItemId";
+                SqlParameter[] parameters = new SqlParameter[]
+                {
                 new SqlParameter("@ItemId", item.Id),
                 new SqlParameter("@ItemStatus", item.Status),
                 new SqlParameter("@OrderId", order.Id)
-            };
+                };
 
-            ExecuteEditQuery(query, parameters);
+                ExecuteEditQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
+            }
+            
         }
     }
 }
