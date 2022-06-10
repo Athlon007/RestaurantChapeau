@@ -275,7 +275,7 @@
             this.dateTimePicker1.MinDate = new System.DateTime(2022, 5, 25, 23, 59, 59, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(224, 27);
-            this.dateTimePicker1.TabIndex = 34;
+            this.dateTimePicker1.TabIndex = 3;
             this.dateTimePicker1.Value = new System.DateTime(2022, 5, 25, 23, 59, 59, 0);
             // 
             // lbl_ReservationIsReserved
@@ -335,7 +335,7 @@
             this.txt_ReservationFirstName.Multiline = true;
             this.txt_ReservationFirstName.Name = "txt_ReservationFirstName";
             this.txt_ReservationFirstName.Size = new System.Drawing.Size(452, 58);
-            this.txt_ReservationFirstName.TabIndex = 33;
+            this.txt_ReservationFirstName.TabIndex = 0;
             // 
             // txt_ReservationLastName
             // 
@@ -344,7 +344,7 @@
             this.txt_ReservationLastName.Multiline = true;
             this.txt_ReservationLastName.Name = "txt_ReservationLastName";
             this.txt_ReservationLastName.Size = new System.Drawing.Size(452, 58);
-            this.txt_ReservationLastName.TabIndex = 34;
+            this.txt_ReservationLastName.TabIndex = 1;
             // 
             // txt_ReservationEmail
             // 
@@ -353,7 +353,7 @@
             this.txt_ReservationEmail.Multiline = true;
             this.txt_ReservationEmail.Name = "txt_ReservationEmail";
             this.txt_ReservationEmail.Size = new System.Drawing.Size(452, 58);
-            this.txt_ReservationEmail.TabIndex = 35;
+            this.txt_ReservationEmail.TabIndex = 2;
             // 
             // txt_ReservationTableID
             // 
@@ -362,7 +362,7 @@
             this.txt_ReservationTableID.Multiline = true;
             this.txt_ReservationTableID.Name = "txt_ReservationTableID";
             this.txt_ReservationTableID.Size = new System.Drawing.Size(452, 58);
-            this.txt_ReservationTableID.TabIndex = 37;
+            this.txt_ReservationTableID.TabIndex = 4;
             // 
             // btn_MakeReservation
             // 
@@ -372,7 +372,7 @@
             this.btn_MakeReservation.Location = new System.Drawing.Point(145, 731);
             this.btn_MakeReservation.Name = "btn_MakeReservation";
             this.btn_MakeReservation.Size = new System.Drawing.Size(452, 58);
-            this.btn_MakeReservation.TabIndex = 0;
+            this.btn_MakeReservation.TabIndex = 5;
             this.btn_MakeReservation.Text = "Make Reservation";
             this.btn_MakeReservation.UseVisualStyleBackColor = false;
             this.btn_MakeReservation.Click += new System.EventHandler(this.btn_MakeReservation_Click);
@@ -706,6 +706,7 @@
             this.pb_TableAgenda.Location = new System.Drawing.Point(301, 83);
             this.pb_TableAgenda.Name = "pb_TableAgenda";
             this.pb_TableAgenda.Size = new System.Drawing.Size(125, 75);
+            this.pb_TableAgenda.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_TableAgenda.TabIndex = 63;
             this.pb_TableAgenda.TabStop = false;
             // 
