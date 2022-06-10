@@ -211,11 +211,11 @@ namespace RestaurantDAL
         // update the order status of an order to another order
         public void UpdateOrderStatus(Order order)
         {
-            string command = ("UPDATE dbo.[Order] SET complete = @complete  WHERE Id = @orderId");
+            string command = ("UPDATE dbo.[Order] SET complete = @complete WHERE Id = @orderId");
             SqlParameter[] parameters = new SqlParameter[]
             {
                     new SqlParameter("@complete", order.Complete),
-                    new SqlParameter("@OrderId", order.Id)
+                    new SqlParameter("@orderId", order.Id)
             };
             ExecuteEditQuery(command, parameters);
         }
