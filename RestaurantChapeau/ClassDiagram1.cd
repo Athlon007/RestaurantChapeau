@@ -1,22 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="RestaurantModel.Employee">
+  <Class Name="RestaurantModel.Employee" Collapsed="true">
     <Position X="8" Y="0.75" Width="1.5" />
     <TypeIdentifier />
-    <ShowAsAssociation>
-      <Field Name="employeeType" />
-    </ShowAsAssociation>
   </Class>
-  <Class Name="RestaurantModel.EmployeeType">
-    <Position X="4.75" Y="0.75" Width="1.5" />
+  <Class Name="RestaurantLogic.EmployeeService" Collapsed="true">
+    <Position X="18" Y="0.75" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="RestaurantLogic.EmployeeService">
-    <Position X="18.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="RestaurantChapeau.LoginForm">
-    <Position X="21.5" Y="0.5" Width="1.5" />
+  <Class Name="RestaurantChapeau.LoginForm" Collapsed="true">
+    <Position X="21.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IDAgJBQIACFAghACBgCGCMhCQIkMAAICGJ00gARQIBI=</HashCode>
       <FileName>LoginForm.cs</FileName>
@@ -25,7 +18,7 @@
       <Field Name="employeeService" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="RestaurantChapeau.TableViewForm">
+  <Class Name="RestaurantChapeau.TableViewForm" Collapsed="true">
     <Position X="11.25" Y="0.75" Width="1.5" />
     <NestedTypes>
       <Struct Name="RestaurantChapeau.TableViewForm.ListItem" Collapsed="true">
@@ -39,27 +32,37 @@
       <FileName>TableViewForm.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="currentBill" />
-      <Field Name="currentEmployee" />
-      <Field Name="order" />
       <Field Name="paymentService" />
+      <Field Name="currentEmployee" />
       <Field Name="orderLogic" />
+      <Field Name="currentBill" />
+      <Field Name="order" />
+      <Field Name="reservationService" />
+      <Field Name="reservation" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="RestaurantModel.Bill">
-    <Position X="15" Y="6.5" Width="1.5" />
+  <Class Name="RestaurantModel.Bill" Collapsed="true">
+    <Position X="15" Y="4.75" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="RestaurantModel.Order">
-    <Position X="15" Y="0.5" Width="1.5" />
+  <Class Name="RestaurantModel.Order" Collapsed="true">
+    <Position X="15" Y="0.75" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="RestaurantLogic.PaymentService">
-    <Position X="15" Y="3.5" Width="1.5" />
+  <Class Name="RestaurantLogic.PaymentService" Collapsed="true">
+    <Position X="15" Y="3" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="RestaurantLogic.OrderLogic">
-    <Position X="8" Y="5.5" Width="1.5" />
+  <Class Name="RestaurantLogic.OrderLogic" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantLogic.ReservationService" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RestaurantModel.Reservation" Collapsed="true">
+    <Position X="8" Y="2.25" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Font Name="Segoe UI" Size="9" />
