@@ -181,7 +181,7 @@ namespace RestaurantDAL
         //Returns all the items in an order with a specific orderID
         public List<MenuItem> GetBarOrderItemsByID(int orderId)
         {
-            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is NOT null;";
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, po.status, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is NOT null;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderId", orderId)
