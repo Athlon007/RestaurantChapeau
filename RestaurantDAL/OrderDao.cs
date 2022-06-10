@@ -209,6 +209,7 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, parameters);
         }
 
+        // update the order status of an order to another order
         public void UpdateOrderStatus(Order order)
         {
             string command = ("UPDATE dbo.[Order] SET complete = @complete  WHERE Id = @orderId");
@@ -220,6 +221,7 @@ namespace RestaurantDAL
             ExecuteEditQuery(command, parameters);
         }
       
+        // get the comment which is attached to an order 
         public Order GetOrderCommentByID(int OrderID)
         {
             string command = (
@@ -326,6 +328,7 @@ namespace RestaurantDAL
             return ReadMenuItemsForOrder(ExecuteSelectQuery(query, parameters));
         }
 
+        // get the items for an order from the databse
         private List<MenuItem> ReadMenuItemsForOrder(DataTable table)
         {
             List<MenuItem> items = new List<MenuItem>();
@@ -385,6 +388,7 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, parameters);
         }
 
+        // sets order status to a status
         public void SetOrderItemStatus(MenuItem item, Order order)
         {
             try
