@@ -118,7 +118,7 @@ namespace RestaurantChapeau
                 Order selectedOrder = orderService.GetOrderCommentByID(orderItem.Id);
                 lbl_OrderComments.Text = selectedOrder.Comment;
 
-                //if kitchenmode is true, display only kitchen items 
+                //if kitchenmode is true, display only kitchen items
                 if (employee.employeeType == EmployeeType.KitchenStaff)
                 {
                     orderMenuItems = orderService.GetOrderItemsByID(orderItem.Id);
@@ -130,7 +130,7 @@ namespace RestaurantChapeau
                 // delete all the items in the listview before adding new ones
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
 
-                //foreach item in the list acquired from the db, add the name to the active order 
+                //foreach item in the list acquired from the db, add the name to the active order
                 foreach (MenuItem item in orderMenuItems)
                 {
                     ListViewItem li = new ListViewItem(item.Name.ToString());
@@ -150,7 +150,7 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"There was a problem fetching the items belonging to the order: { ex.Message}");
+                MessageBox.Show($"There was a problem fetching the items belonging to the order: {ex.Message}");
             }
         }
         #endregion
@@ -182,7 +182,7 @@ namespace RestaurantChapeau
         #region New Order button
         private void btnKitchen_newOrders_Click(object sender, EventArgs e)
         {
-            // hide all panels and show 
+            // hide all panels and show
             HidePanels();
             pnlKitchen_NewOrders.Show();
 
@@ -200,10 +200,10 @@ namespace RestaurantChapeau
         }
         #endregion
 
-        #region Complete Orders button 
+        #region Complete Orders button
         private void btnKitchen_CompleteOrders_Click(object sender, EventArgs e)
         {
-            // hide all panels and show complete orders 
+            // hide all panels and show complete orders
             HidePanels();
             pnlKitchen_CompleteOrders.Show();
         }
@@ -244,9 +244,9 @@ namespace RestaurantChapeau
                     bool allItemsDone = true;
 
                     // for each checked item in the listview
-                    foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
+                    foreach (MenuItem menuItem in orderService.GetItemsForOrder(orderItem))
                     {
-                        MenuItem menuItem = (MenuItem)item.Tag;
+                        //MenuItem menuItem = (MenuItem)item.Tag;
                         // if status is not ready to serve, then all the items are not done
                         if (menuItem.Status < OrderStatus.ReadyToServe)
                         {
@@ -271,7 +271,7 @@ namespace RestaurantChapeau
                 RemoveListViewItems(listViewNewOrders);
                 DisplayOrders();
 
-                //remove all the item in the active order listview and display again 
+                //remove all the item in the active order listview and display again
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
                 DisplayOrderItems();
             }
@@ -304,7 +304,7 @@ namespace RestaurantChapeau
         }
         #endregion
 
-        #region Timer 
+        #region Timer
         private void Timer()
         {
             lblMins.Text = mins.ToString(":00");
@@ -361,12 +361,12 @@ namespace RestaurantChapeau
             lbl_newOrders.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
             lblKitchenn_OrderNo.Font = FontManager.Instance.ScriptMT(lbl_newOrders.Font.Size);
 
-            // 
+            //
             lbl_activeOrder.UseCompatibleTextRendering = true;
             lbl_completedOrders.UseCompatibleTextRendering = true;
             lbl_newOrders.UseCompatibleTextRendering = true;
             lblKitchenn_OrderNo.UseCompatibleTextRendering = true;
         }
-        #endregion  
+        #endregion
     }
 }
