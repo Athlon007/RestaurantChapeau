@@ -23,6 +23,8 @@ namespace RestaurantChapeau
         Bill currentBill;
         int currentTableNumber;
         Order order = new Order();
+        OrderView orderViewWindow;
+        Payment paymentWindow;
 
         Timer timer;
         public TableViewForm(Employee employee)
@@ -76,6 +78,16 @@ namespace RestaurantChapeau
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            if (orderViewWindow != null && orderViewWindow.Visible)
+            {
+                return;
+            }
+
+            if (paymentWindow != null && paymentWindow.Visible)
+            {
+                return;
+            }
+
             if (currentBill != null)
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             CheckNotification();
@@ -451,8 +463,8 @@ namespace RestaurantChapeau
                     // Table has no bill?
                     // Go to order view.
                     ShowOrderView(tableId);
-                    HideNotification();
-                    pb_TableAgenda.Hide();
+                    //HideNotification();
+                    //pb_TableAgenda.Hide();
                 }
                 else
                 {
@@ -487,9 +499,9 @@ namespace RestaurantChapeau
         }
         private void ShowOrderView(int tableID, Bill bill = null)
         {
-            OrderView order = new OrderView(currentEmployee, bill, tableID);
-            order.ShowDialog(this);
-            order.Location = this.Location; // Show OrderView right on top of this window.
+            orderViewWindow = new OrderView(currentEmployee, bill, tableID);
+            orderViewWindow.ShowDialog(this);
+            orderViewWindow.Location = this.Location; // Show OrderView right on top of this window.
         }
 
         private void lv_TableDetailView_SelectedIndexChanged(int tableId, Bill bill)
@@ -554,6 +566,7 @@ namespace RestaurantChapeau
         private void TableViewForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Should make it so the Login form also gets closed...
+            timer.Stop();
             Application.Exit();
         }
 
@@ -622,8 +635,8 @@ namespace RestaurantChapeau
 
         private void btn_TableDetailViewCheckOut_Click(object sender, EventArgs e)
         {
-            Payment payment = new Payment(currentTableNumber);
-            payment.Show();
+            paymentWindow = new Payment(currentTableNumber);
+            paymentWindow.Show();
         }
     }
 }
