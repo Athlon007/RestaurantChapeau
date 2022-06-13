@@ -79,6 +79,7 @@ namespace RestaurantChapeau
             if (currentBill != null)
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             CheckNotification();
+            CheckReservations();
         }
         private void ShowNotification()
         {
