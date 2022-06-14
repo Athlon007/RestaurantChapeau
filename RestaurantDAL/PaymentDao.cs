@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using RestaurantModel;
+using System.Globalization;
 
 namespace RestaurantDAL
 {   
@@ -45,9 +46,9 @@ namespace RestaurantDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadBillTable(ExecuteEditAndSelectQuery(query, sqlParameters));
         }
-        public void CreatePayment(int billId, decimal amountPaid, string comment, decimal tip)
+        public void CreatePayment(int billId, decimal amountPaid, string comment, decimal tip, int paymentType, int paymentNum)
         {
-            string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip) VALUES ({billId}, {DateTime.Now.ToString("yyyyMMdd HH:mm:ss")}, {amountPaid}, {comment}, {tip});";
+            string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip, paymentType, paymentNum) VALUES (2, CURRENT_TIMESTAMP, {amountPaid},'{comment}', {tip}, {paymentType}, {paymentNum})";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }
