@@ -504,9 +504,16 @@ namespace RestaurantChapeau
         }
         private void ShowOrderView(int tableID, Bill bill = null)
         {
-            orderViewWindow = new OrderView(currentEmployee, bill, tableID);
-            orderViewWindow.ShowDialog(this);
-            orderViewWindow.Location = this.Location; // Show OrderView right on top of this window.
+            try
+            {
+                orderViewWindow = new OrderView(currentEmployee, bill, tableID);
+                orderViewWindow.ShowDialog(this);
+                orderViewWindow.Location = this.Location; // Show OrderView right on top of this window.
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while loading order view.");
+            }
         }
 
         private void lv_TableDetailView_SelectedIndexChanged(int tableId, Bill bill)
