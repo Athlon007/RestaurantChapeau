@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using RestaurantLogic;
 using RestaurantModel;
 using RestaurantDAL;
+using RestaurantChapeau.OrderViewUIController;
 
 namespace RestaurantChapeau
 {
@@ -69,11 +70,12 @@ namespace RestaurantChapeau
             timer.Tick += Timer_Tick;
             timer.Interval = 10000;
             timer.Start();
-            lv_TableDetailView.Columns.Add("ID", 80, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Status", 80, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
+            DPIScaler.Instance.UpdateToForm(this);
+            lv_TableDetailView.Columns.Add("ID", (int)(40 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Status", (int)(80 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", (int)(260 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Quantity", (int)(60 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Time", (int)(160 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
 
             label1.Font = FontManager.Instance.ScriptMT(label1.Font.Size);
             label2.Font = FontManager.Instance.ScriptMT(label2.Font.Size);
