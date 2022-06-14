@@ -93,8 +93,8 @@
             // 
             // btn_LoginLogin
             // 
-            this.btn_LoginLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_LoginLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_LoginLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btn_LoginLogin.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_LoginLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_LoginLogin.Location = new System.Drawing.Point(146, 654);
             this.btn_LoginLogin.Name = "btn_LoginLogin";
@@ -106,8 +106,8 @@
             // 
             // btn_LoginForgot
             // 
-            this.btn_LoginForgot.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_LoginForgot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_LoginForgot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btn_LoginForgot.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_LoginForgot.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_LoginForgot.Location = new System.Drawing.Point(146, 770);
             this.btn_LoginForgot.Name = "btn_LoginForgot";
@@ -205,8 +205,8 @@
             // 
             // btn_ForgotLogin
             // 
-            this.btn_ForgotLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_ForgotLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_ForgotLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btn_ForgotLogin.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_ForgotLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_ForgotLogin.Location = new System.Drawing.Point(146, 871);
             this.btn_ForgotLogin.Name = "btn_ForgotLogin";
@@ -218,8 +218,8 @@
             // 
             // btn_ForgotChange
             // 
-            this.btn_ForgotChange.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_ForgotChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_ForgotChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btn_ForgotChange.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_ForgotChange.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_ForgotChange.Location = new System.Drawing.Point(146, 770);
             this.btn_ForgotChange.Name = "btn_ForgotChange";
@@ -306,8 +306,8 @@
             // 
             // btn_RegisterLogin
             // 
-            this.btn_RegisterLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_RegisterLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_RegisterLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btn_RegisterLogin.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_RegisterLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_RegisterLogin.Location = new System.Drawing.Point(146, 871);
             this.btn_RegisterLogin.Name = "btn_RegisterLogin";
@@ -319,8 +319,8 @@
             // 
             // btn_RegisterRegister
             // 
-            this.btn_RegisterRegister.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_RegisterRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_RegisterRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btn_RegisterRegister.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_RegisterRegister.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_RegisterRegister.Location = new System.Drawing.Point(146, 770);
             this.btn_RegisterRegister.Name = "btn_RegisterRegister";
@@ -396,8 +396,8 @@
             // 
             // btn_LoginRegister
             // 
-            this.btn_LoginRegister.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_LoginRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_LoginRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
+            this.btn_LoginRegister.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_LoginRegister.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_LoginRegister.Location = new System.Drawing.Point(146, 871);
             this.btn_LoginRegister.Name = "btn_LoginRegister";

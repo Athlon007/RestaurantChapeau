@@ -74,6 +74,11 @@ namespace RestaurantChapeau
             lv_TableDetailView.Columns.Add("Menu", 260, HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Quantity", 79, HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Time", 160, HorizontalAlignment.Left);
+
+            label1.Font = FontManager.Instance.ScriptMT(label1.Font.Size);
+            label2.Font = FontManager.Instance.ScriptMT(label2.Font.Size);
+            lblHeader.Font = FontManager.Instance.ScriptMT(lblHeader.Font.Size);
+            lbl_DisplayTableNr.Font = FontManager.Instance.ScriptMT(lbl_DisplayTableNr.Font.Size);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -637,6 +642,11 @@ namespace RestaurantChapeau
         {
             paymentWindow = new Payment(currentTableNumber);
             paymentWindow.Show();
+        }
+
+        private void tableView_OccupyTable_Click(object sender, EventArgs e)
+        {
+            tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;
         }
     }
 }

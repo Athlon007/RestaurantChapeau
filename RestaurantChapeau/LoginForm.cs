@@ -40,7 +40,7 @@ namespace RestaurantChapeau
             if (txt_LoginEmail.Text != "" && txt_LoginPassword.Text != "")
             {
                 btn_LoginLogin.Enabled = true;
-                btn_LoginLogin.BackColor = Color.FromArgb(39, 126, 172);
+                btn_LoginLogin.BackColor = Color.FromArgb(67, 179, 215);
             }
             //else disable it
             else
@@ -79,7 +79,7 @@ namespace RestaurantChapeau
             if (txt_LoginEmail.Text != "" && txt_LoginPassword.Text != "")
             {
                 btn_LoginLogin.Enabled = true;
-                btn_LoginLogin.BackColor = Color.FromArgb(39, 126, 172);
+                btn_LoginLogin.BackColor = Color.FromArgb(67, 179, 215);
             }
             //else diable it
             else
