@@ -23,6 +23,8 @@ namespace RestaurantChapeau
         Bill currentBill;
         int currentTableNumber;
         Order order = new Order();
+        OrderView orderViewWindow;
+        Payment paymentWindow;
 
         Timer timer;
         public TableViewForm(Employee employee)
@@ -76,9 +78,20 @@ namespace RestaurantChapeau
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            if (orderViewWindow != null && orderViewWindow.Visible)
+            {
+                return;
+            }
+
+            if (paymentWindow != null && paymentWindow.Visible)
+            {
+                return;
+            }
+
             if (currentBill != null)
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             CheckNotification();
+            CheckReservations();
         }
         private void ShowNotification()
         {
@@ -191,7 +204,7 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong while checking reservation: {ex.Message}");
             }
-            
+
         }
 
         private void TableViewForm_Load(object sender, EventArgs e)
@@ -207,12 +220,6 @@ namespace RestaurantChapeau
             pnl_TableDetailView.Hide();
         }
 
-
-        private void btn_TableViewOrder_Click(object sender, EventArgs e)
-        {
-            Form1 form1 = new Form1();
-            form1.Show();
-        }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -258,7 +265,7 @@ namespace RestaurantChapeau
             catch(Exception ex)
             {
                 MessageBox.Show($"something went wrong with this button: {ex.Message}");
-            }           
+            }
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -310,7 +317,7 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong with the disyplay reseravtion: {ex.Message}");
             }
-            
+
         }
 
         private void btn_MakeReservationGoBack_Click(object sender, EventArgs e)
@@ -369,7 +376,7 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong with the reservation system: {ex.Message}");
             }
-           
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -456,8 +463,8 @@ namespace RestaurantChapeau
                     // Table has no bill?
                     // Go to order view.
                     ShowOrderView(tableId);
-                    HideNotification();
-                    pb_TableAgenda.Hide();
+                    //HideNotification();
+                    //pb_TableAgenda.Hide();
                 }
                 else
                 {
@@ -488,13 +495,13 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong with the button: {ex.Message}");
             }
-            
+
         }
         private void ShowOrderView(int tableID, Bill bill = null)
         {
-            OrderView order = new OrderView(currentEmployee, bill, tableID);
-            order.ShowDialog(this);
-            order.Location = this.Location; // Show OrderView right on top of this window.
+            orderViewWindow = new OrderView(currentEmployee, bill, tableID);
+            orderViewWindow.ShowDialog(this);
+            orderViewWindow.Location = this.Location; // Show OrderView right on top of this window.
         }
 
         private void lv_TableDetailView_SelectedIndexChanged(int tableId, Bill bill)
@@ -559,6 +566,7 @@ namespace RestaurantChapeau
         private void TableViewForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Should make it so the Login form also gets closed...
+            timer.Stop();
             Application.Exit();
         }
 
@@ -622,13 +630,13 @@ namespace RestaurantChapeau
 
         private void btn_LogOut_Click(object sender, EventArgs e)
         {
-            this.Close();            
+            this.Close();
         }
 
         private void btn_TableDetailViewCheckOut_Click(object sender, EventArgs e)
         {
-            Payment payment = new Payment(currentTableNumber);
-            payment.Show();
+            paymentWindow = new Payment(currentTableNumber);
+            paymentWindow.Show();
         }
     }
 }
