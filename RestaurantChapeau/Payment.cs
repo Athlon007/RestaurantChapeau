@@ -35,7 +35,8 @@ namespace RestaurantChapeau
         Label numberOfLoads = new Label();
         ListView invoiceCopy = new ListView();
         Label ContainerHeight;
-        public Payment(int tableId)
+        Panel tableViewDetail;
+        public Payment(int tableId, Panel tableViewDetail)
         {
             InitializeComponent();
             HideAllPanels();
@@ -47,11 +48,12 @@ namespace RestaurantChapeau
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
             this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
             this.tableId = tableId;
-
+            this.tableViewDetail = tableViewDetail;
             backInvoice.Font = FontManager.Instance.ScriptMT(backInvoice.Font.Size);
             headingPaymentType2.Font = FontManager.Instance.ScriptMT(headingPaymentType2.Font.Size);
             backInvoice.Font = FontManager.Instance.ScriptMT(backInvoice.Font.Size);
             lblPaymentTopBarText.Font = FontManager.Instance.ScriptMT(lblPaymentTopBarText.Font.Size);
+            this.tableViewDetail = tableViewDetail;
         }
 
         private async void Payment_Load(object sender, EventArgs e)
@@ -102,8 +104,8 @@ namespace RestaurantChapeau
                 tax += (subtotalValue * taxValue);
             }
             SubtotalValue.Text = $"{(subtotal - tax).ToString("#.##")} €";
-            TaxValue.Text = $"{tax} €";
-            TotalValue.Text = $"{subtotal} €";
+            TaxValue.Text = $"{tax.ToString("#.##")} €";
+            TotalValue.Text = $"{subtotal.ToString("#.##")} €";
             totalPrice = Convert.ToDecimal(subtotal + tip);
             lblBillHeading.Text = $"Split the bill {bill.Id} to ";
         }
@@ -302,8 +304,9 @@ namespace RestaurantChapeau
                 btnCard.Enabled = false;
                 debitCard.Enabled = false;
                 cash.Enabled = false;
-               
-                btnCard.BackColor = Color.DarkGray;
+                
+                btnCard.BackColor = btnCard.BackColor = Color.FromArgb(206, 206, 206);
+                
                 debitCard.BackColor = Color.DarkGray;
                 cash.BackColor = Color.DarkGray;
                 payCard.BackColor = Color.DarkGray;
@@ -375,8 +378,13 @@ namespace RestaurantChapeau
 
         }
 
-      
 
+        
+        private void paymentBackButton2_Click(object sender, EventArgs e)
+        {
+            HideAllPanels();
+            paymentNumber.Text = "1";
+        }
         private void paymentBackButton1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -590,10 +598,9 @@ namespace RestaurantChapeau
             payByCash.BorderStyle = BorderStyle.None;
             payByCash.Padding = new Padding(4, 4, 4, 4);
             payByCash.TextAlign = HorizontalAlignment.Center;
-
             pay.Location = new Point(payByCash.Location.X + payByCash.Width + 20, payByCash.Location.Y);
             pay.Height = payByCash.Height;
-         
+            pay.BackColor = Color.White;
 
             if (btn.Checked)
             {
@@ -842,11 +849,11 @@ namespace RestaurantChapeau
 
             if (Convert.ToDecimal(debitCardValue.Text) > 0)
             {
-                debitCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString();
+                debitCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
             }
             else if (Convert.ToDecimal(creditCardValue.Text) > 0)
             {
-                creditCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString();
+                creditCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
             }
         }
 
