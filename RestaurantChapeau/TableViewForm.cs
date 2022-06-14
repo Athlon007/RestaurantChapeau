@@ -603,22 +603,25 @@ namespace RestaurantChapeau
             {
                 if (lv_TableDetailView.FocusedItem.Tag == null) return;
 
-                ListItem listItem = (ListItem)lv_TableDetailView.FocusedItem.Tag;
-                Order order = listItem.Order;
-                MenuItem item = listItem.MenuItem;
-                if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
+                foreach (ListViewItem lvi in lv_TableDetailView.SelectedItems)
                 {
-                    MessageBox.Show("You cannot change status yet");
-                }
-                else if (item.Status == OrderStatus.ReadyToServe)
-                {
-                    item.Status = OrderStatus.Served;
-                    orderLogic.SetOrderItemStatus(item, order);
-                    lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
-                }
-                else if (item.Status == OrderStatus.Served)
-                {
-                    MessageBox.Show("You already changed status");
+                    ListItem listItem = (ListItem)lvi.Tag;
+                    Order order = listItem.Order;
+                    MenuItem item = listItem.MenuItem;
+                    if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
+                    {
+                        MessageBox.Show("You cannot change status yet");
+                    }
+                    else if (item.Status == OrderStatus.ReadyToServe)
+                    {
+                        item.Status = OrderStatus.Served;
+                        orderLogic.SetOrderItemStatus(item, order);
+                        lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
+                    }
+                    else if (item.Status == OrderStatus.Served)
+                    {
+                        MessageBox.Show("You already changed status");
+                    }
                 }
             }
             catch(Exception ex)
