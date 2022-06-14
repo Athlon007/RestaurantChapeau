@@ -45,6 +45,11 @@ namespace RestaurantChapeau
                 throw new ArgumentNullException("Employee must be provided");
             }
 
+            if (tableID == 0)
+            {
+                throw new ArgumentNullException("Table ID must be provided!");
+            }
+
             this.bill = bill;
             this.employee = employee;
             this.tableID = tableID;
@@ -146,6 +151,7 @@ namespace RestaurantChapeau
         /// </summary>
         private void OnMenuTypeClick(object sender, EventArgs e)
         {
+            // Do not load menu that is currently selected.
             if (currentMenuType == (MenuType)(sender as Button).Tag)
             {
                 return;
