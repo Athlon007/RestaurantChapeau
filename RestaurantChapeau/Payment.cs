@@ -22,8 +22,6 @@ namespace RestaurantChapeau
         Font fontMenuType = new Font("Segoe UI", 18);
         private int tableId;
         private int startY;
-        Color activeButtonColor = Color.FromArgb(255, 67, 179, 215);
-        Color activeButtonTextColor = Color.FromArgb(255, 255, 255, 255);
         bool isChecked = false;
         const int WindowWidth = 651;
         const int WindowHeight = 830;
@@ -31,8 +29,12 @@ namespace RestaurantChapeau
         decimal tax = 0;
         decimal tip = 0;
         decimal totalPrice = 0;
-        Label numberOfLoads  = new Label();
+        decimal totalUnitPrice = 0;
+        decimal alreadyPaid = 0;
+        int paymentNum = 1;
+        Label numberOfLoads = new Label();
         ListView invoiceCopy = new ListView();
+        Label ContainerHeight;
         public Payment(int tableId)
         {
             InitializeComponent();
@@ -49,6 +51,7 @@ namespace RestaurantChapeau
 
         private async void Payment_Load(object sender, EventArgs e)
         {
+
             pnlBills.AutoScroll = false;
             pnlBills.HorizontalScroll.Enabled = false;
             pnlBills.HorizontalScroll.Visible = false;
@@ -74,7 +77,7 @@ namespace RestaurantChapeau
                 li.SubItems.Add((item.PriceBrutto * item.Quantity).ToString());
                 li.SubItems.Add(item.Vat.ToString());
                 listViewInvoice.Items.Add(li);
-                
+
                 for (int i = 1; i <= item.Quantity; i++)
                 {
                     invoiceCopy.Items.Add((ListViewItem)li.Clone());
@@ -93,10 +96,11 @@ namespace RestaurantChapeau
                 subtotal += subtotalValue;
                 tax += (subtotalValue * taxValue);
             }
-            SubtotalValue.Text = $"{subtotal - tax} €";
-            TaxValue.Text = $"{tax.ToString("#.##")} €";
-            TotalValue.Text = $"{(subtotal + tax).ToString("#.##")} €";
-            totalPrice = Convert.ToDecimal(subtotal + tax + tip, new CultureInfo("en-US"));
+            SubtotalValue.Text = $"{(subtotal - tax).ToString("#.##")} €";
+            TaxValue.Text = $"{tax} €";
+            TotalValue.Text = $"{subtotal} €";
+            totalPrice = Convert.ToDecimal(subtotal + tip);
+            lblBillHeading.Text = $"Split the bill {bill.Id} to ";
         }
         private async Task ConnectToServer()
         {
@@ -122,24 +126,18 @@ namespace RestaurantChapeau
         private void HideAllPanels()
         {
             pnlPaymentType.Hide();
-            pnlCardDetails.Hide();
             pnlCashPayment.Hide();
             pnlPaymentSucessful.Hide();
             pnlCardPay.Hide();
             pnlPaymentError.Hide();
+            pnlPin.Hide();
         }
 
-        private void btnCard_Click(object sender, EventArgs e)
-        {
-            cardDetails();
-            pnlCardDetails.Show();
-        }
 
         private void paymentBackButton3_Click(object sender, EventArgs e)
         {
             tip = 0;
             valueTip.Text = "0.00";
-            pnlCardDetails.Hide();
         }
 
         private void intInput_KeyPress(object sender, KeyPressEventArgs e)
@@ -157,12 +155,171 @@ namespace RestaurantChapeau
             }
         }
 
-        private void btnCash_Click(object sender, EventArgs e, TextBox toPay)
+        private void btnCash_Click(object sender, EventArgs e, TextBox toPay, CheckBox btnCash, Button payCash, TextBox cashValue, RadioButton creditCard, RadioButton debitCard)
         {
             pnlCashPayment.Show();
             pnlPaymentType.Hide();
+            creditCard.Enabled = false;
+            debitCard.Enabled = false;
+            btnCash.Enabled = false;
+            btnConfirmCashPayment.Click += (sender, EventArgs) => { btnConfirmCashPayment_Click(sender, EventArgs, btnCash, payCash, cashValue, creditCard, debitCard); };
             valueToPay.Text = $"{toPay.Text} €";
-            
+
+        }
+
+        private async void btnCreditCard_Click(object sender, EventArgs e, TextBox payByCash, RadioButton creditCard, Button payCard, Label cardValue, CheckBox cash, RadioButton debitCard) {
+            pnlPaymentType.Hide();
+            finalValueCard.Text = $"€ {cardValue.Text}";
+            pnlCardPay.Show();
+            await Task.Run(() =>
+            {
+                Thread.Sleep(1000);
+            });
+            btnCredit_Click(payByCash, creditCard, payCard, cardValue, cash, debitCard);
+
+        }
+
+        private async void btnDebitCard_Click(object sender, EventArgs e, TextBox payByCash, RadioButton debitCard, Button payCard, Label cardValue, CheckBox cash, RadioButton creditCard)
+        {
+            debitFinalPrice.Text = $"€ {cardValue.Text}";
+            finalValueCard.Text = $"€ {cardValue.Text}";
+            lblPin.Text = ""; 
+            pnlPaymentType.Hide();
+            btn1.Click += pinBtnClick;
+            btn2.Click += pinBtnClick;
+            btn3.Click += pinBtnClick;
+            btn4.Click += pinBtnClick;
+            btn5.Click += pinBtnClick;
+            btn6.Click += pinBtnClick;
+            btn7.Click += pinBtnClick;
+            btn8.Click += pinBtnClick;
+            btn9.Click += pinBtnClick;
+            btn0.Click += pinBtnClick;
+            btnSubmitPin.Enabled = false;
+            btnClear.Enabled = false;
+            pnlPin.Show();
+            btnSubmitPin.Click += (sender, EventArgs) => { pinSubmit(sender, EventArgs, payByCash, debitCard, payCard, cardValue, cash, creditCard); };
+            btnClear.Click += clearPin;
+            lblPin.TextChanged += LblPin_TextChanged;
+        }
+
+        private void LblPin_TextChanged(object sender, EventArgs e)
+        {
+            if (lblPin.Text != "")
+            {
+                btnClear.Enabled = true;
+            }
+            else
+            {
+                btnClear.Enabled = false;
+            }
+
+            if (lblPin.Text != "****")
+            {
+                btn1.Enabled = true;
+                btn2.Enabled = true;
+                btn3.Enabled = true;
+                btn4.Enabled = true;
+                btn5.Enabled = true;
+                btn6.Enabled = true;
+                btn7.Enabled = true;
+                btn8.Enabled = true;
+                btn9.Enabled = true;
+                btn0.Enabled = true;
+                btnSubmitPin.Enabled = false;
+            }
+            else
+            {
+                btnSubmitPin.Enabled = true;
+                btn1.Enabled = false;
+                btn2.Enabled = false;
+                btn3.Enabled = false;
+                btn4.Enabled = false;
+                btn5.Enabled = false;
+                btn6.Enabled = false;
+                btn7.Enabled = false;
+                btn8.Enabled = false;
+                btn9.Enabled = false;
+                btn0.Enabled = false;
+
+            }
+
+        }
+
+        private void pinSubmit(object sender, EventArgs e, TextBox payByCash, RadioButton debitCard, Button payCard, Label cardValue, CheckBox cash, RadioButton creditCard)
+        {
+            pnlCardPay.Show();
+            Thread.Sleep(1000);
+            btnCredit_Click(payByCash, debitCard, payCard, cardValue, cash, creditCard);
+
+        }
+        private void clearPin(object sender, EventArgs e)
+        {
+            lblPin.Text = "";
+            btn1.Enabled = true;
+            btn2.Enabled = true;
+            btn3.Enabled = true;
+            btn4.Enabled = true;
+            btn5.Enabled = true;
+            btn6.Enabled = true;
+            btn7.Enabled = true;
+            btn8.Enabled = true;
+            btn9.Enabled = true;
+            btn0.Enabled = true;
+            btnSubmitPin.Enabled = false;
+        }
+        private void pinBtnClick(object sender, EventArgs e)
+        {
+           
+            if (lblPin.Text != "****")
+            {
+                lblPin.Text += "*";
+              
+            }
+        }
+        private async void btnCredit_Click(TextBox toPay, RadioButton btnCard, Button payCard, Label cardValue, CheckBox cash, RadioButton debitCard)
+        {
+            Panel[] panels = new[] { pnlPaymentSucessful, pnlPaymentError };
+            Random r = new Random();
+            Panel result = panels[r.Next(panels.Length)];
+            string comment = valueComment.Text;
+            Thread.Sleep(1000);
+            HideAllPanels();
+            result.Show();
+            await Task.Run(() =>
+            {
+                Thread.Sleep(1000);
+            });
+            result.Hide();
+            if (result == pnlPaymentSucessful)
+            {
+                payCard.Enabled = false;
+                btnCard.Enabled = false;
+                debitCard.Enabled = false;
+                cash.Enabled = false;
+               
+                btnCard.BackColor = Color.DarkGray;
+                debitCard.BackColor = Color.DarkGray;
+                cash.BackColor = Color.DarkGray;
+                payCard.BackColor = Color.DarkGray;
+
+                decimal CardValue = Convert.ToDecimal(cardValue.Text);
+                paymentService.CreatePayment(bill.Id, CardValue, comment, tip, 0, paymentNum);
+                alreadyPaid += CardValue;
+                if (alreadyPaid == totalPrice)
+                {
+                    paymentService.UpdateBillStatus(bill.Id, 0);
+                    this.Close();
+                } else
+                {
+                    pnlPaymentType.Show();
+
+                }
+                paymentNum += 1;
+
+            } else {
+                pnlPaymentType.Show();
+            }
         }
 
         private void paymentBackButton4_Click(object sender, EventArgs e)
@@ -173,89 +330,66 @@ namespace RestaurantChapeau
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
-            ValueReturn.Text = Convert.ToDecimal(Convert.ToDecimal(PaidValue.Text, new CultureInfo("en-US")) - totalPrice).ToString("#.##");
+            ValueReturn.Text = Convert.ToDecimal(Convert.ToDecimal(PaidValue.Text) - totalPrice).ToString("#.##");
         }
 
-        private void btnTip_Click(object sender, EventArgs e)
-        {
-            tip = Convert.ToDecimal(valueTip.Text, new CultureInfo("en-US"));
-            totalPrice = Convert.ToDecimal(subtotal + tax + tip, new CultureInfo("en-US"));
-            valueTip2.Text = $"{tip} €";
-            valueTotal2.Text = $"{totalPrice.ToString("#.##")} €";
-        }
-      
-      
-        private async void btnConfirmCashPayment_Click(object sender, EventArgs e)
+           
+        private async void btnConfirmCashPayment_Click(object sender, EventArgs e, CheckBox btnCash, Button payCash, TextBox cashValue, RadioButton creditCard, RadioButton debitCard)
         {
             int billId = bill.Id;
             string comment = valueComment.Text;
-            // paymentService.CreatePayment(billId, totalPrice, comment, tip);
+            CultureInfo ci = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = ci;
+            Thread.CurrentThread.CurrentCulture = ci;
+            decimal CashValue = Convert.ToDecimal(cashValue.Text);
+            paymentService.CreatePayment(billId, CashValue, comment, tip, 0, paymentNum);
+            alreadyPaid += CashValue;
+            if (alreadyPaid == totalPrice)
+            {
+                paymentService.UpdateBillStatus(bill.Id, 0);
+                this.Close();
+            }
+            paymentNum += 1;
             HideAllPanels();
             pnlPaymentSucessful.Show();
+            btnCash.Enabled = false;
+            payCash.Enabled = false;
+            cashValue.Enabled = false;
+            paymentNumber.Enabled = false;
+            if (CashValue == totalUnitPrice)
+            {
+                creditCard.Enabled = false;
+                debitCard.Enabled = false;
+            }
             await Task.Run(() =>
             {
                 Thread.Sleep(1000);
             });
+            pnlPaymentType.Show(); 
             pnlPaymentSucessful.Hide();
+
         }
 
-        private async void btnConfirmPayment_Click(object sender, EventArgs e)
-        {
-            finalValueCard.Text = $"€ {totalPrice.ToString("#.##")}";
-            pnlCardPay.Show();
-            Panel[] panels = new[] { pnlPaymentSucessful, pnlPaymentError };
-            Random r = new Random();
-            Panel result = panels[r.Next(panels.Length)];
-            Thread.Sleep(1000);
-            HideAllPanels();
-            result.Show();
-            await Task.Run(() =>
-            {    
-                Thread.Sleep(1000);
-            });
-            result.Hide();
-            if (result == pnlPaymentSucessful)
-            {
-                
-            }
-            this.Close();
-        }
+      
 
         private void paymentBackButton1_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btnPin_Click(object sender, EventArgs e)
-        {
-            cardDetails();
-
-            pnlCardDetails.Show();
-        }
-
-        private void cardDetails()
-        {
-            valueSubtotal2.Text = TotalValue.Text;
-            valueTip2.Text = $"0,00 €";
-            valueTotal2.Text = $"{totalPrice.ToString("#.##")} €";
-        }
-
-       
+        }       
 
         private int dynamicBillContainer(Bill bill, int startY, int payment)
 
         {
             Panel billContainer = new Panel();
-            billContainer.Size = new Size(1135, 1512);
+            billContainer.Size = new Size(935, 50);
             billContainer.Name = $"billContainer{bill.Id}";
-            billContainer.BackColor = Color.WhiteSmoke;
+            billContainer.BackColor = ColorTranslator.FromHtml("#EFF0F3");
             billContainer.Location = new Point(0, startY);
             billContainer.Name = $"lblBillContainer{bill.Id}";
-            billContainer.TabIndex = 0;
             billContainer.Text = "";
-            billContainer.AutoSize = false;
+            billContainer.AutoSize = true;
             billContainer.Anchor = AnchorStyles.None;
-            billContainer.BorderStyle = BorderStyle.FixedSingle;
+            billContainer.BorderStyle = BorderStyle.None;
 
             Label lblPayment = new Label();
             lblPayment.Location = new Point(50, 20);
@@ -265,11 +399,13 @@ namespace RestaurantChapeau
             lblPayment.TabIndex = 22;
             lblPayment.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
 
-            Label line = new Label();
-            line.BorderStyle = BorderStyle.FixedSingle;
+
+            Button line = new Button();
             line.Location = new Point(10, 90);
             line.Name = $"line{bill.Id}";
-            line.Size = new Size(830, 1);
+            line.Size = new Size(900, 1);
+            line.Enabled = false;
+            line.BackColor = Color.White;
 
             RadioButton creditCard = new RadioButton();
             CheckBox cash = new CheckBox();
@@ -277,81 +413,107 @@ namespace RestaurantChapeau
 
 
             creditCard.Appearance = Appearance.Button;
-            creditCard.AutoSize = true;
+            creditCard.AutoSize = false;
             creditCard.Location = new Point(250, 195);
             creditCard.Name = "radioBtnCredit";
-            creditCard.Size = new Size(200, 72);
+            creditCard.Size = new Size(350, 72);
             creditCard.TabIndex = 0;
             creditCard.Text = "CREDIT CARD";
             creditCard.TextAlign = ContentAlignment.MiddleCenter;
-            creditCard.BackColor = Color.White;
+            creditCard.BackColor = Color.FromArgb(206, 206, 206);
+            creditCard.ForeColor = Color.White;
+            creditCard.FlatStyle = FlatStyle.Flat;
+            creditCard.TabStop = false;
+            creditCard.FlatAppearance.BorderSize = 0;
+            creditCard.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); //transparent
 
             debitCard.Appearance = Appearance.Button;
-            debitCard.AutoSize = true;
+            debitCard.AutoSize = false;
             debitCard.Location = new Point(550, 195);
             debitCard.Name = "radioBtnDebit";
             debitCard.Size = new Size(350, 72);
             debitCard.TabIndex = 0;
             debitCard.Text = "DEBIT CARD";
             debitCard.TextAlign = ContentAlignment.MiddleCenter;
-            debitCard.BackColor = Color.White;
+            debitCard.BackColor = Color.FromArgb(206, 206, 206);
+            debitCard.ForeColor = Color.White;
+            debitCard.FlatStyle = FlatStyle.Flat;
+            debitCard.TabStop = false;
+            debitCard.FlatAppearance.BorderSize = 0;
+            debitCard.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); //transparent
 
             TextBox payByCash = new TextBox();
             payByCash.Name = $"payBtn";
             payByCash.KeyPress += intInput_KeyPress;
 
             cash.Appearance = Appearance.Button;
-            cash.AutoSize = true;
+            cash.AutoSize = false;
             cash.Location = new Point(112, 195);
             cash.Name = "checkBoxCashh";
-            cash.Size = new Size(200, 72);
+            cash.Size = new Size(350, 72);
             cash.TabIndex = 0;
             cash.Text = "CASH";
             cash.TextAlign = ContentAlignment.MiddleCenter;
-            cash.BackColor = Color.White;
+            cash.BackColor = Color.FromArgb(206, 206, 206);
+            cash.ForeColor = Color.White; debitCard.FlatStyle = FlatStyle.Flat; 
+            cash.FlatStyle = FlatStyle.Flat;
+            cash.TabStop = false;
+            cash.FlatAppearance.BorderSize = 0;
+            cash.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); //transparent
 
             TextBox addTipValue = new TextBox();
             addTipValue.KeyPress += intInput_KeyPress;
+            addTipValue.Font = new Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            addTipValue.BorderStyle = BorderStyle.None;
+            addTipValue.Padding = new Padding(4, 4, 4, 4);
+            addTipValue.TextAlign = HorizontalAlignment.Center;
+
 
             Label lblAddTip = new Label();
             lblAddTip.Text = "Add tip";
-            lblAddTip.BackColor = Color.SandyBrown;
+            lblAddTip.ForeColor = Color.Black;
             lblAddTip.Font = new Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblAddTip.ForeColor = SystemColors.ButtonHighlight;
             lblAddTip.Margin = new Padding(5);
-            lblAddTip.Size = new Size(203, 93);
-            lblAddTip.TabIndex = 26;
+            lblAddTip.Size = new Size(220, 93);
+            lblAddTip.TabIndex = 26;     
+
 
             TextBox addFeedbackValue = new TextBox();
             addFeedbackValue.AutoSize = false;
-            addFeedbackValue.Height = 100;
-
+            addFeedbackValue.Height = 150;
+            addFeedbackValue.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            addFeedbackValue.BorderStyle = BorderStyle.None;
+            addFeedbackValue.Padding = new Padding(4, 4, 4, 4);
 
             Label lblAddFeedback = new Label();
             lblAddFeedback.Text = "Add feedback";
-            lblAddFeedback.BackColor = Color.SandyBrown;
+            lblAddFeedback.ForeColor = Color.Black;
             lblAddFeedback.Font = new Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblAddFeedback.ForeColor = SystemColors.ButtonHighlight;
             lblAddFeedback.Margin = new Padding(5);
-            lblAddFeedback.Size = new Size(203, 93);
+            lblAddFeedback.Size = new Size(220, 73);
             lblAddFeedback.TabIndex = 26;
 
             Button load = new Button();
             load.Text = "Load menu items";
-            load.BackColor = Color.Blue;
             load.ForeColor = Color.White;
-            load.Location = new Point(10, 100);
+            load.Location = new Point(10, line.Location.Y + 2);
             load.Name = $"load{bill.Id}";
             load.Size = new Size(116, 64);
+            load.AutoSize = true;
             load.TabIndex = 21;
             load.Click += (sender, EventArgs) => { btn_loadItemsClicked(sender, EventArgs, billContainer, cash, creditCard, debitCard, lblAddTip, addTipValue, lblAddFeedback, addFeedbackValue, payment, payByCash); };
-
-
+            load.BackColor = Color.FromArgb(67, 179,215);
+            load.FlatStyle = FlatStyle.Flat;
+            load.TabStop = false;
+            load.FlatAppearance.BorderSize = 0;
+            load.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); //transparent
             if (Convert.ToUInt32(paymentNumber.Text) > 1)
             {
                 billContainer.Controls.Add(load);
+                load.Left = ((billContainer.Width - load.Width) / 2);
 
-            } else
+            }
+            else
             {
                 load.PerformClick();
                 billContainer.Controls.Add(cash);
@@ -359,6 +521,7 @@ namespace RestaurantChapeau
                 billContainer.Controls.Add(debitCard);
             }
             billContainer.Controls.Add(lblPayment);
+            lblPayment.Left = ((billContainer.Width - load.Width) / 2);
             billContainer.Controls.Add(line);
 
             pnlBills.Controls.Add(billContainer);
@@ -368,18 +531,21 @@ namespace RestaurantChapeau
 
         private decimal AddTipValue_TextChanged(object sender, EventArgs e, Label TotalValue, Label SubTotalValue, Label TaxValue)
         {
-            TextBox tip = sender as TextBox;
-            if (tip.Text == "")
+            TextBox tipValue = sender as TextBox;
+            if (tipValue.Text == "")
             {
-                tip.Text = "0";
+                tipValue.Text = "0";
                 TotalValue.Text = (Convert.ToDecimal(SubTotalValue.Text) + Convert.ToDecimal(TaxValue.Text)).ToString("#.##");
+                totalPrice = Convert.ToDecimal(subtotal + tip);
+
             }
             else
             {
-                TotalValue.Text = (Convert.ToDecimal(SubTotalValue.Text) + Convert.ToDecimal(TaxValue.Text) + Convert.ToDecimal(tip.Text)).ToString("#.##");
-
+                TotalValue.Text = (Convert.ToDecimal(SubTotalValue.Text) + Convert.ToDecimal(TaxValue.Text) + Convert.ToDecimal(tipValue.Text)).ToString("#.##");
+                totalPrice += Convert.ToDecimal(tipValue.Text);
             }
-            return Convert.ToDecimal(TotalValue.Text);
+            totalUnitPrice = Convert.ToDecimal(TotalValue.Text);
+            return totalUnitPrice;
 
         }
 
@@ -412,75 +578,119 @@ namespace RestaurantChapeau
         {
             CheckBox btn = sender as CheckBox;
             payByCash.Text = "0.00";
-
             payByCash.Location = new Point(btn.Location.X + btn.Width + 20, btn.Location.Y);
+            payByCash.AutoSize = false;
+            payByCash.Height = btn.Height;
+            payByCash.BackColor = Color.White;
+            payByCash.BorderStyle = BorderStyle.None;
+            payByCash.Padding = new Padding(4, 4, 4, 4);
+            payByCash.TextAlign = HorizontalAlignment.Center;
+
             pay.Location = new Point(payByCash.Location.X + payByCash.Width + 20, payByCash.Location.Y);
             pay.Height = payByCash.Height;
+         
 
             if (btn.Checked)
             {
                 billContainer.Controls.Add(payByCash);
-                btn.BackColor = Color.Orange;
+                btn.BackColor = Color.SandyBrown;
+                btn.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#fbc651");
+                btn.FlatAppearance.CheckedBackColor = Color.SandyBrown;
                 if (!creditCard.Checked && !debitCard.Checked)
                 {
                    payByCash.Text = totalPrice.ToString("#.##");
+                    payByCash.Enabled = false;
+                } else
+                {
+                    payByCash.Enabled = true;
+                    payByCash.Text = (totalPrice - 1).ToString("#.##");
+
                 }
                 pay.Enabled = true;
-                pay.BackColor = Color.Blue;
+                pay.BackColor = Color.FromArgb(67, 179, 215);
                 billContainer.Controls.Add(pay);
                
             } else
             {
                 billContainer.Controls.Remove(payByCash);
-                btn.BackColor = Color.White;
+                btn.BackColor = Color.FromArgb(206, 206, 206);
                 if (creditCard.Checked || debitCard.Checked)
                 { 
-                  payByCash.Text = "0.50";   
+                  payByCash.Text = "1";   
                 }
                 billContainer.Controls.Remove(pay);
             }
 
         }
 
-        void btn_RadioChecked(object sender, EventArgs e, RadioButton otherRadioBtn, CheckBox cash)
+        void btn_RadioChecked(object sender, EventArgs e, RadioButton otherRadioBtn, CheckBox cash, Label cardValue, TextBox cashValue, Panel billContainer, Button payBtn)
         {
             RadioButton btn = sender as RadioButton;
             isChecked = btn.Checked;
-            
+
             if (btn.Checked)
             {
-                btn.BackColor = Color.Orange;
+                btn.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#fbc651");
+                btn.FlatAppearance.CheckedBackColor = Color.SandyBrown;
+                if (!cash.Checked)
+                {
+                    cardValue.Text = totalUnitPrice.ToString("#.##");
+                }
+                else
+                {
+                    cashValue.Text = (totalUnitPrice - 1).ToString("#.##");
+                    cardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
+                }
 
                 //pay.Enabled = true;
                 //pay.BackColor = Color.Blue
-            }
+            } 
             else
             {
-                btn.BackColor = Color.White;
-                if (!otherRadioBtn.Checked && !cash.Checked)
+                if (!otherRadioBtn.Checked)
                 {
-                    //pay.Enabled = false;
-                    //pay.BackColor = Color.Gray;
+                    cashValue.Text = (totalUnitPrice).ToString("#.##");
+                    cashValue.Enabled = false;
                 }
+                btn.BackColor = Color.FromArgb(206, 206, 206);
+                cardValue.Text = "0.00";
+                billContainer.Controls.Remove(cardValue);
+                billContainer.Controls.Remove(payBtn);
             }
         }
-        void btn_RadioClicked(object sender, EventArgs e, TextBox cashValue, Panel billContainer, decimal totalPrice, Label cardValue)
+        void btn_RadioClicked(object sender, EventArgs e, TextBox cashValue, Panel billContainer, decimal totalPrice, Label cardValue, Button payBtn)
         {
             RadioButton btn = sender as RadioButton;
             
-            cardValue.Text = (totalPrice - Convert.ToDecimal(cashValue.Text)).ToString();
+            cardValue.Text = (totalPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
             cardValue.Location = new Point(btn.Location.X + btn.Width + 20, btn.Location.Y);
+            cardValue.Height = btn.Height;
+            cardValue.BackColor = Color.White;
+            cardValue.TextAlign = ContentAlignment.MiddleCenter;
+            cardValue.ForeColor = Color.Gray;
 
-            if (btn.Checked && !isChecked)
+            payBtn.Location = new Point(cardValue.Location.X + cardValue.Width + 20, btn.Location.Y);
+            payBtn.AutoSize = false;
+            payBtn.Height = btn.Height;
+            payBtn.Padding = new Padding(4, 4, 4, 4);
+
+
+            if ((btn.Checked && !isChecked))
             {
                 btn.Checked = false;
                 billContainer.Controls.Remove(cardValue);
+                billContainer.Controls.Remove(payBtn);
+                cardValue.Text = "0.00";
+
             }
             else
             {
                 btn.Checked = true;
                 isChecked = false;
                 billContainer.Controls.Add(cardValue);
+                billContainer.Controls.Add(payBtn);
+                cashValue.Enabled = true;
+
             }
         }
         void btn_saveSelectedOption(object sender, EventArgs e, CheckedListBox menuItems, Panel billContainer, Button saveSelected, CheckBox cash, RadioButton creditCard, RadioButton debitCard, Label lblAddTip, TextBox addTipValue,  Label lblAddFeedback, TextBox addFeedbackValue, int paymentNum, TextBox payByCash)
@@ -529,7 +739,7 @@ namespace RestaurantChapeau
                 
                 billContainer.Controls.Add(lblAddTip);
 
-                lblAddTip.Location = new Point(112, selectedOptions.Location.Y + selectedOptions.Height + 50);
+                lblAddTip.Location = new Point(112, selectedOptions.Location.Y + selectedOptions.Height);
 
                 billContainer.Controls.Add(addTipValue);
                 addTipValue.Text = "0.00";
@@ -537,10 +747,10 @@ namespace RestaurantChapeau
                 lblAddTip.Height = addTipValue.Height;
 
                 billContainer.Controls.Add(lblAddFeedback);
-                lblAddFeedback.Location = new Point(112, addTipValue.Location.Y + addTipValue.Height + 50);
+                lblAddFeedback.Location = new Point(112, addTipValue.Location.Y + addTipValue.Height + 20);
 
                 billContainer.Controls.Add(addFeedbackValue);
-                addFeedbackValue.Location = new Point(112, lblAddFeedback.Location.Y + lblAddFeedback.Height + 20);
+                addFeedbackValue.Location = new Point(112, lblAddFeedback.Location.Y + lblAddFeedback.Height);
                 addFeedbackValue.Width = 700;
 
                 Button payCash = new Button();
@@ -548,31 +758,64 @@ namespace RestaurantChapeau
                 payCash.Enabled = true;
                 payCash.BackColor = Color.Gray;
                 payCash.ForeColor = Color.White;
-                payCash.Click += (sender, EventArgs) => { btnCash_Click(sender, EventArgs, payByCash); };
-
-
+                payCash.Click += (sender, EventArgs) => { btnCash_Click(sender, EventArgs, payByCash, cash, payCash, payByCash, creditCard, debitCard); };
+                payCash.FlatStyle = FlatStyle.Flat;
+                payCash.TabStop = false;
+                payCash.FlatAppearance.BorderSize = 0;
+                payCash.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); //transparent
                 billContainer.Controls.Add(cash);
                 payByCash.Text = "0.00";
                 cash.Location = new Point(112, addFeedbackValue.Location.Y + addFeedbackValue.Height + 50);
                 cash.CheckStateChanged += (sender, EventArgs) => { btn_Checked(sender, EventArgs, creditCard, debitCard, billContainer, payByCash, finalTotal, payCash); };
 
                 Label creditCardValue = new Label();
+                creditCardValue.Text = "0.00";
                 billContainer.Controls.Add(creditCard);
+
+                Button payCredit = new Button();
+                payCredit.Text = "Pay";
+                payCredit.Enabled = true;
+                payCredit.BackColor = Color.FromArgb(67, 179, 215);
+                payCredit.ForeColor = Color.White;
+                payCredit.Click += (sender, EventArgs) => { btnCreditCard_Click(sender, EventArgs, payByCash, creditCard, payCredit, creditCardValue, cash, debitCard); };
+                payCredit.FlatStyle = FlatStyle.Flat;
+                payCredit.TabStop = false;
+                payCredit.FlatAppearance.BorderSize = 0;
+                payCredit.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); //transparent
+
+
                 creditCard.Location = new Point(112, cash.Location.Y + cash.Height + 20);
-                creditCard.CheckedChanged += (sender, EventArgs) => { btn_RadioChecked(sender, EventArgs, debitCard, cash); };
-                creditCard.Click += (sender, EventArgs) => { btn_RadioClicked(sender, EventArgs, payByCash, billContainer, finalTotal, creditCardValue); };
-               
+                creditCard.CheckedChanged += (sender, EventArgs) => { btn_RadioChecked(sender, EventArgs, debitCard, cash, creditCardValue, payByCash, billContainer, payCredit); };
+                creditCard.Click += (sender, EventArgs) => { btn_RadioClicked(sender, EventArgs, payByCash, billContainer, finalTotal, creditCardValue, payCredit); };
+
+
                 Label debitCardValue = new Label();
+                debitCardValue.Text = "0.00";
                 billContainer.Controls.Add(debitCard);
+
+                Button payDebit = new Button();
+                payDebit.Text = "Pay";
+                payDebit.Enabled = true;
+                payDebit.BackColor = Color.FromArgb(67, 179, 215); 
+                payDebit.ForeColor = Color.White;
+                payDebit.Click += (sender, EventArgs) => { btnDebitCard_Click(sender, EventArgs, payByCash, debitCard, payDebit, debitCardValue, cash, creditCard); };
+                payDebit.FlatStyle = FlatStyle.Flat;
+                payDebit.TabStop = false;
+                payDebit.FlatAppearance.BorderSize = 0;
+                payDebit.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); //transparent
+
                 debitCard.Location = new Point(112, creditCard.Location.Y + creditCard.Height + 20);
-                debitCard.CheckedChanged += (sender, EventArgs) => { btn_RadioChecked(sender, EventArgs, creditCard, cash); };
-                debitCard.Click += (sender, EventArgs) => { btn_RadioClicked(sender, EventArgs, payByCash, billContainer, finalTotal, debitCardValue); };
+                debitCard.CheckedChanged += (sender, EventArgs) => { btn_RadioChecked(sender, EventArgs, creditCard, cash, debitCardValue, payByCash, billContainer, payDebit); };
+                debitCard.Click += (sender, EventArgs) => { btn_RadioClicked(sender, EventArgs, payByCash, billContainer, finalTotal, debitCardValue, payDebit); };
+
+                payByCash.TextChanged += (sender, EventArgs) => { cashAmountChanged(sender, EventArgs, debitCardValue, creditCardValue); };
 
 
-                List<Label> paymentSummaryValues = dynamicPaymentSummary(paymentNum, billContainer, 112, debitCard.Location.Y + debitCard.Height + 20);
+                List<Label> paymentSummaryValues = dynamicPaymentSummary(paymentNum, billContainer, 0, debitCard.Location.Y + debitCard.Height + 40);
                 paymentSummaryValues[0].Text = finalTotal.ToString("#.##");
                 paymentSummaryValues[1].Text = finalSubtotal.ToString("#.##");
                 paymentSummaryValues[2].Text = finalTax.ToString("#.##");
+                totalUnitPrice = Convert.ToDecimal(paymentSummaryValues[0].Text);
                 addTipValue.TextChanged += (sender, EventArgs) => { finalTotal = AddTipValue_TextChanged(sender, EventArgs, paymentSummaryValues[0], paymentSummaryValues[1], paymentSummaryValues[2]); };
 
                 // billContainer.Controls.Add(selectedOptions);
@@ -583,14 +826,33 @@ namespace RestaurantChapeau
             }
 
         }
+        void cashAmountChanged(object sender, EventArgs e, Label debitCardValue, Label creditCardValue)
+        {
+            TextBox cashValue = sender as TextBox;
+
+            if (cashValue.Text == "" || cashValue.Text == "0")
+            {
+                cashValue.Text = "1";
+            }
+
+            if (Convert.ToDecimal(debitCardValue.Text) > 0)
+            {
+                debitCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString();
+            }
+            else if (Convert.ToDecimal(creditCardValue.Text) > 0)
+            {
+                creditCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString();
+            }
+        }
 
         void btn_loadItemsClicked(object sender, EventArgs e, Panel billContainer, CheckBox cash, RadioButton creditCard, RadioButton debitCard, Label lblAddTip, TextBox addTipValue, Label lblAddFeedback, TextBox addFeedbackValue, int paymentNum, TextBox payByCash) {
             Button btn = sender as Button;
             CheckedListBox menuItems = new CheckedListBox();
             menuItems.Location = new Point(10, 110);
-            menuItems.Size = new Size(700, 50);
+            menuItems.Size = new Size(billContainer.Width, 50);
             menuItems.Height = invoiceCopy.Items.Count * 40;
             menuItems.Name = $"selection{paymentNumber}";
+            menuItems.AutoSize = true;
             foreach (ListViewItem item in invoiceCopy.Items)
             {
                 menuItems.Items.Add($"{invoiceCopy.Items.IndexOf(item)+1}.: 1x - {item.SubItems[0].Text} ({item.SubItems[1].Text})");
@@ -599,7 +861,7 @@ namespace RestaurantChapeau
 
             Button saveSelected = new Button();
             saveSelected.Text = "SAVE";
-            saveSelected.BackColor = Color.Orange;
+            saveSelected.BackColor = Color.SandyBrown;
             saveSelected.ForeColor = Color.White;
             saveSelected.Location = new Point(10, 110 + invoiceCopy.Items.Count * 40 + 20);
             saveSelected.Name = $"save{bill.Id}";
@@ -740,9 +1002,8 @@ namespace RestaurantChapeau
             groupBoxMoreInfo2.Controls.Add(dLblLine);
             groupBoxMoreInfo2.Controls.Add(dLblTotals);
             groupBoxMoreInfo2.Controls.Add(dLblInfo);
-            groupBoxMoreInfo2.Location = new Point(130, 923);
             groupBoxMoreInfo2.Name = "groupBoxMoreInfo2";
-            groupBoxMoreInfo2.Size = new Size(867, 264);
+            groupBoxMoreInfo2.Size = new Size(935, 264);
             groupBoxMoreInfo2.TabIndex = 26;
             groupBoxMoreInfo2.TabStop = false;
             groupBoxMoreInfo2.Location = new Point(X, Y);

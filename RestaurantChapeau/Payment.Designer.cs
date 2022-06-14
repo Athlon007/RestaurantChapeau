@@ -59,13 +59,12 @@
             this.pnlPaymentType = new System.Windows.Forms.Panel();
             this.pnlBills = new System.Windows.Forms.FlowLayoutPanel();
             this.paymentNumber = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPayment = new System.Windows.Forms.Label();
             this.lblBillHeading = new System.Windows.Forms.Label();
             this.paymentBackButton2 = new System.Windows.Forms.PictureBox();
             this.backInvoice = new System.Windows.Forms.Label();
             this.LogoPayment2 = new System.Windows.Forms.PictureBox();
             this.headingPaymentType = new System.Windows.Forms.Label();
-            this.pnlCardDetails = new System.Windows.Forms.Panel();
             this.headingComment = new System.Windows.Forms.Label();
             this.groupBoxPayment2 = new System.Windows.Forms.GroupBox();
             this.lblLine4 = new System.Windows.Forms.Label();
@@ -109,6 +108,26 @@
             this.cardPaymentImg = new System.Windows.Forms.PictureBox();
             this.finalValueCard = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pnlPin = new System.Windows.Forms.Panel();
+            this.debitFinalPrice = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.lblEnterPin = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pinContainer = new System.Windows.Forms.Label();
+            this.btn1 = new System.Windows.Forms.Button();
+            this.btn2 = new System.Windows.Forms.Button();
+            this.btn3 = new System.Windows.Forms.Button();
+            this.btn6 = new System.Windows.Forms.Button();
+            this.btn5 = new System.Windows.Forms.Button();
+            this.btn4 = new System.Windows.Forms.Button();
+            this.btn9 = new System.Windows.Forms.Button();
+            this.btn8 = new System.Windows.Forms.Button();
+            this.btn7 = new System.Windows.Forms.Button();
+            this.btnSubmitPin = new System.Windows.Forms.Button();
+            this.btn0 = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.lblPin = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment1)).BeginInit();
             this.groupBoxMoreInfo.SuspendLayout();
@@ -130,6 +149,9 @@
             this.pnlCardPay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cardPaymentImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.pnlPin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // paymentBackButton1
@@ -283,7 +305,7 @@
             // btnProcessPayment
             // 
             this.btnProcessPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
-            this.btnProcessPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProcessPayment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnProcessPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnProcessPayment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProcessPayment.Location = new System.Drawing.Point(393, 1227);
@@ -414,7 +436,7 @@
             // 
             this.pnlPaymentType.Controls.Add(this.pnlBills);
             this.pnlPaymentType.Controls.Add(this.paymentNumber);
-            this.pnlPaymentType.Controls.Add(this.label1);
+            this.pnlPaymentType.Controls.Add(this.lblPayment);
             this.pnlPaymentType.Controls.Add(this.lblBillHeading);
             this.pnlPaymentType.Controls.Add(this.paymentBackButton2);
             this.pnlPaymentType.Controls.Add(this.backInvoice);
@@ -427,9 +449,9 @@
             // 
             // pnlBills
             // 
-            this.pnlBills.Location = new System.Drawing.Point(0, 355);
+            this.pnlBills.Location = new System.Drawing.Point(94, 355);
             this.pnlBills.Name = "pnlBills";
-            this.pnlBills.Size = new System.Drawing.Size(1135, 1002);
+            this.pnlBills.Size = new System.Drawing.Size(1044, 1002);
             this.pnlBills.TabIndex = 24;
             // 
             // paymentNumber
@@ -444,23 +466,23 @@
             this.paymentNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.paymentNumber.TextChanged += new System.EventHandler(this.paymentNumber_TextChanged);
             // 
-            // label1
+            // lblPayment
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(747, 278);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 50);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "payment";
+            this.lblPayment.AutoSize = true;
+            this.lblPayment.BackColor = System.Drawing.Color.White;
+            this.lblPayment.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPayment.Location = new System.Drawing.Point(747, 278);
+            this.lblPayment.Name = "lblPayment";
+            this.lblPayment.Size = new System.Drawing.Size(170, 50);
+            this.lblPayment.TabIndex = 23;
+            this.lblPayment.Text = "payment";
             // 
             // lblBillHeading
             // 
             this.lblBillHeading.AutoSize = true;
             this.lblBillHeading.BackColor = System.Drawing.Color.White;
             this.lblBillHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblBillHeading.Location = new System.Drawing.Point(224, 278);
+            this.lblBillHeading.Location = new System.Drawing.Point(160, 278);
             this.lblBillHeading.Name = "lblBillHeading";
             this.lblBillHeading.Size = new System.Drawing.Size(246, 50);
             this.lblBillHeading.TabIndex = 22;
@@ -509,13 +531,6 @@
             this.headingPaymentType.TabIndex = 18;
             this.headingPaymentType.Text = "Choose the payment type";
             this.headingPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlCardDetails
-            // 
-            this.pnlCardDetails.Location = new System.Drawing.Point(0, 0);
-            this.pnlCardDetails.Name = "pnlCardDetails";
-            this.pnlCardDetails.Size = new System.Drawing.Size(200, 100);
-            this.pnlCardDetails.TabIndex = 0;
             // 
             // headingComment
             // 
@@ -655,7 +670,6 @@
             this.btnConfirmPayment.TabIndex = 31;
             this.btnConfirmPayment.Text = "Confirm Payment";
             this.btnConfirmPayment.UseVisualStyleBackColor = false;
-            this.btnConfirmPayment.Click += new System.EventHandler(this.btnConfirmPayment_Click);
             // 
             // valueComment
             // 
@@ -814,7 +828,6 @@
             this.btnConfirmCashPayment.TabIndex = 31;
             this.btnConfirmCashPayment.Text = "Confirm Payment";
             this.btnConfirmCashPayment.UseVisualStyleBackColor = false;
-            this.btnConfirmCashPayment.Click += new System.EventHandler(this.btnConfirmCashPayment_Click);
             // 
             // PaidValue
             // 
@@ -981,14 +994,271 @@
             this.pictureBox6.TabIndex = 17;
             this.pictureBox6.TabStop = false;
             // 
+            // pnlPin
+            // 
+            this.pnlPin.Controls.Add(this.lblPin);
+            this.pnlPin.Controls.Add(this.btnSubmitPin);
+            this.pnlPin.Controls.Add(this.btn0);
+            this.pnlPin.Controls.Add(this.btnClear);
+            this.pnlPin.Controls.Add(this.btn9);
+            this.pnlPin.Controls.Add(this.btn8);
+            this.pnlPin.Controls.Add(this.btn7);
+            this.pnlPin.Controls.Add(this.btn6);
+            this.pnlPin.Controls.Add(this.btn5);
+            this.pnlPin.Controls.Add(this.btn4);
+            this.pnlPin.Controls.Add(this.btn3);
+            this.pnlPin.Controls.Add(this.btn2);
+            this.pnlPin.Controls.Add(this.btn1);
+            this.pnlPin.Controls.Add(this.pinContainer);
+            this.pnlPin.Controls.Add(this.debitFinalPrice);
+            this.pnlPin.Controls.Add(this.pictureBox3);
+            this.pnlPin.Controls.Add(this.label3);
+            this.pnlPin.Controls.Add(this.pictureBox4);
+            this.pnlPin.Controls.Add(this.lblEnterPin);
+            this.pnlPin.Location = new System.Drawing.Point(0, 1);
+            this.pnlPin.Name = "pnlPin";
+            this.pnlPin.Size = new System.Drawing.Size(1138, 1360);
+            this.pnlPin.TabIndex = 35;
+            // 
+            // debitFinalPrice
+            // 
+            this.debitFinalPrice.BackColor = System.Drawing.Color.White;
+            this.debitFinalPrice.Font = new System.Drawing.Font("Script MT Bold", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.debitFinalPrice.Location = new System.Drawing.Point(3, 124);
+            this.debitFinalPrice.Name = "debitFinalPrice";
+            this.debitFinalPrice.Size = new System.Drawing.Size(1135, 50);
+            this.debitFinalPrice.TabIndex = 22;
+            this.debitFinalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
+            this.pictureBox3.Location = new System.Drawing.Point(10, 12);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 20;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Black;
+            this.pictureBox4.Image = global::RestaurantChapeau.Properties.Resources.hat;
+            this.pictureBox4.Location = new System.Drawing.Point(951, 0);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(187, 127);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 17;
+            this.pictureBox4.TabStop = false;
+            // 
+            // lblEnterPin
+            // 
+            this.lblEnterPin.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEnterPin.Location = new System.Drawing.Point(3, 183);
+            this.lblEnterPin.Name = "lblEnterPin";
+            this.lblEnterPin.Size = new System.Drawing.Size(1138, 64);
+            this.lblEnterPin.TabIndex = 18;
+            this.lblEnterPin.Text = "Enter your pin";
+            this.lblEnterPin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Script MT Bold", 22.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(116, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(839, 127);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Invoice";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.UseCompatibleTextRendering = true;
+            // 
+            // pinContainer
+            // 
+            this.pinContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
+            this.pinContainer.Location = new System.Drawing.Point(168, 327);
+            this.pinContainer.Name = "pinContainer";
+            this.pinContainer.Size = new System.Drawing.Size(807, 997);
+            this.pinContainer.TabIndex = 23;
+            // 
+            // btn1
+            // 
+            this.btn1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn1.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn1.Location = new System.Drawing.Point(261, 398);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(142, 116);
+            this.btn1.TabIndex = 24;
+            this.btn1.Text = "1";
+            this.btn1.UseVisualStyleBackColor = true;
+            // 
+            // btn2
+            // 
+            this.btn2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn2.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn2.Location = new System.Drawing.Point(503, 398);
+            this.btn2.Name = "btn2";
+            this.btn2.Size = new System.Drawing.Size(143, 116);
+            this.btn2.TabIndex = 25;
+            this.btn2.Text = "2";
+            this.btn2.UseVisualStyleBackColor = true;
+            // 
+            // btn3
+            // 
+            this.btn3.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn3.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn3.Location = new System.Drawing.Point(741, 398);
+            this.btn3.Name = "btn3";
+            this.btn3.Size = new System.Drawing.Size(142, 116);
+            this.btn3.TabIndex = 26;
+            this.btn3.Text = "3";
+            this.btn3.UseVisualStyleBackColor = true;
+            // 
+            // btn6
+            // 
+            this.btn6.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn6.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn6.Location = new System.Drawing.Point(741, 595);
+            this.btn6.Name = "btn6";
+            this.btn6.Size = new System.Drawing.Size(142, 116);
+            this.btn6.TabIndex = 29;
+            this.btn6.Text = "6";
+            this.btn6.UseVisualStyleBackColor = true;
+            // 
+            // btn5
+            // 
+            this.btn5.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn5.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn5.Location = new System.Drawing.Point(503, 595);
+            this.btn5.Name = "btn5";
+            this.btn5.Size = new System.Drawing.Size(143, 116);
+            this.btn5.TabIndex = 28;
+            this.btn5.Text = "5";
+            this.btn5.UseVisualStyleBackColor = true;
+            // 
+            // btn4
+            // 
+            this.btn4.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn4.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn4.Location = new System.Drawing.Point(261, 595);
+            this.btn4.Name = "btn4";
+            this.btn4.Size = new System.Drawing.Size(142, 116);
+            this.btn4.TabIndex = 27;
+            this.btn4.Text = "4";
+            this.btn4.UseVisualStyleBackColor = true;
+            // 
+            // btn9
+            // 
+            this.btn9.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn9.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn9.Location = new System.Drawing.Point(741, 793);
+            this.btn9.Name = "btn9";
+            this.btn9.Size = new System.Drawing.Size(142, 116);
+            this.btn9.TabIndex = 32;
+            this.btn9.Text = "9";
+            this.btn9.UseVisualStyleBackColor = true;
+            // 
+            // btn8
+            // 
+            this.btn8.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn8.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn8.Location = new System.Drawing.Point(503, 793);
+            this.btn8.Name = "btn8";
+            this.btn8.Size = new System.Drawing.Size(143, 116);
+            this.btn8.TabIndex = 31;
+            this.btn8.Text = "8";
+            this.btn8.UseVisualStyleBackColor = true;
+            // 
+            // btn7
+            // 
+            this.btn7.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn7.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn7.Location = new System.Drawing.Point(261, 793);
+            this.btn7.Name = "btn7";
+            this.btn7.Size = new System.Drawing.Size(142, 116);
+            this.btn7.TabIndex = 30;
+            this.btn7.Text = "7";
+            this.btn7.UseVisualStyleBackColor = true;
+            // 
+            // btnSubmitPin
+            // 
+            this.btnSubmitPin.BackColor = System.Drawing.Color.Green;
+            this.btnSubmitPin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnSubmitPin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnSubmitPin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubmitPin.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSubmitPin.ForeColor = System.Drawing.Color.White;
+            this.btnSubmitPin.Location = new System.Drawing.Point(590, 1165);
+            this.btnSubmitPin.Name = "btnSubmitPin";
+            this.btnSubmitPin.Size = new System.Drawing.Size(368, 136);
+            this.btnSubmitPin.TabIndex = 35;
+            this.btnSubmitPin.Text = "Confirm";
+            this.btnSubmitPin.UseVisualStyleBackColor = false;
+            // 
+            // btn0
+            // 
+            this.btn0.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn0.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn0.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn0.Location = new System.Drawing.Point(503, 983);
+            this.btn0.Name = "btn0";
+            this.btn0.Size = new System.Drawing.Size(143, 116);
+            this.btn0.TabIndex = 34;
+            this.btn0.Text = "0";
+            this.btn0.UseVisualStyleBackColor = true;
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Firebrick;
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(185, 1165);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(368, 137);
+            this.btnClear.TabIndex = 33;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            // 
+            // lblPin
+            // 
+            this.lblPin.Font = new System.Drawing.Font("Script MT Bold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPin.Location = new System.Drawing.Point(168, 277);
+            this.lblPin.Name = "lblPin";
+            this.lblPin.Size = new System.Drawing.Size(807, 50);
+            this.lblPin.TabIndex = 36;
+            this.lblPin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1138, 1362);
-            this.Controls.Add(this.pnlCashPayment);
+            this.Controls.Add(this.pnlPin);
             this.Controls.Add(this.pnlPaymentType);
+            this.Controls.Add(this.pnlCashPayment);
             this.Controls.Add(this.pnlPaymentError);
             this.Controls.Add(this.pnlPaymentSucessful);
             this.Controls.Add(this.pnlCardPay);
@@ -1036,6 +1306,9 @@
             this.pnlCardPay.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cardPaymentImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            this.pnlPin.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1076,7 +1349,6 @@
         private System.Windows.Forms.Label backInvoice;
         private System.Windows.Forms.PictureBox LogoPayment2;
         private System.Windows.Forms.Label headingPaymentType;
-        private System.Windows.Forms.Panel pnlCardDetails;
         private System.Windows.Forms.Button btnTip;
         private System.Windows.Forms.PictureBox paymentBackButton3;
         private System.Windows.Forms.Label backPaymentType;
@@ -1120,9 +1392,29 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox cardPaymentImg;
         private System.Windows.Forms.Label lblBillHeading;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPayment;
         private System.Windows.Forms.TextBox paymentNumber;
         private System.Windows.Forms.FlowLayoutPanel pnlBills;
         private System.Windows.Forms.Button btnCalculate;
+        private System.Windows.Forms.Panel pnlPin;
+        private System.Windows.Forms.Label pinContainer;
+        private System.Windows.Forms.Label debitFinalPrice;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label lblEnterPin;
+        private System.Windows.Forms.Label lblPin;
+        private System.Windows.Forms.Button btnSubmitPin;
+        private System.Windows.Forms.Button btn0;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btn9;
+        private System.Windows.Forms.Button btn8;
+        private System.Windows.Forms.Button btn7;
+        private System.Windows.Forms.Button btn6;
+        private System.Windows.Forms.Button btn5;
+        private System.Windows.Forms.Button btn4;
+        private System.Windows.Forms.Button btn3;
+        private System.Windows.Forms.Button btn2;
+        private System.Windows.Forms.Button btn1;
     }
 }
