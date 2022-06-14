@@ -584,7 +584,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(529, 80);
             this.label2.TabIndex = 50;
-            this.label2.Text = "Reservation";
+            this.label2.Text = "Table view";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label2.UseCompatibleTextRendering = true;
             // 
