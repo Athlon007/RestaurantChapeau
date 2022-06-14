@@ -106,7 +106,16 @@ namespace RestaurantChapeau
                 orderService = new OrderLogic();
 
                 //extract order item from the selected item in the listview
-                Order orderItem = listViewNewOrders.SelectedItems.Count == 0 ? this.selectedOrder : (Order)listViewNewOrders.SelectedItems[0].Tag;
+                Order orderItem =new Order();
+
+                if (listViewNewOrders.SelectedItems.Count==0)
+                {
+                    orderItem = this.selectedOrder;
+                }
+                else
+                {
+                    orderItem= (Order)listViewNewOrders.SelectedItems[0].Tag;
+                }
 
                 // get table number from the database where orderid is selected item
                 Table table = orderService.GetOrderTable(orderItem.Id);
