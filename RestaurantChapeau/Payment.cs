@@ -58,7 +58,7 @@ namespace RestaurantChapeau
             pnlBills.HorizontalScroll.Maximum = 0;
             pnlBills.AutoScroll = true;
             pnlBills.WrapContents = true;
-            await Task.Run(ConnectToServer);
+            // await Task.Run(ConnectToServer);
             this.bill = paymentService.GetBill(tableId);
             lblPaymentHeader.Text = $"Table {bill.Table.Id.ToString()}";
             valueInvoiceDate.Text = DateTime.Now.ToString();

@@ -48,7 +48,7 @@ namespace RestaurantDAL
         }
         public void CreatePayment(int billId, decimal amountPaid, string comment, decimal tip, int paymentType, int paymentNum)
         {
-            string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip, paymentType, paymentNum) VALUES (2, CURRENT_TIMESTAMP, {amountPaid},'{comment}', {tip}, {paymentType}, {paymentNum})";
+            string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip, paymentType, paymentNum) VALUES ({billId}, CURRENT_TIMESTAMP, {amountPaid},'{comment}', {tip}, {paymentType}, {paymentNum})";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }
