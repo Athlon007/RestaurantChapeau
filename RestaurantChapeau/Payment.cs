@@ -47,6 +47,11 @@ namespace RestaurantChapeau
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
             this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
             this.tableId = tableId;
+
+            backInvoice.Font = FontManager.Instance.ScriptMT(backInvoice.Font.Size);
+            headingPaymentType2.Font = FontManager.Instance.ScriptMT(headingPaymentType2.Font.Size);
+            backInvoice.Font = FontManager.Instance.ScriptMT(backInvoice.Font.Size);
+            lblPaymentTopBarText.Font = FontManager.Instance.ScriptMT(lblPaymentTopBarText.Font.Size);
         }
 
         private async void Payment_Load(object sender, EventArgs e)
@@ -58,7 +63,7 @@ namespace RestaurantChapeau
             pnlBills.HorizontalScroll.Maximum = 0;
             pnlBills.AutoScroll = true;
             pnlBills.WrapContents = true;
-            // await Task.Run(ConnectToServer);
+            await Task.Run(ConnectToServer);
             this.bill = paymentService.GetBill(tableId);
             lblPaymentHeader.Text = $"Table {bill.Table.Id.ToString()}";
             valueInvoiceDate.Text = DateTime.Now.ToString();
