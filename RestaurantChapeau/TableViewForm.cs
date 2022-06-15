@@ -73,9 +73,9 @@ namespace RestaurantChapeau
             DPIScaler.Instance.UpdateToForm(this);
             lv_TableDetailView.Columns.Add("ID", (int)(40 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Status", (int)(80 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Menu", (int)(260 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", (int)(230 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Quantity", (int)(60 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Time", (int)(160 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Time", (int)(230 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
 
             label1.Font = FontManager.Instance.ScriptMT(label1.Font.Size);
             label2.Font = FontManager.Instance.ScriptMT(label2.Font.Size);
@@ -174,7 +174,7 @@ namespace RestaurantChapeau
                     if (paymentService.HasBill(i + 1))
                     {
                         button.Image = Properties.Resources.occupied;
-                    }
+                    }                    
                 }
 
                 List<Reservation> reservations = reservationService.GetAllReservations();
@@ -248,11 +248,16 @@ namespace RestaurantChapeau
                 string email = txt_ReservationEmail.Text;
                 DateTime reservationStart = dateTimePicker1.Value;
                 string TableId = txt_ReservationTableID.Text;
+                //DateTime reservationAvailable = reservation.ReservationStart;
 
                 if (firstName == "" || lastName == "" || email == "" || reservationStart == null || TableId == "")
                 {
                     MessageBox.Show("please fill out text box");
                 }
+                //else if(reservationAvailable >= reservation.ReservationStart.AddHours(-1))
+                //{
+                //    MessageBox.Show("You cannot make reservation");
+                //}
                 else
                 {
                     //add the customer info for the reservation to the database
@@ -659,6 +664,26 @@ namespace RestaurantChapeau
         private void tableView_OccupyTable_Click(object sender, EventArgs e)
         {
             tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;
+        }
+
+        private void btn_Table6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lv_TableDetailView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pb_TableAgenda_Click(object sender, EventArgs e)
+        {
+
+        }       
+
+        private void btn_Occupy_Click_1(object sender, EventArgs e)
+        {
+           
         }
     }
 }
