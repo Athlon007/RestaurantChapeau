@@ -227,7 +227,6 @@
             this.btn_ForgotChange.TabIndex = 12;
             this.btn_ForgotChange.Text = "Change password";
             this.btn_ForgotChange.UseVisualStyleBackColor = false;
-            this.btn_ForgotChange.Click += new System.EventHandler(this.btn_ForgotChange_Click);
             // 
             // textBox3
             // 

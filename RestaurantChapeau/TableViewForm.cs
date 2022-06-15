@@ -652,7 +652,7 @@ namespace RestaurantChapeau
 
         private void btn_TableDetailViewCheckOut_Click(object sender, EventArgs e)
         {
-            paymentWindow = new Payment(currentTableNumber);
+            paymentWindow = new Payment(currentTableNumber, pnl_TableDetailView);
             paymentWindow.Show();
         }
 
