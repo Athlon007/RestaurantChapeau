@@ -20,6 +20,7 @@ namespace RestaurantChapeau
         Employee currentEmployee;
         Button[] tableButtons;
         Label[] notificationLabels;
+        Label[] drinkNotificationLabels;
         OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
         int currentTableNumber;
@@ -61,6 +62,20 @@ namespace RestaurantChapeau
                 lbl_Table10Notification
             };
 
+            drinkNotificationLabels = new Label[]
+            {
+                lbl_DrinkNotification1,
+                lbl_DrinkNotification2,
+                lbl_DrinkNotification3,
+                lbl_DrinkNotification4,
+                lbl_DrinkNotification5,
+                lbl_DrinkNotification6,
+                lbl_DrinkNotification7,
+                lbl_DrinkNotification8,
+                lbl_DrinkNotification9,
+                lbl_DrinkNotification10
+            };
+
             foreach (Button btn in tableButtons)
             {
                 btn.Click += OnTableButtonClick;
@@ -99,6 +114,7 @@ namespace RestaurantChapeau
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
             CheckNotification();
             CheckReservations();
+            CheckDrinkNotification();
         }
         private void ShowNotification()
         {
@@ -126,6 +142,7 @@ namespace RestaurantChapeau
             lbl_Table9Notification.Hide();
             lbl_Table10Notification.Hide();
         }
+       
         private void CheckNotification()
         {
             try
@@ -146,7 +163,7 @@ namespace RestaurantChapeau
                             List<MenuItem> items = orderLogic.GetItemsForOrder(order);
                             foreach (MenuItem item in items)
                             {
-                                if (item.Status == OrderStatus.ReadyToServe)
+                                if (item.Status == OrderStatus.ReadyToServe && !item.IsDrink)
                                 {
                                     readyCount++;
                                 }
@@ -157,6 +174,41 @@ namespace RestaurantChapeau
                 }
             }
             catch(Exception ex)
+            {
+                MessageBox.Show($"Something went wrong with notifycation: {ex.Message}");
+            }
+        }
+        private void CheckDrinkNotification()
+        {
+            try
+            {
+                for (int i = 0; i < drinkNotificationLabels.Length; i++)
+                {
+                    Label label = drinkNotificationLabels[i];
+                    label.Text = "";
+                    int tableNumber = i + 1;
+                    if (paymentService.HasBill(tableNumber))
+                    {
+                        Bill bill = paymentService.GetBill(tableNumber);
+                        List<Order> orders = orderLogic.GetOrdersForBill(bill);
+
+                        int readyCount = 0;
+                        foreach (Order order in orders)
+                        {
+                            List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                            foreach (MenuItem item in items)
+                            {
+                                if (item.Status == OrderStatus.ReadyToServe && item.IsDrink)
+                                {
+                                    readyCount++;
+                                }
+                            }
+                        }
+                        label.Text = $"{readyCount}";
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"Something went wrong with notifycation: {ex.Message}");
             }
@@ -243,6 +295,8 @@ namespace RestaurantChapeau
             try
             {
                 ReservationService reservationService = new ReservationService();
+                List<Reservation> reservations = reservationService.GetAllReservations();
+                Dictionary<DateTime,string> reservationCheck = new Dictionary<DateTime, string>();
                 string firstName = txt_ReservationFirstName.Text;
                 string lastName = txt_ReservationLastName.Text;
                 string email = txt_ReservationEmail.Text;
@@ -254,15 +308,16 @@ namespace RestaurantChapeau
                 {
                     MessageBox.Show("please fill out text box");
                 }
-                //else if(reservationAvailable >= reservation.ReservationStart.AddHours(-1))
-                //{
-                //    MessageBox.Show("You cannot make reservation");
-                //}
-                else
+                else if(reservationCheck.ContainsKey(reservation.ReservationStart) && reservationCheck.ContainsValue(reservation.tableid.ToString()))
+                {
+                    MessageBox.Show("you are unable to make reservation");
+                }                
+                else if(!reservationCheck.ContainsKey(reservation.ReservationStart) && !reservationCheck.ContainsValue(reservation.tableid.ToString()))
                 {
                     //add the customer info for the reservation to the database
                     reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
                     MessageBox.Show("Succesfully made reservation!");
+                    reservationCheck.Add(reservationStart,TableId);
                 }
 
                 //hide the panels and show the dashboard again
@@ -388,7 +443,6 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"Something went wrong with the reservation system: {ex.Message}");
             }
-
         }
 
         private void button1_Click_1(object sender, EventArgs e)
