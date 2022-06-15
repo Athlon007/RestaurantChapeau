@@ -56,7 +56,7 @@ namespace RestaurantChapeau
                     {
                         li.SubItems.Add("Not ready");
                     }
-                    //order tags become an order item
+                    
                     li.Tag = order;
 
                     //get all the items that belong to an order
@@ -81,7 +81,7 @@ namespace RestaurantChapeau
                     //if order is ready add to completed orders page or add to new order page
                     if (allItemsAboveReady == true)
                     {
-                        listViewKitchen_CompleteOrders.Items.Add(li);
+                        listViewKitchen_CompleteOrders.Items.Insert(0,li);
                     }
                     else
                     {
@@ -98,7 +98,7 @@ namespace RestaurantChapeau
         #endregion
 
         #region Display Order Items
-        private void DisplayOrderItems()
+        private void DisplayOrderItems(ListView listview)
         {
             try
             {
@@ -108,15 +108,14 @@ namespace RestaurantChapeau
                 //extract order item from the selected item in the listview
                 Order orderItem =new Order();
 
-                if (listViewNewOrders.SelectedItems.Count==0)
+                if (listview.SelectedItems.Count==0)//listview neweorders
                 {
                     orderItem = this.selectedOrder;
                 }
                 else
                 {
-                    orderItem= (Order)listViewNewOrders.SelectedItems[0].Tag;
+                    orderItem= (Order)listview.SelectedItems[0].Tag;//new orders
                 }
-
                 // get table number from the database where orderid is selected item
                 Table table = orderService.GetOrderTable(orderItem.Id);
 
@@ -153,7 +152,7 @@ namespace RestaurantChapeau
                     //set the background of the item to green if its ready to serve
                     if (item.Status >= OrderStatus.ReadyToServe)
                     {
-                        li.BackColor = Color.Green;
+                        li.BackColor = Color.GreenYellow;
                     }
                 }
             }
@@ -169,7 +168,7 @@ namespace RestaurantChapeau
         {
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
-            DisplayOrderItems();
+            DisplayOrderItems(listViewNewOrders);
 
             //Begin timer
             IsActive = true;
@@ -282,7 +281,7 @@ namespace RestaurantChapeau
 
                 //remove all the item in the active order listview and display again
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
-                DisplayOrderItems();
+                DisplayOrderItems(listViewNewOrders);
             }
             catch (Exception ex)
             {
@@ -348,6 +347,32 @@ namespace RestaurantChapeau
             mins = 0;
             hours = 0;
         }
+
+        private void pnlKitchen_ActiveOrder_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void listViewKitchen_CompleteOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayOrderItems(listViewKitchen_CompleteOrders);
+        }
+
+        private void listViewKitchen_CompleteOrders_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+            pnlKitchen_ActiveOrder.Show();
+            DisplayOrderItems(listViewKitchen_CompleteOrders);
+
+            //Begin timer
+            IsActive = true;
+
+            // the selected order is the order that has been selected in the new orderlistview
+            // makes sure that the order is not null when you make an order ready and doesnt break the program
+            selectedOrder = (Order)listViewKitchen_CompleteOrders.SelectedItems[0].Tag;
+        }
+
+
         #endregion
 
         #region Close Form
@@ -357,8 +382,6 @@ namespace RestaurantChapeau
             LoginForm login = new LoginForm();
             login.Show();
         }
-
-
         #endregion
 
         #region Fonts
