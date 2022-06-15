@@ -128,6 +128,36 @@ namespace RestaurantChapeau
             lbl_Table8Notification.Show();
             lbl_Table9Notification.Show();
             lbl_Table10Notification.Show();
+            lbl_DrinkNotification1.Show();
+            lbl_DrinkNotification2.Show();
+            lbl_DrinkNotification3.Show();
+            lbl_DrinkNotification4.Show();
+            lbl_DrinkNotification5.Show();
+            lbl_DrinkNotification6.Show();
+            lbl_DrinkNotification7.Show();
+            lbl_DrinkNotification8.Show();
+            lbl_DrinkNotification9.Show();
+            lbl_DrinkNotification10.Show();
+            pb_drink1.Show();
+            pb_drink2.Show();
+            pb_drink3.Show();
+            pb_drink4.Show();
+            pb_drink5.Show();
+            pb_drink6.Show();
+            pb_drink7.Show();
+            pb_drink8.Show();
+            pb_drink9.Show();
+            pb_drink10.Show();
+            pb_Food1.Show();
+            pb_Food2.Show();
+            pb_Food3.Show();
+            pb_Food4.Show();
+            pb_Food5.Show();
+            pb_Food6.Show();
+            pb_Food7.Show();
+            pb_Food8.Show();
+            pb_Food9.Show();
+            pb_Food10.Show();
         }
         private void HideNotification()
         {
@@ -141,6 +171,36 @@ namespace RestaurantChapeau
             lbl_Table8Notification.Hide();
             lbl_Table9Notification.Hide();
             lbl_Table10Notification.Hide();
+            lbl_DrinkNotification1.Hide();
+            lbl_DrinkNotification2.Hide();
+            lbl_DrinkNotification3.Hide();
+            lbl_DrinkNotification4.Hide();
+            lbl_DrinkNotification5.Hide();
+            lbl_DrinkNotification6.Hide();
+            lbl_DrinkNotification7.Hide();
+            lbl_DrinkNotification8.Hide();
+            lbl_DrinkNotification9.Hide();
+            lbl_DrinkNotification10.Hide();
+            pb_drink1.Hide();
+            pb_drink2.Hide();
+            pb_drink3.Hide();
+            pb_drink4.Hide();
+            pb_drink5.Hide();
+            pb_drink6.Hide();
+            pb_drink7.Hide();
+            pb_drink8.Hide();
+            pb_drink9.Hide();
+            pb_drink10.Hide();
+            pb_Food1.Hide();
+            pb_Food2.Hide();
+            pb_Food3.Hide();
+            pb_Food4.Hide();
+            pb_Food5.Hide();
+            pb_Food6.Hide();
+            pb_Food7.Hide();
+            pb_Food8.Hide();
+            pb_Food9.Hide();
+            pb_Food10.Hide();
         }
        
         private void CheckNotification()
@@ -738,6 +798,11 @@ namespace RestaurantChapeau
         private void btn_Occupy_Click_1(object sender, EventArgs e)
         {
            
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

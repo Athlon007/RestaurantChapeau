@@ -95,6 +95,26 @@
             this.lbl_DrinkNotification5 = new System.Windows.Forms.Label();
             this.lbl_DrinkNotification3 = new System.Windows.Forms.Label();
             this.lbl_DrinkNotification1 = new System.Windows.Forms.Label();
+            this.pb_drink1 = new System.Windows.Forms.PictureBox();
+            this.pb_drink2 = new System.Windows.Forms.PictureBox();
+            this.pb_drink4 = new System.Windows.Forms.PictureBox();
+            this.pb_drink6 = new System.Windows.Forms.PictureBox();
+            this.pb_drink8 = new System.Windows.Forms.PictureBox();
+            this.pb_drink10 = new System.Windows.Forms.PictureBox();
+            this.pb_drink3 = new System.Windows.Forms.PictureBox();
+            this.pb_drink5 = new System.Windows.Forms.PictureBox();
+            this.pb_drink7 = new System.Windows.Forms.PictureBox();
+            this.pb_drink9 = new System.Windows.Forms.PictureBox();
+            this.pb_Food1 = new System.Windows.Forms.PictureBox();
+            this.pb_Food3 = new System.Windows.Forms.PictureBox();
+            this.pb_Food5 = new System.Windows.Forms.PictureBox();
+            this.pb_Food7 = new System.Windows.Forms.PictureBox();
+            this.pb_Food9 = new System.Windows.Forms.PictureBox();
+            this.pb_Food2 = new System.Windows.Forms.PictureBox();
+            this.pb_Food4 = new System.Windows.Forms.PictureBox();
+            this.pb_Food6 = new System.Windows.Forms.PictureBox();
+            this.pb_Food8 = new System.Windows.Forms.PictureBox();
+            this.pb_Food10 = new System.Windows.Forms.PictureBox();
             this.pnl_Reservation.SuspendLayout();
             this.pnl_ViewReservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -106,6 +126,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_TableAgenda)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food10)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Table1
@@ -222,7 +262,6 @@
             // 
             // pnl_Reservation
             // 
-            this.pnl_Reservation.Controls.Add(this.pnl_ViewReservation);
             this.pnl_Reservation.Controls.Add(this.picLogo);
             this.pnl_Reservation.Controls.Add(this.lblHeader);
             this.pnl_Reservation.Controls.Add(this.pbMakeReservationGoBack);
@@ -237,7 +276,7 @@
             this.pnl_Reservation.Controls.Add(this.txt_ReservationEmail);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationTableID);
             this.pnl_Reservation.Controls.Add(this.btn_MakeReservation);
-            this.pnl_Reservation.Location = new System.Drawing.Point(528, 147);
+            this.pnl_Reservation.Location = new System.Drawing.Point(0, 0);
             this.pnl_Reservation.Name = "pnl_Reservation";
             this.pnl_Reservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Reservation.TabIndex = 32;
@@ -250,7 +289,7 @@
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationCancel);
             this.pnl_ViewReservation.Controls.Add(this.btn_ViewReservationMake);
             this.pnl_ViewReservation.Controls.Add(this.lV_ReservationDisplay);
-            this.pnl_ViewReservation.Location = new System.Drawing.Point(717, 80);
+            this.pnl_ViewReservation.Location = new System.Drawing.Point(0, 0);
             this.pnl_ViewReservation.Name = "pnl_ViewReservation";
             this.pnl_ViewReservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ViewReservation.TabIndex = 33;
@@ -483,7 +522,6 @@
             // 
             // pnl_TableDetailView
             // 
-            this.pnl_TableDetailView.Controls.Add(this.pnl_Reservation);
             this.pnl_TableDetailView.Controls.Add(this.btn_Occupy);
             this.pnl_TableDetailView.Controls.Add(this.btn_TableDetailViewChangeStatus);
             this.pnl_TableDetailView.Controls.Add(this.btn_TableDetailViewCheckOut);
@@ -492,7 +530,7 @@
             this.pnl_TableDetailView.Controls.Add(this.lbl_DisplayTableNr);
             this.pnl_TableDetailView.Controls.Add(this.lv_TableDetailView);
             this.pnl_TableDetailView.Controls.Add(this.pbTableDetailViewGoBack);
-            this.pnl_TableDetailView.Location = new System.Drawing.Point(685, 183);
+            this.pnl_TableDetailView.Location = new System.Drawing.Point(0, 0);
             this.pnl_TableDetailView.Name = "pnl_TableDetailView";
             this.pnl_TableDetailView.Size = new System.Drawing.Size(726, 1055);
             this.pnl_TableDetailView.TabIndex = 51;
@@ -645,7 +683,7 @@
             this.lbl_Table5Notification.AutoSize = true;
             this.lbl_Table5Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table5Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table5Notification.Location = new System.Drawing.Point(127, 534);
+            this.lbl_Table5Notification.Location = new System.Drawing.Point(114, 588);
             this.lbl_Table5Notification.Name = "lbl_Table5Notification";
             this.lbl_Table5Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table5Notification.TabIndex = 53;
@@ -655,7 +693,7 @@
             this.lbl_Table10Notification.AutoSize = true;
             this.lbl_Table10Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table10Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table10Notification.Location = new System.Drawing.Point(429, 831);
+            this.lbl_Table10Notification.Location = new System.Drawing.Point(412, 876);
             this.lbl_Table10Notification.Name = "lbl_Table10Notification";
             this.lbl_Table10Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table10Notification.TabIndex = 54;
@@ -665,7 +703,7 @@
             this.lbl_Table1Notification.AutoSize = true;
             this.lbl_Table1Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table1Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table1Notification.Location = new System.Drawing.Point(127, 258);
+            this.lbl_Table1Notification.Location = new System.Drawing.Point(114, 312);
             this.lbl_Table1Notification.Name = "lbl_Table1Notification";
             this.lbl_Table1Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table1Notification.TabIndex = 55;
@@ -675,7 +713,7 @@
             this.lbl_Table2Notification.AutoSize = true;
             this.lbl_Table2Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table2Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table2Notification.Location = new System.Drawing.Point(429, 258);
+            this.lbl_Table2Notification.Location = new System.Drawing.Point(412, 312);
             this.lbl_Table2Notification.Name = "lbl_Table2Notification";
             this.lbl_Table2Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table2Notification.TabIndex = 56;
@@ -685,7 +723,7 @@
             this.lbl_Table3Notification.AutoSize = true;
             this.lbl_Table3Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table3Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table3Notification.Location = new System.Drawing.Point(127, 394);
+            this.lbl_Table3Notification.Location = new System.Drawing.Point(114, 448);
             this.lbl_Table3Notification.Name = "lbl_Table3Notification";
             this.lbl_Table3Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table3Notification.TabIndex = 57;
@@ -695,7 +733,7 @@
             this.lbl_Table4Notification.AutoSize = true;
             this.lbl_Table4Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table4Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table4Notification.Location = new System.Drawing.Point(429, 394);
+            this.lbl_Table4Notification.Location = new System.Drawing.Point(412, 448);
             this.lbl_Table4Notification.Name = "lbl_Table4Notification";
             this.lbl_Table4Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table4Notification.TabIndex = 58;
@@ -705,7 +743,7 @@
             this.lbl_Table9Notification.AutoSize = true;
             this.lbl_Table9Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table9Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table9Notification.Location = new System.Drawing.Point(127, 822);
+            this.lbl_Table9Notification.Location = new System.Drawing.Point(114, 876);
             this.lbl_Table9Notification.Name = "lbl_Table9Notification";
             this.lbl_Table9Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table9Notification.TabIndex = 59;
@@ -715,7 +753,7 @@
             this.lbl_Table6Notification.AutoSize = true;
             this.lbl_Table6Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table6Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table6Notification.Location = new System.Drawing.Point(429, 538);
+            this.lbl_Table6Notification.Location = new System.Drawing.Point(412, 584);
             this.lbl_Table6Notification.Name = "lbl_Table6Notification";
             this.lbl_Table6Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table6Notification.TabIndex = 60;
@@ -725,7 +763,7 @@
             this.lbl_Table7Notification.AutoSize = true;
             this.lbl_Table7Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table7Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table7Notification.Location = new System.Drawing.Point(127, 675);
+            this.lbl_Table7Notification.Location = new System.Drawing.Point(114, 729);
             this.lbl_Table7Notification.Name = "lbl_Table7Notification";
             this.lbl_Table7Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table7Notification.TabIndex = 61;
@@ -735,7 +773,7 @@
             this.lbl_Table8Notification.AutoSize = true;
             this.lbl_Table8Notification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_Table8Notification.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Table8Notification.Location = new System.Drawing.Point(429, 686);
+            this.lbl_Table8Notification.Location = new System.Drawing.Point(412, 729);
             this.lbl_Table8Notification.Name = "lbl_Table8Notification";
             this.lbl_Table8Notification.Size = new System.Drawing.Size(0, 28);
             this.lbl_Table8Notification.TabIndex = 62;
@@ -756,7 +794,7 @@
             this.lbl_DrinkNotification10.AutoSize = true;
             this.lbl_DrinkNotification10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification10.Location = new System.Drawing.Point(619, 822);
+            this.lbl_DrinkNotification10.Location = new System.Drawing.Point(645, 876);
             this.lbl_DrinkNotification10.Name = "lbl_DrinkNotification10";
             this.lbl_DrinkNotification10.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification10.TabIndex = 64;
@@ -766,7 +804,7 @@
             this.lbl_DrinkNotification8.AutoSize = true;
             this.lbl_DrinkNotification8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification8.Location = new System.Drawing.Point(619, 675);
+            this.lbl_DrinkNotification8.Location = new System.Drawing.Point(645, 729);
             this.lbl_DrinkNotification8.Name = "lbl_DrinkNotification8";
             this.lbl_DrinkNotification8.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification8.TabIndex = 65;
@@ -776,7 +814,7 @@
             this.lbl_DrinkNotification6.AutoSize = true;
             this.lbl_DrinkNotification6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification6.Location = new System.Drawing.Point(619, 530);
+            this.lbl_DrinkNotification6.Location = new System.Drawing.Point(645, 584);
             this.lbl_DrinkNotification6.Name = "lbl_DrinkNotification6";
             this.lbl_DrinkNotification6.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification6.TabIndex = 66;
@@ -786,7 +824,7 @@
             this.lbl_DrinkNotification4.AutoSize = true;
             this.lbl_DrinkNotification4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbl_DrinkNotification4.Location = new System.Drawing.Point(619, 394);
+            this.lbl_DrinkNotification4.Location = new System.Drawing.Point(645, 448);
             this.lbl_DrinkNotification4.Name = "lbl_DrinkNotification4";
             this.lbl_DrinkNotification4.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification4.TabIndex = 67;
@@ -796,7 +834,7 @@
             this.lbl_DrinkNotification2.AutoSize = true;
             this.lbl_DrinkNotification2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification2.Location = new System.Drawing.Point(619, 258);
+            this.lbl_DrinkNotification2.Location = new System.Drawing.Point(645, 312);
             this.lbl_DrinkNotification2.Name = "lbl_DrinkNotification2";
             this.lbl_DrinkNotification2.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification2.TabIndex = 68;
@@ -806,7 +844,7 @@
             this.lbl_DrinkNotification9.AutoSize = true;
             this.lbl_DrinkNotification9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification9.Location = new System.Drawing.Point(328, 822);
+            this.lbl_DrinkNotification9.Location = new System.Drawing.Point(338, 876);
             this.lbl_DrinkNotification9.Name = "lbl_DrinkNotification9";
             this.lbl_DrinkNotification9.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification9.TabIndex = 69;
@@ -816,7 +854,7 @@
             this.lbl_DrinkNotification7.AutoSize = true;
             this.lbl_DrinkNotification7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification7.Location = new System.Drawing.Point(328, 675);
+            this.lbl_DrinkNotification7.Location = new System.Drawing.Point(338, 729);
             this.lbl_DrinkNotification7.Name = "lbl_DrinkNotification7";
             this.lbl_DrinkNotification7.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification7.TabIndex = 70;
@@ -826,7 +864,7 @@
             this.lbl_DrinkNotification5.AutoSize = true;
             this.lbl_DrinkNotification5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification5.Location = new System.Drawing.Point(328, 534);
+            this.lbl_DrinkNotification5.Location = new System.Drawing.Point(338, 588);
             this.lbl_DrinkNotification5.Name = "lbl_DrinkNotification5";
             this.lbl_DrinkNotification5.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification5.TabIndex = 71;
@@ -836,7 +874,7 @@
             this.lbl_DrinkNotification3.AutoSize = true;
             this.lbl_DrinkNotification3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification3.Location = new System.Drawing.Point(328, 394);
+            this.lbl_DrinkNotification3.Location = new System.Drawing.Point(338, 448);
             this.lbl_DrinkNotification3.Name = "lbl_DrinkNotification3";
             this.lbl_DrinkNotification3.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification3.TabIndex = 72;
@@ -846,10 +884,201 @@
             this.lbl_DrinkNotification1.AutoSize = true;
             this.lbl_DrinkNotification1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_DrinkNotification1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrinkNotification1.Location = new System.Drawing.Point(328, 258);
+            this.lbl_DrinkNotification1.Location = new System.Drawing.Point(338, 312);
             this.lbl_DrinkNotification1.Name = "lbl_DrinkNotification1";
             this.lbl_DrinkNotification1.Size = new System.Drawing.Size(0, 28);
             this.lbl_DrinkNotification1.TabIndex = 73;
+            // 
+            // pb_drink1
+            // 
+            this.pb_drink1.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink1.Image")));
+            this.pb_drink1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink1.InitialImage")));
+            this.pb_drink1.Location = new System.Drawing.Point(319, 258);
+            this.pb_drink1.Name = "pb_drink1";
+            this.pb_drink1.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink1.TabIndex = 74;
+            this.pb_drink1.TabStop = false;
+            // 
+            // pb_drink2
+            // 
+            this.pb_drink2.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink2.Image")));
+            this.pb_drink2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink2.InitialImage")));
+            this.pb_drink2.Location = new System.Drawing.Point(619, 258);
+            this.pb_drink2.Name = "pb_drink2";
+            this.pb_drink2.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink2.TabIndex = 75;
+            this.pb_drink2.TabStop = false;
+            // 
+            // pb_drink4
+            // 
+            this.pb_drink4.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink4.Image")));
+            this.pb_drink4.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink4.InitialImage")));
+            this.pb_drink4.Location = new System.Drawing.Point(619, 394);
+            this.pb_drink4.Name = "pb_drink4";
+            this.pb_drink4.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink4.TabIndex = 76;
+            this.pb_drink4.TabStop = false;
+            // 
+            // pb_drink6
+            // 
+            this.pb_drink6.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink6.Image")));
+            this.pb_drink6.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink6.InitialImage")));
+            this.pb_drink6.Location = new System.Drawing.Point(619, 530);
+            this.pb_drink6.Name = "pb_drink6";
+            this.pb_drink6.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink6.TabIndex = 77;
+            this.pb_drink6.TabStop = false;
+            this.pb_drink6.Click += new System.EventHandler(this.pictureBox7_Click);
+            // 
+            // pb_drink8
+            // 
+            this.pb_drink8.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink8.Image")));
+            this.pb_drink8.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink8.InitialImage")));
+            this.pb_drink8.Location = new System.Drawing.Point(619, 675);
+            this.pb_drink8.Name = "pb_drink8";
+            this.pb_drink8.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink8.TabIndex = 78;
+            this.pb_drink8.TabStop = false;
+            // 
+            // pb_drink10
+            // 
+            this.pb_drink10.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink10.Image")));
+            this.pb_drink10.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink10.InitialImage")));
+            this.pb_drink10.Location = new System.Drawing.Point(619, 822);
+            this.pb_drink10.Name = "pb_drink10";
+            this.pb_drink10.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink10.TabIndex = 79;
+            this.pb_drink10.TabStop = false;
+            // 
+            // pb_drink3
+            // 
+            this.pb_drink3.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink3.Image")));
+            this.pb_drink3.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink3.InitialImage")));
+            this.pb_drink3.Location = new System.Drawing.Point(319, 394);
+            this.pb_drink3.Name = "pb_drink3";
+            this.pb_drink3.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink3.TabIndex = 80;
+            this.pb_drink3.TabStop = false;
+            // 
+            // pb_drink5
+            // 
+            this.pb_drink5.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink5.Image")));
+            this.pb_drink5.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink5.InitialImage")));
+            this.pb_drink5.Location = new System.Drawing.Point(319, 534);
+            this.pb_drink5.Name = "pb_drink5";
+            this.pb_drink5.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink5.TabIndex = 81;
+            this.pb_drink5.TabStop = false;
+            // 
+            // pb_drink7
+            // 
+            this.pb_drink7.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink7.Image")));
+            this.pb_drink7.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink7.InitialImage")));
+            this.pb_drink7.Location = new System.Drawing.Point(319, 675);
+            this.pb_drink7.Name = "pb_drink7";
+            this.pb_drink7.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink7.TabIndex = 82;
+            this.pb_drink7.TabStop = false;
+            // 
+            // pb_drink9
+            // 
+            this.pb_drink9.Image = ((System.Drawing.Image)(resources.GetObject("pb_drink9.Image")));
+            this.pb_drink9.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_drink9.InitialImage")));
+            this.pb_drink9.Location = new System.Drawing.Point(319, 822);
+            this.pb_drink9.Name = "pb_drink9";
+            this.pb_drink9.Size = new System.Drawing.Size(52, 51);
+            this.pb_drink9.TabIndex = 83;
+            this.pb_drink9.TabStop = false;
+            // 
+            // pb_Food1
+            // 
+            this.pb_Food1.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food1.Location = new System.Drawing.Point(87, 258);
+            this.pb_Food1.Name = "pb_Food1";
+            this.pb_Food1.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food1.TabIndex = 84;
+            this.pb_Food1.TabStop = false;
+            // 
+            // pb_Food3
+            // 
+            this.pb_Food3.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food3.Location = new System.Drawing.Point(87, 394);
+            this.pb_Food3.Name = "pb_Food3";
+            this.pb_Food3.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food3.TabIndex = 85;
+            this.pb_Food3.TabStop = false;
+            // 
+            // pb_Food5
+            // 
+            this.pb_Food5.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food5.Location = new System.Drawing.Point(87, 534);
+            this.pb_Food5.Name = "pb_Food5";
+            this.pb_Food5.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food5.TabIndex = 86;
+            this.pb_Food5.TabStop = false;
+            // 
+            // pb_Food7
+            // 
+            this.pb_Food7.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food7.Location = new System.Drawing.Point(87, 675);
+            this.pb_Food7.Name = "pb_Food7";
+            this.pb_Food7.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food7.TabIndex = 87;
+            this.pb_Food7.TabStop = false;
+            // 
+            // pb_Food9
+            // 
+            this.pb_Food9.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food9.Location = new System.Drawing.Point(87, 822);
+            this.pb_Food9.Name = "pb_Food9";
+            this.pb_Food9.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food9.TabIndex = 88;
+            this.pb_Food9.TabStop = false;
+            // 
+            // pb_Food2
+            // 
+            this.pb_Food2.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food2.Location = new System.Drawing.Point(387, 258);
+            this.pb_Food2.Name = "pb_Food2";
+            this.pb_Food2.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food2.TabIndex = 89;
+            this.pb_Food2.TabStop = false;
+            // 
+            // pb_Food4
+            // 
+            this.pb_Food4.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food4.Location = new System.Drawing.Point(387, 394);
+            this.pb_Food4.Name = "pb_Food4";
+            this.pb_Food4.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food4.TabIndex = 90;
+            this.pb_Food4.TabStop = false;
+            // 
+            // pb_Food6
+            // 
+            this.pb_Food6.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food6.Location = new System.Drawing.Point(387, 530);
+            this.pb_Food6.Name = "pb_Food6";
+            this.pb_Food6.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food6.TabIndex = 91;
+            this.pb_Food6.TabStop = false;
+            // 
+            // pb_Food8
+            // 
+            this.pb_Food8.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food8.Location = new System.Drawing.Point(387, 675);
+            this.pb_Food8.Name = "pb_Food8";
+            this.pb_Food8.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food8.TabIndex = 92;
+            this.pb_Food8.TabStop = false;
+            // 
+            // pb_Food10
+            // 
+            this.pb_Food10.Image = global::RestaurantChapeau.Properties.Resources.food4;
+            this.pb_Food10.Location = new System.Drawing.Point(387, 822);
+            this.pb_Food10.Name = "pb_Food10";
+            this.pb_Food10.Size = new System.Drawing.Size(52, 51);
+            this.pb_Food10.TabIndex = 93;
+            this.pb_Food10.TabStop = false;
             // 
             // TableViewForm
             // 
@@ -857,6 +1086,28 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(726, 1055);
+            this.Controls.Add(this.pnl_ViewReservation);
+            this.Controls.Add(this.pnl_Reservation);
+            this.Controls.Add(this.pb_Food10);
+            this.Controls.Add(this.pb_Food8);
+            this.Controls.Add(this.pb_Food6);
+            this.Controls.Add(this.pb_Food4);
+            this.Controls.Add(this.pb_Food2);
+            this.Controls.Add(this.pb_Food9);
+            this.Controls.Add(this.pb_Food7);
+            this.Controls.Add(this.pb_Food5);
+            this.Controls.Add(this.pb_Food3);
+            this.Controls.Add(this.pb_Food1);
+            this.Controls.Add(this.pb_drink9);
+            this.Controls.Add(this.pb_drink7);
+            this.Controls.Add(this.pb_drink5);
+            this.Controls.Add(this.pb_drink3);
+            this.Controls.Add(this.pb_drink10);
+            this.Controls.Add(this.pb_drink8);
+            this.Controls.Add(this.pb_drink6);
+            this.Controls.Add(this.pb_drink4);
+            this.Controls.Add(this.pb_drink2);
+            this.Controls.Add(this.pb_drink1);
             this.Controls.Add(this.lbl_DrinkNotification1);
             this.Controls.Add(this.lbl_DrinkNotification3);
             this.Controls.Add(this.lbl_DrinkNotification5);
@@ -910,6 +1161,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTableDetailViewGoBack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_TableAgenda)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_drink9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Food10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -982,5 +1253,25 @@
         private System.Windows.Forms.Label lbl_DrinkNotification5;
         private System.Windows.Forms.Label lbl_DrinkNotification3;
         private System.Windows.Forms.Label lbl_DrinkNotification1;
+        private System.Windows.Forms.PictureBox pb_drink1;
+        private System.Windows.Forms.PictureBox pb_drink2;
+        private System.Windows.Forms.PictureBox pb_drink4;
+        private System.Windows.Forms.PictureBox pb_drink6;
+        private System.Windows.Forms.PictureBox pb_drink8;
+        private System.Windows.Forms.PictureBox pb_drink10;
+        private System.Windows.Forms.PictureBox pb_drink3;
+        private System.Windows.Forms.PictureBox pb_drink5;
+        private System.Windows.Forms.PictureBox pb_drink7;
+        private System.Windows.Forms.PictureBox pb_drink9;
+        private System.Windows.Forms.PictureBox pb_Food1;
+        private System.Windows.Forms.PictureBox pb_Food3;
+        private System.Windows.Forms.PictureBox pb_Food5;
+        private System.Windows.Forms.PictureBox pb_Food7;
+        private System.Windows.Forms.PictureBox pb_Food9;
+        private System.Windows.Forms.PictureBox pb_Food2;
+        private System.Windows.Forms.PictureBox pb_Food4;
+        private System.Windows.Forms.PictureBox pb_Food6;
+        private System.Windows.Forms.PictureBox pb_Food8;
+        private System.Windows.Forms.PictureBox pb_Food10;
     }
 }

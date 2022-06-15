@@ -103,6 +103,16 @@ namespace RestaurantChapeau.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap food4 {
+            get {
+                object obj = ResourceManager.GetObject("food4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hat {
             get {
                 object obj = ResourceManager.GetObject("hat", resourceCulture);
