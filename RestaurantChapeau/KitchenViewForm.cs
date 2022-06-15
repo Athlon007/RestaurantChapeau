@@ -108,15 +108,14 @@ namespace RestaurantChapeau
                 //extract order item from the selected item in the listview
                 Order orderItem =new Order();
 
-                if (listViewNewOrders.SelectedItems.Count==0)
+                if (listview.SelectedItems.Count==0)//listview neweorders
                 {
                     orderItem = this.selectedOrder;
                 }
                 else
                 {
-                    orderItem= (Order)listViewNewOrders.SelectedItems[0].Tag;
+                    orderItem= (Order)listview.SelectedItems[0].Tag;//new orders
                 }
-
                 // get table number from the database where orderid is selected item
                 Table table = orderService.GetOrderTable(orderItem.Id);
 
@@ -169,7 +168,7 @@ namespace RestaurantChapeau
         {
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
-            DisplayOrderItems();
+            DisplayOrderItems(listViewNewOrders);
 
             //Begin timer
             IsActive = true;
@@ -282,7 +281,7 @@ namespace RestaurantChapeau
 
                 //remove all the item in the active order listview and display again
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
-                DisplayOrderItems();
+                DisplayOrderItems(listViewNewOrders);
             }
             catch (Exception ex)
             {
@@ -356,13 +355,24 @@ namespace RestaurantChapeau
 
         private void listViewKitchen_CompleteOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            DisplayOrderItems(listViewKitchen_CompleteOrders);
         }
 
-        private void listViewKitchen_CompleteOrders_MouseClick(object sender, MouseEventArgs e)
+        private void listViewKitchen_CompleteOrders_Click(object sender, EventArgs e)
         {
-            DisplayOrderItems();
+            HidePanels();
+            pnlKitchen_ActiveOrder.Show();
+            DisplayOrderItems(listViewKitchen_CompleteOrders);
+
+            //Begin timer
+            IsActive = true;
+
+            // the selected order is the order that has been selected in the new orderlistview
+            // makes sure that the order is not null when you make an order ready and doesnt break the program
+            selectedOrder = (Order)listViewKitchen_CompleteOrders.SelectedItems[0].Tag;
         }
+
+
         #endregion
 
         #region Close Form
@@ -372,8 +382,6 @@ namespace RestaurantChapeau
             LoginForm login = new LoginForm();
             login.Show();
         }
-
-
         #endregion
 
         #region Fonts

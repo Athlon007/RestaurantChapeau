@@ -208,7 +208,7 @@
             this.listViewKitchen_CompleteOrders.UseCompatibleStateImageBehavior = false;
             this.listViewKitchen_CompleteOrders.View = System.Windows.Forms.View.Details;
             this.listViewKitchen_CompleteOrders.SelectedIndexChanged += new System.EventHandler(this.listViewKitchen_CompleteOrders_SelectedIndexChanged);
-            this.listViewKitchen_CompleteOrders.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewKitchen_CompleteOrders_MouseClick);
+            this.listViewKitchen_CompleteOrders.Click += new System.EventHandler(this.listViewKitchen_CompleteOrders_Click);
             // 
             // columnHeader1
             // 
