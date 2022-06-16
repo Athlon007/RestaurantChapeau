@@ -59,9 +59,9 @@ namespace RestaurantLogic
         /// <summary>
         /// Returns the list of all orders that are either not started, or being prepared, with all of its items.
         /// </summary>
-        public List<Order> GetKitchenOrdersToPrepare()
+        public List<Order> GetOrders(bool complete)
         {
-            return orderDao.GetKitchenOrdersToPrepare();
+            return orderDao.GetOrders(complete);
         }
 
         /// <summary>

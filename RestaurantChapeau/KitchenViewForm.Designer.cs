@@ -359,7 +359,6 @@
             this.pnlKitchen_ActiveOrder.Name = "pnlKitchen_ActiveOrder";
             this.pnlKitchen_ActiveOrder.Size = new System.Drawing.Size(1629, 1154);
             this.pnlKitchen_ActiveOrder.TabIndex = 10;
-            this.pnlKitchen_ActiveOrder.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlKitchen_ActiveOrder_Paint);
             // 
             // lblSecs
             // 

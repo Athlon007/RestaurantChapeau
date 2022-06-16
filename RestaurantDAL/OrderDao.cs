@@ -157,12 +157,14 @@ namespace RestaurantDAL
         /// <summary>
         /// Returns the list of orders that are either not started, or being prepared with all the items.
         /// </summary>
-        public List<Order> GetKitchenOrdersToPrepare()
+        public List<Order> GetOrders(bool complete)
         {
             string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
-                            "FROM[Order] o ";
-
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+                            "FROM[Order] o where o.complete = @complete ";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@complete", complete)
+            };
             return ReadOrderTables(ExecuteSelectQuery(query, sqlParameters));
         }
 

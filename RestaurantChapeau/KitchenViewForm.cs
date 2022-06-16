@@ -22,24 +22,75 @@ namespace RestaurantChapeau
         private Order selectedOrder;
         private MenuItem selectedItem;
         private OrderLogic orderService;
+        private bool complete;
+
 
         public KitchenViewForm(Employee employee)
         {
             this.employee = employee;
             InitializeComponent();
             SetFonts();
-            DisplayOrders();
+            DisplayNewOrders(complete,false ,listViewNewOrders);
+            // DisplayOrders(complete);
 
             ResetTimer();
         }
 
         #region Display Orders
-        public void DisplayOrders()
+        private void DisplayNewOrders(bool complete,bool allItemsReady, ListView listView)
+        {
+            // set bool to get new orders that arent complete
+            orderService = new OrderLogic();
+            List<Order> orders = orderService.GetOrders(complete);
+
+            foreach (Order order in orders)
+            {
+                ListViewItem li = new ListViewItem(order.Id.ToString());
+                li.SubItems.Add(order.PlacedTime.ToString());
+                if (complete == false)
+                    li.SubItems.Add("Not ready");
+                else
+                    li.SubItems.Add("Ready");
+                li.Tag = order;
+                 //add items to listviews
+                  listView.Items.Add(li);
+
+                //get items for selectedorder
+                List<MenuItem> items = orderService.GetItemsForOrder(order);
+                //if there are no items, do nothing
+                //if (items.Count == 0)
+                //    listView.Items.Remove(li);
+
+
+                // all lthe items above an item in a listview have a status of ready
+                allItemsReady = true;
+                foreach (MenuItem item in items)
+                {
+                    //if the order item is not ready to serve
+                    if (item.Status < OrderStatus.ReadyToServe)
+                    {
+                        //this makes sure so that the bartender doesnt see orders which contain food orders and otherwise (prevents empty order items in the listview)
+                        if (((item.IsDrink && employee.employeeType == EmployeeType.Bartender) || (!item.IsDrink && employee.employeeType == EmployeeType.KitchenStaff)))
+                          allItemsReady= false;
+                    }
+                }
+                //if order is ready add to completed orders page or add to new order page
+
+                if (allItemsReady == true)
+                {
+                    listView.Items.Remove(li);
+                }
+            }
+          
+        }
+
+
+        public void DisplayOrders(bool complete)
         {
             try
             {
                 orderService = new OrderLogic();
-                List<Order> orders = orderService.GetKitchenOrdersToPrepare();
+                List<Order> orders = orderService.GetOrders(complete);
 
                 foreach (Order order in orders)
                 {
@@ -56,7 +107,7 @@ namespace RestaurantChapeau
                     {
                         li.SubItems.Add("Not ready");
                     }
-                    
+
                     li.Tag = order;
 
                     //get all the items that belong to an order
@@ -81,7 +132,7 @@ namespace RestaurantChapeau
                     //if order is ready add to completed orders page or add to new order page
                     if (allItemsAboveReady == true)
                     {
-                        listViewKitchen_CompleteOrders.Items.Insert(0,li);
+                        listViewKitchen_CompleteOrders.Items.Insert(0, li);
                     }
                     else
                     {
@@ -106,15 +157,15 @@ namespace RestaurantChapeau
                 orderService = new OrderLogic();
 
                 //extract order item from the selected item in the listview
-                Order orderItem =new Order();
+                Order orderItem = new Order();
 
-                if (listview.SelectedItems.Count==0)//listview neweorders
+                if (listview.SelectedItems.Count == 0)//listview neweorders
                 {
                     orderItem = this.selectedOrder;
                 }
                 else
                 {
-                    orderItem= (Order)listview.SelectedItems[0].Tag;//new orders
+                    orderItem = (Order)listview.SelectedItems[0].Tag;//new orders
                 }
                 // get table number from the database where orderid is selected item
                 Table table = orderService.GetOrderTable(orderItem.Id);
@@ -195,7 +246,9 @@ namespace RestaurantChapeau
             pnlKitchen_NewOrders.Show();
 
             RemoveListViewItems(listViewNewOrders);
-            DisplayOrders();
+            //DisplayOrders(complete);
+
+            DisplayNewOrders(false,false, listViewNewOrders);
         }
         #endregion
 
@@ -214,6 +267,9 @@ namespace RestaurantChapeau
             // hide all panels and show complete orders
             HidePanels();
             pnlKitchen_CompleteOrders.Show();
+
+            RemoveListViewItems(listViewKitchen_CompleteOrders);
+            DisplayNewOrders(true,true, listViewKitchen_CompleteOrders);
         }
         #endregion
 
@@ -277,7 +333,7 @@ namespace RestaurantChapeau
 
                 //remove the items on the new order listview and update with new information
                 RemoveListViewItems(listViewNewOrders);
-                DisplayOrders();
+                DisplayOrders(complete);
 
                 //remove all the item in the active order listview and display again
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
@@ -346,11 +402,6 @@ namespace RestaurantChapeau
             secs = 0;
             mins = 0;
             hours = 0;
-        }
-
-        private void pnlKitchen_ActiveOrder_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void listViewKitchen_CompleteOrders_SelectedIndexChanged(object sender, EventArgs e)
