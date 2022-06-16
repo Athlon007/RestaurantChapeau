@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using RestaurantModel;
 
-namespace RestaurantModel
+namespace RestaurantLogic
 {
     public class PasswordWithSaltHasher
     {

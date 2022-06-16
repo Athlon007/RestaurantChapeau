@@ -164,11 +164,11 @@ namespace RestaurantChapeau
                 }
                 txt_RegisterPassword.Clear();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Unable to register: {ex.Message}");
             }
-            
+
         }
         private bool PasswordRequirements(string password)
         {
@@ -199,42 +199,32 @@ namespace RestaurantChapeau
                 employeeService = new EmployeeService();
 
                 //store the entered username and password
-                string email = txt_LoginEmail.Text;
+                string id = txt_LoginEmail.Text;
                 string enteredPassword = txt_LoginPassword.Text;
 
-                //get the user by the entered employeename
-                Employee employee = employeeService.GetEmployeeByEmployeeName(email);
+                //gets the employee if the login credentials are correct
+                Employee employee = employeeService.GetEmployeeByEmployeeID(id, enteredPassword);
 
-                //password hasher
-                PasswordWithSaltHasher passwordHasher = new PasswordWithSaltHasher();
+                //hide the panels and form, display form of tableView
+                HidePanels();
+                this.Hide();
 
                 
-                //if the entered password matches the one in the db
-                if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
-                {
-                    //hide the panels and form, display form of tableView
-                    HidePanels();
-                    this.Hide();
 
-                    switch (employee.employeeType)
-                    {
-                        case EmployeeType.Waiter:
-                            TableViewForm tableView = new TableViewForm(employee);
-                            tableView.Show();
-                            break;
-                        case EmployeeType.KitchenStaff:
-                            KitchenViewForm kitchenView = new KitchenViewForm(employee);
-                            kitchenView.Show();
-                            break;
-                        case EmployeeType.Bartender:
-                            KitchenViewForm kitchenView2 = new KitchenViewForm(employee);
-                            kitchenView2.Show();
-                            break;
-                    }
-                }
-                else
+                switch (employee.employeeType)
                 {
-                    MessageBox.Show("Login unabled.");
+                    case EmployeeType.Waiter:
+                        TableViewForm tableView = new TableViewForm(employee);
+                        tableView.Show();
+                        break;
+                    case EmployeeType.KitchenStaff:
+                        KitchenViewForm kitchenView = new KitchenViewForm(employee);
+                        kitchenView.Show();
+                        break;
+                    case EmployeeType.Bartender:
+                        KitchenViewForm kitchenView2 = new KitchenViewForm(employee);
+                        kitchenView2.Show();
+                        break;
                 }
             }
             catch (Exception ex)
