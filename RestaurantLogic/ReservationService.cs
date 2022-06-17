@@ -14,11 +14,13 @@ namespace RestaurantLogic
             //create connection to database
             reservationDb = new ReservationDao();
         }
+
         //adding the user to the db
-        public void AddToReservation(string firstName, string lastName, string email,string isReserved, DateTime ReservationStart, string tableid)
+        public void AddToReservation(Reservation reservation)
         {
-            reservationDb.AddToReservation(firstName, lastName, email,isReserved, ReservationStart, tableid);
+            reservationDb.AddToReservation(reservation);
         }
+
         //getting the reservation by its email
         public Reservation GetReservationByEmail(string email)
         {

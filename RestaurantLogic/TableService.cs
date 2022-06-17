@@ -18,5 +18,9 @@ namespace RestaurantLogic
         {
             return tableDB.GetTableId(id);            
         }
+        public int GetTheNumberOfTable()
+        {
+            return tableDB.GetNumberOfTables();
+        }
     }
 }

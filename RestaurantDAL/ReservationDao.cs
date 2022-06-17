@@ -12,18 +12,18 @@ namespace RestaurantDAL
     {        
         //adding a new reservation to the db
         
-        public void AddToReservation(string firstName, string lastName, string email,string isReserved, DateTime ReservationStart, string tableid)
+        public void AddToReservation(Reservation reservation)
         {
 
             string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, isReserved, ReservationStart, tableid) VALUES (@firstName, @lastName, @email, @isReserved, @ReservationStart, @tableid);";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@firstName", firstName),
-                new SqlParameter("@lastName", lastName),
-                new SqlParameter("@email", email),
-                new SqlParameter("@isReserved", isReserved),
-                new SqlParameter("@ReservationStart", ReservationStart),
-                new SqlParameter("@tableid", tableid)
+                new SqlParameter("@firstName", reservation.firstName),
+                new SqlParameter("@lastName", reservation.lastName),
+                new SqlParameter("@email", reservation.email),
+                new SqlParameter("@isReserved", reservation.isReserved),
+                new SqlParameter("@ReservationStart", reservation.ReservationStart),
+                new SqlParameter("@tableid", reservation.tableid)
             };
             ExecuteEditQuery(query, sqlParameters);
         }

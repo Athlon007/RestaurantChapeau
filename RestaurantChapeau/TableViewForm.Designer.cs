@@ -40,6 +40,7 @@
             this.btn_Table9 = new System.Windows.Forms.Button();
             this.btn_Table10 = new System.Windows.Forms.Button();
             this.pnl_Reservation = new System.Windows.Forms.Panel();
+            this.reservationTableNumber = new System.Windows.Forms.NumericUpDown();
             this.pnl_ViewReservation = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.txt_ReservationFirstName = new System.Windows.Forms.TextBox();
             this.txt_ReservationLastName = new System.Windows.Forms.TextBox();
             this.txt_ReservationEmail = new System.Windows.Forms.TextBox();
-            this.txt_ReservationTableID = new System.Windows.Forms.TextBox();
             this.btn_MakeReservation = new System.Windows.Forms.Button();
             this.pnl_TableDetailView = new System.Windows.Forms.Panel();
             this.btn_Occupy = new System.Windows.Forms.Button();
@@ -116,6 +116,7 @@
             this.pb_Food8 = new System.Windows.Forms.PictureBox();
             this.pb_Food10 = new System.Windows.Forms.PictureBox();
             this.pnl_Reservation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reservationTableNumber)).BeginInit();
             this.pnl_ViewReservation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -214,7 +215,6 @@
             this.btn_Table6.TabIndex = 25;
             this.btn_Table6.Text = "6";
             this.btn_Table6.UseVisualStyleBackColor = true;
-            this.btn_Table6.Click += new System.EventHandler(this.btn_Table6_Click);
             // 
             // btn_Table7
             // 
@@ -262,6 +262,7 @@
             // 
             // pnl_Reservation
             // 
+            this.pnl_Reservation.Controls.Add(this.reservationTableNumber);
             this.pnl_Reservation.Controls.Add(this.picLogo);
             this.pnl_Reservation.Controls.Add(this.lblHeader);
             this.pnl_Reservation.Controls.Add(this.pbMakeReservationGoBack);
@@ -274,12 +275,33 @@
             this.pnl_Reservation.Controls.Add(this.txt_ReservationFirstName);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationLastName);
             this.pnl_Reservation.Controls.Add(this.txt_ReservationEmail);
-            this.pnl_Reservation.Controls.Add(this.txt_ReservationTableID);
             this.pnl_Reservation.Controls.Add(this.btn_MakeReservation);
             this.pnl_Reservation.Location = new System.Drawing.Point(0, 0);
             this.pnl_Reservation.Name = "pnl_Reservation";
             this.pnl_Reservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Reservation.TabIndex = 32;
+            // 
+            // reservationTableNumber
+            // 
+            this.reservationTableNumber.Location = new System.Drawing.Point(144, 593);
+            this.reservationTableNumber.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.reservationTableNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.reservationTableNumber.Name = "reservationTableNumber";
+            this.reservationTableNumber.Size = new System.Drawing.Size(227, 27);
+            this.reservationTableNumber.TabIndex = 50;
+            this.reservationTableNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // pnl_ViewReservation
             // 
@@ -293,7 +315,6 @@
             this.pnl_ViewReservation.Name = "pnl_ViewReservation";
             this.pnl_ViewReservation.Size = new System.Drawing.Size(726, 1055);
             this.pnl_ViewReservation.TabIndex = 33;
-            this.pnl_ViewReservation.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_ViewReservation_Paint_1);
             // 
             // pictureBox2
             // 
@@ -369,7 +390,6 @@
             this.lV_ReservationDisplay.Size = new System.Drawing.Size(723, 439);
             this.lV_ReservationDisplay.TabIndex = 0;
             this.lV_ReservationDisplay.UseCompatibleStateImageBehavior = false;
-            this.lV_ReservationDisplay.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // picLogo
             // 
@@ -498,15 +518,6 @@
             this.txt_ReservationEmail.Size = new System.Drawing.Size(452, 58);
             this.txt_ReservationEmail.TabIndex = 2;
             // 
-            // txt_ReservationTableID
-            // 
-            this.txt_ReservationTableID.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txt_ReservationTableID.Location = new System.Drawing.Point(145, 587);
-            this.txt_ReservationTableID.Multiline = true;
-            this.txt_ReservationTableID.Name = "txt_ReservationTableID";
-            this.txt_ReservationTableID.Size = new System.Drawing.Size(452, 58);
-            this.txt_ReservationTableID.TabIndex = 4;
-            // 
             // btn_MakeReservation
             // 
             this.btn_MakeReservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
@@ -543,7 +554,6 @@
             this.btn_Occupy.TabIndex = 55;
             this.btn_Occupy.Text = "button1";
             this.btn_Occupy.UseVisualStyleBackColor = true;
-            this.btn_Occupy.Click += new System.EventHandler(this.btn_Occupy_Click_1);
             // 
             // btn_TableDetailViewChangeStatus
             // 
@@ -603,7 +613,6 @@
             this.lbl_DisplayTableNr.TabIndex = 50;
             this.lbl_DisplayTableNr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lbl_DisplayTableNr.UseCompatibleTextRendering = true;
-            this.lbl_DisplayTableNr.Click += new System.EventHandler(this.label3_Click);
             // 
             // lv_TableDetailView
             // 
@@ -615,7 +624,6 @@
             this.lv_TableDetailView.Size = new System.Drawing.Size(726, 605);
             this.lv_TableDetailView.TabIndex = 49;
             this.lv_TableDetailView.UseCompatibleStateImageBehavior = false;
-            this.lv_TableDetailView.SelectedIndexChanged += new System.EventHandler(this.lv_TableDetailView_SelectedIndexChanged);
             // 
             // pbTableDetailViewGoBack
             // 
@@ -787,7 +795,6 @@
             this.pb_TableAgenda.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_TableAgenda.TabIndex = 63;
             this.pb_TableAgenda.TabStop = false;
-            this.pb_TableAgenda.Click += new System.EventHandler(this.pb_TableAgenda_Click);
             // 
             // lbl_DrinkNotification10
             // 
@@ -928,7 +935,6 @@
             this.pb_drink6.Size = new System.Drawing.Size(52, 51);
             this.pb_drink6.TabIndex = 77;
             this.pb_drink6.TabStop = false;
-            this.pb_drink6.Click += new System.EventHandler(this.pictureBox7_Click);
             // 
             // pb_drink8
             // 
@@ -1151,6 +1157,7 @@
             this.Load += new System.EventHandler(this.TableViewForm_Load);
             this.pnl_Reservation.ResumeLayout(false);
             this.pnl_Reservation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reservationTableNumber)).EndInit();
             this.pnl_ViewReservation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1202,7 +1209,6 @@
         private System.Windows.Forms.TextBox txt_ReservationFirstName;
         private System.Windows.Forms.TextBox txt_ReservationLastName;
         private System.Windows.Forms.TextBox txt_ReservationEmail;
-        private System.Windows.Forms.TextBox txt_ReservationTableID;
         private System.Windows.Forms.Label lbl_ReservationIsReserved;
         private System.Windows.Forms.Label lbl_ReservationTableid;
         private System.Windows.Forms.Label lbl_ReservationEmail;
@@ -1273,5 +1279,6 @@
         private System.Windows.Forms.PictureBox pb_Food6;
         private System.Windows.Forms.PictureBox pb_Food8;
         private System.Windows.Forms.PictureBox pb_Food10;
+        private System.Windows.Forms.NumericUpDown reservationTableNumber;
     }
 }
