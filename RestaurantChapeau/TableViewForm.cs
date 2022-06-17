@@ -14,6 +14,7 @@ namespace RestaurantChapeau
 {
     public partial class TableViewForm : Form
     {
+        TableService tableService = new TableService();
         ReservationService reservationService = new ReservationService();
         PaymentService paymentService = new PaymentService();
         Reservation reservation = new Reservation();
@@ -75,7 +76,7 @@ namespace RestaurantChapeau
                 lbl_DrinkNotification9,
                 lbl_DrinkNotification10
             };
-
+            
             foreach (Button btn in tableButtons)
             {
                 btn.Click += OnTableButtonClick;
@@ -203,6 +204,21 @@ namespace RestaurantChapeau
             pb_Food10.Hide();
         }
        
+        private Dictionary<string,Button> TableButtons()
+        {
+            Dictionary<string,Button> buttons = new Dictionary<string,Button>();
+            buttons.Add("btn_Table1", btn_Table1);
+            buttons.Add("btn_Table2", btn_Table2);
+            buttons.Add("btn_Table3", btn_Table3);
+            buttons.Add("btn_Table4", btn_Table4);
+            buttons.Add("btn_Table5", btn_Table5);
+            buttons.Add("btn_Table6", btn_Table6);
+            buttons.Add("btn_Table7", btn_Table7);
+            buttons.Add("btn_Table8", btn_Table8);
+            buttons.Add("btn_Table9", btn_Table9);
+            buttons.Add("btn_Table10", btn_Table10);
+            return buttons;
+        }
         private void CheckNotification()
         {
             try
@@ -279,7 +295,53 @@ namespace RestaurantChapeau
             {
                 for (int i = 0; i < tableButtons.Length; i++)
                 {
-                    Button button = tableButtons[i];
+                    //Table table = tableService.GetTableNumber(i + 1);
+                    //switch (table.Id)
+                    //{
+                    //    case 1:
+                    //        tableService.GetTableNumber(1);
+                    //        lv_TableDetailView_SelectedIndexChanged(1, currentBill);
+                    //        break;
+                    //    case 2:
+                    //        tableService.GetTableNumber(2);
+                    //        lv_TableDetailView_SelectedIndexChanged(2, currentBill);
+                    //        break;
+                    //    case 3:
+                    //        tableService.GetTableNumber(3);
+                    //        lv_TableDetailView_SelectedIndexChanged(3, currentBill);
+                    //        break;
+                    //    case 4:
+                    //        tableService.GetTableNumber(4);
+                    //        lv_TableDetailView_SelectedIndexChanged(4, currentBill);
+                    //        break;
+                    //    case 5:
+                    //        tableService.GetTableNumber(5);
+                    //        lv_TableDetailView_SelectedIndexChanged(5, currentBill);
+                    //        break;
+                    //    case 6:
+                    //        tableService.GetTableNumber(6);
+                    //        lv_TableDetailView_SelectedIndexChanged(6, currentBill);
+                    //        break;
+                    //    case 7:
+                    //        tableService.GetTableNumber(7);
+                    //        lv_TableDetailView_SelectedIndexChanged(7, currentBill);
+                    //        break;
+                    //    case 8:
+                    //        tableService.GetTableNumber(8);
+                    //        lv_TableDetailView_SelectedIndexChanged(8, currentBill);
+                    //        break;
+                    //    case 9:
+                    //        tableService.GetTableNumber(9);
+                    //        lv_TableDetailView_SelectedIndexChanged(9, currentBill);
+                    //        break;
+                    //    case 10:
+                    //        tableService.GetTableNumber(10);
+                    //        lv_TableDetailView_SelectedIndexChanged(10, currentBill);
+                    //        break;
+                    //}
+                    //Button button = new Button();
+                    Button button = tableService.GetTableNumber(i+1);
+                    /*Button button = tableButtons[i]*/;
                     button.Image = Properties.Resources.screenshotTable;
                     button.Tag = null;
 
@@ -295,7 +357,6 @@ namespace RestaurantChapeau
                     tableButtons[reservation.tableid - 1].Tag = reservation;
                     if (reservation.isReserved)
                     {
-                        bool reservationNoShowUp = DateTime.Now >= reservation.ReservationStart.AddHours(-1);
                         bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
                         bool isTakenNow = DateTime.Now > reservation.ReservationStart;
                         bool tableHasBill = paymentService.HasBill(reservation.tableid);
@@ -307,11 +368,7 @@ namespace RestaurantChapeau
                         else if (isTableReserved)
                         {
                             tableButtons[reservation.tableid - 1].Image = Properties.Resources.reserved;
-                        }
-                        else if (reservationNoShowUp)
-                        {
-                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
-                        }
+                        }                        
                         else
                         {
                             tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
@@ -368,17 +425,21 @@ namespace RestaurantChapeau
                 {
                     MessageBox.Show("please fill out text box");
                 }
-                else if(reservationCheck.ContainsKey(reservation.ReservationStart) && reservationCheck.ContainsValue(reservation.tableid.ToString()))
+                foreach (KeyValuePair<DateTime,String> item in reservationCheck)
                 {
-                    MessageBox.Show("you are unable to make reservation");
-                }                
-                else if(!reservationCheck.ContainsKey(reservation.ReservationStart) && !reservationCheck.ContainsValue(reservation.tableid.ToString()))
-                {
-                    //add the customer info for the reservation to the database
-                    reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
-                    MessageBox.Show("Succesfully made reservation!");
-                    reservationCheck.Add(reservationStart,TableId);
+                    if (reservationCheck.ContainsKey(reservation.ReservationStart) && reservationCheck.ContainsValue(reservation.tableid.ToString()))
+                    {
+                        MessageBox.Show("you are unable to make reservation");
+                    }
+                    else if (!reservationCheck.ContainsKey(reservation.ReservationStart) && !reservationCheck.ContainsValue(reservation.tableid.ToString()))
+                    {
+                        //add the customer info for the reservation to the database
+                        reservationCheck.Add(reservationStart, TableId);
+                        reservationService.AddToReservation(firstName, lastName, email, "1", reservationStart, TableId);
+                        MessageBox.Show("Succesfully made reservation!");
+                    }
                 }
+                
 
                 //hide the panels and show the dashboard again
                 HidePanel();
@@ -586,11 +647,8 @@ namespace RestaurantChapeau
             {
                 if (!paymentService.HasBill(tableId))
                 {
-                    // Table has no bill?
                     // Go to order view.
-                    ShowOrderView(tableId);
-                    //HideNotification();
-                    //pb_TableAgenda.Hide();
+                    ShowOrderView(tableId);                 
                 }
                 else
                 {
