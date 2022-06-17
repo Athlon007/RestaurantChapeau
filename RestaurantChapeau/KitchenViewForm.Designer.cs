@@ -359,7 +359,6 @@
             this.pnlKitchen_ActiveOrder.Name = "pnlKitchen_ActiveOrder";
             this.pnlKitchen_ActiveOrder.Size = new System.Drawing.Size(1629, 1154);
             this.pnlKitchen_ActiveOrder.TabIndex = 10;
-            this.pnlKitchen_ActiveOrder.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlKitchen_ActiveOrder_Paint);
             // 
             // lblSecs
             // 
@@ -469,7 +468,6 @@
             // 
             // listViewKitchen_ActiveOrder
             // 
-            this.listViewKitchen_ActiveOrder.CheckBoxes = true;
             this.listViewKitchen_ActiveOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Order_item,
             this.Quantity,
@@ -524,9 +522,9 @@
             this.ClientSize = new System.Drawing.Size(1844, 1157);
             this.Controls.Add(this.sidebarPanelCompleteOrder);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Controls.Add(this.pnlKitchen_ActiveOrder);
             this.Controls.Add(this.pnlKitchen_NewOrders);
+            this.Controls.Add(this.pnlKitchen_CompleteOrders);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KitchenViewForm";
             this.Text = "KitchenViewForm";

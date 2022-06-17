@@ -59,9 +59,9 @@ namespace RestaurantLogic
         /// <summary>
         /// Returns the list of all orders that are either not started, or being prepared, with all of its items.
         /// </summary>
-        public List<Order> GetKitchenOrdersToPrepare()
+        public List<Order> GetOrders(bool complete, bool isDrink, OrderStatus maximumOrderStatus)
         {
-            return orderDao.GetKitchenOrdersToPrepare();
+            return orderDao.GetOrders(complete, isDrink, maximumOrderStatus);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace RestaurantLogic
         {
             orderDao.RegisterOrderToBartender(employee, order);
         }
-      
+
         public List<MenuItem> GetOrderItemsByID(int orderID)
         {
             return orderDao.GetOrderItemsByID(orderID);
@@ -115,6 +115,11 @@ namespace RestaurantLogic
         public List<MenuItem> GetItemsForOrder(Order order)
         {
             return orderDao.GetItemsForOrder(order);
+        }
+
+        public List<MenuItem> GetItemsToPrepareForOrder(Order order, bool isDrink)
+        {
+            return orderDao.GetItemsToPrepareForOrder(order, isDrink);
         }
 
         /// <summary>

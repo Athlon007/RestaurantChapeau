@@ -157,19 +157,31 @@ namespace RestaurantDAL
         /// <summary>
         /// Returns the list of orders that are either not started, or being prepared with all the items.
         /// </summary>
-        public List<Order> GetKitchenOrdersToPrepare()
+        public List<Order> GetOrders(bool complete, bool isDrink, OrderStatus maximumOrderStatus)
         {
-            string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
-                            "FROM[Order] o ";
-
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            //string query = "SELECT o.[id], o.placedTime, o.complete, o.comment " +
+            //                "FROM[Order] o where o.complete = @complete ";
+            string query = "SELECT o2.id, o2.placedTime, o2.complete, o2.comment " +
+                            "FROM[Order] o2 " +
+                            "WHERE o2.id IN (SELECT o.[id] " +
+                                            "FROM [Order] o " +
+                                            "JOIN PartOf po ON po.orderId = o.id " +
+                                            "JOIN MenuItem mi ON po.menuItemId = mi.id " +
+                                            "WHERE o.complete = @complete AND mi.isDrink = @isdrink AND po.status <= @orderstatus " +
+                                            "GROUP BY o.[id])";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@complete", complete),
+                new SqlParameter("@isdrink", isDrink),
+                new SqlParameter("@orderstatus", (int)maximumOrderStatus)
+            };
             return ReadOrderTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         //Returns all the food items in an order with a specific orderID
         public List<MenuItem> GetOrderItemsByID(int orderId)
         {
-            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, po.status, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is null;";
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, po.status, v.vat, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink = 0;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderId", orderId)
@@ -181,7 +193,7 @@ namespace RestaurantDAL
         //Returns all the items in an order with a specific orderID
         public List<MenuItem> GetBarOrderItemsByID(int orderId)
         {
-            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, po.status, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink is NOT null;";
+            string selectItemsQuery = "SELECT mi.id, mi.name, mi.priceBrutto, po.quantity, v.vat, po.status, mi.isDrink FROM PartOf po JOIN MenuItem mi ON po.menuItemId = mi.id JOIN Vat v ON mi.vatId = v.id WHERE orderId = @orderId AND mi.isDrink = 1;";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderId", orderId)
@@ -219,7 +231,7 @@ namespace RestaurantDAL
             };
             ExecuteEditQuery(command, parameters);
         }
-      
+
         // get the comment which is attached to an order 
         public Order GetOrderCommentByID(int OrderID)
         {
@@ -321,7 +333,28 @@ namespace RestaurantDAL
                             "WHERE po.orderId = @OrderId";
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("OrderId", order.Id)
+                new SqlParameter("@OrderId", order.Id)
+            };
+
+            return ReadMenuItemsForOrder(ExecuteSelectQuery(query, parameters));
+        }
+
+        /// <summary>
+        /// Returns the full list of all items belonging to a specified order.
+        /// </summary>
+        /// <param name="order">Order that we want to check the menu items of.</param>
+        /// <returns></returns>
+        public List<MenuItem> GetItemsToPrepareForOrder(Order order, bool isDrink)
+        {
+            string query = "SELECT mi.id, mi.name, v.vat, mi.priceBrutto, mi.isDrink, po.quantity, mi.stock, po.status " +
+                            "FROM MenuItem mi " +
+                            "JOIN Vat v on v.id = mi.vatId " +
+                            "JOIN PartOf po ON po.menuItemId = mi.id " +
+                            "WHERE po.orderId = @OrderId AND mi.isDrink = @IsDrink AND po.status < 3";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderId", order.Id),
+                new SqlParameter("@IsDrink", isDrink)
             };
 
             return ReadMenuItemsForOrder(ExecuteSelectQuery(query, parameters));
@@ -407,7 +440,7 @@ namespace RestaurantDAL
 
                 throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
             }
-            
+
         }
     }
 }
