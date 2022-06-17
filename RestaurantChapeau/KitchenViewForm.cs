@@ -36,9 +36,19 @@ namespace RestaurantChapeau
         }
 
         #region Display Orders
+
+        /// <summary>
+        /// gets orders depending on if the item is complete ,the listview to be displayed on
+        ///  and the max order status by which it should get the information from the database
+        /// </summary>
+        /// <param name="complete"></param>
+        /// is a bool which checks if the item is complete and gets data from db
+        /// <param name="listView"></param>
+        /// shows which listview it should display the data on
+        /// <param name="maxOrderStatus"></param>
+        /// max ordering status which it should show the orders 
         private void DisplayNewOrders(bool complete, ListView listView, OrderStatus maxOrderStatus)
         {
-            // set bool to get new orders that arent complete
             orderService = new OrderLogic();
             //List<Order> orders = orderService.GetOrders(complete);
             List<Order> orders = new List<Order>();
@@ -54,7 +64,7 @@ namespace RestaurantChapeau
             foreach (Order order in orders)
             {
                 ListViewItem li = new ListViewItem(order.Id.ToString());
-                li.SubItems.Add(order.PlacedTime.ToString());
+                li.SubItems.Add(order.PlacedTime.TimeOfDay.ToString());
                 if (complete == false)
                     li.SubItems.Add("Not ready");
                 else
@@ -77,15 +87,11 @@ namespace RestaurantChapeau
                 //add items to listviews and if complete add backwards
                 if (complete || items.Count > 0)
                 {
-
                     if (complete == true)
                         listView.Items.Insert(0, li);
                     else
                         listView.Items.Add(li);
                 }
-
-
-
             }
         }
         #endregion
@@ -131,7 +137,7 @@ namespace RestaurantChapeau
                 // delete all the items in the listview before adding new ones
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
 
-                //foreach item in the list acquired from the db, add the name to the active order
+                //foreach item in the list acquired from the db, add the name to the active order listview
                 foreach (MenuItem item in orderMenuItems)
                 {
                     ListViewItem li = new ListViewItem(item.Name.ToString());
@@ -161,6 +167,7 @@ namespace RestaurantChapeau
         {
             HidePanels();
             pnlKitchen_ActiveOrder.Show();
+            // display order items for the selected item on  a listview
             DisplayOrderItems(listViewNewOrders);
 
             //Begin timer
@@ -232,13 +239,13 @@ namespace RestaurantChapeau
                 selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
 
                 //if all the items on the listview are selected, change status to ready else preparing
-                if (listViewKitchen_ActiveOrder.CheckedItems.Count == 0)
+                if (listViewKitchen_ActiveOrder.SelectedItems.Count == 0)
                 {
                     MessageBox.Show($"Please select an item to mark ready");
                 }
                 else
                 {
-                    foreach (ListViewItem item in listViewKitchen_ActiveOrder.CheckedItems)
+                    foreach (ListViewItem item in listViewKitchen_ActiveOrder.SelectedItems)
                     {
                         //set menu item to item in the listview
                         MenuItem menuItem = (MenuItem)item.Tag;
@@ -260,7 +267,6 @@ namespace RestaurantChapeau
                             break;
                         }
                     }
-
                     //if all the items are done and are selected, change status to ready else preparing
                     if (allItemsDone)
                     {
