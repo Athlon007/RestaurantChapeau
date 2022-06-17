@@ -30,18 +30,26 @@ namespace RestaurantChapeau
             this.employee = employee;
             InitializeComponent();
             SetFonts();
-            DisplayNewOrders(complete,false ,listViewNewOrders);
-            // DisplayOrders(complete);
+            DisplayNewOrders(false, listViewNewOrders, OrderStatus.Preparing);
 
             ResetTimer();
         }
 
         #region Display Orders
-        private void DisplayNewOrders(bool complete,bool allItemsReady, ListView listView)
+        private void DisplayNewOrders(bool complete, ListView listView, OrderStatus maxOrderStatus)
         {
             // set bool to get new orders that arent complete
             orderService = new OrderLogic();
-            List<Order> orders = orderService.GetOrders(complete);
+            //List<Order> orders = orderService.GetOrders(complete);
+            List<Order> orders = new List<Order>();
+            if (employee.employeeType == EmployeeType.KitchenStaff)
+            {
+                orders = orderService.GetOrders(complete, false, maxOrderStatus);
+            }
+            else if (employee.employeeType == EmployeeType.Bartender)
+            {
+                orders = orderService.GetOrders(complete, true, maxOrderStatus);
+            }
 
             foreach (Order order in orders)
             {
@@ -51,100 +59,34 @@ namespace RestaurantChapeau
                     li.SubItems.Add("Not ready");
                 else
                     li.SubItems.Add("Ready");
+
                 li.Tag = order;
-                 //add items to listviews
-                  listView.Items.Add(li);
 
                 //get items for selectedorder
-                List<MenuItem> items = orderService.GetItemsForOrder(order);
-                //if there are no items, do nothing
-                //if (items.Count == 0)
-                //    listView.Items.Remove(li);
-
-
-                // all lthe items above an item in a listview have a status of ready
-                allItemsReady = true;
-                foreach (MenuItem item in items)
+                //List<MenuItem> items = orderService.GetItemsForOrder(order);
+                List<MenuItem> items = new List<MenuItem>();
+                if (employee.employeeType == EmployeeType.KitchenStaff)
                 {
-                    //if the order item is not ready to serve
-                    if (item.Status < OrderStatus.ReadyToServe)
-                    {
-                        //this makes sure so that the bartender doesnt see orders which contain food orders and otherwise (prevents empty order items in the listview)
-                        if (((item.IsDrink && employee.employeeType == EmployeeType.Bartender) || (!item.IsDrink && employee.employeeType == EmployeeType.KitchenStaff)))
-                          allItemsReady= false;
-                    }
+                    items = orderService.GetItemsToPrepareForOrder(order, false);
                 }
-                //if order is ready add to completed orders page or add to new order page
-
-                if (allItemsReady == true)
+                else if (employee.employeeType == EmployeeType.Bartender)
                 {
-                    listView.Items.Remove(li);
+                    items = orderService.GetItemsToPrepareForOrder(order, true);
                 }
-            }
-          
-        }
 
-
-        public void DisplayOrders(bool complete)
-        {
-            try
-            {
-                orderService = new OrderLogic();
-                List<Order> orders = orderService.GetOrders(complete);
-
-                foreach (Order order in orders)
+                //add items to listviews and if complete add backwards
+                if (complete || items.Count > 0)
                 {
-                    //create new listview item and add the items to the listview item
-                    ListViewItem li = new ListViewItem(order.Id.ToString());
-                    li.SubItems.Add(order.PlacedTime.ToString());
 
-                    // if the item is complete, display status is ready or else not ready in the listview
-                    if (order.Complete == true)
-                    {
-                        li.SubItems.Add("Ready");
-                    }
+                    if (complete == true)
+                        listView.Items.Insert(0, li);
                     else
-                    {
-                        li.SubItems.Add("Not ready");
-                    }
-
-                    li.Tag = order;
-
-                    //get all the items that belong to an order
-                    List<MenuItem> items = orderService.GetItemsForOrder(order);
-
-                    //if there are no items, do nothing
-                    if (items.Count == 0)
-                        continue;
-
-                    // all lthe items above an item in a listview have a status of ready
-                    bool allItemsAboveReady = true;
-                    foreach (MenuItem item in items)
-                    {
-                        //if the order item is not ready to serve
-                        if (item.Status < OrderStatus.ReadyToServe)
-                        {
-                            //this makes sure so that the bartender doesnt see orders which contain food orders and otherwise (prevents empty order items in the listview)
-                            if (((item.IsDrink && employee.employeeType == EmployeeType.Bartender) || (!item.IsDrink && employee.employeeType == EmployeeType.KitchenStaff)))
-                                allItemsAboveReady = false;
-                        }
-                    }
-                    //if order is ready add to completed orders page or add to new order page
-                    if (allItemsAboveReady == true)
-                    {
-                        listViewKitchen_CompleteOrders.Items.Insert(0, li);
-                    }
-                    else
-                    {
-                        listViewNewOrders.Items.Add(li);
-                    }
+                        listView.Items.Add(li);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error! There was a problem fetching orders from the database: {ex.Message}");
-            }
 
+
+
+            }
         }
         #endregion
 
@@ -248,7 +190,7 @@ namespace RestaurantChapeau
             RemoveListViewItems(listViewNewOrders);
             //DisplayOrders(complete);
 
-            DisplayNewOrders(false,false, listViewNewOrders);
+            DisplayNewOrders(false, listViewNewOrders, OrderStatus.Preparing);
         }
         #endregion
 
@@ -269,7 +211,7 @@ namespace RestaurantChapeau
             pnlKitchen_CompleteOrders.Show();
 
             RemoveListViewItems(listViewKitchen_CompleteOrders);
-            DisplayNewOrders(true,true, listViewKitchen_CompleteOrders);
+            DisplayNewOrders(true, listViewKitchen_CompleteOrders, OrderStatus.Served);
         }
         #endregion
 
@@ -333,7 +275,7 @@ namespace RestaurantChapeau
 
                 //remove the items on the new order listview and update with new information
                 RemoveListViewItems(listViewNewOrders);
-                DisplayOrders(complete);
+                DisplayNewOrders(false, listViewNewOrders, OrderStatus.Served);
 
                 //remove all the item in the active order listview and display again
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
