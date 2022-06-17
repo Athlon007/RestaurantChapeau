@@ -176,6 +176,16 @@ namespace RestaurantChapeau
             // the selected order is the order that has been selected in the new orderlistview
             // makes sure that the order is not null when you make an order ready and doesnt break the program
             selectedOrder = (Order)listViewNewOrders.SelectedItems[0].Tag;
+
+
+            foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
+            {
+                MenuItem menuItem = (MenuItem)item.Tag;
+                if (menuItem.Status == OrderStatus.Preparing)
+                {
+                    btn_preparingOrder.Enabled = false;
+                }
+            }
         }
         #endregion
 
@@ -250,7 +260,7 @@ namespace RestaurantChapeau
                         //set menu item to item in the listview
                         MenuItem menuItem = (MenuItem)item.Tag;
                         menuItem.Status = OrderStatus.ReadyToServe;
-                        orderService.SetOrderItemStatus(menuItem, orderItem);
+                        orderService.SetOrderItemStatus(menuItem, orderItem,false);
                     }
 
                     // assume all items are ready
@@ -276,6 +286,8 @@ namespace RestaurantChapeau
 
                         // stop the timer
                         IsActive = false;
+                        // enable start order button
+                        btn_preparingOrder.Enabled = true;
                     }
                 }
 
@@ -286,6 +298,9 @@ namespace RestaurantChapeau
                 //remove all the item in the active order listview and display again
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
                 DisplayOrderItems(listViewNewOrders);
+
+
+
             }
             catch (Exception ex)
             {
@@ -381,6 +396,11 @@ namespace RestaurantChapeau
             LoginForm login = new LoginForm();
             login.Show();
         }
+
+        private void btn_preparingOrder_Click(object sender, EventArgs e)
+        {
+            PreparingOrder();
+        }
         #endregion
 
         #region Fonts
@@ -399,5 +419,34 @@ namespace RestaurantChapeau
             lblKitchenn_OrderNo.UseCompatibleTextRendering = true;
         }
         #endregion
+
+        public void PreparingOrder()
+        {
+            Order order = selectedOrder;
+            orderService = new OrderLogic();
+            MenuItem menuItem = new MenuItem();
+            bool isDrink;
+
+            if (employee.employeeType==EmployeeType.KitchenStaff)
+            {
+                 isDrink = false;
+            }
+            else
+            {
+                isDrink = true;
+            }
+            foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
+            {
+                menuItem = (MenuItem)item.Tag;
+                menuItem.Status = OrderStatus.Preparing;
+                orderService.SetOrderItemStatus(menuItem, order,isDrink);
+            }
+
+            MessageBox.Show("Order has been started!");
+            btn_preparingOrder.Enabled = false;
+            RemoveListViewItems(listViewKitchen_ActiveOrder);
+            DisplayOrderItems(listViewKitchen_ActiveOrder);
+        }
     }
+
 }
