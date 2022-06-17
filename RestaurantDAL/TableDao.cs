@@ -23,7 +23,7 @@ namespace RestaurantDAL
             string query = $"select count(id) AS count from dbo.[Table]";
             SqlParameter[] sqlParameters = new SqlParameter[0];           
             return ReadTableCount(ExecuteSelectQuery(query, sqlParameters));
-        }
+        }        
         private Table ReadTable(DataTable dataTable)
         {
             // create object to store values

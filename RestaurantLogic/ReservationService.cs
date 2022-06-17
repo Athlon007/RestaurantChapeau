@@ -14,6 +14,10 @@ namespace RestaurantLogic
             //create connection to database
             reservationDb = new ReservationDao();
         }
+        public bool IsReserved(int tableId)
+        {
+            return reservationDb.IsReserved(tableId);
+        }
 
         //adding the user to the db
         public void AddToReservation(Reservation reservation)
@@ -26,6 +30,10 @@ namespace RestaurantLogic
         {
             return reservationDb.GetReservationByEmail(email);
         }
+        public Reservation GetAllReservationForTable()
+        {
+            return reservationDb.GetAllReservationForTable();
+        }
 
         //getting the list of all reservations
         public List<Reservation> GetAllReservations()
@@ -36,7 +44,7 @@ namespace RestaurantLogic
         public void CancelReservation(Reservation reservation)
         {
             reservationDb.CancelReservation(reservation);
-        }
+        }        
 
         [Obsolete("Replaced by PaymentService.HasBill().")]
         public bool TableHasBill(int tableId)

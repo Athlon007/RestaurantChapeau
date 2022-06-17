@@ -21,7 +21,7 @@ namespace RestaurantDAL
                 new SqlParameter("@firstName", reservation.firstName),
                 new SqlParameter("@lastName", reservation.lastName),
                 new SqlParameter("@email", reservation.email),
-                new SqlParameter("@isReserved", reservation.isReserved),
+                new SqlParameter("@isReserved", "1"),
                 new SqlParameter("@ReservationStart", reservation.ReservationStart),
                 new SqlParameter("@tableid", reservation.tableid)
             };
@@ -35,6 +35,23 @@ namespace RestaurantDAL
             {
                 new SqlParameter("@email", email)
             };
+            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public bool IsReserved(int tableId)
+        {
+            string query = $"SELECT isReserved FROM [Reservation] WHERE tableid = @tableid";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@tableid", tableId)
+            };
+            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
+
+            //return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public Reservation GetAllReservationForTable()
+        {
+            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM [Reservation]";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
         //getting a list of all the reservation

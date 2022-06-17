@@ -127,9 +127,9 @@ namespace RestaurantChapeau
             //Initialise listview with DPI scale
             lv_TableDetailView.Columns.Add("ID", (int)(40 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
             lv_TableDetailView.Columns.Add("Status", (int)(80 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Menu", (int)(230 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Quantity", (int)(60 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Time", (int)(230 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", (int)(280 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Quantity", (int)(100 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Time", (int)(200 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
 
             //Adjust fonts based on scale
             label1.Font = FontManager.Instance.ScriptMT(label1.Font.Size);
@@ -273,67 +273,6 @@ namespace RestaurantChapeau
                 MessageBox.Show($"Something went wrong with notifycation: {ex.Message}");
             }
         }
-        private void CheckReservations()
-        {
-            try
-            {
-                for (int i = 0; i < nrOfTables; i++)
-                {
-
-                    tableButtons[i].Image = Properties.Resources.screenshotTable;
-                    tableButtons[i].Tag = null;
-
-                    if (paymentService.HasBill(i + 1))
-                    {
-                        tableButtons[i].Image = Properties.Resources.occupied;
-                    }
-                }
-
-                List<Reservation> reservations = reservationService.GetAllReservations();
-                foreach (Reservation reservation in reservations)
-                {
-                    tableButtons[reservation.tableid - 1].Tag = reservation;
-                    if (reservation.isReserved)
-                    {
-                        bool isTableReserved = DateTime.Now.AddHours(+1) >= reservation.ReservationStart;
-                        bool isTakenNow = DateTime.Now > reservation.ReservationStart;
-                        bool tableHasBill = paymentService.HasBill(reservation.tableid);
-                        if (isTakenNow && tableHasBill)
-                        {
-                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.occupied;
-
-                        }
-                        else if (isTableReserved)
-                        {
-                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.reserved;
-                        }
-                        else
-                        {
-                            tableButtons[reservation.tableid - 1].Image = Properties.Resources.screenshotTable;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Something went wrong while checking reservation: {ex.Message}");
-            }
-
-        }
-
-        private void TableViewForm_Load(object sender, EventArgs e)
-        {
-            HidePanel();
-            dateTimePicker1.MinDate = DateTime.Now;
-            dateTimePicker1.Value = DateTime.Now;
-        }
-        public void HidePanel()
-        {
-            pnl_Reservation.Hide();
-            pnl_ViewReservation.Hide();
-            pnl_TableDetailView.Hide();
-        }
-
         private void btn_MakeReservation_Click(object sender, EventArgs e)
         {
             try
@@ -363,6 +302,11 @@ namespace RestaurantChapeau
                         MessageBox.Show("you are unable to make reservation");
                         return;
                     }
+                    else if (reservation.tableid == newReservation.tableid && reservation.ReservationStart.AddHours(1) >= newReservation.ReservationStart)
+                    {
+                        MessageBox.Show("you are unable to make reservation");
+                        return;
+                    }
                 }
 
                 //Add the reservation to the database
@@ -382,6 +326,47 @@ namespace RestaurantChapeau
                 MessageBox.Show($"something went wrong with this button: {ex.Message}");
             }
         }
+        private void CheckReservations()
+        {
+            try
+            {
+                reservation = reservationService.GetAllReservationForTable();
+                for (int i = 0; i < nrOfTables; i++)
+                {
+                    tableButtons[i].Image = Properties.Resources.screenshotTable;
+                    tableButtons[i].Tag = null;
+
+                    if (paymentService.HasBill(i + 1))
+                    {
+                        tableButtons[i].Image = Properties.Resources.occupied;
+                    }
+                    else if (reservationService.IsReserved(i + 1))
+                    {
+                        tableButtons[i].Image = Properties.Resources.reserved;
+                    }
+                }                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Something went wrong while checking reservation: {ex.Message}");
+            }
+
+        }
+
+        private void TableViewForm_Load(object sender, EventArgs e)
+        {
+            HidePanel();
+            dateTimePicker1.MinDate = DateTime.Now;
+            dateTimePicker1.Value = DateTime.Now;
+        }
+        public void HidePanel()
+        {
+            pnl_Reservation.Hide();
+            pnl_ViewReservation.Hide();
+            pnl_TableDetailView.Hide();
+        }
+
+       
 
         private void btn_Test_Click(object sender, EventArgs e)
         {
@@ -407,8 +392,8 @@ namespace RestaurantChapeau
                 //Initialise listview
                 lV_ReservationDisplay.Clear();
                 lV_ReservationDisplay.Columns.Add("ID", 50, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("First Name", 90, HorizontalAlignment.Left);
-                lV_ReservationDisplay.Columns.Add("Last Name", 90, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("First Name", 100, HorizontalAlignment.Left);
+                lV_ReservationDisplay.Columns.Add("Last Name", 100, HorizontalAlignment.Left);
                 lV_ReservationDisplay.Columns.Add("Email", 150, HorizontalAlignment.Left);
                 lV_ReservationDisplay.Columns.Add("Time", 150, HorizontalAlignment.Left);
                 lV_ReservationDisplay.Columns.Add("Table number", 150, HorizontalAlignment.Left);
@@ -421,7 +406,7 @@ namespace RestaurantChapeau
                     li.SubItems.Add(r.firstName);
                     li.SubItems.Add(r.lastName);
                     li.SubItems.Add(r.email);
-                    li.SubItems.Add(r.ReservationStart.ToString());
+                    li.SubItems.Add(r.ReservationStart.TimeOfDay.ToString());
                     li.SubItems.Add(r.tableid.ToString());
                     li.Tag = r;
                     lV_ReservationDisplay.Items.Add(li);
@@ -586,7 +571,7 @@ namespace RestaurantChapeau
                         li.SubItems.Add(item.Status.ToString());
                         li.SubItems.Add(item.Name.ToString());
                         li.SubItems.Add(item.Quantity.ToString());
-                        li.SubItems.Add(order.PlacedTime.ToString());
+                        li.SubItems.Add(order.PlacedTime.TimeOfDay.ToString());
                         ListItem listItem = new ListItem()
                         {
                             Order = order,
