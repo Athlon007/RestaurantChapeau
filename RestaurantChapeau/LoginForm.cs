@@ -15,7 +15,6 @@ using System.Security.Cryptography;
 
 namespace RestaurantChapeau
 {
-
     public partial class LoginForm : Form
     {
         private EmployeeService employeeService;
@@ -229,7 +228,7 @@ namespace RestaurantChapeau
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Login unabled: {ex.Message}");
+                MessageBox.Show($"Login not successful: {ex.Message}");
 
                 //clear the text boxes
                 txt_LoginEmail.Text = "";
