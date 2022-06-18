@@ -462,13 +462,19 @@ namespace RestaurantChapeau
             {
                 PictureBox picturebox = new PictureBox();
                 picturebox.Size = new Size(51, 51);
-                picturebox.Location = new Point(150 * (pbX), 135 * (pbY));
+                picturebox.Location = new Point(100 * (pbX), 135 * (pbY));
                 picturebox.Image = Properties.Resources.food4;
-                pbX++;
+                pbX += 3;
                 pbCount++;
+                if(i % 2 == 1)
+                {
+                    pbX -= 6;
+                    pbY++;
+                    
+                }
+                //Controls.Add(picturebox);
             }
         }
-
         private void DynamicLabelsForFoodNotification()
         {
             int lbX = 1;
@@ -480,6 +486,7 @@ namespace RestaurantChapeau
                 label.Text = "";
                 label.Name = lbCount.ToString();
                 label.Size = new Size(20, 20);
+                label.Font = new Font("Segoe UI", 12f);
                 label.BackColor = Color.Gray;
                 label.ForeColor = Color.White;
                 label.Location = new Point(105 * (lbX), 135 * (lbY));
@@ -524,9 +531,10 @@ namespace RestaurantChapeau
                 label.Text = "";
                 label.Name = lbCount.ToString();
                 label.Size = new Size(20, 20);
+                label.Font = new Font("Segoe UI", 12f);
                 label.BackColor = Color.Gray;
                 label.ForeColor = Color.White;
-                label.Location = new Point(105 * (lbX), 135 * (lbY));
+                label.Location = new Point(103 * (lbX), 135 * (lbY));
                 label.AutoSize = true;
                 lbX += 3;
                 lbCount++;
@@ -571,24 +579,25 @@ namespace RestaurantChapeau
                 Button button = new Button();
                 button.Text = buttonCount.ToString();
                 button.Name = buttonCount.ToString();
+                button.Font = new Font("Segoe UI", 15f);
                 button.Size = new Size(160, 130);
-                button.Location = new Point(150 * (buttonX), 135 * (buttonY));
+                button.Location = new Point(145 * (buttonX), 130 * (buttonY));
                 button.Image = Properties.Resources.screenshotTable;
-                buttonX++;
+                buttonX+=2;
                 buttonCount++;
                 if (i % 2 == 1)
                 {
 
-                    buttonX -= 3;
+                    buttonX -= 4;
                     buttonY++;
                 }
-                else
-                {
-                    buttonX++;
-                }
+                //else
+                //{
+                //    buttonX++;
+                //}
                 if (paymentService.HasBill(i + 1))
-                {
-                    button.Image = Properties.Resources.occupied;
+                {                     
+                    button.Image = Properties.Resources.occupiedNotif2;                    
                 }
                 else if (reservationService.IsReserved(i + 1))
                 {

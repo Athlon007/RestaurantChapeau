@@ -73,6 +73,36 @@ namespace RestaurantChapeau.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AgendaOccupiedTable {
+            get {
+                object obj = ResourceManager.GetObject("AgendaOccupiedTable", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap agendaTable22 {
+            get {
+                object obj = ResourceManager.GetObject("agendaTable22", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap agendaTable221 {
+            get {
+                object obj = ResourceManager.GetObject("agendaTable221", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap backbutton {
             get {
                 object obj = ResourceManager.GetObject("backbutton", resourceCulture);
@@ -126,6 +156,36 @@ namespace RestaurantChapeau.Properties {
         internal static System.Drawing.Bitmap occupied {
             get {
                 object obj = ResourceManager.GetObject("occupied", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap occupiedNotif {
+            get {
+                object obj = ResourceManager.GetObject("occupiedNotif", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap occupiedNotif2 {
+            get {
+                object obj = ResourceManager.GetObject("occupiedNotif2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap occupiedTableWithNotification {
+            get {
+                object obj = ResourceManager.GetObject("occupiedTableWithNotification", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
