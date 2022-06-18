@@ -99,10 +99,10 @@ namespace RestaurantDAL
                 reservation.ReservationStart = (DateTime)(dr["ReservationStart"]);
                 reservation.tableid = int.Parse(dr["tableid"].ToString());
             }
-            else
-            {
-                throw new Exception("There is no reservation");
-            }
+            //else
+            //{
+            //    throw new Exception("There is no reservation");
+            //}
             return reservation;
         }
         public void CancelReservation(Reservation reservation)
