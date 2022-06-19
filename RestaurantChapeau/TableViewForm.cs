@@ -17,7 +17,6 @@ namespace RestaurantChapeau
         TableService tableService = new TableService();
         ReservationService reservationService = new ReservationService();
         PaymentService paymentService = new PaymentService();
-        Reservation reservation = new Reservation();
         Employee currentEmployee;
         OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
@@ -28,13 +27,19 @@ namespace RestaurantChapeau
         int nrOfTables;
         Timer timer;
 
+        //Lists of components
+        List<Button> tableButtons;
+        List<Label> drinkNotifications;
+        List<Label> foodNotifications;
+
         //On form load
         public TableViewForm(Employee employee)
         {
-            InitializeComponent();
-
+            InitializeComponent();            
             nrOfTables = tableService.GetTheNumberOfTable();
             currentEmployee = employee;
+
+            
 
             //Start the timer for refreshing information
             timer = new Timer();
@@ -62,20 +67,17 @@ namespace RestaurantChapeau
         //Refresh on timer tick
         private void Timer_Tick(object sender, EventArgs e)
         {
-            //If order window is open, don't do anything
-            if (orderViewWindow != null && orderViewWindow.Visible)
+            //If order window or payment window is open, don't do anything
+            if ((orderViewWindow != null && orderViewWindow.Visible) || (paymentWindow != null && paymentWindow.Visible))
             {
                 return;
             }
-            //If payment window is open, don't do anything
-            if (paymentWindow != null && paymentWindow.Visible)
-            {
-                return;
-            }
+
             //Refresh table details
-            DynamicLabelsForFoodNotification();
-            DynamicLabelsForDrinkNotification();
-            DynamicButtonsForTables();
+            UpdateDrinkLabels(drinkNotifications);
+            UpdateFoodLabels(foodNotifications);
+            UpdateTableButtons(tableButtons);
+
             if (currentBill != null)
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
         }
@@ -115,21 +117,7 @@ namespace RestaurantChapeau
                 }
                 //Add the reservation to the database
                 reservationService.AddToReservation(newReservation);
-                MessageBox.Show("Succesfully made reservation!");
-                //for (int i = 0; i < nrOfTables; i++)
-                //{
-                //    if (!paymentService.HasBill(i + 1))
-                //    {
-
-                //        break;
-                //    }
-                //    else
-                //    {                        
-                //        MessageBox.Show("You cannot make reservation, this table is occupied");
-                //        break;
-                //    }
-                //}
-
+                MessageBox.Show("Succesfully made reservation!");                
 
                 //hide the panels and show the dashboard again
                 HidePanel();
@@ -150,10 +138,15 @@ namespace RestaurantChapeau
             HidePanel();
             dateTimePicker1.MinDate = DateTime.Now;
             dateTimePicker1.Value = DateTime.Now;
-            DynamicButtonsForTables();
-            DynamicPictureBoxes();
-            DynamicLabelsForFoodNotification();
-            DynamicLabelsForDrinkNotification();
+            CreateButtonsForTables();
+            //DynamicPictureBoxes();
+            CreateLabelsForFoodNotification();
+            CreateLabelsForDrinkNotification();
+
+            //Create lists of components
+            tableButtons = CreateButtonsForTables();
+            drinkNotifications = CreateLabelsForDrinkNotification();
+            foodNotifications = CreateLabelsForFoodNotification();
 
         }
         public void HidePanel()
@@ -270,49 +263,49 @@ namespace RestaurantChapeau
             pb_TableAgenda.Show();
         }
 
-        private void CreateButtons(Object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            if(button != null)
-            {
-                for (int i = 0; i < nrOfTables; i++)
-                {
-                    if(button.Text == i.ToString())
-                    {
-                        HandleTableButtonClick(i + 1);
-                        return;
-                    }
-                }
-            }
-        }
-        //private void OnTableButtonClick(object sender, EventArgs e)
+        //private void CreateButtons(Object sender, EventArgs e)
         //{
-        //    try
+        //    Button button = sender as Button;
+        //    if(button != null)
         //    {
-        //        //Get table ID from the sender/button
-        //        if (!int.TryParse((sender as Button).Text, out int id))
+        //        for (int i = 0; i < nrOfTables; i++)
         //        {
-        //            throw new Exception("Could not read table ID.");
+        //            if(button.Text == i.ToString())
+        //            {
+        //                HandleTableButtonClick(i + 1);
+        //                return;
+        //            }
         //        }
-
-        //        //Load table reservation
-        //        Reservation reservation;
-        //        if ((sender as Button).Tag != null)
-        //        {
-        //            reservation = (Reservation)(sender as Button).Tag;
-        //        }
-        //        else
-        //        {
-        //            reservation = null;
-        //        }
-
-        //        HandleTableButtonClick(id);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
         //    }
         //}
+        private void OnTableButtonClick(object sender, EventArgs e)
+        {
+            try
+            {
+                //Get table ID from the sender/button
+                if (!int.TryParse((sender as Button).Text, out int id))
+                {
+                    throw new Exception("Could not read table ID.");
+                }
+
+                //Load table reservation
+                Reservation reservation;
+                if ((sender as Button).Tag != null)
+                {
+                    reservation = (Reservation)(sender as Button).Tag;
+                }
+                else
+                {
+                    reservation = null;
+                }
+
+                HandleTableButtonClick(id);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
+            }
+        }
 
         //
         private void HandleTableButtonClick(int tableId)
@@ -498,55 +491,89 @@ namespace RestaurantChapeau
             paymentWindow = new Payment(currentTableNumber, pnl_TableDetailView);
             paymentWindow.Show();
         }
-
-        private void DynamicPictureBoxes()
+        
+        private List<Label> CreateLabelsForFoodNotification()
         {
-            int pbX = 1;
-            int pbY = 2;
-            int pbCount = 1;
-            for (int i = 0; i < nrOfTables; i++)
-            {
-                PictureBox picturebox = new PictureBox();
-                picturebox.Size = new Size(51, 51);
-                picturebox.Location = new Point(100 * (pbX), 135 * (pbY));
-                picturebox.Image = Properties.Resources.food4;
-                pbX += 3;
-                pbCount++;
-                if (i % 2 == 1)
-                {
-                    pbX -= 6;
-                    pbY++;
-
-                }
-                //Controls.Add(picturebox);
-            }
-        }
-        private void DynamicLabelsForFoodNotification()
-        {
+            List<Label> foodLabels = new List<Label>();
+            //Set position start
             int lbX = 1;
             int lbY = 2;
+            //Set labelCount to 1
             int lbCount = 1;
+            
+            //For each table, add labels
             for (int i = 0; i < nrOfTables; i++)
             {
-                Label label = new Label();
-                label.Text = "";
-                label.Name = lbCount.ToString();
-                label.Size = new Size(20, 20);
-                label.Font = new Font("Segoe UI", 12f);
-                label.BackColor = Color.Gray;
-                label.ForeColor = Color.White;
-                label.Location = new Point(105 * (lbX), 135 * (lbY));
-                label.AutoSize = true;
+                //Create label using positioning paramaters
+                Label label = CreateNotificationLabel(lbCount, lbX, lbY);
+
                 lbX += 3;
+
+                if (i % 2 == 1)
+                {
+                    lbX -= 6;
+                    lbY++;
+                }               
+                Controls.Add(label);
+                foodLabels.Add(label);
+
                 lbCount++;
+            }
+            return foodLabels;
+        }
+
+        private List<Label> CreateLabelsForDrinkNotification()
+        {
+            List<Label> drinkLabels = new List<Label>();
+            int lbX = 3;
+            int lbY = 2;
+            int lbCount = 1;
+            
+            for (int i = 0; i < nrOfTables; i++)
+            {
+                //Create new label with positioning parameters
+                Label label = CreateNotificationLabel(lbCount, lbX, lbY);
+                
+                lbX += 3;
+                
+                //For each uneven label, move label to the left
                 if (i % 2 == 1)
                 {
                     lbX -= 6;
                     lbY++;
                 }
-                if (paymentService.HasBill(i + 1))
+                
+                Controls.Add(label);
+                drinkLabels.Add(label);
+
+                lbCount++;
+            }
+            return drinkLabels;
+        }
+
+        private Label CreateNotificationLabel(int lbCount, int lbX, int lbY)
+        {
+            Label label = new Label();
+            label.Text = "";
+            label.Name = lbCount.ToString();
+            label.Size = new Size(20, 20);
+            label.Font = new Font("Segoe UI", 12f);
+            label.BackColor = Color.Gray;
+            label.ForeColor = Color.White;
+            label.Location = new Point(103 * (lbX), 135 * (lbY));
+            label.AutoSize = true;
+
+            return label;
+        }
+        private void UpdateFoodLabels(List<Label> foodLabels)
+        {
+            int tableNr = 1;
+            foreach (Label label in foodLabels)
+            {
+                //If table has a bill, get ready orders and store them into label
+                if (paymentService.HasBill(tableNr))
                 {
-                    Bill bill = paymentService.GetBill(i + 1);
+                    Bill bill = paymentService.GetBill(tableNr);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
 
                     int readyCount = 0;
@@ -561,37 +588,23 @@ namespace RestaurantChapeau
                             }
                         }
                     }
+
                     label.Text = $"{readyCount}";
                 }
-                Controls.Add(label);
+
+                tableNr++;
             }
         }
-        private void DynamicLabelsForDrinkNotification()
+
+        private void UpdateDrinkLabels(List<Label> drinkLabels)
         {
-            int lbX = 3;
-            int lbY = 2;
-            int lbCount = 1;
-            for (int i = 0; i < nrOfTables; i++)
+            int tableNr = 1;
+            foreach (Label label in drinkLabels)
             {
-                Label label = new Label();
-                label.Text = "";
-                label.Name = lbCount.ToString();
-                label.Size = new Size(20, 20);
-                label.Font = new Font("Segoe UI", 12f);
-                label.BackColor = Color.Gray;
-                label.ForeColor = Color.White;
-                label.Location = new Point(103 * (lbX), 135 * (lbY));
-                label.AutoSize = true;
-                lbX += 3;
-                lbCount++;
-                if (i % 2 == 1)
+                //If table has a bill, get ready orders and store them into label
+                if (paymentService.HasBill(tableNr))
                 {
-                    lbX -= 6;
-                    lbY++;
-                }
-                if (paymentService.HasBill(i + 1))
-                {
-                    Bill bill = paymentService.GetBill(i + 1);
+                    Bill bill = paymentService.GetBill(tableNr);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
 
                     int readyCount = 0;
@@ -606,18 +619,21 @@ namespace RestaurantChapeau
                             }
                         }
                     }
+
                     label.Text = $"{readyCount}";
                 }
-                Controls.Add(label);
+                
+                tableNr++;
             }
         }
 
-        private void DynamicButtonsForTables()
+        private List<Button> CreateButtonsForTables()
         {
+            List<Button> tableButtons = new List<Button>();
+
             int buttonX = 1;
             int buttonY = 2;
             int buttonCount = 1;
-            //reservation = reservationService.GetAllReservationForTable();
 
             for (int i = 0; i < nrOfTables; i++)
             {
@@ -635,16 +651,29 @@ namespace RestaurantChapeau
                     buttonX -= 4;
                     buttonY++;
                 }
-                if (paymentService.HasBill(i + 1))
+                
+                tableButtons.Add(button);
+            }
+            return tableButtons;
+        }
+
+        private void UpdateTableButtons(List<Button> tableButtons)
+        {
+            int tableNr = 1;
+            foreach (Button button in tableButtons)
+            {
+                if (paymentService.HasBill(tableNr))
                 {
                     button.Image = Properties.Resources.occupiedNotif2;
                 }
-                else if (reservationService.IsReserved(i + 1))
+                else if (reservationService.IsReserved(tableNr))
                 {
                     button.Image = Properties.Resources.reserved;
                 }
                 Controls.Add(button);
-                button.Click += CreateButtons;//OnTableButtonClick;
+                button.Click += OnTableButtonClick;//CreateButtons;
+
+                tableNr++;
             }
         }
     }
