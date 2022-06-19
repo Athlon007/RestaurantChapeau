@@ -18,9 +18,9 @@ namespace RestaurantLogic
         }
         
         //adding the user to the db
-        public void AddToRegister(string firstName, string lastName,string email, string passwordHash, string passwordSalt)
+        public void AddToRegister(string firstName, string lastName,string id, string passwordHash, string passwordSalt)
         {
-            employeeDb.AddToRegister(firstName, lastName,email, passwordHash, passwordSalt);
+            employeeDb.AddToRegister(firstName, lastName,id, passwordHash, passwordSalt);
         }
         
         //getting the user by its username
@@ -29,7 +29,7 @@ namespace RestaurantLogic
             Employee employee = employeeDb.GetEmployeeByEmployeeID(id);
 
             if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
-            {
+            {           
                 return employee;
             }
             else

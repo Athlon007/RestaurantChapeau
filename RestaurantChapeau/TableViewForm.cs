@@ -85,7 +85,6 @@ namespace RestaurantChapeau
             {
                 ReservationService reservationService = new ReservationService();
 
-
                 Reservation newReservation = new Reservation();
                 newReservation.firstName = txt_ReservationFirstName.Text;
                 newReservation.lastName = txt_ReservationLastName.Text;
@@ -112,12 +111,25 @@ namespace RestaurantChapeau
                     {
                         MessageBox.Show("you are unable to make reservation");
                         return;
-                    }
+                    } 
                 }
-
                 //Add the reservation to the database
                 reservationService.AddToReservation(newReservation);
                 MessageBox.Show("Succesfully made reservation!");
+                //for (int i = 0; i < nrOfTables; i++)
+                //{
+                //    if (!paymentService.HasBill(i + 1))
+                //    {
+                        
+                //        break;
+                //    }
+                //    else
+                //    {                        
+                //        MessageBox.Show("You cannot make reservation, this table is occupied");
+                //        break;
+                //    }
+                //}
+                
 
                 //hide the panels and show the dashboard again
                 HidePanel();
@@ -155,11 +167,14 @@ namespace RestaurantChapeau
 
         private void btn_Test_Click(object sender, EventArgs e)
         {
-            HidePanel();
-            pnl_ViewReservation.Show();
+           
             try
             {
+                HidePanel();
+                pnl_ViewReservation.Show();
                 DisplayReservation();
+                pb_TableAgenda.Hide();
+                pbTableInfo.Hide();
             }
             catch (Exception ex)
             {
@@ -251,6 +266,8 @@ namespace RestaurantChapeau
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             HidePanel();
+            pbTableInfo.Show();
+            pb_TableAgenda.Show();
         }
 
         private void OnTableButtonClick(object sender, EventArgs e)
@@ -287,8 +304,10 @@ namespace RestaurantChapeau
         {
             try
             {
-                if (!paymentService.HasBill(tableId))
+                
+                if ((!paymentService.HasBill(tableId)) && (reservationService.IsReserved(tableId)))
                 {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Cancel reservation", MessageBoxButtons.YesNo);
                     //Go to order view
                     ShowOrderView(tableId);
                 }
@@ -312,6 +331,7 @@ namespace RestaurantChapeau
 
                     //Hide panel elements
                     pb_TableAgenda.Hide();
+                    pbTableInfo.Hide();
                 }
             }
             catch (Exception ex)
@@ -392,6 +412,7 @@ namespace RestaurantChapeau
         {
             HidePanel();
             pb_TableAgenda.Show();
+            pbTableInfo.Show();
         }
 
         //Add order button
@@ -542,8 +563,7 @@ namespace RestaurantChapeau
                 {                    
                     lbX -= 6;
                     lbY++;
-                }
-                
+                }                
                 if (paymentService.HasBill(i + 1))
                 {
                     Bill bill = paymentService.GetBill(i + 1);
@@ -572,7 +592,7 @@ namespace RestaurantChapeau
             int buttonX = 1;
             int buttonY = 2;
             int buttonCount = 1;
-            reservation = reservationService.GetAllReservationForTable();
+            //reservation = reservationService.GetAllReservationForTable();
 
             for (int i = 0; i < nrOfTables; i++)
             {
@@ -587,14 +607,9 @@ namespace RestaurantChapeau
                 buttonCount++;
                 if (i % 2 == 1)
                 {
-
                     buttonX -= 4;
                     buttonY++;
-                }
-                //else
-                //{
-                //    buttonX++;
-                //}
+                }              
                 if (paymentService.HasBill(i + 1))
                 {                     
                     button.Image = Properties.Resources.occupiedNotif2;                    

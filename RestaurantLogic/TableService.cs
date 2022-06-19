@@ -13,11 +13,7 @@ namespace RestaurantLogic
         public TableService()
         {
             tableDB = new TableDao();
-        }
-        public Table GetTableNumber(int id)
-        {
-            return tableDB.GetTableId(id);            
-        }
+        }       
         public int GetTheNumberOfTable()
         {
             return tableDB.GetNumberOfTables();

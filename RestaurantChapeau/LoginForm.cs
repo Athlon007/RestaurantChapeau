@@ -213,14 +213,17 @@ namespace RestaurantChapeau
                 switch (employee.employeeType)
                 {
                     case EmployeeType.Waiter:
+                        MessageBox.Show($"Welcome {employee.firstName}!");
                         TableViewForm tableView = new TableViewForm(employee);
                         tableView.Show();
                         break;
                     case EmployeeType.KitchenStaff:
+                        MessageBox.Show($"Welcome {employee.firstName}!");
                         KitchenViewForm kitchenView = new KitchenViewForm(employee);
                         kitchenView.Show();
                         break;
                     case EmployeeType.Bartender:
+                        MessageBox.Show($"Welcome {employee.firstName}!");
                         KitchenViewForm kitchenView2 = new KitchenViewForm(employee);
                         kitchenView2.Show();
                         break;

@@ -48,11 +48,14 @@ namespace RestaurantDAL
 
             //return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
-        public Reservation GetAllReservationForTable()
+        public bool GetAllReservationForTable(int tableId)
         {
-            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM [Reservation]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM [Reservation] WHERE tableid = @tableid";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@tableid", tableId)
+            };
+            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
         }
         //getting a list of all the reservation
         public List<Reservation> GetAllReservations()
@@ -107,18 +110,13 @@ namespace RestaurantDAL
         }
         public void CancelReservation(Reservation reservation)
         {
-            string query = $"DELETE FROM dbo.[Reservation] WHERE id={reservation.reservationID}";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"DELETE FROM dbo.[Reservation] WHERE id = @id";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@id", reservation.reservationID)
+            };
             ExecuteEditQuery(query, sqlParameters);
-        }
-        public void isReserved(Reservation reservation)
-        {
-            string query = $"Select isReserved, tableid from Reservation where id={reservation.isReserved}, {reservation.tableid};";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            ExecuteEditQuery(query, sqlParameters);
-        }
-
-        [Obsolete("Replaced by PaymentService.HasBill().")]
+        }      
         public bool TableHasBill(int tableId)
         {
             string query = $"Select status FROM [Bill] WHERE tableId={tableId}";

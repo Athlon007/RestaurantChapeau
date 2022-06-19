@@ -11,18 +11,11 @@ namespace RestaurantDAL
     {
 
         //adding a new user to the db
-        public void AddToRegister(string firstName, string lastName, string email,string passwordHash, string passwordSalt)
+        public void AddToRegister(string firstName, string lastName, string id,string passwordHash, string passwordSalt)
         {
 
-            string query = $"INSERT INTO [Employee] (firstName, lastName, email, passwordHash, passwordSalt) VALUES (@firstName, @lastName, @email, @passwordHash, @passwordSalt)";
-            SqlParameter[] sqlParameters = new SqlParameter[5];
-            {
-                new SqlParameter("@firstName", firstName);
-                new SqlParameter("@lastName", lastName);
-                new SqlParameter("@email", email);
-                new SqlParameter("@passwordHash", passwordHash);
-                new SqlParameter("@passwordSalt", passwordSalt);
-            };            
+            string query = $"INSERT INTO [Employee] (firstName, lastName, email, passwordHash, passwordSalt) VALUES ('{firstName}', '{lastName}', '{id}', '{passwordHash}', '{passwordSalt}')";
+            SqlParameter[] sqlParameters = new SqlParameter[0];                       
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the user from the db by the employeeName, in order to get the salt

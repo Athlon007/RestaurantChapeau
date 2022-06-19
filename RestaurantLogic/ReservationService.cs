@@ -30,9 +30,9 @@ namespace RestaurantLogic
         {
             return reservationDb.GetReservationByEmail(email);
         }
-        public Reservation GetAllReservationForTable()
+        public bool GetAllReservationForTable(int tableId)
         {
-            return reservationDb.GetAllReservationForTable();
+            return reservationDb.GetAllReservationForTable(tableId);
         }
 
         //getting the list of all reservations

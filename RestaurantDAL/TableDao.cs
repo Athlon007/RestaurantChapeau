@@ -8,16 +8,7 @@ using System.Data;
 namespace RestaurantDAL
 {
     public class TableDao : BaseDao
-    {
-        public Table GetTableId(int id)
-        {
-            string query = $"SELECT id, activeBill FROM dbo.[Table] WHERE id = @id";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@id", id)
-            };
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
-        }
+    {      
         public int GetNumberOfTables()
         {
             string query = $"select count(id) AS count from dbo.[Table]";
@@ -35,7 +26,7 @@ namespace RestaurantDAL
             }
             else
             {
-                throw new Exception("There is no user with these credentials");
+                throw new Exception("There is error while loading table");
             }
             return table;
         }
@@ -51,7 +42,7 @@ namespace RestaurantDAL
             }
             else
             {
-                throw new Exception("There is no user with these credentials");
+                throw new Exception("There is error while loading table");
             }
             return number;
         }
