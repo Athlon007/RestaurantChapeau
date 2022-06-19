@@ -14,7 +14,6 @@ namespace RestaurantDAL
         
         public void AddToReservation(Reservation reservation)
         {
-
             string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, isReserved, ReservationStart, tableid) VALUES (@firstName, @lastName, @email, @isReserved, @ReservationStart, @tableid);";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
@@ -27,16 +26,7 @@ namespace RestaurantDAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        //getting the reservation from the db by the email
-        public Reservation GetReservationByEmail(string email)
-        {
-            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM dbo.[Reservation] WHERE email = @email";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@email", email)
-            };
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
-        }
+        //getting the reservation from the db by the         
         public bool IsReserved(int tableId)
         {
             string query = $"SELECT isReserved FROM [Reservation] WHERE tableid = @tableid";
@@ -47,16 +37,7 @@ namespace RestaurantDAL
             return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
 
             //return ReadTable(ExecuteSelectQuery(query, sqlParameters));
-        }
-        public bool GetAllReservationForTable(int tableId)
-        {
-            string query = $"SELECT id, firstName, lastName, email, isReserved, ReservationStart, tableid FROM [Reservation] WHERE tableid = @tableid";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@tableid", tableId)
-            };
-            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
-        }
+        }        
         //getting a list of all the reservation
         public List<Reservation> GetAllReservations()
         {
@@ -116,13 +97,7 @@ namespace RestaurantDAL
                 new SqlParameter("@id", reservation.reservationID)
             };
             ExecuteEditQuery(query, sqlParameters);
-        }      
-        public bool TableHasBill(int tableId)
-        {
-            string query = $"Select status FROM [Bill] WHERE tableId={tableId}";
-            return ReadTableHasBill(ExecuteSelectQuery(query));
-        }
-
+        }           
         private bool ReadTableHasBill(DataTable table)
         {
             if (table.Rows.Count == 0)

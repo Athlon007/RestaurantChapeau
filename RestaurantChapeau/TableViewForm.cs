@@ -18,7 +18,7 @@ namespace RestaurantChapeau
         ReservationService reservationService = new ReservationService();
         PaymentService paymentService = new PaymentService();
         Reservation reservation = new Reservation();
-        Employee currentEmployee;   
+        Employee currentEmployee;
         OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
         int currentTableNumber;
@@ -35,7 +35,7 @@ namespace RestaurantChapeau
 
             nrOfTables = tableService.GetTheNumberOfTable();
             currentEmployee = employee;
-           
+
             //Start the timer for refreshing information
             timer = new Timer();
             timer.Tick += Timer_Tick;
@@ -77,8 +77,8 @@ namespace RestaurantChapeau
             DynamicLabelsForDrinkNotification();
             DynamicButtonsForTables();
             if (currentBill != null)
-                lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);                                 
-        }                
+                lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
+        }
         private void btn_MakeReservation_Click(object sender, EventArgs e)
         {
             try
@@ -111,7 +111,7 @@ namespace RestaurantChapeau
                     {
                         MessageBox.Show("you are unable to make reservation");
                         return;
-                    } 
+                    }
                 }
                 //Add the reservation to the database
                 reservationService.AddToReservation(newReservation);
@@ -120,7 +120,7 @@ namespace RestaurantChapeau
                 //{
                 //    if (!paymentService.HasBill(i + 1))
                 //    {
-                        
+
                 //        break;
                 //    }
                 //    else
@@ -129,7 +129,7 @@ namespace RestaurantChapeau
                 //        break;
                 //    }
                 //}
-                
+
 
                 //hide the panels and show the dashboard again
                 HidePanel();
@@ -143,7 +143,7 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show($"something went wrong with this button: {ex.Message}");
             }
-        }        
+        }
 
         private void TableViewForm_Load(object sender, EventArgs e)
         {
@@ -167,7 +167,7 @@ namespace RestaurantChapeau
 
         private void btn_Test_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
                 HidePanel();
@@ -270,46 +270,71 @@ namespace RestaurantChapeau
             pb_TableAgenda.Show();
         }
 
-        private void OnTableButtonClick(object sender, EventArgs e)
+        private void CreateButtons(Object sender, EventArgs e)
         {
-            try
+            Button button = sender as Button;
+            if(button != null)
             {
-                //Get table ID from the sender/button
-                if (!int.TryParse((sender as Button).Text, out int id))
+                for (int i = 0; i < nrOfTables; i++)
                 {
-                    throw new Exception("Could not read table ID.");
+                    if(button.Text == i.ToString())
+                    {
+                        HandleTableButtonClick(i + 1);
+                        return;
+                    }
                 }
-
-                //Load table reservation
-                Reservation reservation;
-                if ((sender as Button).Tag != null)
-                {
-                    reservation = (Reservation)(sender as Button).Tag;
-                }
-                else
-                {
-                    reservation = null;
-                }
-
-                HandleTableButtonClick(id);
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
             }
         }
+        //private void OnTableButtonClick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        //Get table ID from the sender/button
+        //        if (!int.TryParse((sender as Button).Text, out int id))
+        //        {
+        //            throw new Exception("Could not read table ID.");
+        //        }
+
+        //        //Load table reservation
+        //        Reservation reservation;
+        //        if ((sender as Button).Tag != null)
+        //        {
+        //            reservation = (Reservation)(sender as Button).Tag;
+        //        }
+        //        else
+        //        {
+        //            reservation = null;
+        //        }
+
+        //        HandleTableButtonClick(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
+        //    }
+        //}
 
         //
         private void HandleTableButtonClick(int tableId)
         {
             try
             {
-                
-                if ((!paymentService.HasBill(tableId)) && (reservationService.IsReserved(tableId)))
+                List<Reservation>reservations = reservationService.GetAllReservations();
+                foreach (Reservation reservation in reservations)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Cancel reservation", MessageBoxButtons.YesNo);
-                    //Go to order view
-                    ShowOrderView(tableId);
+                    if (reservationService.IsReserved(tableId))
+                    {
+                        DialogResult dialogResult = MessageBox.Show($"this table has reservation at {reservation.ReservationStart.TimeOfDay} would you like to occupy this table? ", "Go to order view", MessageBoxButtons.YesNo);
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (!paymentService.HasBill(tableId))
+                {
+                    ShowOrderView(tableId);                    
                 }
                 else
                 {
@@ -487,11 +512,11 @@ namespace RestaurantChapeau
                 picturebox.Image = Properties.Resources.food4;
                 pbX += 3;
                 pbCount++;
-                if(i % 2 == 1)
+                if (i % 2 == 1)
                 {
                     pbX -= 6;
                     pbY++;
-                    
+
                 }
                 //Controls.Add(picturebox);
             }
@@ -515,7 +540,7 @@ namespace RestaurantChapeau
                 lbX += 3;
                 lbCount++;
                 if (i % 2 == 1)
-                {                   
+                {
                     lbX -= 6;
                     lbY++;
                 }
@@ -538,7 +563,7 @@ namespace RestaurantChapeau
                     }
                     label.Text = $"{readyCount}";
                 }
-                Controls.Add(label);               
+                Controls.Add(label);
             }
         }
         private void DynamicLabelsForDrinkNotification()
@@ -560,10 +585,10 @@ namespace RestaurantChapeau
                 lbX += 3;
                 lbCount++;
                 if (i % 2 == 1)
-                {                    
+                {
                     lbX -= 6;
                     lbY++;
-                }                
+                }
                 if (paymentService.HasBill(i + 1))
                 {
                     Bill bill = paymentService.GetBill(i + 1);
@@ -583,7 +608,7 @@ namespace RestaurantChapeau
                     }
                     label.Text = $"{readyCount}";
                 }
-                Controls.Add(label);                
+                Controls.Add(label);
             }
         }
 
@@ -603,24 +628,24 @@ namespace RestaurantChapeau
                 button.Size = new Size(160, 130);
                 button.Location = new Point(145 * (buttonX), 130 * (buttonY));
                 button.Image = Properties.Resources.screenshotTable;
-                buttonX+=2;
+                buttonX += 2;
                 buttonCount++;
                 if (i % 2 == 1)
                 {
                     buttonX -= 4;
                     buttonY++;
-                }              
+                }
                 if (paymentService.HasBill(i + 1))
-                {                     
-                    button.Image = Properties.Resources.occupiedNotif2;                    
+                {
+                    button.Image = Properties.Resources.occupiedNotif2;
                 }
                 else if (reservationService.IsReserved(i + 1))
                 {
                     button.Image = Properties.Resources.reserved;
                 }
                 Controls.Add(button);
-                button.Click += OnTableButtonClick;                
-            }            
-        }      
+                button.Click += CreateButtons;//OnTableButtonClick;
+            }
+        }
     }
 }
