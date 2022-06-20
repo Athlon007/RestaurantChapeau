@@ -139,5 +139,31 @@ namespace RestaurantDAL
 
             return dataTable;
         }
+        protected DataTable ExecuteEditAndSelectQuery(string query)
+        {
+            SqlCommand command = new SqlCommand();
+            DataTable dataTable;
+            DataSet dataSet = new DataSet();
+
+            try
+            {
+                command.Connection = OpenConnection();
+                command.CommandText = query;
+                adapter.SelectCommand = command;
+                adapter.Fill(dataSet);
+
+                dataTable = dataSet.Tables[0];
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return dataTable;
+        }
     }
 }

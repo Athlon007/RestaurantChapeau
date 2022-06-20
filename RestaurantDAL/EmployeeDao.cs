@@ -19,16 +19,44 @@ namespace RestaurantDAL
             ExecuteEditQuery(query, sqlParameters);
         }
         //getting the user from the db by the employeeName, in order to get the salt
-        public Employee GetEmployeeByEmployeeID(string id)
+        public Employee GetEmployeeByEmployeeAccount(string account, string hashedPassword)
         {
-            string query = $"SELECT id, firstName, lastName, email, passwordHash, passwordSalt, employeeType FROM dbo.[Employee] WHERE email = @email";
+            string query = $"SELECT id, firstName, lastName, email, employeeType FROM dbo.[Employee] WHERE email = @email AND passwordHash = @passwordHash";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@email", id)
+                new SqlParameter("@email", account),
+                new SqlParameter("@passwordHash", hashedPassword)
             };
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+            Employee employee = ReadTable(ExecuteSelectQuery(query, sqlParameters));
+            if (employee == null)
+            {
+                throw new Exception(" YOur pass is wrong");
+            }
+            return employee;
         }
-
+        public String GetSaltForEmployee(string account)
+        {
+            string query = $"SELECT passwordSalt FROM dbo.[Employee] WHERE email = @email";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@email",account)
+            };
+            string salt = ReadSalt(ExecuteSelectQuery(query, sqlParameters));
+            if (salt == null)
+            {
+                throw new Exception("There is no user with this  email");
+            }
+            return salt;
+        }
+        private string ReadSalt(DataTable dataTable)
+        {
+            string salt=null;
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                 salt = (string)dr["passwordSalt"];
+            }
+            return salt;
+        }
         private Employee ReadTable(DataTable dataTable)
         {
             // create object to store values
@@ -39,9 +67,7 @@ namespace RestaurantDAL
                 employee.id = Convert.ToInt32(dr["id"]);
                 employee.firstName = (string)(dr["firstName"]);
                 employee.lastName = (string)(dr["lastName"]);
-                employee.email = (string)(dr["email"]);
-                employee.passwordHash = (string)(dr["passwordHash"]);
-                employee.passwordSalt = (string)(dr["passwordSalt"]);
+                employee.email = (string)(dr["email"]);              
                 if (!Convert.IsDBNull(dr["employeeType"]))
                 {
                     employee.employeeType = (EmployeeType)Convert.ToInt32(dr["employeeType"]);
@@ -49,7 +75,7 @@ namespace RestaurantDAL
             }
             else
             {
-                throw new Exception("There is no user with these credentials");
+                employee = null;
             }
             return employee;
         }       

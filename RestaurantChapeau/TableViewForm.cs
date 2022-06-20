@@ -37,9 +37,7 @@ namespace RestaurantChapeau
         {
             InitializeComponent();            
             nrOfTables = tableService.GetTheNumberOfTable();
-            currentEmployee = employee;
-
-            
+            currentEmployee = employee;            
 
             //Start the timer for refreshing information
             timer = new Timer();
@@ -80,13 +78,12 @@ namespace RestaurantChapeau
 
             if (currentBill != null)
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
-        }
+        }        
         private void btn_MakeReservation_Click(object sender, EventArgs e)
         {
             try
             {
                 ReservationService reservationService = new ReservationService();
-
                 Reservation newReservation = new Reservation();
                 newReservation.firstName = txt_ReservationFirstName.Text;
                 newReservation.lastName = txt_ReservationLastName.Text;
@@ -98,51 +95,40 @@ namespace RestaurantChapeau
                 {
                     MessageBox.Show("please fill out all textboxes");
                 }
-
                 List<Reservation> allReservations = reservationService.GetAllReservations();
-
                 //Check if reservation is valid
                 foreach (Reservation reservation in allReservations)
                 {
-                    if (reservation.tableid == newReservation.tableid && reservation.ReservationStart == newReservation.ReservationStart)
+                    if (reservation.tableid == newReservation.tableid && reservation.ReservationStart == newReservation.ReservationStart || reservation.ReservationStart.AddHours(1) >= newReservation.ReservationStart)
                     {
-                        MessageBox.Show("you are unable to make reservation");
+                        MessageBox.Show("you are unable to make reservation please check the reservation time and table number");
                         return;
-                    }
-                    else if (reservation.tableid == newReservation.tableid && reservation.ReservationStart.AddHours(1) >= newReservation.ReservationStart)
-                    {
-                        MessageBox.Show("you are unable to make reservation");
-                        return;
-                    }
+                    }                    
                 }
                 //Add the reservation to the database
                 reservationService.AddToReservation(newReservation);
-                MessageBox.Show("Succesfully made reservation!");                
-
+                MessageBox.Show("Succesfully made reservation!");
                 //hide the panels and show the dashboard again
                 HidePanel();
-                pnl_Reservation.Show();
-                txt_ReservationFirstName.Clear();
-                txt_ReservationLastName.Clear();
-                txt_ReservationEmail.Clear();
-                DisplayReservation();
+                ClearReservationTextBox();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"something went wrong with this button: {ex.Message}");
             }
         }
+        private void ClearReservationTextBox()
+        {
+            txt_ReservationFirstName.Clear();
+            txt_ReservationLastName.Clear();
+            txt_ReservationEmail.Clear();            
+        }
 
         private void TableViewForm_Load(object sender, EventArgs e)
         {
             HidePanel();
             dateTimePicker1.MinDate = DateTime.Now;
-            dateTimePicker1.Value = DateTime.Now;
-            CreateButtonsForTables();
-            //DynamicPictureBoxes();
-            CreateLabelsForFoodNotification();
-            CreateLabelsForDrinkNotification();
-
+            dateTimePicker1.Value = DateTime.Now;       
             //Create lists of components
             tableButtons = CreateButtonsForTables();
             drinkNotifications = CreateLabelsForDrinkNotification();
@@ -155,9 +141,6 @@ namespace RestaurantChapeau
             pnl_ViewReservation.Hide();
             pnl_TableDetailView.Hide();
         }
-
-
-
         private void btn_Test_Click(object sender, EventArgs e)
         {
 
@@ -306,23 +289,30 @@ namespace RestaurantChapeau
                 ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
             }
         }
+        private void CheckReservationTime(int tableId)
+        {
 
+        }
         //
         private void HandleTableButtonClick(int tableId)
         {
             try
             {
-                List<Reservation>reservations = reservationService.GetAllReservations();
-                foreach (Reservation reservation in reservations)
+                List<Reservation> CheckReservationTime = reservationService.ReservationTimeForTable(tableId);
+                foreach (Reservation reservation in CheckReservationTime)
                 {
                     if (reservationService.IsReserved(tableId))
                     {
-                        DialogResult dialogResult = MessageBox.Show($"this table has reservation at {reservation.ReservationStart.TimeOfDay} would you like to occupy this table? ", "Go to order view", MessageBoxButtons.YesNo);
-                        break;
-                    }
-                    else
-                    {
-                        break;
+                        DialogResult dialogResult = MessageBox.Show($"this table has reservation at {reservation.ReservationStart} would you like to occupy this table? ", "Go to order view", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            ShowOrderView(tableId);
+                            return;
+                        }
+                        else
+                        {
+                            return;
+                        }
                     }
                 }
                 if (!paymentService.HasBill(tableId))
@@ -334,7 +324,6 @@ namespace RestaurantChapeau
                     //Get the bill for this table
                     this.currentBill = paymentService.GetBill(tableId);
                     this.currentTableNumber = tableId;
-
                     if (!orderLogic.HasBillOrders(this.currentBill))
                     {
                         //If bill is empty, go into order view
@@ -346,7 +335,6 @@ namespace RestaurantChapeau
                         pnl_TableDetailView.Show();
                         lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
                     }
-
                     //Hide panel elements
                     pb_TableAgenda.Hide();
                     pbTableInfo.Hide();
@@ -588,13 +576,13 @@ namespace RestaurantChapeau
                             }
                         }
                     }
-
                     label.Text = $"{readyCount}";
                 }
 
                 tableNr++;
             }
         }
+
 
         private void UpdateDrinkLabels(List<Label> drinkLabels)
         {
@@ -619,10 +607,8 @@ namespace RestaurantChapeau
                             }
                         }
                     }
-
                     label.Text = $"{readyCount}";
-                }
-                
+                }                
                 tableNr++;
             }
         }
@@ -637,13 +623,8 @@ namespace RestaurantChapeau
 
             for (int i = 0; i < nrOfTables; i++)
             {
-                Button button = new Button();
-                button.Text = buttonCount.ToString();
-                button.Name = buttonCount.ToString();
-                button.Font = new Font("Segoe UI", 15f);
-                button.Size = new Size(160, 130);
-                button.Location = new Point(145 * (buttonX), 130 * (buttonY));
-                button.Image = Properties.Resources.screenshotTable;
+                Button button = CreateButtons(buttonCount, buttonX, buttonY);
+
                 buttonX += 2;
                 buttonCount++;
                 if (i % 2 == 1)
@@ -651,10 +632,25 @@ namespace RestaurantChapeau
                     buttonX -= 4;
                     buttonY++;
                 }
-                
+
+                Controls.Add(button);
                 tableButtons.Add(button);
+                button.Click += OnTableButtonClick;//CreateButtons;
+
             }
             return tableButtons;
+        }
+        private Button CreateButtons(int count, int x, int y)
+        {
+            Button button = new Button();
+            button.Text = count.ToString();
+            button.Name = count.ToString();
+            button.Font = new Font("Segoe UI", 15f);
+            button.Size = new Size(160, 130);
+            button.Location = new Point(145 * (x), 130 * (y));
+            button.Image = Properties.Resources.screenshotTable;
+
+            return button;
         }
 
         private void UpdateTableButtons(List<Button> tableButtons)
@@ -662,7 +658,7 @@ namespace RestaurantChapeau
             int tableNr = 1;
             foreach (Button button in tableButtons)
             {
-                if (paymentService.HasBill(tableNr))
+                if (paymentService.HasBill(tableNr) || tableService.IsOccupied(tableNr))
                 {
                     button.Image = Properties.Resources.occupiedNotif2;
                 }
@@ -670,8 +666,10 @@ namespace RestaurantChapeau
                 {
                     button.Image = Properties.Resources.reserved;
                 }
-                Controls.Add(button);
-                button.Click += OnTableButtonClick;//CreateButtons;
+                else
+                {
+                    button.Image = Properties.Resources.screenshotTable;
+                }
 
                 tableNr++;
             }

@@ -34,6 +34,10 @@ namespace RestaurantLogic
         public void CancelReservation(Reservation reservation)
         {
             reservationDb.CancelReservation(reservation);
-        }              
+        }            
+        public List<Reservation> ReservationTimeForTable(int tableId)
+        {
+            return reservationDb.ReservationTimeForTable(tableId);
+        }
     }
 }
