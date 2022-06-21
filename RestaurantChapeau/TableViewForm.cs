@@ -17,12 +17,7 @@ namespace RestaurantChapeau
         TableService tableService = new TableService();
         ReservationService reservationService = new ReservationService();
         PaymentService paymentService = new PaymentService();
-        Reservation reservation = new Reservation();
         Employee currentEmployee;
-        Button[] tableButtons;
-        Label[] notificationLabels;
-        Label[] drinkNotificationLabels;
-        PictureBox[] pictureboxes;
         OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
         int currentTableNumber;
@@ -32,104 +27,32 @@ namespace RestaurantChapeau
         int nrOfTables;
         Timer timer;
 
+        //Lists of components
+        List<Button> tableButtons;
+        List<Label> drinkNotifications;
+        List<Label> foodNotifications;
+
         //On form load
         public TableViewForm(Employee employee)
         {
-            InitializeComponent();
+            InitializeComponent();            
             nrOfTables = tableService.GetTheNumberOfTable();
             currentEmployee = employee;
-
-            //Create array of table buttons
-            tableButtons = new Button[]
-            {
-                btn_Table1,
-                btn_Table2,
-                btn_Table3,
-                btn_Table4,
-                btn_Table5,
-                btn_Table6,
-                btn_Table7,
-                btn_Table8,
-                btn_Table9,
-                btn_Table10
-            };
-
-            //Create array of food notifications 
-            notificationLabels = new Label[]
-            {
-                lbl_Table1Notification,
-                lbl_Table2Notification,
-                lbl_Table3Notification,
-                lbl_Table4Notification,
-                lbl_Table5Notification,
-                lbl_Table6Notification,
-                lbl_Table7Notification,
-                lbl_Table8Notification,
-                lbl_Table9Notification,
-                lbl_Table10Notification
-            };
-
-            //Create array of drink notifications 
-            drinkNotificationLabels = new Label[]
-            {
-                lbl_DrinkNotification1,
-                lbl_DrinkNotification2,
-                lbl_DrinkNotification3,
-                lbl_DrinkNotification4,
-                lbl_DrinkNotification5,
-                lbl_DrinkNotification6,
-                lbl_DrinkNotification7,
-                lbl_DrinkNotification8,
-                lbl_DrinkNotification9,
-                lbl_DrinkNotification10
-            };
-            pictureboxes = new PictureBox[]
-            {
-                pb_drink1,
-                pb_drink2,
-                pb_drink3,
-                pb_drink4,
-                pb_drink5,
-                pb_drink6,
-                pb_drink7,
-                pb_drink8,
-                pb_drink9,
-                pb_drink10,
-                pb_Food1,
-                pb_Food2,
-                pb_Food3,
-                pb_Food4,
-                pb_Food5,
-                pb_Food6,
-                pb_Food7,
-                pb_Food8,
-                pb_Food9,
-                pb_Food10
-            };
-            //Check all tables for reservations
-            CheckReservations();
-
-            //Set click event for all buttons
-            foreach (Button btn in tableButtons)
-            {
-                btn.Click += OnTableButtonClick;
-            }
-
+            btn_LogOut.Enabled = false;
             //Start the timer for refreshing information
             timer = new Timer();
             timer.Tick += Timer_Tick;
             timer.Interval = 10000;
             timer.Start();
-
+            lbl_LogOut.Text = employee.firstName;
             //Update DPI scale
             DPIScaler.Instance.UpdateToForm(this);
 
             //Initialise listview with DPI scale
             lv_TableDetailView.Columns.Add("ID", (int)(40 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Status", (int)(80 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Menu", (int)(280 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Quantity", (int)(100 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Time", (int)(200 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Status", (int)(70 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", (int)(350 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Q", (int)(40 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
 
             //Adjust fonts based on scale
             label1.Font = FontManager.Instance.ScriptMT(label1.Font.Size);
@@ -141,145 +64,25 @@ namespace RestaurantChapeau
         //Refresh on timer tick
         private void Timer_Tick(object sender, EventArgs e)
         {
-            //If order window is open, don't do anything
-            if (orderViewWindow != null && orderViewWindow.Visible)
+            //If order window or payment window is open, don't do anything
+            if ((orderViewWindow != null && orderViewWindow.Visible) || (paymentWindow != null && paymentWindow.Visible))
             {
                 return;
             }
-            //If payment window is open, don't do anything
-            if (paymentWindow != null && paymentWindow.Visible)
-            {
-                return;
-            }
+
             //Refresh table details
+            UpdateDrinkLabels(drinkNotifications);
+            UpdateFoodLabels(foodNotifications);
+            UpdateTableButtons(tableButtons);
+
             if (currentBill != null)
                 lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
-            CheckNotification();
-            CheckReservations();
-            CheckDrinkNotification();
-        }
-
-        //Show all notifications
-        private void ShowNotification()
-        {
-            foreach (Label notification in notificationLabels)
-            {
-                notification.Show();
-            }
-
-            foreach (Label notification in drinkNotificationLabels)
-            {
-                notification.Show();
-            }
-            foreach (PictureBox pictureBox in pictureboxes)
-            {
-                pictureBox.Show();
-            }
-        }
-        //Hide all notifications
-        private void HideNotification()
-        {
-            foreach (Label notification in notificationLabels)
-            {
-                notification.Hide();
-            }
-
-            foreach (Label notification in drinkNotificationLabels)
-            {
-                notification.Hide();
-            }
-            foreach (PictureBox pictureBox in pictureboxes)
-            {
-                pictureBox.Hide();
-            }
-        }
-
-        private void CheckNotification()
-        {
-            try
-            {
-                int tableNr = 1;
-
-                foreach (Label notification in notificationLabels)
-                {
-                    //First empty the notification
-                    notification.Text = "";
-
-                    //check for ready and unserved orders
-                    if (paymentService.HasBill(tableNr))
-                    {
-                        Bill bill = paymentService.GetBill(tableNr);
-                        List<Order> orders = orderLogic.GetOrdersForBill(bill);
-
-                        int readyCount = 0;
-                        foreach (Order order in orders)
-                        {
-                            List<MenuItem> items = orderLogic.GetItemsForOrder(order);
-                            foreach (MenuItem item in items)
-                            {
-                                if (item.Status == OrderStatus.ReadyToServe && !item.IsDrink)
-                                {
-                                    readyCount++;
-                                }
-                            }
-                        }
-                        notification.Text = $"{readyCount}";
-                    }
-                    tableNr++;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Something went wrong with notifycation: {ex.Message}");
-            }
-        }
-        //Update drink notifications
-        private void CheckDrinkNotification()
-        {
-            try
-            {
-                int tableNr = 1;
-
-                foreach (Label notification in drinkNotificationLabels)
-                {
-                    //First empty the notification
-                    notification.Text = "";
-
-                    //check for ready and unserved orders
-                    if (paymentService.HasBill(tableNr))
-                    {
-                        Bill bill = paymentService.GetBill(tableNr);
-                        List<Order> orders = orderLogic.GetOrdersForBill(bill);
-
-                        int readyCount = 0;
-                        foreach (Order order in orders)
-                        {
-                            List<MenuItem> items = orderLogic.GetItemsForOrder(order);
-                            foreach (MenuItem item in items)
-                            {
-                                if (item.Status == OrderStatus.ReadyToServe && item.IsDrink)
-                                {
-                                    readyCount++;
-                                }
-                            }
-                        }
-                        notification.Text = $"{readyCount}";
-                    }
-                    tableNr++;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Something went wrong with notifycation: {ex.Message}");
-            }
-        }
+        }        
         private void btn_MakeReservation_Click(object sender, EventArgs e)
         {
             try
             {
                 ReservationService reservationService = new ReservationService();
-
-
                 Reservation newReservation = new Reservation();
                 newReservation.firstName = txt_ReservationFirstName.Text;
                 newReservation.lastName = txt_ReservationLastName.Text;
@@ -291,90 +94,63 @@ namespace RestaurantChapeau
                 {
                     MessageBox.Show("please fill out all textboxes");
                 }
-
                 List<Reservation> allReservations = reservationService.GetAllReservations();
-
                 //Check if reservation is valid
                 foreach (Reservation reservation in allReservations)
                 {
-                    if (reservation.tableid == newReservation.tableid && reservation.ReservationStart == newReservation.ReservationStart)
+                    if (reservation.tableid == newReservation.tableid && reservation.ReservationStart == newReservation.ReservationStart || reservation.ReservationStart.AddHours(1) >= newReservation.ReservationStart)
                     {
-                        MessageBox.Show("you are unable to make reservation");
+                        MessageBox.Show("you are unable to make reservation please check the reservation time and table number");
                         return;
-                    }
-                    else if (reservation.tableid == newReservation.tableid && reservation.ReservationStart.AddHours(1) >= newReservation.ReservationStart)
-                    {
-                        MessageBox.Show("you are unable to make reservation");
-                        return;
-                    }
+                    }                    
                 }
-
                 //Add the reservation to the database
                 reservationService.AddToReservation(newReservation);
                 MessageBox.Show("Succesfully made reservation!");
-
                 //hide the panels and show the dashboard again
                 HidePanel();
-                pnl_Reservation.Show();
-                txt_ReservationFirstName.Clear();
-                txt_ReservationLastName.Clear();
-                txt_ReservationEmail.Clear();
-                DisplayReservation();
+                ClearReservationTextBox();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"something went wrong with this button: {ex.Message}");
             }
         }
-        private void CheckReservations()
+        private void ClearReservationTextBox()
         {
-            try
-            {
-                reservation = reservationService.GetAllReservationForTable();
-                for (int i = 0; i < nrOfTables; i++)
-                {
-                    tableButtons[i].Image = Properties.Resources.screenshotTable;
-                    tableButtons[i].Tag = null;
-
-                    if (paymentService.HasBill(i + 1))
-                    {
-                        tableButtons[i].Image = Properties.Resources.occupied;
-                    }
-                    else if (reservationService.IsReserved(i + 1))
-                    {
-                        tableButtons[i].Image = Properties.Resources.reserved;
-                    }
-                }                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Something went wrong while checking reservation: {ex.Message}");
-            }
-
+            txt_ReservationFirstName.Clear();
+            txt_ReservationLastName.Clear();
+            txt_ReservationEmail.Clear();            
         }
 
         private void TableViewForm_Load(object sender, EventArgs e)
         {
             HidePanel();
             dateTimePicker1.MinDate = DateTime.Now;
-            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker1.Value = DateTime.Now;       
+            //Create lists of components
+            tableButtons = CreateButtonsForTables();
+            drinkNotifications = CreateLabelsForDrinkNotification();
+            foodNotifications = CreateLabelsForFoodNotification();
+
         }
         public void HidePanel()
         {
             pnl_Reservation.Hide();
             pnl_ViewReservation.Hide();
             pnl_TableDetailView.Hide();
+            pnl_Information.Hide();
         }
-
-       
-
         private void btn_Test_Click(object sender, EventArgs e)
         {
-            HidePanel();
-            pnl_ViewReservation.Show();
+
             try
             {
+                HidePanel();
+                pnl_ViewReservation.Show();
                 DisplayReservation();
+                pb_TableAgenda.Hide();
+                pbTableInfo.Hide();
             }
             catch (Exception ex)
             {
@@ -445,7 +221,7 @@ namespace RestaurantChapeau
 
                     //refresh panel
                     HidePanel();
-                    CheckReservations();
+                    //CheckReservations();
                     DisplayReservation();
                     pnl_ViewReservation.Show();
                 }
@@ -466,9 +242,25 @@ namespace RestaurantChapeau
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             HidePanel();
-            CheckReservations();
+            pbTableInfo.Show();
+            pb_TableAgenda.Show();
         }
 
+        //private void CreateButtons(Object sender, EventArgs e)
+        //{
+        //    Button button = sender as Button;
+        //    if(button != null)
+        //    {
+        //        for (int i = 0; i < nrOfTables; i++)
+        //        {
+        //            if(button.Text == i.ToString())
+        //            {
+        //                HandleTableButtonClick(i + 1);
+        //                return;
+        //            }
+        //        }
+        //    }
+        //}
         private void OnTableButtonClick(object sender, EventArgs e)
         {
             try
@@ -497,23 +289,41 @@ namespace RestaurantChapeau
                 ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
             }
         }
+        private void CheckReservationTime(int tableId)
+        {
 
+        }
         //
         private void HandleTableButtonClick(int tableId)
         {
             try
             {
+                List<Reservation> CheckReservationTime = reservationService.ReservationTimeForTable(tableId);
+                foreach (Reservation reservation in CheckReservationTime)
+                {
+                    if (reservationService.IsReserved(tableId))
+                    {
+                        DialogResult dialogResult = MessageBox.Show($"this table has reservation at {reservation.ReservationStart} would you like to occupy this table? ", "Go to order view", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            ShowOrderView(tableId);
+                            return;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
                 if (!paymentService.HasBill(tableId))
                 {
-                    //Go to order view
-                    ShowOrderView(tableId);
+                    ShowOrderView(tableId);                    
                 }
                 else
                 {
                     //Get the bill for this table
                     this.currentBill = paymentService.GetBill(tableId);
                     this.currentTableNumber = tableId;
-
                     if (!orderLogic.HasBillOrders(this.currentBill))
                     {
                         //If bill is empty, go into order view
@@ -525,10 +335,9 @@ namespace RestaurantChapeau
                         pnl_TableDetailView.Show();
                         lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
                     }
-
                     //Hide panel elements
-                    HideNotification();
                     pb_TableAgenda.Hide();
+                    pbTableInfo.Hide();
                 }
             }
             catch (Exception ex)
@@ -568,20 +377,34 @@ namespace RestaurantChapeau
                     foreach (MenuItem item in menus)
                     {
                         ListViewItem li = new ListViewItem(order.Id.ToString());
-                        li.SubItems.Add(item.Status.ToString());
+                        if(item.Status == OrderStatus.NotStarted)
+                        {
+                            li.SubItems.Add("N");
+                        }
+                        else if (item.Status == OrderStatus.Preparing)
+                        {
+                            li.ForeColor = Color.Green;
+                            li.SubItems.Add("P");
+                        }
+                        else if (item.Status == OrderStatus.ReadyToServe)
+                        {
+                            li.ForeColor = Color.Blue;
+                            li.SubItems.Add("R");
+                        }
+                        else if (item.Status == OrderStatus.Served)
+                        {
+                            li.ForeColor = Color.DarkOrange;
+                            li.SubItems.Add("S");
+                        }
                         li.SubItems.Add(item.Name.ToString());
                         li.SubItems.Add(item.Quantity.ToString());
-                        li.SubItems.Add(order.PlacedTime.TimeOfDay.ToString());
                         ListItem listItem = new ListItem()
                         {
                             Order = order,
                             MenuItem = item
                         };
-                        li.Tag = listItem;
-                        if (item.Status == OrderStatus.ReadyToServe)
-                        {
-                            li.ForeColor = Color.Blue;
-                        }
+                        li.Tag = listItem;                   
+                        
                         lv_TableDetailView.Items.Add(li);
                     }
                 }
@@ -608,8 +431,8 @@ namespace RestaurantChapeau
         private void pbTableDetailViewGoBack_Click(object sender, EventArgs e)
         {
             HidePanel();
-            ShowNotification();
             pb_TableAgenda.Show();
+            pbTableInfo.Show();
         }
 
         //Add order button
@@ -630,7 +453,7 @@ namespace RestaurantChapeau
                     ListItem listItem = (ListItem)lvi.Tag;
                     Order order = listItem.Order;
                     MenuItem item = listItem.MenuItem;
-                    if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
+                    if (item.Status == OrderStatus.NotStarted|| item.Status == OrderStatus.Preparing)
                     {
                         MessageBox.Show("You cannot change status yet. Kitchen/bar is still preparing the order.");
                     }
@@ -669,6 +492,217 @@ namespace RestaurantChapeau
         {
             paymentWindow = new Payment(currentTableNumber, pnl_TableDetailView);
             paymentWindow.Show();
+        }
+        
+        private List<Label> CreateLabelsForFoodNotification()
+        {
+            List<Label> foodLabels = new List<Label>();
+            //Set position start
+            int lbX = 1;
+            int lbY = 1;
+            //Set labelCount to 1
+            int lbCount = 1;
+            
+            //For each table, add labels
+            for (int i = 0; i < nrOfTables; i++)
+            {
+                //Create label using positioning paramaters
+                Label label = CreateNotificationLabel(lbCount, lbX, lbY);
+
+                lbX += 3;
+
+                if (i % 2 == 1)
+                {
+                    lbX -= 6;
+                    lbY++;
+                }               
+                Controls.Add(label);
+                foodLabels.Add(label);
+
+                lbCount++;
+            }
+            return foodLabels;
+        }
+
+        private List<Label> CreateLabelsForDrinkNotification()
+        {
+            List<Label> drinkLabels = new List<Label>();
+            int lbX = 3;
+            int lbY = 1;
+            int lbCount = 1;
+            
+            for (int i = 0; i < nrOfTables; i++)
+            {
+                //Create new label with positioning parameters
+                Label label = CreateNotificationLabel(lbCount, lbX, lbY);
+                
+                lbX += 3;
+                
+                //For each uneven label, move label to the left
+                if (i % 2 == 1)
+                {
+                    lbX -= 6;
+                    lbY++;
+                }
+                
+                Controls.Add(label);
+                drinkLabels.Add(label);
+
+                lbCount++;
+            }
+            return drinkLabels;
+        }
+
+        private Label CreateNotificationLabel(int lbCount, int lbX, int lbY)
+        {
+            Label label = new Label();
+            label.Text = "";
+            label.Name = lbCount.ToString();
+            label.Size = new Size(20, 20);
+            label.Font = new Font("Segoe UI", 12f);
+            label.BackColor = Color.Gray;
+            label.ForeColor = Color.White;
+            label.Location = new Point(103 * (lbX), 130 * (lbY));
+            label.AutoSize = true;
+
+            return label;
+        }
+        private void UpdateFoodLabels(List<Label> foodLabels)
+        {
+            int tableNr = 1;
+            foreach (Label label in foodLabels)
+            {
+                //If table has a bill, get ready orders and store them into label
+                if (paymentService.HasBill(tableNr))
+                {
+                    Bill bill = paymentService.GetBill(tableNr);
+                    List<Order> orders = orderLogic.GetOrdersForBill(bill);
+
+                    int readyCount = 0;
+                    foreach (Order order in orders)
+                    {
+                        List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                        foreach (MenuItem item in items)
+                        {
+                            if (item.Status == OrderStatus.ReadyToServe&& !item.IsDrink)
+                            {
+                                readyCount++;
+                            }
+                        }
+                    }
+                    label.Text = $"{readyCount}";
+                }
+
+                tableNr++;
+            }
+        }
+
+
+        private void UpdateDrinkLabels(List<Label> drinkLabels)
+        {
+            int tableNr = 1;
+            foreach (Label label in drinkLabels)
+            {
+                //If table has a bill, get ready orders and store them into label
+                if (paymentService.HasBill(tableNr))
+                {
+                    Bill bill = paymentService.GetBill(tableNr);
+                    List<Order> orders = orderLogic.GetOrdersForBill(bill);
+
+                    int readyCount = 0;
+                    foreach (Order order in orders)
+                    {
+                        List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                        foreach (MenuItem item in items)
+                        {
+                            if (item.Status == OrderStatus.ReadyToServe&& item.IsDrink)
+                            {
+                                readyCount++;
+                            }
+                        }
+                    }
+                    label.Text = $"{readyCount}";
+                }                
+                tableNr++;
+            }
+        }
+
+        private List<Button> CreateButtonsForTables()
+        {
+            List<Button> tableButtons = new List<Button>();
+
+            int buttonX = 1;
+            int buttonY = 1;
+            int buttonCount = 1;
+
+            for (int i = 0; i < nrOfTables; i++)
+            {
+                Button button = CreateButtons(buttonCount, buttonX, buttonY);
+
+                buttonX += 2;
+                buttonCount++;
+                if (i % 2 == 1)
+                {
+                    buttonX -= 4;
+                    buttonY++;
+                }
+
+                Controls.Add(button);
+                tableButtons.Add(button);
+                button.Click += OnTableButtonClick;//CreateButtons;
+
+            }
+            return tableButtons;
+        }
+        private Button CreateButtons(int count, int x, int y)
+        {
+            Button button = new Button();
+            button.Text = count.ToString();
+            button.Name = count.ToString();
+            button.Font = new Font("Segoe UI", 15f);
+            button.Size = new Size(160, 130);
+            button.Location = new Point(145 * (x), 130 * (y));
+            button.Image = Properties.Resources.screenshotTable;
+
+            return button;
+        }
+
+        private void UpdateTableButtons(List<Button> tableButtons)
+        {
+            int tableNr = 1;
+            foreach (Button button in tableButtons)
+            {
+                if (paymentService.HasBill(tableNr) || tableService.IsOccupied(tableNr))
+                {
+                    button.Image = Properties.Resources.occupiedNotif2;
+                }
+                else if (reservationService.IsReserved(tableNr))
+                {
+                    button.Image = Properties.Resources.reserved;
+                }
+                else
+                {
+                    button.Image = Properties.Resources.screenshotTable;
+                }
+
+                tableNr++;
+            }
+        }
+
+        private void btn_Information_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+            pnl_Information.Show();
+        }
+
+        private void btn_GoBackInformation_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+        }
+
+        private void lbl_LogOut_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

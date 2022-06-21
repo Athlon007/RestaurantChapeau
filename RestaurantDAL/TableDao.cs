@@ -9,21 +9,11 @@ namespace RestaurantDAL
 {
     public class TableDao : BaseDao
     {
-        public Table GetTableId(int id)
-        {
-            string query = $"SELECT id, activeBill FROM dbo.[Table] WHERE id = @id";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@id", id)
-            };
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
-        }
         public int GetNumberOfTables()
         {
             string query = $"select count(id) AS count from dbo.[Table]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];           
-            return ReadTableCount(ExecuteSelectQuery(query, sqlParameters));
-        }        
+            return ReadTableCount(ExecuteSelectQuery(query));
+        }
         private Table ReadTable(DataTable dataTable)
         {
             // create object to store values
@@ -31,15 +21,34 @@ namespace RestaurantDAL
             if (dataTable.Rows.Count > 0)
             {
                 DataRow dr = dataTable.Rows[0];
-                table.Id = Convert.ToInt32(dr["id"]);                
+                table.Id = Convert.ToInt32(dr["id"]);
             }
             else
             {
-                throw new Exception("There is no user with these credentials");
+                throw new Exception("There is error while loading table");
             }
             return table;
         }
-
+        public Table OccupyTable(int tableId)
+        {
+            string query = $"UPDATE dbo.[Table] SET IsOccupied = @IsOccupied where id = @id";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("IsOccupied","1"),
+                new SqlParameter("id",tableId)
+            };
+            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public bool IsOccupied(int tableId)
+        {
+            string query = $"select IsOccupied from dbo.[Table] where id = @id And IsOccupied = @IsOccupied";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("id",tableId),
+                new SqlParameter("IsOccupied","1")
+            };
+            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
+        }
         private int ReadTableCount(DataTable dataTable)
         {
             // create object to store values
@@ -51,7 +60,7 @@ namespace RestaurantDAL
             }
             else
             {
-                throw new Exception("There is no user with these credentials");
+                throw new Exception("There is error while loading table");
             }
             return number;
         }

@@ -402,5 +402,11 @@ namespace RestaurantChapeau
                 }
             }
         }
+
+        private void btn_Occupy_Click(object sender, EventArgs e)
+        {
+            TableService tableService = new TableService();
+            //Table table = tableService.OccupyTable(tableID);
+        }
     }
 }

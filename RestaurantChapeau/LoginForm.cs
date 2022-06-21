@@ -30,13 +30,13 @@ namespace RestaurantChapeau
         private void Form1_Load(object sender, EventArgs e)
         {
             HidePanels();
-            btn_LoginRegister.Show();
+            btn_LoginRegister.Hide();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             //if the username and password fields are not empty enable and color the button
-            if (txt_LoginEmail.Text != "" && txt_LoginPassword.Text != "")
+            if (txt_LoginUserName.Text != "" && txt_LoginPassword.Text != "")
             {
                 btn_LoginLogin.Enabled = true;
                 btn_LoginLogin.BackColor = Color.FromArgb(67, 179, 215);
@@ -63,7 +63,7 @@ namespace RestaurantChapeau
 
                 pnl_ForgotPassword.Show();
 
-                txt_LoginEmail.Text = "";
+                txt_LoginUserName.Text = "";
                 txt_LoginPassword.Text = "";
             }
         }
@@ -75,7 +75,7 @@ namespace RestaurantChapeau
         private void txt_LoginPassword_TextChanged(object sender, EventArgs e)
         {
             //if the username and password fields are not empty enable and color the button
-            if (txt_LoginEmail.Text != "" && txt_LoginPassword.Text != "")
+            if (txt_LoginUserName.Text != "" && txt_LoginPassword.Text != "")
             {
                 btn_LoginLogin.Enabled = true;
                 btn_LoginLogin.BackColor = Color.FromArgb(67, 179, 215);
@@ -198,7 +198,7 @@ namespace RestaurantChapeau
                 employeeService = new EmployeeService();
 
                 //store the entered username and password
-                string id = txt_LoginEmail.Text;
+                string id = txt_LoginUserName.Text;
                 string enteredPassword = txt_LoginPassword.Text;
 
                 //gets the employee if the login credentials are correct
@@ -231,7 +231,7 @@ namespace RestaurantChapeau
                 MessageBox.Show($"Login not successful: {ex.Message}");
 
                 //clear the text boxes
-                txt_LoginEmail.Text = "";
+                txt_LoginUserName.Text = "";
                 txt_LoginPassword.Text = "";
 
             }

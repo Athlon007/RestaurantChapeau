@@ -6,9 +6,9 @@ namespace RestaurantModel
 {
     public enum OrderStatus
     {
-        NotStarted,
-        Preparing,
-        ReadyToServe,
-        Served
+        NotStarted,//notStarted
+        Preparing,//preparing
+        ReadyToServe,//ReadyToServe
+        Served//Served
     }
 }

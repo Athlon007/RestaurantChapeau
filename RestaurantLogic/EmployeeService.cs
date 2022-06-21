@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RestaurantModel;
 using RestaurantDAL;
+using System.Security.Cryptography;
 
 namespace RestaurantLogic
 {
@@ -16,26 +17,21 @@ namespace RestaurantLogic
             employeeDb = new EmployeeDao();
             passwordHasher = new PasswordWithSaltHasher();
         }
-        
+
         //adding the user to the db
-        public void AddToRegister(string firstName, string lastName,string email, string passwordHash, string passwordSalt)
+        public void AddToRegister(string firstName, string lastName, string id, string passwordHash, string passwordSalt)
         {
-            employeeDb.AddToRegister(firstName, lastName,email, passwordHash, passwordSalt);
+            employeeDb.AddToRegister(firstName, lastName, id, passwordHash, passwordSalt);
         }
-        
+
         //getting the user by its username
         public Employee GetEmployeeByEmployeeID(string id, string enteredPassword)
         {
-            Employee employee = employeeDb.GetEmployeeByEmployeeID(id);
+            //Employee employee = employeeDb.GetEmployeeByEmployeeID(id);
+            HashWithSaltResult password = passwordHasher.HashWithKnownSalt(enteredPassword, employeeDb.GetSaltForEmployee(id), SHA256.Create());
+            return  employeeDb.GetEmployeeByEmployeeAccount(id, password.Digest);
 
-            if (passwordHasher.PasswordValidation(enteredPassword, employee.passwordHash, employee.passwordSalt))
-            {
-                return employee;
-            }
-            else
-            {
-                throw new Exception("Combination of username and password is incorrect.");
-            }
+            //HashWithKnownSalt()
         }
     }
 }

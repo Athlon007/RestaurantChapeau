@@ -13,14 +13,18 @@ namespace RestaurantLogic
         public TableService()
         {
             tableDB = new TableDao();
-        }
-        public Table GetTableNumber(int id)
-        {
-            return tableDB.GetTableId(id);            
-        }
+        }       
         public int GetTheNumberOfTable()
         {
             return tableDB.GetNumberOfTables();
+        }
+        public bool IsOccupied(int tableId)
+        {
+            return tableDB.IsOccupied(tableId);
+        }
+        public Table OccupyTable(int tableId)
+        {
+            return tableDB.OccupyTable(tableId);
         }
     }
 }
