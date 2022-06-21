@@ -1,0 +1,77 @@
+(2022-06-01 17:14:39) Cannot add or insert the item 'Served' in more than one place. You must first remove it from its current location or clone it. (Parameter 'item')
+       at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 400
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-01 17:14:43) Cannot add or insert the item 'Served' in more than one place. You must first remove it from its current location or clone it. (Parameter 'item')
+       at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 400
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-01 17:16:00) Cannot add or insert the item 'Served' in more than one place. You must first remove it from its current location or clone it. (Parameter 'item')
+       at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 400
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-01 17:16:47) Cannot add or insert the item 'Served' in more than one place. You must first remove it from its current location or clone it. (Parameter 'item')
+       at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 400
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-01 17:17:37) Cannot add or insert the item 'Served' in more than one place. You must first remove it from its current location or clone it. (Parameter 'item')
+       at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 400
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-01 17:19:16) Cannot add or insert the item 'Served' in more than one place. You must first remove it from its current location or clone it. (Parameter 'item')
+       at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 401
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-01 17:21:46) Cannot add or insert the item 'Served' in more than one place. You must first remove it from its current location or clone it. (Parameter 'item')
+       at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 400
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-02 18:56:54) InvalidArgument=Value of '0' is not valid for 'index'. (Parameter 'index')
+Actual value was 0.
+       at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 378
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-02 18:57:02) InvalidArgument=Value of '0' is not valid for 'index'. (Parameter 'index')
+Actual value was 0.
+       at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 378
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 363
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 331
+
+(2022-06-02 21:20:02) InvalidArgument=Value of '0' is not valid for 'index'. (Parameter 'index')
+Actual value was 0.
+       at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at RestaurantChapeau.TableViewForm.lv_TableDetailView_SelectedIndexChanged(Int32 tableId, Bill bill) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 389
+   at RestaurantChapeau.TableViewForm.HandleTableButtonClick(Int32 tableId) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 364
+   at RestaurantChapeau.TableViewForm.OnTableButtonClick(Object sender, EventArgs e) in C:\Users\hhhhh\OneDrive - Hogeschool Inholland\Desktop\RestaurantChapeau\RestaurantChapeau\TableViewForm.cs:line 332
+
