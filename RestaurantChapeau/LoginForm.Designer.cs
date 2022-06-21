@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.txt_LoginPassword = new System.Windows.Forms.TextBox();
-            this.txt_LoginEmail = new System.Windows.Forms.TextBox();
+            this.txt_LoginUserName = new System.Windows.Forms.TextBox();
             this.btn_LoginLogin = new System.Windows.Forms.Button();
             this.btn_LoginForgot = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -80,16 +80,16 @@
             this.txt_LoginPassword.TextChanged += new System.EventHandler(this.txt_LoginPassword_TextChanged);
             this.txt_LoginPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_LoginPassword_KeyDown);
             // 
-            // txt_LoginEmail
+            // txt_LoginUserName
             // 
-            this.txt_LoginEmail.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txt_LoginEmail.Location = new System.Drawing.Point(146, 337);
-            this.txt_LoginEmail.Multiline = true;
-            this.txt_LoginEmail.Name = "txt_LoginEmail";
-            this.txt_LoginEmail.Size = new System.Drawing.Size(452, 58);
-            this.txt_LoginEmail.TabIndex = 1;
-            this.txt_LoginEmail.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.txt_LoginEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_LoginEmail_KeyDown);
+            this.txt_LoginUserName.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txt_LoginUserName.Location = new System.Drawing.Point(146, 337);
+            this.txt_LoginUserName.Multiline = true;
+            this.txt_LoginUserName.Name = "txt_LoginUserName";
+            this.txt_LoginUserName.Size = new System.Drawing.Size(452, 58);
+            this.txt_LoginUserName.TabIndex = 1;
+            this.txt_LoginUserName.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txt_LoginUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_LoginEmail_KeyDown);
             // 
             // btn_LoginLogin
             // 
@@ -123,9 +123,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(146, 314);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 20);
+            this.label3.Size = new System.Drawing.Size(75, 20);
             this.label3.TabIndex = 6;
-            this.label3.Text = "ID";
+            this.label3.Text = "Username";
             // 
             // label4
             // 
@@ -421,7 +421,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_LoginForgot);
             this.Controls.Add(this.btn_LoginLogin);
-            this.Controls.Add(this.txt_LoginEmail);
+            this.Controls.Add(this.txt_LoginUserName);
             this.Controls.Add(this.txt_LoginPassword);
             this.Name = "LoginForm";
             this.Text = "Form1";
@@ -442,7 +442,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox txt_LoginPassword;
-        private System.Windows.Forms.TextBox txt_LoginEmail;
+        private System.Windows.Forms.TextBox txt_LoginUserName;
         private System.Windows.Forms.Button btn_LoginLogin;
         private System.Windows.Forms.Button btn_LoginForgot;
         private System.Windows.Forms.Label label3;

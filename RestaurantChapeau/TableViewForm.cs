@@ -37,23 +37,22 @@ namespace RestaurantChapeau
         {
             InitializeComponent();            
             nrOfTables = tableService.GetTheNumberOfTable();
-            currentEmployee = employee;            
-
+            currentEmployee = employee;
+            btn_LogOut.Enabled = false;
             //Start the timer for refreshing information
             timer = new Timer();
             timer.Tick += Timer_Tick;
             timer.Interval = 10000;
             timer.Start();
-
+            lbl_LogOut.Text = employee.firstName;
             //Update DPI scale
             DPIScaler.Instance.UpdateToForm(this);
 
             //Initialise listview with DPI scale
             lv_TableDetailView.Columns.Add("ID", (int)(40 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Status", (int)(80 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Menu", (int)(280 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Quantity", (int)(100 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
-            lv_TableDetailView.Columns.Add("Time", (int)(200 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Status", (int)(70 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Menu", (int)(350 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
+            lv_TableDetailView.Columns.Add("Q", (int)(40 * DPIScaler.Instance.ScaleWidth), HorizontalAlignment.Left);
 
             //Adjust fonts based on scale
             label1.Font = FontManager.Instance.ScriptMT(label1.Font.Size);
@@ -140,6 +139,7 @@ namespace RestaurantChapeau
             pnl_Reservation.Hide();
             pnl_ViewReservation.Hide();
             pnl_TableDetailView.Hide();
+            pnl_Information.Hide();
         }
         private void btn_Test_Click(object sender, EventArgs e)
         {
@@ -377,20 +377,34 @@ namespace RestaurantChapeau
                     foreach (MenuItem item in menus)
                     {
                         ListViewItem li = new ListViewItem(order.Id.ToString());
-                        li.SubItems.Add(item.Status.ToString());
+                        if(item.Status == OrderStatus.NotStarted)
+                        {
+                            li.SubItems.Add("N");
+                        }
+                        else if (item.Status == OrderStatus.Preparing)
+                        {
+                            li.ForeColor = Color.Green;
+                            li.SubItems.Add("P");
+                        }
+                        else if (item.Status == OrderStatus.ReadyToServe)
+                        {
+                            li.ForeColor = Color.Blue;
+                            li.SubItems.Add("R");
+                        }
+                        else if (item.Status == OrderStatus.Served)
+                        {
+                            li.ForeColor = Color.DarkOrange;
+                            li.SubItems.Add("S");
+                        }
                         li.SubItems.Add(item.Name.ToString());
                         li.SubItems.Add(item.Quantity.ToString());
-                        li.SubItems.Add(order.PlacedTime.TimeOfDay.ToString());
                         ListItem listItem = new ListItem()
                         {
                             Order = order,
                             MenuItem = item
                         };
-                        li.Tag = listItem;
-                        if (item.Status == OrderStatus.ReadyToServe)
-                        {
-                            li.ForeColor = Color.Blue;
-                        }
+                        li.Tag = listItem;                   
+                        
                         lv_TableDetailView.Items.Add(li);
                     }
                 }
@@ -439,7 +453,7 @@ namespace RestaurantChapeau
                     ListItem listItem = (ListItem)lvi.Tag;
                     Order order = listItem.Order;
                     MenuItem item = listItem.MenuItem;
-                    if (item.Status == OrderStatus.NotStarted || item.Status == OrderStatus.Preparing)
+                    if (item.Status == OrderStatus.NotStarted|| item.Status == OrderStatus.Preparing)
                     {
                         MessageBox.Show("You cannot change status yet. Kitchen/bar is still preparing the order.");
                     }
@@ -485,7 +499,7 @@ namespace RestaurantChapeau
             List<Label> foodLabels = new List<Label>();
             //Set position start
             int lbX = 1;
-            int lbY = 2;
+            int lbY = 1;
             //Set labelCount to 1
             int lbCount = 1;
             
@@ -514,7 +528,7 @@ namespace RestaurantChapeau
         {
             List<Label> drinkLabels = new List<Label>();
             int lbX = 3;
-            int lbY = 2;
+            int lbY = 1;
             int lbCount = 1;
             
             for (int i = 0; i < nrOfTables; i++)
@@ -548,7 +562,7 @@ namespace RestaurantChapeau
             label.Font = new Font("Segoe UI", 12f);
             label.BackColor = Color.Gray;
             label.ForeColor = Color.White;
-            label.Location = new Point(103 * (lbX), 135 * (lbY));
+            label.Location = new Point(103 * (lbX), 130 * (lbY));
             label.AutoSize = true;
 
             return label;
@@ -570,7 +584,7 @@ namespace RestaurantChapeau
                         List<MenuItem> items = orderLogic.GetItemsForOrder(order);
                         foreach (MenuItem item in items)
                         {
-                            if (item.Status == OrderStatus.ReadyToServe && !item.IsDrink)
+                            if (item.Status == OrderStatus.ReadyToServe&& !item.IsDrink)
                             {
                                 readyCount++;
                             }
@@ -601,7 +615,7 @@ namespace RestaurantChapeau
                         List<MenuItem> items = orderLogic.GetItemsForOrder(order);
                         foreach (MenuItem item in items)
                         {
-                            if (item.Status == OrderStatus.ReadyToServe && item.IsDrink)
+                            if (item.Status == OrderStatus.ReadyToServe&& item.IsDrink)
                             {
                                 readyCount++;
                             }
@@ -618,7 +632,7 @@ namespace RestaurantChapeau
             List<Button> tableButtons = new List<Button>();
 
             int buttonX = 1;
-            int buttonY = 2;
+            int buttonY = 1;
             int buttonCount = 1;
 
             for (int i = 0; i < nrOfTables; i++)
@@ -673,6 +687,22 @@ namespace RestaurantChapeau
 
                 tableNr++;
             }
+        }
+
+        private void btn_Information_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+            pnl_Information.Show();
+        }
+
+        private void btn_GoBackInformation_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+        }
+
+        private void lbl_LogOut_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
