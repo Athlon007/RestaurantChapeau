@@ -407,7 +407,7 @@
             // 
             this.lbl_OrderComments.AutoSize = true;
             this.lbl_OrderComments.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_OrderComments.Location = new System.Drawing.Point(326, 969);
+            this.lbl_OrderComments.Location = new System.Drawing.Point(249, 951);
             this.lbl_OrderComments.Name = "lbl_OrderComments";
             this.lbl_OrderComments.Size = new System.Drawing.Size(0, 72);
             this.lbl_OrderComments.TabIndex = 12;
