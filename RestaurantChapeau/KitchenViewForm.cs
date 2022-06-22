@@ -253,8 +253,6 @@ namespace RestaurantChapeau
 
                 Order orderItem = selectedOrder;
 
-                //save the name of the highlighted menu item into a menuitem
-                selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
 
                 //if all the items on the listview are selected, change status to ready else preparing
                 if (listViewKitchen_ActiveOrder.SelectedItems.Count == 0)
@@ -270,7 +268,12 @@ namespace RestaurantChapeau
                         menuItem = (MenuItem)item.Tag;
                         // change everyting to ready to serve 
                         menuItem.Status = OrderStatus.ReadyToServe;
-                        orderService.SetOrderItemStatus(menuItem, orderItem, false);
+                        if (employee.employeeType== EmployeeType.KitchenStaff)
+                        {
+                            orderService.SetOrderItemStatus(menuItem, orderItem, false);
+                        }
+                        else orderService.SetOrderItemStatus(menuItem, orderItem, true);
+
                     }
 
                     // assume all items are ready
