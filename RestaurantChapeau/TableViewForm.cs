@@ -138,7 +138,6 @@ namespace RestaurantChapeau
         }
         private void btn_Test_Click(object sender, EventArgs e)
         {
-
             try
             {
                 HidePanel();
@@ -195,7 +194,6 @@ namespace RestaurantChapeau
             HidePanel();
             pnl_Reservation.Show();
         }
-
         private void btn_ViewReservationCancel_Click(object sender, EventArgs e)
         {
             try
@@ -229,7 +227,6 @@ namespace RestaurantChapeau
                 MessageBox.Show($"Something went wrong with the reservation system: {ex.Message}");
             }
         }
-
         private void picBackButton_Click_1(object sender, EventArgs e)
         {
             HidePanel();
@@ -242,7 +239,6 @@ namespace RestaurantChapeau
             pbTableInfo.Show();
             pb_TableAgenda.Show();
         }
-
         private void EventHandlersForButtons(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -258,7 +254,6 @@ namespace RestaurantChapeau
                 }
             }
         }
-
         private void HandleTableButtonClick(int tableId)
         {
             try

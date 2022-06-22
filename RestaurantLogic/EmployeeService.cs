@@ -17,13 +17,6 @@ namespace RestaurantLogic
             employeeDb = new EmployeeDao();
             passwordHasher = new PasswordWithSaltHasher();
         }
-
-        //adding the user to the db
-        public void AddToRegister(string firstName, string lastName, string id, string passwordHash, string passwordSalt)
-        {
-            employeeDb.AddToRegister(firstName, lastName, id, passwordHash, passwordSalt);
-        }
-
         //getting the user by its username
         public Employee GetEmployeeByEmployeeID(string id, string enteredPassword)
         {

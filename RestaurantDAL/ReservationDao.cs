@@ -10,8 +10,7 @@ namespace RestaurantDAL
 {
     public class ReservationDao : BaseDao
     {        
-        //adding a new reservation to the db
-        
+        //adding a new reservation to the db        
         public void AddToReservation(Reservation reservation)
         {
             string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, isReserved, ReservationStart, tableid) VALUES (@firstName, @lastName, @email, @isReserved, @ReservationStart, @tableid);";

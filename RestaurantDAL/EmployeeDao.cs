@@ -8,16 +8,7 @@ using RestaurantModel;
 namespace RestaurantDAL
 {   
     public class EmployeeDao : BaseDao
-    {
-
-        //adding a new user to the db
-        public void AddToRegister(string firstName, string lastName, string id,string passwordHash, string passwordSalt)
-        {
-
-            string query = $"INSERT INTO [Employee] (firstName, lastName, email, passwordHash, passwordSalt) VALUES ('{firstName}', '{lastName}', '{id}', '{passwordHash}', '{passwordSalt}')";
-            SqlParameter[] sqlParameters = new SqlParameter[0];                       
-            ExecuteEditQuery(query, sqlParameters);
-        }
+    {        
         //getting the user from the db by the employeeName, in order to get the salt
         public Employee GetEmployeeByEmployeeAccount(string account, string hashedPassword)
         {
