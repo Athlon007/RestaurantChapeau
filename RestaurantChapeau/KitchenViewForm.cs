@@ -154,6 +154,14 @@ namespace RestaurantChapeau
                     {
                         li.BackColor = Color.GreenYellow;
                     }
+                    else if (item.Status == OrderStatus.NotStarted)
+                    {
+                        btn_preparingOrder.Enabled = true;
+                    }
+                    else
+                    {
+                        btn_preparingOrder.Enabled = false;
+                    }
                 }
             }
             catch (Exception ex)
@@ -206,7 +214,6 @@ namespace RestaurantChapeau
             pnlKitchen_NewOrders.Show();
 
             RemoveListViewItems(listViewNewOrders);
-            //DisplayOrders(complete);
 
             DisplayNewOrders(false, listViewNewOrders, OrderStatus.Preparing);
         }
@@ -258,6 +265,7 @@ namespace RestaurantChapeau
                 {
                     foreach (ListViewItem item in listViewKitchen_ActiveOrder.SelectedItems)
                     {
+                        MenuItem menuItem =  this.menuItem;   
                         //set menu item to item in the listview
                         menuItem = (MenuItem)item.Tag;
                         // change everyting to ready to serve 
@@ -276,9 +284,7 @@ namespace RestaurantChapeau
                         {
                             allItemsDone = false;
                             break;
-                        }
-                        else if (menuItem.Status == OrderStatus.NotStarted)
-                            btn_preparingOrder.Enabled = true;
+                        } 
                     }
                     //if all the items are done and are selected, change status to ready else preparing
                     if (allItemsDone == true)
@@ -303,15 +309,11 @@ namespace RestaurantChapeau
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
                 DisplayOrderItems(listViewNewOrders);
 
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"There was a problem readying the order: {ex.Message}");
             }
-
-
         }
         #endregion
 
@@ -424,11 +426,12 @@ namespace RestaurantChapeau
         }
         #endregion
 
+        #region Preparing Order Button
         public void PreparingOrder()
         {
             Order order = selectedOrder;
             orderService = new OrderLogic();
-            MenuItem menuItem = new MenuItem();
+            MenuItem selectedMenuItem = menuItem;
             bool isDrink;
 
             // Prevents kitchen stuff updating the orderstatus in drinks and the other way round 
@@ -442,9 +445,12 @@ namespace RestaurantChapeau
             }
             foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
             {
-                menuItem = (MenuItem)item.Tag;
-                menuItem.Status = OrderStatus.Preparing;
-                orderService.SetOrderItemStatus(menuItem, order, isDrink);
+                selectedMenuItem = (MenuItem)item.Tag;
+                if (selectedMenuItem.Status == OrderStatus.NotStarted)
+                {
+                    selectedMenuItem.Status = OrderStatus.Preparing;
+                    orderService.SetOrderItemStatus(selectedMenuItem, order, isDrink);
+                }
             }
 
             MessageBox.Show("Order has been started!");
@@ -452,6 +458,7 @@ namespace RestaurantChapeau
             RemoveListViewItems(listViewKitchen_ActiveOrder);
             DisplayOrderItems(listViewKitchen_ActiveOrder);
         }
+        #endregion      
     }
 
 }
