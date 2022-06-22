@@ -22,6 +22,7 @@ namespace RestaurantDAL
             {
                 DataRow dr = dataTable.Rows[0];
                 table.Id = Convert.ToInt32(dr["id"]);
+                table.isOccupied = (bool)(dr["isReserved"]);
             }
             else
             {
@@ -29,15 +30,15 @@ namespace RestaurantDAL
             }
             return table;
         }
-        public Table OccupyTable(int tableId)
+        public void  OccupyTable(int tableId)
         {
             string query = $"UPDATE dbo.[Table] SET IsOccupied = @IsOccupied where id = @id";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("IsOccupied","1"),
-                new SqlParameter("id",tableId)
+                new SqlParameter("id",tableId),
+                new SqlParameter("IsOccupied",1)
             };
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+             ExecuteEditQuery(query, sqlParameters);
         }
         public bool IsOccupied(int tableId)
         {
@@ -45,9 +46,18 @@ namespace RestaurantDAL
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("id",tableId),
-                new SqlParameter("IsOccupied","1")
+                new SqlParameter("IsOccupied",1)
             };
-            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
+            return ReadStatusOfTable(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private bool ReadStatusOfTable(DataTable dataTable)
+        {
+            bool status= false;
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                 status = (bool)dr["IsOccupied"];
+            }
+            return status;
         }
         private int ReadTableCount(DataTable dataTable)
         {

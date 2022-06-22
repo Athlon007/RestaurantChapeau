@@ -7,6 +7,6 @@ namespace RestaurantModel
     public class Table
     {
         public int Id { get; set; }     
-        public bool isReserved { get; set; }
+        public bool isOccupied { get; set; }
     }
 }

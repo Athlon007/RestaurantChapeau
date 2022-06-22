@@ -22,9 +22,9 @@ namespace RestaurantLogic
         {
             return tableDB.IsOccupied(tableId);
         }
-        public Table OccupyTable(int tableId)
+        public void  OccupyTable(int tableId)
         {
-            return tableDB.OccupyTable(tableId);
+             tableDB.OccupyTable(tableId);
         }
     }
 }
