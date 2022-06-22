@@ -14,11 +14,12 @@ namespace RestaurantLogic
             //create connection to database
             paymentDb = new PaymentDao();
         }
+
         //getting list of all orders within the bill
-        public List<Order> GetAllOrdersInBill(int billID)
+        public (Bill, List<Order>) GetBillAndOrders(int tableId)
         {
-            List<Order> orders = paymentDb.GetAllOrdersInBill(billID);
-            return orders;
+            (Bill bill, List<Order> orders) = paymentDb.GetBillAndOrders(tableId);
+            return (bill: bill, orders: orders);
         }
 
         //getting list of all items within the order

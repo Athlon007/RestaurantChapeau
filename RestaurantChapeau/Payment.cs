@@ -19,7 +19,9 @@ namespace RestaurantChapeau
     {
         PaymentService paymentService;
         Bill bill;
-        Font fontMenuType = new Font("Segoe UI", 18);
+        ListView invoiceCopy = new ListView();
+        Panel tableViewDetail;
+
         private int tableId;
         private int startY;
         bool isChecked = false;
@@ -32,30 +34,44 @@ namespace RestaurantChapeau
         decimal totalUnitPrice = 0;
         decimal alreadyPaid = 0;
         int paymentNum = 1;
-        Label numberOfLoads = new Label();
-        ListView invoiceCopy = new ListView();
-        Label ContainerHeight;
-        Panel tableViewDetail;
+        int numberOfLoads = 0;
+        private void HideAllPanels()
+        {
+            pnlPaymentType.Hide();
+            pnlCashPayment.Hide();
+            pnlPaymentSucessful.Hide();
+            pnlCardPay.Hide();
+            pnlPaymentError.Hide();
+            pnlPin.Hide();
+        }
+
+
+        #region CONSTRUCTOR
         public Payment(int tableId, Panel tableViewDetail)
         {
+            // Display setup
             InitializeComponent();
             HideAllPanels();
             DPIScaler.Instance.UpdateToForm(this);
-            valueTip.KeyPress += intInput_KeyPress;
-            PaidValue.KeyPress += intInput_KeyPress;
-            paymentNumber.KeyPress += intInput_KeyPress;
-            pnlPaymentType.AutoScroll = true;
             this.Width = Convert.ToInt32(DPIScaler.Instance.ScaleWidth * WindowWidth);
             this.Height = Convert.ToInt32(DPIScaler.Instance.ScaleHeight * WindowHeight);
-            this.tableId = tableId;
-            this.tableViewDetail = tableViewDetail;
             backInvoice.Font = FontManager.Instance.ScriptMT(backInvoice.Font.Size);
             headingPaymentType2.Font = FontManager.Instance.ScriptMT(headingPaymentType2.Font.Size);
             backInvoice.Font = FontManager.Instance.ScriptMT(backInvoice.Font.Size);
             lblPaymentTopBarText.Font = FontManager.Instance.ScriptMT(lblPaymentTopBarText.Font.Size);
+            pnlPaymentType.AutoScroll = true;
+
+            // Listeners
+            valueTip.KeyPress += intInput_KeyPress;
+            PaidValue.KeyPress += intInput_KeyPress;
+            paymentNumber.KeyPress += intInput_KeyPress;
+
+            // Assigning values
+            this.tableId = tableId;
             this.tableViewDetail = tableViewDetail;
         }
-
+        #endregion
+        #region PAYMENT PANEL LOAD
         private async void Payment_Load(object sender, EventArgs e)
         {
 
@@ -65,17 +81,23 @@ namespace RestaurantChapeau
             pnlBills.HorizontalScroll.Maximum = 0;
             pnlBills.AutoScroll = true;
             pnlBills.WrapContents = true;
-            await Task.Run(ConnectToServer);
-            this.bill = paymentService.GetBill(tableId);
+
+            PaymentService paymentService = new PaymentService();
+            var dbdata = paymentService.GetBillAndOrders(tableId);
+            this.bill = dbdata.Item1;
             lblPaymentHeader.Text = $"Table {bill.Table.Id.ToString()}";
             valueInvoiceDate.Text = DateTime.Now.ToString();
             valueTip.Text = "0.00";
-            List<Order> orders = paymentService.GetAllOrdersInBill(bill.Id);
+
+          
+            // update!!!!
             List<MenuItem> items = new List<MenuItem>();
-            foreach (Order order in orders)
+            foreach (Order order in dbdata.Item2)
             {
                 items.AddRange(paymentService.GetAllItemsInOrder(order.Id));
             }
+
+            // Filling the listview
             foreach (MenuItem item in items)
             {
                 ListViewItem li = new ListViewItem(item.Name.ToString());
@@ -94,6 +116,7 @@ namespace RestaurantChapeau
 
             subtotal = 0;
             tax = 0;
+
             foreach (ListViewItem listViewItem in listViewInvoice.Items)
             {
                 listViewItem.UseItemStyleForSubItems = false;
@@ -103,50 +126,54 @@ namespace RestaurantChapeau
                 subtotal += subtotalValue;
                 tax += (subtotalValue * taxValue);
             }
+            // Assign labels
+
             SubtotalValue.Text = $"{(subtotal - tax).ToString("#.##")} €";
             TaxValue.Text = $"{tax.ToString("#.##")} €";
             TotalValue.Text = $"{subtotal.ToString("#.##")} €";
             totalPrice = Convert.ToDecimal(subtotal + tip);
             lblBillHeading.Text = $"Split the bill {bill.Id} to ";
         }
-        private async Task ConnectToServer()
-        {
-            paymentService = await Task.Run(() =>
-            {
-                return new PaymentService();
-            });
-        }
+        #endregion
 
+
+        #region PROCESS PAYMENT CLICK
         private void btnProcessPayment_Click(object sender, EventArgs e)
         {
             startY = 50;
-            numberOfLoads.Text = "1";
+            numberOfLoads = 1;
+           
             startY = dynamicBillContainer(bill, startY, 1);
             pnlPaymentType.Show();
         }
+        #endregion
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        #region BACK BUTTONS
+
+        // Back to Invoice
+        private void btnBack_Click(object sender, EventArgs e)
         {
             HideAllPanels();
+            paymentNum = 1;
+            paymentNumber.Text = "1";
         }
 
-        private void HideAllPanels()
-        {
-            pnlPaymentType.Hide();
-            pnlCashPayment.Hide();
-            pnlPaymentSucessful.Hide();
-            pnlCardPay.Hide();
-            pnlPaymentError.Hide();
-            pnlPin.Hide();
-        }
-
-
-        private void paymentBackButton3_Click(object sender, EventArgs e)
+        // Back to payment Type
+        private void paymentBackButton4_Click(object sender, EventArgs e)
         {
             tip = 0;
-            valueTip.Text = "0.00";
+            pnlCashPayment.Hide();
         }
 
+        // Close Payment section
+        private void paymentBackButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+
+        #region TEXTBOX LISTENER - KEY PRESSED
         private void intInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -161,7 +188,9 @@ namespace RestaurantChapeau
                 e.Handled = true;
             }
         }
+        #endregion
 
+        #region PAY BY CASH
         private void btnCash_Click(object sender, EventArgs e, TextBox toPay, CheckBox btnCash, Button payCash, TextBox cashValue, RadioButton creditCard, RadioButton debitCard)
         {
             pnlCashPayment.Show();
@@ -174,6 +203,53 @@ namespace RestaurantChapeau
 
         }
 
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            ValueReturn.Text = Convert.ToDecimal(Convert.ToDecimal(PaidValue.Text) - totalPrice).ToString("#.##");
+        }
+
+        private async void btnConfirmCashPayment_Click(object sender, EventArgs e, CheckBox btnCash, Button payCash, TextBox cashValue, RadioButton creditCard, RadioButton debitCard)
+        {
+            int billId = bill.Id;
+            string comment = valueComment.Text;
+            CultureInfo ci = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = ci;
+            Thread.CurrentThread.CurrentCulture = ci;
+
+            decimal CashValue = Convert.ToDecimal(cashValue.Text);
+            paymentService.CreatePayment(billId, CashValue, comment, tip, 0, paymentNum);
+            alreadyPaid += CashValue;
+            if (alreadyPaid == totalPrice)
+            {
+                paymentService.UpdateBillStatus(bill.Id, 0);
+                this.Close();
+            }
+            paymentNum += 1;
+            HideAllPanels();
+            pnlPaymentSucessful.Show();
+            btnCash.Enabled = false;
+            payCash.Enabled = false;
+            cashValue.Enabled = false;
+            paymentNumber.Enabled = false;
+            if (CashValue == totalUnitPrice)
+            {
+                creditCard.Enabled = false;
+                debitCard.Enabled = false;
+            }
+            await Task.Run(() =>
+            {
+                Thread.Sleep(1000);
+            });
+            pnlPaymentType.Show();
+            pnlPaymentSucessful.Hide();
+
+        }
+
+        #endregion
+
+        #region PAY BY  CARD
+
+        // CREDIT CARD
         private async void btnCreditCard_Click(object sender, EventArgs e, TextBox payByCash, RadioButton creditCard, Button payCard, Label cardValue, CheckBox cash, RadioButton debitCard) {
             pnlPaymentType.Hide();
             finalValueCard.Text = $"€ {cardValue.Text}";
@@ -186,6 +262,9 @@ namespace RestaurantChapeau
 
         }
 
+
+
+        // DEBIT CARD
         private async void btnDebitCard_Click(object sender, EventArgs e, TextBox payByCash, RadioButton debitCard, Button payCard, Label cardValue, CheckBox cash, RadioButton creditCard)
         {
             debitFinalPrice.Text = $"€ {cardValue.Text}";
@@ -284,6 +363,8 @@ namespace RestaurantChapeau
               
             }
         }
+
+        
         private async void btnCredit_Click(TextBox toPay, RadioButton btnCard, Button payCard, Label cardValue, CheckBox cash, RadioButton debitCard)
         {
             Panel[] panels = new[] { pnlPaymentSucessful, pnlPaymentError };
@@ -330,66 +411,9 @@ namespace RestaurantChapeau
             }
         }
 
-        private void paymentBackButton4_Click(object sender, EventArgs e)
-        {
-            tip = 0;
-            pnlCashPayment.Hide();
-        }
+        #endregion
 
-        private void btnCalculate_Click(object sender, EventArgs e)
-        {
-            ValueReturn.Text = Convert.ToDecimal(Convert.ToDecimal(PaidValue.Text) - totalPrice).ToString("#.##");
-        }
-
-           
-        private async void btnConfirmCashPayment_Click(object sender, EventArgs e, CheckBox btnCash, Button payCash, TextBox cashValue, RadioButton creditCard, RadioButton debitCard)
-        {
-            int billId = bill.Id;
-            string comment = valueComment.Text;
-            CultureInfo ci = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = ci;
-            Thread.CurrentThread.CurrentCulture = ci;
-            decimal CashValue = Convert.ToDecimal(cashValue.Text);
-            paymentService.CreatePayment(billId, CashValue, comment, tip, 0, paymentNum);
-            alreadyPaid += CashValue;
-            if (alreadyPaid == totalPrice)
-            {
-                paymentService.UpdateBillStatus(bill.Id, 0);
-                this.Close();
-            }
-            paymentNum += 1;
-            HideAllPanels();
-            pnlPaymentSucessful.Show();
-            btnCash.Enabled = false;
-            payCash.Enabled = false;
-            cashValue.Enabled = false;
-            paymentNumber.Enabled = false;
-            if (CashValue == totalUnitPrice)
-            {
-                creditCard.Enabled = false;
-                debitCard.Enabled = false;
-            }
-            await Task.Run(() =>
-            {
-                Thread.Sleep(1000);
-            });
-            pnlPaymentType.Show(); 
-            pnlPaymentSucessful.Hide();
-
-        }
-
-
-        
-        private void paymentBackButton2_Click(object sender, EventArgs e)
-        {
-            HideAllPanels();
-            paymentNumber.Text = "1";
-        }
-        private void paymentBackButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }       
-
+        #region DYNAMIC BILL CONTAINER
         private int dynamicBillContainer(Bill bill, int startY, int payment)
 
         {
@@ -542,6 +566,9 @@ namespace RestaurantChapeau
             return startY;
         }
 
+        #endregion
+
+        #region ADD TIP
         private decimal AddTipValue_TextChanged(object sender, EventArgs e, Label TotalValue, Label SubTotalValue, Label TaxValue)
         {
             TextBox tipValue = sender as TextBox;
@@ -561,7 +588,9 @@ namespace RestaurantChapeau
             return totalUnitPrice;
 
         }
+        #endregion
 
+        #region SPLIT THE BILL
         private void paymentNumber_TextChanged(object sender, EventArgs e)
         {
             pnlBills.Controls.Clear();
@@ -569,7 +598,7 @@ namespace RestaurantChapeau
             {
                 paymentNumber.Text = "1";
             }
-            numberOfLoads.Text = "1";
+            numberOfLoads = 1;
             int payments = Convert.ToInt32(paymentNumber.Text);
             startY = 50;
             invoiceCopy.Clear();
@@ -586,7 +615,9 @@ namespace RestaurantChapeau
                }
             
         }
+        #endregion
 
+        #region CHANGE PAYMENT METHOD
         void btn_Checked(object sender, EventArgs e, RadioButton creditCard, RadioButton debitCard, Panel billContainer, TextBox payByCash, decimal totalPrice, Button pay)
         {
             CheckBox btn = sender as CheckBox;
@@ -653,9 +684,6 @@ namespace RestaurantChapeau
                     cashValue.Text = (totalUnitPrice - 1).ToString("#.##");
                     cardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
                 }
-
-                //pay.Enabled = true;
-                //pay.BackColor = Color.Blue
             } 
             else
             {
@@ -705,6 +733,29 @@ namespace RestaurantChapeau
 
             }
         }
+
+        void cashAmountChanged(object sender, EventArgs e, Label debitCardValue, Label creditCardValue)
+        {
+            TextBox cashValue = sender as TextBox;
+
+            if (cashValue.Text == "" || cashValue.Text == "0")
+            {
+                cashValue.Text = "1";
+            }
+
+            if (Convert.ToDecimal(debitCardValue.Text) > 0)
+            {
+                debitCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
+            }
+            else if (Convert.ToDecimal(creditCardValue.Text) > 0)
+            {
+                creditCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
+            }
+        }
+
+        #endregion
+
+        #region CHOOSE ITEMS TO PAY FOR
         void btn_saveSelectedOption(object sender, EventArgs e, CheckedListBox menuItems, Panel billContainer, Button saveSelected, CheckBox cash, RadioButton creditCard, RadioButton debitCard, Label lblAddTip, TextBox addTipValue,  Label lblAddFeedback, TextBox addFeedbackValue, int paymentNum, TextBox payByCash)
         {
             Label selectedOptions = new Label();
@@ -729,7 +780,7 @@ namespace RestaurantChapeau
                 decimal finalTax = 0;
                 decimal subtax = 0;
                 List<ListViewItem> toDelete = new List<ListViewItem>();
-                numberOfLoads.Text = (Convert.ToInt32(numberOfLoads.Text) + 1).ToString();
+                numberOfLoads++;
                 for (int i = 0; i < invoiceCopy.Items.Count; i++) {
                     string stringToCompare = $"{i+1}.: 1x - {invoiceCopy.Items[i].SubItems[0].Text} ({invoiceCopy.Items[i].SubItems[1].Text})";
                     if (menuItems.CheckedItems.Contains(stringToCompare))
@@ -836,25 +887,6 @@ namespace RestaurantChapeau
             {
                 MessageBox.Show("Please select items for this payment!");
             }
-
-        }
-        void cashAmountChanged(object sender, EventArgs e, Label debitCardValue, Label creditCardValue)
-        {
-            TextBox cashValue = sender as TextBox;
-
-            if (cashValue.Text == "" || cashValue.Text == "0")
-            {
-                cashValue.Text = "1";
-            }
-
-            if (Convert.ToDecimal(debitCardValue.Text) > 0)
-            {
-                debitCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
-            }
-            else if (Convert.ToDecimal(creditCardValue.Text) > 0)
-            {
-                creditCardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
-            }
         }
 
         void btn_loadItemsClicked(object sender, EventArgs e, Panel billContainer, CheckBox cash, RadioButton creditCard, RadioButton debitCard, Label lblAddTip, TextBox addTipValue, Label lblAddFeedback, TextBox addFeedbackValue, int paymentNum, TextBox payByCash) {
@@ -884,7 +916,7 @@ namespace RestaurantChapeau
 
             billContainer.Controls.Add(saveSelected);
 
-            if (Convert.ToUInt32(numberOfLoads.Text) == Convert.ToInt32(paymentNumber.Text))
+            if (numberOfLoads == Convert.ToInt32(paymentNumber.Text))
             {
                 for (int i = 0; i < menuItems.Items.Count; i++) menuItems.SetItemChecked(i, true);
 
@@ -895,7 +927,9 @@ namespace RestaurantChapeau
             billContainer.Controls.Add(menuItems);
             billContainer.Controls.Remove(btn);
         }
+        #endregion
 
+        #region PAYMENT SUMMARY DYNAMIC CONTAINER
         private List<Label> dynamicPaymentSummary(int payment, Panel billContainer, int X, int Y)
         {
             // 
@@ -1030,5 +1064,6 @@ namespace RestaurantChapeau
 
 
         }
+        #endregion
     }
 }

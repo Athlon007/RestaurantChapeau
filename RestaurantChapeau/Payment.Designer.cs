@@ -81,7 +81,6 @@
             this.valueComment = new System.Windows.Forms.RichTextBox();
             this.valueTip = new System.Windows.Forms.TextBox();
             this.btnTip = new System.Windows.Forms.Button();
-            this.paymentBackButton3 = new System.Windows.Forms.PictureBox();
             this.backPaymentType = new System.Windows.Forms.Label();
             this.LogoPayment3 = new System.Windows.Forms.PictureBox();
             this.pnlCashPayment = new System.Windows.Forms.Panel();
@@ -135,7 +134,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).BeginInit();
             this.groupBoxPayment2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment3)).BeginInit();
             this.pnlCashPayment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton4)).BeginInit();
@@ -499,7 +497,7 @@
             this.paymentBackButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.paymentBackButton2.TabIndex = 20;
             this.paymentBackButton2.TabStop = false;
-            this.paymentBackButton2.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.paymentBackButton2.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // backInvoice
             // 
@@ -697,18 +695,7 @@
             this.btnTip.Name = "btnTip";
             this.btnTip.Size = new System.Drawing.Size(75, 23);
             this.btnTip.TabIndex = 0;
-            // 
-            // paymentBackButton3
-            // 
-            this.paymentBackButton3.BackColor = System.Drawing.Color.Transparent;
-            this.paymentBackButton3.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.paymentBackButton3.Location = new System.Drawing.Point(10, 12);
-            this.paymentBackButton3.Name = "paymentBackButton3";
-            this.paymentBackButton3.Size = new System.Drawing.Size(100, 100);
-            this.paymentBackButton3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.paymentBackButton3.TabIndex = 20;
-            this.paymentBackButton3.TabStop = false;
-            this.paymentBackButton3.Click += new System.EventHandler(this.paymentBackButton3_Click);
+      
             // 
             // backPaymentType
             // 
@@ -1291,7 +1278,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment2)).EndInit();
             this.groupBoxPayment2.ResumeLayout(false);
             this.groupBoxPayment2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentBackButton3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPayment3)).EndInit();
             this.pnlCashPayment.ResumeLayout(false);
             this.pnlCashPayment.PerformLayout();
@@ -1353,7 +1339,6 @@
         private System.Windows.Forms.PictureBox LogoPayment2;
         private System.Windows.Forms.Label headingPaymentType;
         private System.Windows.Forms.Button btnTip;
-        private System.Windows.Forms.PictureBox paymentBackButton3;
         private System.Windows.Forms.Label backPaymentType;
         private System.Windows.Forms.PictureBox LogoPayment3;
         private System.Windows.Forms.GroupBox groupBoxPayment2;
