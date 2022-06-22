@@ -39,9 +39,5 @@ namespace RestaurantLogic
         {
             return reservationDb.ReservationTimeForTable(tableId);
         }
-        public void UpdateReservationStatus(int tableId)
-        {
-            reservationDb.UpdateReservationStatus(tableId); 
-        }
     }
 }

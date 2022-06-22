@@ -156,9 +156,10 @@
             // 
             this.paymentBackButton1.BackColor = System.Drawing.Color.Transparent;
             this.paymentBackButton1.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.paymentBackButton1.Location = new System.Drawing.Point(10, 12);
+            this.paymentBackButton1.Location = new System.Drawing.Point(6, 8);
+            this.paymentBackButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paymentBackButton1.Name = "paymentBackButton1";
-            this.paymentBackButton1.Size = new System.Drawing.Size(100, 100);
+            this.paymentBackButton1.Size = new System.Drawing.Size(62, 62);
             this.paymentBackButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.paymentBackButton1.TabIndex = 16;
             this.paymentBackButton1.TabStop = false;
@@ -167,9 +168,10 @@
             // lblPaymentTopBarText
             // 
             this.lblPaymentTopBarText.Font = new System.Drawing.Font("Script MT Bold", 22.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblPaymentTopBarText.Location = new System.Drawing.Point(116, 0);
+            this.lblPaymentTopBarText.Location = new System.Drawing.Point(71, 0);
+            this.lblPaymentTopBarText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPaymentTopBarText.Name = "lblPaymentTopBarText";
-            this.lblPaymentTopBarText.Size = new System.Drawing.Size(839, 127);
+            this.lblPaymentTopBarText.Size = new System.Drawing.Size(516, 79);
             this.lblPaymentTopBarText.TabIndex = 15;
             this.lblPaymentTopBarText.Text = "Order View";
             this.lblPaymentTopBarText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -179,9 +181,10 @@
             // 
             this.LogoPayment1.BackColor = System.Drawing.Color.Black;
             this.LogoPayment1.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.LogoPayment1.Location = new System.Drawing.Point(951, 0);
+            this.LogoPayment1.Location = new System.Drawing.Point(585, 0);
+            this.LogoPayment1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LogoPayment1.Name = "LogoPayment1";
-            this.LogoPayment1.Size = new System.Drawing.Size(187, 127);
+            this.LogoPayment1.Size = new System.Drawing.Size(115, 79);
             this.LogoPayment1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LogoPayment1.TabIndex = 13;
             this.LogoPayment1.TabStop = false;
@@ -189,9 +192,10 @@
             // lblPaymentHeader
             // 
             this.lblPaymentHeader.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPaymentHeader.Location = new System.Drawing.Point(-23, 139);
+            this.lblPaymentHeader.Location = new System.Drawing.Point(-14, 87);
+            this.lblPaymentHeader.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPaymentHeader.Name = "lblPaymentHeader";
-            this.lblPaymentHeader.Size = new System.Drawing.Size(1180, 68);
+            this.lblPaymentHeader.Size = new System.Drawing.Size(726, 42);
             this.lblPaymentHeader.TabIndex = 14;
             this.lblPaymentHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -199,9 +203,10 @@
             // 
             this.lblInvoice.AutoSize = true;
             this.lblInvoice.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblInvoice.Location = new System.Drawing.Point(130, 207);
+            this.lblInvoice.Location = new System.Drawing.Point(80, 129);
+            this.lblInvoice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInvoice.Name = "lblInvoice";
-            this.lblInvoice.Size = new System.Drawing.Size(158, 59);
+            this.lblInvoice.Size = new System.Drawing.Size(101, 37);
             this.lblInvoice.TabIndex = 17;
             this.lblInvoice.Text = "Invoice";
             // 
@@ -209,9 +214,10 @@
             // 
             this.lblInvoiceDate.AutoSize = true;
             this.lblInvoiceDate.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblInvoiceDate.Location = new System.Drawing.Point(134, 278);
+            this.lblInvoiceDate.Location = new System.Drawing.Point(82, 174);
+            this.lblInvoiceDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInvoiceDate.Name = "lblInvoiceDate";
-            this.lblInvoiceDate.Size = new System.Drawing.Size(85, 37);
+            this.lblInvoiceDate.Size = new System.Drawing.Size(53, 23);
             this.lblInvoiceDate.TabIndex = 18;
             this.lblInvoiceDate.Text = "Date:";
             // 
@@ -219,27 +225,30 @@
             // 
             this.valueInvoiceID.AutoSize = true;
             this.valueInvoiceID.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.valueInvoiceID.Location = new System.Drawing.Point(264, 315);
+            this.valueInvoiceID.Location = new System.Drawing.Point(162, 197);
+            this.valueInvoiceID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.valueInvoiceID.Name = "valueInvoiceID";
-            this.valueInvoiceID.Size = new System.Drawing.Size(0, 37);
+            this.valueInvoiceID.Size = new System.Drawing.Size(0, 23);
             this.valueInvoiceID.TabIndex = 21;
             // 
             // valueInvoiceDate
             // 
             this.valueInvoiceDate.AutoSize = true;
             this.valueInvoiceDate.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.valueInvoiceDate.Location = new System.Drawing.Point(232, 278);
+            this.valueInvoiceDate.Location = new System.Drawing.Point(143, 174);
+            this.valueInvoiceDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.valueInvoiceDate.Name = "valueInvoiceDate";
-            this.valueInvoiceDate.Size = new System.Drawing.Size(0, 37);
+            this.valueInvoiceDate.Size = new System.Drawing.Size(0, 23);
             this.valueInvoiceDate.TabIndex = 20;
             // 
             // lblPayTo
             // 
             this.lblPayTo.AutoSize = true;
             this.lblPayTo.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPayTo.Location = new System.Drawing.Point(869, 207);
+            this.lblPayTo.Location = new System.Drawing.Point(535, 129);
+            this.lblPayTo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPayTo.Name = "lblPayTo";
-            this.lblPayTo.Size = new System.Drawing.Size(160, 59);
+            this.lblPayTo.Size = new System.Drawing.Size(100, 37);
             this.lblPayTo.TabIndex = 22;
             this.lblPayTo.Text = "PAY TO";
             // 
@@ -247,9 +256,10 @@
             // 
             this.lblChapeau.AutoSize = true;
             this.lblChapeau.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblChapeau.Location = new System.Drawing.Point(869, 278);
+            this.lblChapeau.Location = new System.Drawing.Point(535, 174);
+            this.lblChapeau.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChapeau.Name = "lblChapeau";
-            this.lblChapeau.Size = new System.Drawing.Size(128, 37);
+            this.lblChapeau.Size = new System.Drawing.Size(79, 23);
             this.lblChapeau.TabIndex = 23;
             this.lblChapeau.Text = "Chapeau";
             // 
@@ -265,9 +275,10 @@
             this.headerVat});
             this.listViewInvoice.Font = new System.Drawing.Font("Segoe UI", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listViewInvoice.HideSelection = false;
-            this.listViewInvoice.Location = new System.Drawing.Point(68, 390);
+            this.listViewInvoice.Location = new System.Drawing.Point(42, 244);
+            this.listViewInvoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listViewInvoice.Name = "listViewInvoice";
-            this.listViewInvoice.Size = new System.Drawing.Size(1011, 496);
+            this.listViewInvoice.Size = new System.Drawing.Size(622, 310);
             this.listViewInvoice.TabIndex = 24;
             this.listViewInvoice.UseCompatibleStateImageBehavior = false;
             this.listViewInvoice.View = System.Windows.Forms.View.Details;
@@ -307,10 +318,9 @@
             this.btnProcessPayment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnProcessPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnProcessPayment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnProcessPayment.Location = new System.Drawing.Point(393, 1227);
-            this.btnProcessPayment.Margin = new System.Windows.Forms.Padding(5);
+            this.btnProcessPayment.Location = new System.Drawing.Point(242, 767);
             this.btnProcessPayment.Name = "btnProcessPayment";
-            this.btnProcessPayment.Size = new System.Drawing.Size(320, 93);
+            this.btnProcessPayment.Size = new System.Drawing.Size(197, 58);
             this.btnProcessPayment.TabIndex = 25;
             this.btnProcessPayment.Text = "Process Payment";
             this.btnProcessPayment.UseVisualStyleBackColor = false;
@@ -330,9 +340,11 @@
             this.groupBoxMoreInfo.Controls.Add(this.lblLine);
             this.groupBoxMoreInfo.Controls.Add(this.lblTotals);
             this.groupBoxMoreInfo.Controls.Add(this.lblInfo);
-            this.groupBoxMoreInfo.Location = new System.Drawing.Point(68, 923);
+            this.groupBoxMoreInfo.Location = new System.Drawing.Point(42, 577);
+            this.groupBoxMoreInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBoxMoreInfo.Name = "groupBoxMoreInfo";
-            this.groupBoxMoreInfo.Size = new System.Drawing.Size(1011, 264);
+            this.groupBoxMoreInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxMoreInfo.Size = new System.Drawing.Size(622, 165);
             this.groupBoxMoreInfo.TabIndex = 26;
             this.groupBoxMoreInfo.TabStop = false;
             // 
@@ -340,35 +352,39 @@
             // 
             this.lblLine2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLine2.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblLine2.Location = new System.Drawing.Point(26, 216);
+            this.lblLine2.Location = new System.Drawing.Point(16, 135);
+            this.lblLine2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLine2.Name = "lblLine2";
-            this.lblLine2.Size = new System.Drawing.Size(950, 2);
+            this.lblLine2.Size = new System.Drawing.Size(585, 2);
             this.lblLine2.TabIndex = 35;
             // 
             // TotalValue
             // 
             this.TotalValue.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.TotalValue.Location = new System.Drawing.Point(683, 170);
+            this.TotalValue.Location = new System.Drawing.Point(420, 106);
+            this.TotalValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TotalValue.Name = "TotalValue";
-            this.TotalValue.Size = new System.Drawing.Size(293, 37);
+            this.TotalValue.Size = new System.Drawing.Size(180, 23);
             this.TotalValue.TabIndex = 34;
             this.TotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TaxValue
             // 
             this.TaxValue.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TaxValue.Location = new System.Drawing.Point(683, 122);
+            this.TaxValue.Location = new System.Drawing.Point(420, 76);
+            this.TaxValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TaxValue.Name = "TaxValue";
-            this.TaxValue.Size = new System.Drawing.Size(293, 37);
+            this.TaxValue.Size = new System.Drawing.Size(180, 23);
             this.TaxValue.TabIndex = 33;
             this.TaxValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // SubtotalValue
             // 
             this.SubtotalValue.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SubtotalValue.Location = new System.Drawing.Point(683, 76);
+            this.SubtotalValue.Location = new System.Drawing.Point(420, 48);
+            this.SubtotalValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SubtotalValue.Name = "SubtotalValue";
-            this.SubtotalValue.Size = new System.Drawing.Size(293, 37);
+            this.SubtotalValue.Size = new System.Drawing.Size(180, 23);
             this.SubtotalValue.TabIndex = 32;
             this.SubtotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -376,9 +392,10 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotal.Location = new System.Drawing.Point(29, 175);
+            this.lblTotal.Location = new System.Drawing.Point(18, 109);
+            this.lblTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(89, 37);
+            this.lblTotal.Size = new System.Drawing.Size(54, 23);
             this.lblTotal.TabIndex = 31;
             this.lblTotal.Text = "Total:";
             // 
@@ -386,9 +403,10 @@
             // 
             this.lblTax.AutoSize = true;
             this.lblTax.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTax.Location = new System.Drawing.Point(26, 127);
+            this.lblTax.Location = new System.Drawing.Point(16, 79);
+            this.lblTax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTax.Name = "lblTax";
-            this.lblTax.Size = new System.Drawing.Size(60, 37);
+            this.lblTax.Size = new System.Drawing.Size(38, 23);
             this.lblTax.TabIndex = 30;
             this.lblTax.Text = "Tax:";
             // 
@@ -396,9 +414,10 @@
             // 
             this.lblSubtotal.AutoSize = true;
             this.lblSubtotal.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSubtotal.Location = new System.Drawing.Point(26, 81);
+            this.lblSubtotal.Location = new System.Drawing.Point(16, 51);
+            this.lblSubtotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubtotal.Name = "lblSubtotal";
-            this.lblSubtotal.Size = new System.Drawing.Size(123, 37);
+            this.lblSubtotal.Size = new System.Drawing.Size(78, 23);
             this.lblSubtotal.TabIndex = 27;
             this.lblSubtotal.Text = "Subtotal:";
             // 
@@ -406,18 +425,20 @@
             // 
             this.lblLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblLine.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblLine.Location = new System.Drawing.Point(26, 64);
+            this.lblLine.Location = new System.Drawing.Point(16, 40);
+            this.lblLine.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLine.Name = "lblLine";
-            this.lblLine.Size = new System.Drawing.Size(950, 2);
+            this.lblLine.Size = new System.Drawing.Size(585, 2);
             this.lblLine.TabIndex = 29;
             // 
             // lblTotals
             // 
             this.lblTotals.AutoSize = true;
             this.lblTotals.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotals.Location = new System.Drawing.Point(882, 15);
+            this.lblTotals.Location = new System.Drawing.Point(543, 9);
+            this.lblTotals.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotals.Name = "lblTotals";
-            this.lblTotals.Size = new System.Drawing.Size(94, 37);
+            this.lblTotals.Size = new System.Drawing.Size(56, 23);
             this.lblTotals.TabIndex = 28;
             this.lblTotals.Text = "Totals";
             // 
@@ -425,9 +446,10 @@
             // 
             this.lblInfo.AutoSize = true;
             this.lblInfo.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblInfo.Location = new System.Drawing.Point(26, 20);
+            this.lblInfo.Location = new System.Drawing.Point(16, 12);
+            this.lblInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(314, 37);
+            this.lblInfo.Size = new System.Drawing.Size(196, 23);
             this.lblInfo.TabIndex = 27;
             this.lblInfo.Text = "Additional information";
             // 
@@ -442,24 +464,27 @@
             this.pnlPaymentType.Controls.Add(this.LogoPayment2);
             this.pnlPaymentType.Controls.Add(this.headingPaymentType);
             this.pnlPaymentType.Location = new System.Drawing.Point(0, 0);
+            this.pnlPaymentType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPaymentType.Name = "pnlPaymentType";
-            this.pnlPaymentType.Size = new System.Drawing.Size(1138, 1360);
+            this.pnlPaymentType.Size = new System.Drawing.Size(700, 850);
             this.pnlPaymentType.TabIndex = 27;
             // 
             // pnlBills
             // 
-            this.pnlBills.Location = new System.Drawing.Point(94, 355);
+            this.pnlBills.Location = new System.Drawing.Point(58, 222);
+            this.pnlBills.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlBills.Name = "pnlBills";
-            this.pnlBills.Size = new System.Drawing.Size(1044, 1002);
+            this.pnlBills.Size = new System.Drawing.Size(642, 626);
             this.pnlBills.TabIndex = 24;
             // 
             // paymentNumber
             // 
             this.paymentNumber.BackColor = System.Drawing.Color.White;
             this.paymentNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.paymentNumber.Location = new System.Drawing.Point(504, 278);
+            this.paymentNumber.Location = new System.Drawing.Point(310, 174);
+            this.paymentNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paymentNumber.Name = "paymentNumber";
-            this.paymentNumber.Size = new System.Drawing.Size(200, 57);
+            this.paymentNumber.Size = new System.Drawing.Size(125, 38);
             this.paymentNumber.TabIndex = 21;
             this.paymentNumber.Text = "1";
             this.paymentNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -470,9 +495,10 @@
             this.lblPayment.AutoSize = true;
             this.lblPayment.BackColor = System.Drawing.Color.White;
             this.lblPayment.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblPayment.Location = new System.Drawing.Point(747, 278);
+            this.lblPayment.Location = new System.Drawing.Point(460, 174);
+            this.lblPayment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPayment.Name = "lblPayment";
-            this.lblPayment.Size = new System.Drawing.Size(170, 50);
+            this.lblPayment.Size = new System.Drawing.Size(110, 32);
             this.lblPayment.TabIndex = 23;
             this.lblPayment.Text = "payment";
             // 
@@ -481,9 +507,10 @@
             this.lblBillHeading.AutoSize = true;
             this.lblBillHeading.BackColor = System.Drawing.Color.White;
             this.lblBillHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblBillHeading.Location = new System.Drawing.Point(160, 278);
+            this.lblBillHeading.Location = new System.Drawing.Point(98, 174);
+            this.lblBillHeading.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBillHeading.Name = "lblBillHeading";
-            this.lblBillHeading.Size = new System.Drawing.Size(246, 50);
+            this.lblBillHeading.Size = new System.Drawing.Size(160, 32);
             this.lblBillHeading.TabIndex = 22;
             this.lblBillHeading.Text = "Split Bill # to ";
             // 
@@ -491,9 +518,10 @@
             // 
             this.paymentBackButton2.BackColor = System.Drawing.Color.Transparent;
             this.paymentBackButton2.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.paymentBackButton2.Location = new System.Drawing.Point(10, 12);
+            this.paymentBackButton2.Location = new System.Drawing.Point(6, 8);
+            this.paymentBackButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paymentBackButton2.Name = "paymentBackButton2";
-            this.paymentBackButton2.Size = new System.Drawing.Size(100, 100);
+            this.paymentBackButton2.Size = new System.Drawing.Size(62, 62);
             this.paymentBackButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.paymentBackButton2.TabIndex = 20;
             this.paymentBackButton2.TabStop = false;
@@ -502,9 +530,10 @@
             // backInvoice
             // 
             this.backInvoice.Font = new System.Drawing.Font("Script MT Bold", 22.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.backInvoice.Location = new System.Drawing.Point(116, 0);
+            this.backInvoice.Location = new System.Drawing.Point(71, 0);
+            this.backInvoice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.backInvoice.Name = "backInvoice";
-            this.backInvoice.Size = new System.Drawing.Size(839, 127);
+            this.backInvoice.Size = new System.Drawing.Size(516, 79);
             this.backInvoice.TabIndex = 19;
             this.backInvoice.Text = "Invoice";
             this.backInvoice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -514,9 +543,10 @@
             // 
             this.LogoPayment2.BackColor = System.Drawing.Color.Black;
             this.LogoPayment2.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.LogoPayment2.Location = new System.Drawing.Point(951, 0);
+            this.LogoPayment2.Location = new System.Drawing.Point(585, 0);
+            this.LogoPayment2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LogoPayment2.Name = "LogoPayment2";
-            this.LogoPayment2.Size = new System.Drawing.Size(187, 127);
+            this.LogoPayment2.Size = new System.Drawing.Size(115, 79);
             this.LogoPayment2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LogoPayment2.TabIndex = 17;
             this.LogoPayment2.TabStop = false;
@@ -524,9 +554,10 @@
             // headingPaymentType
             // 
             this.headingPaymentType.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.headingPaymentType.Location = new System.Drawing.Point(0, 139);
+            this.headingPaymentType.Location = new System.Drawing.Point(0, 87);
+            this.headingPaymentType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headingPaymentType.Name = "headingPaymentType";
-            this.headingPaymentType.Size = new System.Drawing.Size(1138, 68);
+            this.headingPaymentType.Size = new System.Drawing.Size(700, 42);
             this.headingPaymentType.TabIndex = 18;
             this.headingPaymentType.Text = "Choose the payment type";
             this.headingPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -604,7 +635,7 @@
             this.lblTotal2.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTotal2.Location = new System.Drawing.Point(29, 175);
             this.lblTotal2.Name = "lblTotal2";
-            this.lblTotal2.Size = new System.Drawing.Size(89, 37);
+            this.lblTotal2.Size = new System.Drawing.Size(54, 23);
             this.lblTotal2.TabIndex = 31;
             this.lblTotal2.Text = "Total:";
             // 
@@ -614,7 +645,7 @@
             this.lblTip2.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTip2.Location = new System.Drawing.Point(26, 127);
             this.lblTip2.Name = "lblTip2";
-            this.lblTip2.Size = new System.Drawing.Size(60, 37);
+            this.lblTip2.Size = new System.Drawing.Size(37, 23);
             this.lblTip2.TabIndex = 30;
             this.lblTip2.Text = "Tip:";
             // 
@@ -624,7 +655,7 @@
             this.lblSubtotal2.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSubtotal2.Location = new System.Drawing.Point(26, 81);
             this.lblSubtotal2.Name = "lblSubtotal2";
-            this.lblSubtotal2.Size = new System.Drawing.Size(123, 37);
+            this.lblSubtotal2.Size = new System.Drawing.Size(78, 23);
             this.lblSubtotal2.TabIndex = 27;
             this.lblSubtotal2.Text = "Subtotal:";
             // 
@@ -643,7 +674,7 @@
             this.lblTotals2.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTotals2.Location = new System.Drawing.Point(748, 20);
             this.lblTotals2.Name = "lblTotals2";
-            this.lblTotals2.Size = new System.Drawing.Size(94, 37);
+            this.lblTotals2.Size = new System.Drawing.Size(56, 23);
             this.lblTotals2.TabIndex = 28;
             this.lblTotals2.Text = "Totals";
             // 
@@ -653,7 +684,7 @@
             this.lblAdditInfo2.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblAdditInfo2.Location = new System.Drawing.Point(26, 20);
             this.lblAdditInfo2.Name = "lblAdditInfo2";
-            this.lblAdditInfo2.Size = new System.Drawing.Size(314, 37);
+            this.lblAdditInfo2.Size = new System.Drawing.Size(196, 23);
             this.lblAdditInfo2.TabIndex = 27;
             this.lblAdditInfo2.Text = "Additional information";
             // 
@@ -733,8 +764,9 @@
             this.pnlCashPayment.Controls.Add(this.headingPaymentType2);
             this.pnlCashPayment.Controls.Add(this.LogoPayment4);
             this.pnlCashPayment.Location = new System.Drawing.Point(0, 0);
+            this.pnlCashPayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlCashPayment.Name = "pnlCashPayment";
-            this.pnlCashPayment.Size = new System.Drawing.Size(1135, 1363);
+            this.pnlCashPayment.Size = new System.Drawing.Size(698, 852);
             this.pnlCashPayment.TabIndex = 34;
             // 
             // btnCalculate
@@ -742,10 +774,9 @@
             this.btnCalculate.BackColor = System.Drawing.Color.SandyBrown;
             this.btnCalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCalculate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCalculate.Location = new System.Drawing.Point(396, 915);
-            this.btnCalculate.Margin = new System.Windows.Forms.Padding(5);
+            this.btnCalculate.Location = new System.Drawing.Point(244, 572);
             this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(317, 95);
+            this.btnCalculate.Size = new System.Drawing.Size(195, 59);
             this.btnCalculate.TabIndex = 38;
             this.btnCalculate.Text = "Calculate";
             this.btnCalculate.UseVisualStyleBackColor = false;
@@ -754,9 +785,10 @@
             // ValueReturn
             // 
             this.ValueReturn.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ValueReturn.Location = new System.Drawing.Point(349, 666);
+            this.ValueReturn.Location = new System.Drawing.Point(215, 416);
+            this.ValueReturn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ValueReturn.Name = "ValueReturn";
-            this.ValueReturn.Size = new System.Drawing.Size(606, 73);
+            this.ValueReturn.Size = new System.Drawing.Size(373, 46);
             this.ValueReturn.TabIndex = 37;
             this.ValueReturn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ValueReturn.UseCompatibleTextRendering = true;
@@ -764,9 +796,10 @@
             // valueToPay
             // 
             this.valueToPay.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.valueToPay.Location = new System.Drawing.Point(349, 392);
+            this.valueToPay.Location = new System.Drawing.Point(215, 245);
+            this.valueToPay.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.valueToPay.Name = "valueToPay";
-            this.valueToPay.Size = new System.Drawing.Size(606, 73);
+            this.valueToPay.Size = new System.Drawing.Size(373, 46);
             this.valueToPay.TabIndex = 36;
             this.valueToPay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.valueToPay.UseCompatibleTextRendering = true;
@@ -774,9 +807,10 @@
             // lblReturn
             // 
             this.lblReturn.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblReturn.Location = new System.Drawing.Point(163, 666);
+            this.lblReturn.Location = new System.Drawing.Point(100, 416);
+            this.lblReturn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReturn.Name = "lblReturn";
-            this.lblReturn.Size = new System.Drawing.Size(180, 73);
+            this.lblReturn.Size = new System.Drawing.Size(111, 46);
             this.lblReturn.TabIndex = 35;
             this.lblReturn.Text = "Return:";
             this.lblReturn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -785,9 +819,10 @@
             // lblToPay
             // 
             this.lblToPay.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblToPay.Location = new System.Drawing.Point(163, 392);
+            this.lblToPay.Location = new System.Drawing.Point(100, 245);
+            this.lblToPay.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToPay.Name = "lblToPay";
-            this.lblToPay.Size = new System.Drawing.Size(180, 73);
+            this.lblToPay.Size = new System.Drawing.Size(111, 46);
             this.lblToPay.TabIndex = 34;
             this.lblToPay.Text = "To Pay:";
             this.lblToPay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -796,9 +831,10 @@
             // lblPaid
             // 
             this.lblPaid.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPaid.Location = new System.Drawing.Point(168, 525);
+            this.lblPaid.Location = new System.Drawing.Point(103, 328);
+            this.lblPaid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPaid.Name = "lblPaid";
-            this.lblPaid.Size = new System.Drawing.Size(180, 73);
+            this.lblPaid.Size = new System.Drawing.Size(111, 46);
             this.lblPaid.TabIndex = 33;
             this.lblPaid.Text = "Paid:";
             this.lblPaid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -809,10 +845,9 @@
             this.btnConfirmCashPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(179)))), ((int)(((byte)(215)))));
             this.btnConfirmCashPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnConfirmCashPayment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConfirmCashPayment.Location = new System.Drawing.Point(396, 1208);
-            this.btnConfirmCashPayment.Margin = new System.Windows.Forms.Padding(5);
+            this.btnConfirmCashPayment.Location = new System.Drawing.Point(244, 755);
             this.btnConfirmCashPayment.Name = "btnConfirmCashPayment";
-            this.btnConfirmCashPayment.Size = new System.Drawing.Size(317, 95);
+            this.btnConfirmCashPayment.Size = new System.Drawing.Size(195, 59);
             this.btnConfirmCashPayment.TabIndex = 31;
             this.btnConfirmCashPayment.Text = "Confirm Payment";
             this.btnConfirmCashPayment.UseVisualStyleBackColor = false;
@@ -822,11 +857,12 @@
             this.PaidValue.BackColor = System.Drawing.Color.LightGray;
             this.PaidValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PaidValue.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.PaidValue.Location = new System.Drawing.Point(658, 532);
-            this.PaidValue.MaximumSize = new System.Drawing.Size(700, 91);
-            this.PaidValue.MinimumSize = new System.Drawing.Size(100, 91);
+            this.PaidValue.Location = new System.Drawing.Point(405, 332);
+            this.PaidValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PaidValue.MaximumSize = new System.Drawing.Size(431, 91);
+            this.PaidValue.MinimumSize = new System.Drawing.Size(62, 91);
             this.PaidValue.Name = "PaidValue";
-            this.PaidValue.Size = new System.Drawing.Size(300, 91);
+            this.PaidValue.Size = new System.Drawing.Size(185, 36);
             this.PaidValue.TabIndex = 27;
             this.PaidValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -834,9 +870,10 @@
             // 
             this.paymentBackButton4.BackColor = System.Drawing.Color.Transparent;
             this.paymentBackButton4.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.paymentBackButton4.Location = new System.Drawing.Point(10, 12);
+            this.paymentBackButton4.Location = new System.Drawing.Point(6, 8);
+            this.paymentBackButton4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paymentBackButton4.Name = "paymentBackButton4";
-            this.paymentBackButton4.Size = new System.Drawing.Size(100, 100);
+            this.paymentBackButton4.Size = new System.Drawing.Size(62, 62);
             this.paymentBackButton4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.paymentBackButton4.TabIndex = 20;
             this.paymentBackButton4.TabStop = false;
@@ -845,9 +882,10 @@
             // headingPaymentType2
             // 
             this.headingPaymentType2.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.headingPaymentType2.Location = new System.Drawing.Point(116, 0);
+            this.headingPaymentType2.Location = new System.Drawing.Point(71, 0);
+            this.headingPaymentType2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headingPaymentType2.Name = "headingPaymentType2";
-            this.headingPaymentType2.Size = new System.Drawing.Size(839, 127);
+            this.headingPaymentType2.Size = new System.Drawing.Size(516, 79);
             this.headingPaymentType2.TabIndex = 19;
             this.headingPaymentType2.Text = "Payment type";
             this.headingPaymentType2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -857,9 +895,10 @@
             // 
             this.LogoPayment4.BackColor = System.Drawing.Color.Black;
             this.LogoPayment4.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.LogoPayment4.Location = new System.Drawing.Point(951, 0);
+            this.LogoPayment4.Location = new System.Drawing.Point(585, 0);
+            this.LogoPayment4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LogoPayment4.Name = "LogoPayment4";
-            this.LogoPayment4.Size = new System.Drawing.Size(187, 127);
+            this.LogoPayment4.Size = new System.Drawing.Size(115, 79);
             this.LogoPayment4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LogoPayment4.TabIndex = 17;
             this.LogoPayment4.TabStop = false;
@@ -870,16 +909,18 @@
             this.pnlPaymentSucessful.Controls.Add(this.lblSucess);
             this.pnlPaymentSucessful.Controls.Add(this.pictureBox2);
             this.pnlPaymentSucessful.Location = new System.Drawing.Point(0, -1);
+            this.pnlPaymentSucessful.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPaymentSucessful.Name = "pnlPaymentSucessful";
-            this.pnlPaymentSucessful.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlPaymentSucessful.Size = new System.Drawing.Size(700, 852);
             this.pnlPaymentSucessful.TabIndex = 29;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::RestaurantChapeau.Properties.Resources.tick;
-            this.pictureBox1.Location = new System.Drawing.Point(393, 435);
+            this.pictureBox1.Location = new System.Drawing.Point(242, 272);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(333, 334);
+            this.pictureBox1.Size = new System.Drawing.Size(205, 209);
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
             // 
@@ -887,9 +928,10 @@
             // 
             this.lblSucess.AutoSize = true;
             this.lblSucess.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSucess.Location = new System.Drawing.Point(349, 823);
+            this.lblSucess.Location = new System.Drawing.Point(215, 514);
+            this.lblSucess.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSucess.Name = "lblSucess";
-            this.lblSucess.Size = new System.Drawing.Size(441, 65);
+            this.lblSucess.Size = new System.Drawing.Size(274, 41);
             this.lblSucess.TabIndex = 32;
             this.lblSucess.Text = "Payment sucessful";
             // 
@@ -897,9 +939,10 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Black;
             this.pictureBox2.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.pictureBox2.Location = new System.Drawing.Point(381, 153);
+            this.pictureBox2.Location = new System.Drawing.Point(234, 96);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(365, 232);
+            this.pictureBox2.Size = new System.Drawing.Size(225, 145);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 17;
             this.pictureBox2.TabStop = false;
@@ -910,16 +953,18 @@
             this.pnlPaymentError.Controls.Add(this.lblErrorPayment);
             this.pnlPaymentError.Controls.Add(this.logoErrorPayment);
             this.pnlPaymentError.Location = new System.Drawing.Point(0, 0);
+            this.pnlPaymentError.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPaymentError.Name = "pnlPaymentError";
-            this.pnlPaymentError.Size = new System.Drawing.Size(1138, 1363);
+            this.pnlPaymentError.Size = new System.Drawing.Size(700, 852);
             this.pnlPaymentError.TabIndex = 30;
             // 
             // errorImg
             // 
             this.errorImg.Image = global::RestaurantChapeau.Properties.Resources.error_icon_4;
-            this.errorImg.Location = new System.Drawing.Point(393, 435);
+            this.errorImg.Location = new System.Drawing.Point(242, 272);
+            this.errorImg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.errorImg.Name = "errorImg";
-            this.errorImg.Size = new System.Drawing.Size(333, 334);
+            this.errorImg.Size = new System.Drawing.Size(205, 209);
             this.errorImg.TabIndex = 33;
             this.errorImg.TabStop = false;
             // 
@@ -927,9 +972,10 @@
             // 
             this.lblErrorPayment.AutoSize = true;
             this.lblErrorPayment.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblErrorPayment.Location = new System.Drawing.Point(294, 821);
+            this.lblErrorPayment.Location = new System.Drawing.Point(181, 513);
+            this.lblErrorPayment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblErrorPayment.Name = "lblErrorPayment";
-            this.lblErrorPayment.Size = new System.Drawing.Size(531, 65);
+            this.lblErrorPayment.Size = new System.Drawing.Size(330, 41);
             this.lblErrorPayment.TabIndex = 32;
             this.lblErrorPayment.Text = "Payment not sucessful";
             // 
@@ -937,9 +983,10 @@
             // 
             this.logoErrorPayment.BackColor = System.Drawing.Color.Black;
             this.logoErrorPayment.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.logoErrorPayment.Location = new System.Drawing.Point(381, 153);
+            this.logoErrorPayment.Location = new System.Drawing.Point(234, 96);
+            this.logoErrorPayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.logoErrorPayment.Name = "logoErrorPayment";
-            this.logoErrorPayment.Size = new System.Drawing.Size(365, 232);
+            this.logoErrorPayment.Size = new System.Drawing.Size(225, 145);
             this.logoErrorPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.logoErrorPayment.TabIndex = 17;
             this.logoErrorPayment.TabStop = false;
@@ -950,16 +997,18 @@
             this.pnlCardPay.Controls.Add(this.finalValueCard);
             this.pnlCardPay.Controls.Add(this.pictureBox6);
             this.pnlCardPay.Location = new System.Drawing.Point(0, -1);
+            this.pnlCardPay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlCardPay.Name = "pnlCardPay";
-            this.pnlCardPay.Size = new System.Drawing.Size(1138, 1364);
+            this.pnlCardPay.Size = new System.Drawing.Size(700, 852);
             this.pnlCardPay.TabIndex = 31;
             // 
             // cardPaymentImg
             // 
             this.cardPaymentImg.Image = global::RestaurantChapeau.Properties.Resources.payment;
-            this.cardPaymentImg.Location = new System.Drawing.Point(294, 437);
+            this.cardPaymentImg.Location = new System.Drawing.Point(181, 273);
+            this.cardPaymentImg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardPaymentImg.Name = "cardPaymentImg";
-            this.cardPaymentImg.Size = new System.Drawing.Size(542, 333);
+            this.cardPaymentImg.Size = new System.Drawing.Size(334, 208);
             this.cardPaymentImg.TabIndex = 33;
             this.cardPaymentImg.TabStop = false;
             // 
@@ -967,9 +1016,10 @@
             // 
             this.finalValueCard.AutoSize = true;
             this.finalValueCard.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.finalValueCard.Location = new System.Drawing.Point(540, 801);
+            this.finalValueCard.Location = new System.Drawing.Point(332, 501);
+            this.finalValueCard.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.finalValueCard.Name = "finalValueCard";
-            this.finalValueCard.Size = new System.Drawing.Size(0, 65);
+            this.finalValueCard.Size = new System.Drawing.Size(0, 41);
             this.finalValueCard.TabIndex = 32;
             this.finalValueCard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -977,9 +1027,10 @@
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Black;
             this.pictureBox6.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.pictureBox6.Location = new System.Drawing.Point(381, 153);
+            this.pictureBox6.Location = new System.Drawing.Point(234, 96);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(365, 232);
+            this.pictureBox6.Size = new System.Drawing.Size(225, 145);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 17;
             this.pictureBox6.TabStop = false;
@@ -1006,16 +1057,18 @@
             this.pnlPin.Controls.Add(this.pictureBox4);
             this.pnlPin.Controls.Add(this.lblEnterPin);
             this.pnlPin.Location = new System.Drawing.Point(0, 1);
+            this.pnlPin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPin.Name = "pnlPin";
-            this.pnlPin.Size = new System.Drawing.Size(1138, 1360);
+            this.pnlPin.Size = new System.Drawing.Size(700, 850);
             this.pnlPin.TabIndex = 35;
             // 
             // lblPin
             // 
             this.lblPin.Font = new System.Drawing.Font("Script MT Bold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblPin.Location = new System.Drawing.Point(168, 277);
+            this.lblPin.Location = new System.Drawing.Point(103, 173);
+            this.lblPin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPin.Name = "lblPin";
-            this.lblPin.Size = new System.Drawing.Size(807, 50);
+            this.lblPin.Size = new System.Drawing.Size(497, 31);
             this.lblPin.TabIndex = 36;
             this.lblPin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1027,9 +1080,10 @@
             this.btnSubmitPin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmitPin.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSubmitPin.ForeColor = System.Drawing.Color.White;
-            this.btnSubmitPin.Location = new System.Drawing.Point(590, 1165);
+            this.btnSubmitPin.Location = new System.Drawing.Point(363, 728);
+            this.btnSubmitPin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSubmitPin.Name = "btnSubmitPin";
-            this.btnSubmitPin.Size = new System.Drawing.Size(368, 136);
+            this.btnSubmitPin.Size = new System.Drawing.Size(226, 85);
             this.btnSubmitPin.TabIndex = 35;
             this.btnSubmitPin.Text = "Confirm";
             this.btnSubmitPin.UseVisualStyleBackColor = false;
@@ -1040,9 +1094,10 @@
             this.btn0.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn0.Location = new System.Drawing.Point(503, 983);
+            this.btn0.Location = new System.Drawing.Point(310, 614);
+            this.btn0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn0.Name = "btn0";
-            this.btn0.Size = new System.Drawing.Size(143, 116);
+            this.btn0.Size = new System.Drawing.Size(88, 72);
             this.btn0.TabIndex = 34;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = true;
@@ -1055,9 +1110,10 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(185, 1165);
+            this.btnClear.Location = new System.Drawing.Point(114, 728);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(368, 137);
+            this.btnClear.Size = new System.Drawing.Size(226, 86);
             this.btnClear.TabIndex = 33;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
@@ -1068,9 +1124,10 @@
             this.btn9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn9.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn9.Location = new System.Drawing.Point(741, 793);
+            this.btn9.Location = new System.Drawing.Point(456, 496);
+            this.btn9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn9.Name = "btn9";
-            this.btn9.Size = new System.Drawing.Size(142, 116);
+            this.btn9.Size = new System.Drawing.Size(87, 72);
             this.btn9.TabIndex = 32;
             this.btn9.Text = "9";
             this.btn9.UseVisualStyleBackColor = true;
@@ -1081,9 +1138,10 @@
             this.btn8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn8.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn8.Location = new System.Drawing.Point(503, 793);
+            this.btn8.Location = new System.Drawing.Point(310, 496);
+            this.btn8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn8.Name = "btn8";
-            this.btn8.Size = new System.Drawing.Size(143, 116);
+            this.btn8.Size = new System.Drawing.Size(88, 72);
             this.btn8.TabIndex = 31;
             this.btn8.Text = "8";
             this.btn8.UseVisualStyleBackColor = true;
@@ -1094,9 +1152,10 @@
             this.btn7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn7.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn7.Location = new System.Drawing.Point(261, 793);
+            this.btn7.Location = new System.Drawing.Point(161, 496);
+            this.btn7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn7.Name = "btn7";
-            this.btn7.Size = new System.Drawing.Size(142, 116);
+            this.btn7.Size = new System.Drawing.Size(87, 72);
             this.btn7.TabIndex = 30;
             this.btn7.Text = "7";
             this.btn7.UseVisualStyleBackColor = true;
@@ -1107,9 +1166,10 @@
             this.btn6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn6.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn6.Location = new System.Drawing.Point(741, 595);
+            this.btn6.Location = new System.Drawing.Point(456, 372);
+            this.btn6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn6.Name = "btn6";
-            this.btn6.Size = new System.Drawing.Size(142, 116);
+            this.btn6.Size = new System.Drawing.Size(87, 72);
             this.btn6.TabIndex = 29;
             this.btn6.Text = "6";
             this.btn6.UseVisualStyleBackColor = true;
@@ -1120,9 +1180,10 @@
             this.btn5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn5.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn5.Location = new System.Drawing.Point(503, 595);
+            this.btn5.Location = new System.Drawing.Point(310, 372);
+            this.btn5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn5.Name = "btn5";
-            this.btn5.Size = new System.Drawing.Size(143, 116);
+            this.btn5.Size = new System.Drawing.Size(88, 72);
             this.btn5.TabIndex = 28;
             this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = true;
@@ -1133,9 +1194,10 @@
             this.btn4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn4.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn4.Location = new System.Drawing.Point(261, 595);
+            this.btn4.Location = new System.Drawing.Point(161, 372);
+            this.btn4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn4.Name = "btn4";
-            this.btn4.Size = new System.Drawing.Size(142, 116);
+            this.btn4.Size = new System.Drawing.Size(87, 72);
             this.btn4.TabIndex = 27;
             this.btn4.Text = "4";
             this.btn4.UseVisualStyleBackColor = true;
@@ -1146,9 +1208,10 @@
             this.btn3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn3.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn3.Location = new System.Drawing.Point(741, 398);
+            this.btn3.Location = new System.Drawing.Point(456, 249);
+            this.btn3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn3.Name = "btn3";
-            this.btn3.Size = new System.Drawing.Size(142, 116);
+            this.btn3.Size = new System.Drawing.Size(87, 72);
             this.btn3.TabIndex = 26;
             this.btn3.Text = "3";
             this.btn3.UseVisualStyleBackColor = true;
@@ -1159,9 +1222,10 @@
             this.btn2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn2.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn2.Location = new System.Drawing.Point(503, 398);
+            this.btn2.Location = new System.Drawing.Point(310, 249);
+            this.btn2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(143, 116);
+            this.btn2.Size = new System.Drawing.Size(88, 72);
             this.btn2.TabIndex = 25;
             this.btn2.Text = "2";
             this.btn2.UseVisualStyleBackColor = true;
@@ -1172,9 +1236,10 @@
             this.btn1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn1.Font = new System.Drawing.Font("Script MT Bold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn1.Location = new System.Drawing.Point(261, 398);
+            this.btn1.Location = new System.Drawing.Point(161, 249);
+            this.btn1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(142, 116);
+            this.btn1.Size = new System.Drawing.Size(87, 72);
             this.btn1.TabIndex = 24;
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = true;
@@ -1182,18 +1247,20 @@
             // pinContainer
             // 
             this.pinContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
-            this.pinContainer.Location = new System.Drawing.Point(168, 327);
+            this.pinContainer.Location = new System.Drawing.Point(103, 204);
+            this.pinContainer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.pinContainer.Name = "pinContainer";
-            this.pinContainer.Size = new System.Drawing.Size(807, 997);
+            this.pinContainer.Size = new System.Drawing.Size(497, 623);
             this.pinContainer.TabIndex = 23;
             // 
             // debitFinalPrice
             // 
             this.debitFinalPrice.BackColor = System.Drawing.Color.White;
             this.debitFinalPrice.Font = new System.Drawing.Font("Script MT Bold", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.debitFinalPrice.Location = new System.Drawing.Point(3, 124);
+            this.debitFinalPrice.Location = new System.Drawing.Point(2, 78);
+            this.debitFinalPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.debitFinalPrice.Name = "debitFinalPrice";
-            this.debitFinalPrice.Size = new System.Drawing.Size(1135, 50);
+            this.debitFinalPrice.Size = new System.Drawing.Size(698, 31);
             this.debitFinalPrice.TabIndex = 22;
             this.debitFinalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1201,9 +1268,10 @@
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.Image = global::RestaurantChapeau.Properties.Resources.backbutton;
-            this.pictureBox3.Location = new System.Drawing.Point(10, 12);
+            this.pictureBox3.Location = new System.Drawing.Point(6, 8);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox3.Size = new System.Drawing.Size(62, 62);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 20;
             this.pictureBox3.TabStop = false;
@@ -1211,9 +1279,10 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Script MT Bold", 22.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(116, 0);
+            this.label3.Location = new System.Drawing.Point(71, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(839, 127);
+            this.label3.Size = new System.Drawing.Size(516, 79);
             this.label3.TabIndex = 19;
             this.label3.Text = "Invoice";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1223,9 +1292,10 @@
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Black;
             this.pictureBox4.Image = global::RestaurantChapeau.Properties.Resources.hat;
-            this.pictureBox4.Location = new System.Drawing.Point(951, 0);
+            this.pictureBox4.Location = new System.Drawing.Point(585, 0);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(187, 127);
+            this.pictureBox4.Size = new System.Drawing.Size(115, 79);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 17;
             this.pictureBox4.TabStop = false;
@@ -1233,19 +1303,20 @@
             // lblEnterPin
             // 
             this.lblEnterPin.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblEnterPin.Location = new System.Drawing.Point(3, 183);
+            this.lblEnterPin.Location = new System.Drawing.Point(2, 114);
+            this.lblEnterPin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEnterPin.Name = "lblEnterPin";
-            this.lblEnterPin.Size = new System.Drawing.Size(1138, 64);
+            this.lblEnterPin.Size = new System.Drawing.Size(700, 40);
             this.lblEnterPin.TabIndex = 18;
             this.lblEnterPin.Text = "Enter your pin";
             this.lblEnterPin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Payment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1138, 1362);
+            this.ClientSize = new System.Drawing.Size(700, 659);
             this.Controls.Add(this.pnlPin);
             this.Controls.Add(this.pnlPaymentType);
             this.Controls.Add(this.pnlPaymentError);
@@ -1265,6 +1336,7 @@
             this.Controls.Add(this.lblPaymentTopBarText);
             this.Controls.Add(this.LogoPayment1);
             this.Controls.Add(this.lblPaymentHeader);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Payment";
             this.Text = "Payment";
             this.Load += new System.EventHandler(this.Payment_Load);

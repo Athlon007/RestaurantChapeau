@@ -82,7 +82,7 @@ namespace RestaurantChapeau
             pnlBills.AutoScroll = true;
             pnlBills.WrapContents = true;
 
-            PaymentService paymentService = new PaymentService();
+            paymentService = new PaymentService();
             var dbdata = paymentService.GetBillAndOrders(tableId);
             this.bill = dbdata.Item1;
             lblPaymentHeader.Text = $"Table {bill.Table.Id.ToString()}";
@@ -90,7 +90,6 @@ namespace RestaurantChapeau
             valueTip.Text = "0.00";
 
           
-            // update!!!!
             List<MenuItem> items = new List<MenuItem>();
             foreach (Order order in dbdata.Item2)
             {
@@ -169,6 +168,7 @@ namespace RestaurantChapeau
         private void paymentBackButton1_Click(object sender, EventArgs e)
         {
             this.Close();
+            tableViewDetail.Hide();
         }
 
         #endregion

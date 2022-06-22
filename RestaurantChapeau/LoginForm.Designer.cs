@@ -135,7 +135,6 @@
             this.label4.Size = new System.Drawing.Size(70, 20);
             this.label4.TabIndex = 7;
             this.label4.Text = "Password";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // imageList1
             // 
@@ -174,7 +173,6 @@
             this.pnl_ForgotPassword.Name = "pnl_ForgotPassword";
             this.pnl_ForgotPassword.Size = new System.Drawing.Size(0, 0);
             this.pnl_ForgotPassword.TabIndex = 9;
-            this.pnl_ForgotPassword.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_ForgotPassword_Paint);
             // 
             // lbl_ForgotConfirm
             // 
@@ -282,7 +280,6 @@
             this.pnl_Register.Name = "pnl_Register";
             this.pnl_Register.Size = new System.Drawing.Size(726, 1055);
             this.pnl_Register.TabIndex = 11;
-            this.pnl_Register.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_Register_Paint);
             // 
             // lbl_RegisterPassword
             // 
@@ -327,7 +324,6 @@
             this.btn_RegisterRegister.TabIndex = 4;
             this.btn_RegisterRegister.Text = "Register";
             this.btn_RegisterRegister.UseVisualStyleBackColor = false;
-            this.btn_RegisterRegister.Click += new System.EventHandler(this.btn_RegisterRegister_Click);
             // 
             // lbl_RegisterEmail
             // 

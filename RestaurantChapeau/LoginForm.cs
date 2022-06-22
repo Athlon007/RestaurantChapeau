@@ -47,31 +47,7 @@ namespace RestaurantChapeau
                 btn_LoginLogin.Enabled = false;
                 btn_LoginLogin.BackColor = Color.Transparent;
             }
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void showPanel(string panelName)
-        {
-            if (panelName == "tableView")
-            {
-                HidePanels();
-
-                pnl_ForgotPassword.Show();
-
-                txt_LoginUserName.Text = "";
-                txt_LoginPassword.Text = "";
-            }
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        }                     
         private void txt_LoginPassword_TextChanged(object sender, EventArgs e)
         {
             //if the username and password fields are not empty enable and color the button
@@ -86,12 +62,7 @@ namespace RestaurantChapeau
                 btn_LoginLogin.Enabled = false;
                 btn_LoginLogin.BackColor = Color.Transparent;
             }
-        }
-
-        private void btn_Register_Click(object sender, EventArgs e)
-        {
-            pnl_Register.Show();
-        }
+        }        
 
         private void btn_RegisterLogin_Click(object sender, EventArgs e)
         {
@@ -107,83 +78,12 @@ namespace RestaurantChapeau
         {
             HidePanels();
             pnl_ForgotPassword.Show();
-        }
-
-        private void pnl_Register_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        }       
         private void btn_LoginRegister_Click_1(object sender, EventArgs e)
         {
             HidePanels();
             pnl_Register.Show();
-        }
-
-        private void btn_RegisterRegister_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //create connection to user layer
-                employeeService = new EmployeeService();
-
-                //password hasher
-                PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-
-                //store the employee name and password
-                string email = txt_RegisterEmail.Text;
-                string firstName = txt_RegisterFirstName.Text;
-                string lastName = txt_RegisterLastName.Text;
-                string password = txt_RegisterPassword.Text;
-
-                //if both the password and employee name are valid add the user
-                if (PasswordRequirements(password))
-                {
-                    //this hashes the password
-                    HashWithSaltResult hashPassword = pwHasher.HashWithSalt(password, 64, SHA256.Create());
-
-                    //add the username, hashed password, salt and the user role to the database
-                    employeeService.AddToRegister(firstName, lastName, email, hashPassword.Digest, hashPassword.Salt);
-                    MessageBox.Show("Succesfully Registered! You can now login.");
-
-                    //hide the panels and show the dashboard again
-                    HidePanels();
-                    txt_RegisterFirstName.Clear();
-                    txt_RegisterLastName.Clear();
-                    txt_RegisterEmail.Clear();
-                }
-                else if (!PasswordRequirements(password)) //if the password does not meet the requirements inform the user
-                {
-                    MessageBox.Show("The password does not meet the requirements");
-                }
-                else //if the username is taken inform the user
-                {
-                    MessageBox.Show("The employeename is already in use");
-                    txt_RegisterFirstName.Clear();
-                    txt_RegisterLastName.Clear();
-                }
-                txt_RegisterPassword.Clear();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Unable to register: {ex.Message}");
-            }
-
-        }
-        private bool PasswordRequirements(string password)
-        {
-            //the number of conditions to be met 
-            int goodConditions = 1;
-
-            //the current conditions
-            int conditions = 0;
-
-            //if the length of the password is greater than 8, add 1 to the current conditions
-            if (password.Length == 4)
-                conditions++;
-
-            return conditions == goodConditions;
-        }
-
+        }       
         private void btn_LoginLogin_Click(object sender, EventArgs e)
         {
             Login();
@@ -198,11 +98,11 @@ namespace RestaurantChapeau
                 employeeService = new EmployeeService();
 
                 //store the entered username and password
-                string userName = txt_LoginUserName.Text;
+                string id = txt_LoginUserName.Text;
                 string enteredPassword = txt_LoginPassword.Text;
 
                 //gets the employee if the login credentials are correct
-                Employee employee = employeeService.GetEmployeeByEmployeeID(userName, enteredPassword);
+                Employee employee = employeeService.GetEmployeeByEmployeeID(id, enteredPassword);
 
                 //hide the panels and form, display form of tableView
                 HidePanels();
@@ -235,13 +135,7 @@ namespace RestaurantChapeau
                 txt_LoginPassword.Text = "";
 
             }
-        }
-
-        private void pnl_ForgotPassword_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        }       
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();

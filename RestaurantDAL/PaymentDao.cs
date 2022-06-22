@@ -9,7 +9,7 @@ namespace RestaurantDAL
 {   
     public class PaymentDao : BaseDao
     {
-
+            
         //getting all orders within the bill
 
         public (Bill, List<Order>) GetBillAndOrders(int tableId)
@@ -48,13 +48,8 @@ namespace RestaurantDAL
 
         public void UpdateBillStatus(int billID, int billStatus)
         {
-            string query = "UPDATE dbo.Bill SET status=@billStatus WHERE id=@billID";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-      {
-                new SqlParameter("@billStatus", billStatus),
-                new SqlParameter("@billID", billID)
-
-      };
+            string query = $"UPDATE dbo.Bill SET status={billStatus} WHERE id={billID}";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }
 
@@ -70,7 +65,7 @@ namespace RestaurantDAL
         }
         public void CreatePayment(int billId, decimal amountPaid, string comment, decimal tip, int paymentType, int paymentNum)
         {
-            string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip, paymentType, paymentNum) VALUES (@billId, CURRENT_TIMESTAMP, @amountPaid,'@comment', @tip, @paymentType, @paymentNum)";
+            string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip, paymentType, paymentNum) VALUES (@billId, CURRENT_TIMESTAMP, @amountPaid, '@comment', @tip, @paymentType, @paymentNum)";
             SqlParameter[] sqlParameters = new SqlParameter[]
     {
                 new SqlParameter("@billId", billId),
@@ -94,7 +89,7 @@ namespace RestaurantDAL
                 if (dataTable.Rows.Count > 0) {
                   
                     table.Id = Convert.ToInt32(dr["tableId"]);
-                    bill.Id = Convert.ToInt32(dr["id"]);
+                    bill.Id = Convert.ToInt32(dr["billID"]);
                     bill.Table = table;
                     Order order = new Order()
 
@@ -115,7 +110,6 @@ namespace RestaurantDAL
             }
             return (bill: bill, orders: orders);
         }
-
         private List<MenuItem> ReadItemTable(DataTable dataTable)
         {
             //create list to store the order items 
@@ -156,11 +150,15 @@ namespace RestaurantDAL
             return bill;
         }
 
-        //public bool HasBill(int tableID)
-        //{
-        //    string query = $"Select id from dbo.Bill where tableId={tableID} and status=1";
-        //    SqlParameter[] sqlParameters = new SqlParameter[0];
-        //    return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
-        //}
+        public bool HasBill(int tableID)
+        {
+            string query = $"Select id from dbo.Bill where tableId = @tableId and status = @status";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@tableId",tableID),
+                new SqlParameter("@status",1)
+            };
+            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
+        }
     }
 }

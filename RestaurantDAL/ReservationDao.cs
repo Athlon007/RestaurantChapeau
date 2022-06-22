@@ -10,8 +10,7 @@ namespace RestaurantDAL
 {
     public class ReservationDao : BaseDao
     {        
-        //adding a new reservation to the db
-        
+        //adding a new reservation to the db        
         public void AddToReservation(Reservation reservation)
         {
             string query = $"INSERT INTO dbo.[Reservation] (firstName, lastName, email, isReserved, ReservationStart, tableid) VALUES (@firstName, @lastName, @email, @isReserved, @ReservationStart, @tableid);";
@@ -35,8 +34,6 @@ namespace RestaurantDAL
                 new SqlParameter("@tableid", tableId)
             };
             return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
-
-            //return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }        
         //getting a list of all the reservation
         public List<Reservation> GetAllReservations()
@@ -53,18 +50,6 @@ namespace RestaurantDAL
                 new SqlParameter("@isReserved",1)
             };
             return ReadTablesForReservationTime(ExecuteSelectQuery(query, sqlParameters));
-        }
-        public void UpdateReservationStatus(int tableId)
-        {
-            string query = "UPDATE Reservation SET isReserved = @isReserved From Reservation WHERE tableid = @tableid";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-           {
-                new SqlParameter("@isReserved",false),
-                new SqlParameter("@tableid", tableId)
-               
-           };
-            ExecuteEditQuery(query,sqlParameters);  
-
         }
         private List<Reservation> ReadTablesForReservationTime(DataTable dataTable)
         {
@@ -104,8 +89,7 @@ namespace RestaurantDAL
                 reservations.Add(reservation);
             }
             return reservations;
-        }
-     
+        }     
         public void CancelReservation(Reservation reservation)
         {
             string query = $"DELETE FROM dbo.[Reservation] WHERE id = @id";
@@ -114,20 +98,6 @@ namespace RestaurantDAL
                 new SqlParameter("@id", reservation.reservationID)
             };
             ExecuteEditQuery(query, sqlParameters);
-        }           
-        private bool ReadTableHasBill(DataTable table)
-        {
-            if (table.Rows.Count == 0)
-            {
-                return false;
-            }
-
-            if (Convert.IsDBNull(table.Rows[0]["status"]))
-            {
-                return false;
-            }
-
-            return true;
-        }
+        }                 
     }
 }

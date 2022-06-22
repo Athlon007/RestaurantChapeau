@@ -223,7 +223,7 @@ namespace RestaurantDAL
         // update the order status of an order to another order
         public void UpdateOrderStatus(Order order)
         {
-            string command = ("UPDATE dbo.[Order] SET complete = @complete WHERE Id = @orderId");
+            string command = "UPDATE dbo.[Order] SET complete = @complete WHERE Id = @orderId";
             SqlParameter[] parameters = new SqlParameter[]
             {
                     new SqlParameter("@complete", order.Complete),
@@ -419,28 +419,47 @@ namespace RestaurantDAL
 
             ExecuteEditQuery(query, parameters);
         }
-
         // sets order status to a status
-        public void SetOrderItemStatus(MenuItem item, Order order)
+        public void SetOrderItemStatus(MenuItem item, Order order,bool isDrink)
         {
             try
             {
-                string query = "UPDATE dbo.PartOf SET status = @ItemStatus WHERE orderId = @OrderId AND menuItemId = @ItemId";
+                string query = "update dbo.PartOf Set status =@ItemStatus from dbo.PartOf join MenuItem on MenuItem.id = Partof.menuItemID where orderId = @OrderId and menuItemId = @ItemId and isDrink = @isDrink;";
+
                 SqlParameter[] parameters = new SqlParameter[]
                 {
                 new SqlParameter("@ItemId", item.Id),
                 new SqlParameter("@ItemStatus", item.Status),
-                new SqlParameter("@OrderId", order.Id)
+                new SqlParameter("@OrderId", order.Id),
+                new SqlParameter("@isDrink", isDrink)
                 };
 
                 ExecuteEditQuery(query, parameters);
             }
             catch (Exception ex)
             {
-
                 throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
             }
+        }
+        public void SetOrderItemStatusForFood(MenuItem item, Order order, bool isDrink)
+        {
+            try
+            {
+                string query = "update dbo.PartOf Set status =@ItemStatus from dbo.PartOf join MenuItem on MenuItem.id = Partof.menuItemID where orderId = @OrderId and menuItemId = @ItemId;";
 
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                new SqlParameter("@ItemId", item.Id),
+                new SqlParameter("@ItemStatus", item.Status),
+                new SqlParameter("@OrderId", order.Id),
+                };
+
+                ExecuteEditQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
+            }
         }
     }
 }

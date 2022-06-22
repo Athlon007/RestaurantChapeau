@@ -9,70 +9,36 @@ namespace RestaurantDAL
 {
     public class TableDao : BaseDao
     {
-        public int GetNumberOfTables()
+        public List<Table> GetTables()
         {
-            string query = $"select count(id) AS count from dbo.[Table]";
-            return ReadTableCount(ExecuteSelectQuery(query));
-        }
-        private Table ReadTable(DataTable dataTable)
+            string query = $"select id from dbo.[Table]";
+            return ReadTable(ExecuteSelectQuery(query));
+        }       
+        private List<Table> ReadTable(DataTable dataTable)
         {
             // create object to store values
-            Table table = new Table();
-            if (dataTable.Rows.Count > 0)
+            List<Table> tables = new List<Table>();
+
+            foreach (DataRow dr in dataTable.Rows)
             {
-                DataRow dr = dataTable.Rows[0];
-                table.Id = Convert.ToInt32(dr["id"]);
-                table.isOccupied = (bool)(dr["isReserved"]);
+                Table table = new Table()
+                {
+                    Id = int.Parse(dr["id"].ToString()),
+                };
+                tables.Add(table);
+
             }
-            else
-            {
-                throw new Exception("There is error while loading table");
-            }
-            return table;
+            return tables;
         }
         public void OccupyTable(int tableId)
         {
-            string query = $"UPDATE dbo.[Table] SET IsOccupied = @IsOccupied where id = @id";
+            string query = $"UPDATE dbo.[Bill] SET status = @status where tableId = @tableId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("id",tableId),
-                new SqlParameter("IsOccupied",1)
+                new SqlParameter("@status",1),
+                new SqlParameter("@tableId",tableId)
             };
-             ExecuteEditQuery(query, sqlParameters);
-        }
-        public bool IsOccupied(int tableId)
-        {
-            string query = $"select IsOccupied from dbo.[Table] where id = @id And IsOccupied = @IsOccupied";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("id",tableId),
-                new SqlParameter("IsOccupied",1)
-            };
-            return ReadStatusOfTable(ExecuteSelectQuery(query, sqlParameters));
-        }
-        private bool ReadStatusOfTable(DataTable dataTable)
-        {
-            bool status= false;
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                 status = (bool)dr["IsOccupied"];
-            }
-            return status;
-        }
-        private int ReadTableCount(DataTable dataTable)
-        {
-            // create object to store values
-            int number;
-            if (dataTable.Rows.Count > 0)
-            {
-                DataRow dr = dataTable.Rows[0];
-                number = Convert.ToInt32(dr["count"]);
-            }
-            else
-            {
-                throw new Exception("There is error while loading table");
-            }
-            return number;
-        }
+            ExecuteEditQuery(query, sqlParameters);
+        }                       
     }
 }

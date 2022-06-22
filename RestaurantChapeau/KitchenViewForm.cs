@@ -23,6 +23,7 @@ namespace RestaurantChapeau
         private MenuItem selectedItem;
         private OrderLogic orderService;
         private bool complete;
+        private MenuItem menuItem;
 
 
         public KitchenViewForm(Employee employee)
@@ -153,6 +154,14 @@ namespace RestaurantChapeau
                     {
                         li.BackColor = Color.GreenYellow;
                     }
+                    else if (item.Status == OrderStatus.NotStarted)
+                    {
+                        btn_preparingOrder.Enabled = true;
+                    }
+                    else
+                    {
+                        btn_preparingOrder.Enabled = false;
+                    }
                 }
             }
             catch (Exception ex)
@@ -176,6 +185,16 @@ namespace RestaurantChapeau
             // the selected order is the order that has been selected in the new orderlistview
             // makes sure that the order is not null when you make an order ready and doesnt break the program
             selectedOrder = (Order)listViewNewOrders.SelectedItems[0].Tag;
+
+
+            foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
+            {
+                menuItem = (MenuItem)item.Tag;
+                if (menuItem.Status == OrderStatus.Preparing)
+                {
+                    btn_preparingOrder.Enabled = false;
+                }
+            }
         }
         #endregion
 
@@ -195,7 +214,6 @@ namespace RestaurantChapeau
             pnlKitchen_NewOrders.Show();
 
             RemoveListViewItems(listViewNewOrders);
-            //DisplayOrders(complete);
 
             DisplayNewOrders(false, listViewNewOrders, OrderStatus.Preparing);
         }
@@ -235,8 +253,6 @@ namespace RestaurantChapeau
 
                 Order orderItem = selectedOrder;
 
-                //save the name of the highlighted menu item into a menuitem
-                selectedItem = (MenuItem)listViewKitchen_ActiveOrder.FocusedItem.Tag;
 
                 //if all the items on the listview are selected, change status to ready else preparing
                 if (listViewKitchen_ActiveOrder.SelectedItems.Count == 0)
@@ -247,10 +263,17 @@ namespace RestaurantChapeau
                 {
                     foreach (ListViewItem item in listViewKitchen_ActiveOrder.SelectedItems)
                     {
+                        MenuItem menuItem =  this.menuItem;   
                         //set menu item to item in the listview
-                        MenuItem menuItem = (MenuItem)item.Tag;
+                        menuItem = (MenuItem)item.Tag;
+                        // change everyting to ready to serve 
                         menuItem.Status = OrderStatus.ReadyToServe;
-                        orderService.SetOrderItemStatus(menuItem, orderItem);
+                        if (employee.employeeType== EmployeeType.KitchenStaff)
+                        {
+                            orderService.SetOrderItemStatus(menuItem, orderItem, false);
+                        }
+                        else orderService.SetOrderItemStatus(menuItem, orderItem, true);
+
                     }
 
                     // assume all items are ready
@@ -259,25 +282,27 @@ namespace RestaurantChapeau
                     // for each checked item in the listview
                     foreach (MenuItem menuItem in orderService.GetItemsForOrder(orderItem))
                     {
-                        //MenuItem menuItem = (MenuItem)item.Tag;
                         // if status is not ready to serve, then all the items are not done
                         if (menuItem.Status < OrderStatus.ReadyToServe)
                         {
                             allItemsDone = false;
                             break;
-                        }
+                        } 
                     }
                     //if all the items are done and are selected, change status to ready else preparing
-                    if (allItemsDone)
+                    if (allItemsDone == true)
                     {
                         orderItem.Complete = true;
                         MessageBox.Show($"Order {orderItem.Id.ToString()} has been completed");
                         orderService.UpdateOrderStatus(orderItem);
 
                         // stop the timer
-                        IsActive = false;
+                        ResetTimer();
+                        // enable start order button
+                        btn_preparingOrder.Enabled = false;
                     }
                 }
+                btn_preparingOrder.Enabled = true;
 
                 //remove the items on the new order listview and update with new information
                 RemoveListViewItems(listViewNewOrders);
@@ -286,13 +311,12 @@ namespace RestaurantChapeau
                 //remove all the item in the active order listview and display again
                 RemoveListViewItems(listViewKitchen_ActiveOrder);
                 DisplayOrderItems(listViewNewOrders);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"There was a problem readying the order: {ex.Message}");
             }
-
-
         }
         #endregion
 
@@ -381,6 +405,11 @@ namespace RestaurantChapeau
             LoginForm login = new LoginForm();
             login.Show();
         }
+
+        private void btn_preparingOrder_Click(object sender, EventArgs e)
+        {
+            PreparingOrder();
+        }
         #endregion
 
         #region Fonts
@@ -399,5 +428,40 @@ namespace RestaurantChapeau
             lblKitchenn_OrderNo.UseCompatibleTextRendering = true;
         }
         #endregion
+
+        #region Preparing Order Button
+        public void PreparingOrder()
+        {
+            Order order = selectedOrder;
+            orderService = new OrderLogic();
+            MenuItem selectedMenuItem = menuItem;
+            bool isDrink;
+
+            // Prevents kitchen stuff updating the orderstatus in drinks and the other way round 
+            if (employee.employeeType == EmployeeType.KitchenStaff)
+            {
+                isDrink = false;
+            }
+            else
+            {
+                isDrink = true;
+            }
+            foreach (ListViewItem item in listViewKitchen_ActiveOrder.Items)
+            {
+                selectedMenuItem = (MenuItem)item.Tag;
+                if (selectedMenuItem.Status == OrderStatus.NotStarted)
+                {
+                    selectedMenuItem.Status = OrderStatus.Preparing;
+                    orderService.SetOrderItemStatus(selectedMenuItem, order, isDrink);
+                }
+            }
+
+            MessageBox.Show("Order has been started!");
+            btn_preparingOrder.Enabled = false;
+            RemoveListViewItems(listViewKitchen_ActiveOrder);
+            DisplayOrderItems(listViewKitchen_ActiveOrder);
+        }
+        #endregion      
     }
+
 }

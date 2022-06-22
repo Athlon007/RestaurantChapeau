@@ -8,19 +8,10 @@ using RestaurantModel;
 namespace RestaurantDAL
 {   
     public class EmployeeDao : BaseDao
-    {
-
-        //adding a new user to the db
-        public void AddToRegister(string firstName, string lastName, string id,string passwordHash, string passwordSalt)
-        {
-            string query = $"INSERT INTO [Employee] (firstName, lastName, email, passwordHash, passwordSalt) VALUES ('{firstName}', '{lastName}', '{id}', '{passwordHash}', '{passwordSalt}')";
-            SqlParameter[] sqlParameters = new SqlParameter[0];                       
-            ExecuteEditQuery(query, sqlParameters);
-        }
+    {        
         //getting the user from the db by the employeeName, in order to get the salt
         public Employee GetEmployeeByEmployeeAccount(string account, string hashedPassword)
         {
-            //verify password
             string query = $"SELECT id, firstName, lastName, email, employeeType FROM dbo.[Employee] WHERE email = @email AND passwordHash = @passwordHash";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
@@ -30,7 +21,7 @@ namespace RestaurantDAL
             Employee employee = ReadTable(ExecuteSelectQuery(query, sqlParameters));
             if (employee == null)
             {
-                throw new Exception(" the password you entered is wrong");
+                throw new Exception("the password you entered is wrong");
             }
             return employee;
         }
@@ -44,7 +35,7 @@ namespace RestaurantDAL
             string salt = ReadSalt(ExecuteSelectQuery(query, sqlParameters));
             if (salt == null)
             {
-                throw new Exception("There is no user with this  email");
+                throw new Exception("There is no user with this email");
             }
             return salt;
         }

@@ -140,9 +140,9 @@ namespace RestaurantLogic
             orderDao.SetItemQuantity(item);
         }
 
-        public void SetOrderItemStatus(MenuItem item, Order order)
+        public void SetOrderItemStatus(MenuItem item, Order order,bool isDrink)
         {
-            orderDao.SetOrderItemStatus(item, order);
+            orderDao.SetOrderItemStatus(item, order,isDrink);
 
             List<MenuItem> orderItems = GetItemsForOrder(order);
             foreach (MenuItem itemItem in orderItems)
@@ -155,6 +155,18 @@ namespace RestaurantLogic
 
             order.Complete = true;
             UpdateOrderStatus(order);
+        }
+        public void SetOrderItemStatusForFood(MenuItem item, Order order, bool isDrink)
+        {
+            orderDao.SetOrderItemStatusForFood(item, order, false);
+            List<MenuItem> foodItems = GetItemsForOrder(order);
+            foreach (MenuItem itemItem in foodItems)
+            {
+                if(item.Status != OrderStatus.Served)
+                {
+                    return;
+                }
+            }
         }
     }
 
