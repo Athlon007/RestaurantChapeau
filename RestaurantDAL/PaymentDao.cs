@@ -28,9 +28,15 @@ namespace RestaurantDAL
         // getting a bill
         public Bill GetBill(int tableID)
         {
-            string query = $"Select id, tableId from dbo.Bill where tableId={tableID} and status=1";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"Select id, tableId from dbo.Bill where tableId = @tableId and status = @status";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("tableId",tableID),
+                new SqlParameter("status",1)
+            };
             return ReadBillTable(ExecuteSelectQuery(query, sqlParameters));
+
+            
         }
 
         public void UpdateBillStatus(int billID, int billStatus)
@@ -112,11 +118,11 @@ namespace RestaurantDAL
             return bill;
         }
 
-        public bool HasBill(int tableID)
-        {
-            string query = $"Select id from dbo.Bill where tableId={tableID} and status=1";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
-        }
+        //public bool HasBill(int tableID)
+        //{
+        //    string query = $"Select id from dbo.Bill where tableId={tableID} and status=1";
+        //    SqlParameter[] sqlParameters = new SqlParameter[0];
+        //    return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
+        //}
     }
 }

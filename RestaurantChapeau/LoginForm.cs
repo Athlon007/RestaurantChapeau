@@ -198,11 +198,11 @@ namespace RestaurantChapeau
                 employeeService = new EmployeeService();
 
                 //store the entered username and password
-                string id = txt_LoginUserName.Text;
+                string userName = txt_LoginUserName.Text;
                 string enteredPassword = txt_LoginPassword.Text;
 
                 //gets the employee if the login credentials are correct
-                Employee employee = employeeService.GetEmployeeByEmployeeID(id, enteredPassword);
+                Employee employee = employeeService.GetEmployeeByEmployeeID(userName, enteredPassword);
 
                 //hide the panels and form, display form of tableView
                 HidePanels();

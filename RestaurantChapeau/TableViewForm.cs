@@ -28,7 +28,7 @@ namespace RestaurantChapeau
         Timer timer;
 
         //Lists of components
-        List<Button> tableButtons;
+        Dictionary<int,Button> tableButtons;
         List<Label> drinkNotifications;
         List<Label> foodNotifications;
 
@@ -306,7 +306,12 @@ namespace RestaurantChapeau
                         DialogResult dialogResult = MessageBox.Show($"this table has reservation at {reservation.ReservationStart} would you like to occupy this table? ", "Go to order view", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
+                            reservationService.UpdateReservationStatus(tableId);
+                            tableService.OccupyTable(tableId);
                             ShowOrderView(tableId);
+                           currentBill= paymentService.CreateBill(tableId);
+                            lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
+
                             return;
                         }
                         else
@@ -585,7 +590,7 @@ namespace RestaurantChapeau
             foreach (Label label in foodLabels)
             {
                 //If table has a bill, get ready orders and store them into label
-                if (paymentService.HasBill(tableNr))
+                if (tableService.IsOccupied(tableNr))
                 {
                     Bill bill = paymentService.GetBill(tableNr);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
@@ -616,7 +621,7 @@ namespace RestaurantChapeau
             foreach (Label label in drinkLabels)
             {
                 //If table has a bill, get ready orders and store them into label
-                if (paymentService.HasBill(tableNr))
+                if (tableService.IsOccupied(tableNr))
                 {
                     Bill bill = paymentService.GetBill(tableNr);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
@@ -639,9 +644,9 @@ namespace RestaurantChapeau
             }
         }
 
-        private List<Button> CreateButtonsForTables()
+        private Dictionary<int,Button> CreateButtonsForTables()
         {
-            List<Button> tableButtons = new List<Button>();
+            Dictionary<int,Button> tableButtons = new Dictionary<int,Button>();
 
             int buttonX = 1;
             int buttonY = 1;
@@ -660,7 +665,7 @@ namespace RestaurantChapeau
                 }
 
                 Controls.Add(button);
-                tableButtons.Add(button);
+                tableButtons.Add(i+1,button);
                 button.Click += /*OnTableButtonClick;*/CreateButtons;
 
             }
@@ -679,22 +684,22 @@ namespace RestaurantChapeau
             return button;
         }
 
-        private void UpdateTableButtons(List<Button> tableButtons)
+        private void UpdateTableButtons(Dictionary<int,Button> tableButtons)
         {
             int tableNr = 1;
-            foreach (Button button in tableButtons)
+            for (int i = 0; i < tableButtons.Count; i++)    
             {
-                if (paymentService.HasBill(tableNr) || tableService.IsOccupied(tableNr))
+                if (tableService.IsOccupied(tableNr))
                 {
-                    button.Image = Properties.Resources.occupiedNotif2;
+                    tableButtons[i+1].Image = Properties.Resources.occupiedNotif2;
                 }
                 else if (reservationService.IsReserved(tableNr))
                 {
-                    button.Image = Properties.Resources.reserved;
+                    tableButtons[i + 1].Image = Properties.Resources.reserved;
                 }
                 else
                 {
-                    button.Image = Properties.Resources.screenshotTable;
+                    tableButtons[i + 1].Image = Properties.Resources.screenshotTable;
                 }
 
                 tableNr++;

@@ -30,7 +30,7 @@ namespace RestaurantDAL
             }
             return table;
         }
-        public void  OccupyTable(int tableId)
+        public void OccupyTable(int tableId)
         {
             string query = $"UPDATE dbo.[Table] SET IsOccupied = @IsOccupied where id = @id";
             SqlParameter[] sqlParameters = new SqlParameter[]

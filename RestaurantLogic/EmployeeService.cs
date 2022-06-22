@@ -25,13 +25,12 @@ namespace RestaurantLogic
         }
 
         //getting the user by its username
-        public Employee GetEmployeeByEmployeeID(string id, string enteredPassword)
+        public Employee GetEmployeeByEmployeeID(string userName, string enteredPassword)
         {
             //Employee employee = employeeDb.GetEmployeeByEmployeeID(id);
-            HashWithSaltResult password = passwordHasher.HashWithKnownSalt(enteredPassword, employeeDb.GetSaltForEmployee(id), SHA256.Create());
-            return  employeeDb.GetEmployeeByEmployeeAccount(id, password.Digest);
-
-            //HashWithKnownSalt()
+            string storedSaltFromDatabase = employeeDb.GetSaltForEmployee(userName);
+            HashWithSaltResult password = passwordHasher.HashWithKnownSalt(enteredPassword, storedSaltFromDatabase, SHA256.Create());
+            return  employeeDb.GetEmployeeByEmployeeAccount(userName, password.Digest);
         }
     }
 }
