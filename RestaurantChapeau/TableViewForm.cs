@@ -454,7 +454,7 @@ namespace RestaurantChapeau
                     else if (item.Status == OrderStatus.ReadyToServe)
                     {
                         item.Status = OrderStatus.Served;
-                        orderLogic.SetOrderItemStatus(item, order);
+                        orderLogic.SetOrderItemStatus(item, order,true);
                         lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
                     }
                     else if (item.Status == OrderStatus.Served)

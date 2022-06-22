@@ -140,9 +140,9 @@ namespace RestaurantLogic
             orderDao.SetItemQuantity(item);
         }
 
-        public void SetOrderItemStatus(MenuItem item, Order order)
+        public void SetOrderItemStatus(MenuItem item, Order order,bool isDrink)
         {
-            orderDao.SetOrderItemStatus(item, order);
+            orderDao.SetOrderItemStatus(item, order,isDrink);
 
             List<MenuItem> orderItems = GetItemsForOrder(order);
             foreach (MenuItem itemItem in orderItems)
