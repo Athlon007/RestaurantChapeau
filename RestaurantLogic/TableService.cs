@@ -14,9 +14,9 @@ namespace RestaurantLogic
         {
             tableDB = new TableDao();
         }       
-        public int GetTheNumberOfTable()
+        public List<Table> GetTables()
         {
-            return tableDB.GetNumberOfTables();
+            return tableDB.GetTables();
         }
         public bool IsOccupied(int tableId)
         {
@@ -25,6 +25,10 @@ namespace RestaurantLogic
         public void  OccupyTable(int tableId)
         {
              tableDB.OccupyTable(tableId);
+        }
+        public void MakeTableFree(int tableId)
+        {
+            tableDB.MakeTableFree(tableId);
         }
     }
 }

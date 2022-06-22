@@ -30,7 +30,7 @@ namespace RestaurantDAL
             Employee employee = ReadTable(ExecuteSelectQuery(query, sqlParameters));
             if (employee == null)
             {
-                throw new Exception(" the password you entered is wrong");
+                throw new Exception("the password you entered is wrong");
             }
             return employee;
         }
@@ -44,7 +44,7 @@ namespace RestaurantDAL
             string salt = ReadSalt(ExecuteSelectQuery(query, sqlParameters));
             if (salt == null)
             {
-                throw new Exception("There is no user with this  email");
+                throw new Exception("There is no user with this email");
             }
             return salt;
         }

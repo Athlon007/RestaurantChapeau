@@ -14,21 +14,16 @@ namespace RestaurantChapeau
 {
     public partial class TableViewForm : Form
     {
-        TableService tableService = new TableService();
-        ReservationService reservationService = new ReservationService();
-        PaymentService paymentService = new PaymentService();
         Employee currentEmployee;
-        OrderLogic orderLogic = new OrderLogic();
         Bill currentBill;
         int currentTableNumber;
-        Order order = new Order();
         OrderView orderViewWindow;
         Payment paymentWindow;
-        int nrOfTables;
+        List<Table> tables;
         Timer timer;
 
         //Lists of components
-        Dictionary<int,Button> tableButtons;
+        Dictionary<int, Button> tableButtons;
         List<Label> drinkNotifications;
         List<Label> foodNotifications;
 
@@ -36,7 +31,8 @@ namespace RestaurantChapeau
         public TableViewForm(Employee employee)
         {
             InitializeComponent();
-            nrOfTables = tableService.GetTheNumberOfTable();
+            TableService tableService = new TableService();
+            tables = tableService.GetTables();
             currentEmployee = employee;
             btn_LogOut.Hide();
             //Start the timer for refreshing information
@@ -162,6 +158,7 @@ namespace RestaurantChapeau
         {
             try
             {
+                ReservationService reservationService = new ReservationService();
                 //Load reservations from database
                 List<Reservation> reservationList = reservationService.GetAllReservations();
 
@@ -204,6 +201,7 @@ namespace RestaurantChapeau
         {
             try
             {
+                ReservationService reservationService = new ReservationService();
                 //dialog pop up asking the user if he is sure of the action
                 DialogResult dialogResult = MessageBox.Show("Are you sure you wish to cancel this reservation? ", "Cancel reservation", MessageBoxButtons.YesNo);
 
@@ -251,7 +249,7 @@ namespace RestaurantChapeau
             Button button = sender as Button;
             if (button != null)
             {
-                for (int i = 0; i < nrOfTables + 1; i++)
+                for (int i = 0; i < tables.Count + 1; i++)
                 {
                     if (button.Text == i.ToString())
                     {
@@ -261,43 +259,15 @@ namespace RestaurantChapeau
                 }
             }
         }
-        private void OnTableButtonClick(object sender, EventArgs e)
-        {
-            try
-            {
-                //Get table ID from the sender/button
-                if (!int.TryParse((sender as Button).Text, out int id))
-                {
-                    throw new Exception("Could not read table ID.");
-                }
 
-                //Load table reservation
-                Reservation reservation;
-                if ((sender as Button).Tag != null)
-                {
-                    reservation = (Reservation)(sender as Button).Tag;
-                }
-                else
-                {
-                    reservation = null;
-                }
-
-                HandleTableButtonClick(id);
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.Instance.WriteError(ex, "Something went wrong while opening table details.");
-            }
-        }
-        private void CheckReservationTime(int tableId)
-        {
-
-        }
-        //
         private void HandleTableButtonClick(int tableId)
         {
             try
             {
+                OrderLogic orderLogic = new OrderLogic();
+                PaymentService paymentService = new PaymentService();
+                TableService tableService = new TableService();
+                ReservationService reservationService = new ReservationService();
                 List<Reservation> CheckReservationTime = reservationService.ReservationTimeForTable(tableId);
                 foreach (Reservation reservation in CheckReservationTime)
                 {
@@ -309,7 +279,7 @@ namespace RestaurantChapeau
                             reservationService.UpdateReservationStatus(tableId);
                             tableService.OccupyTable(tableId);
                             ShowOrderView(tableId);
-                           currentBill= paymentService.CreateBill(tableId);
+                            currentBill = paymentService.CreateBill(tableId);
                             lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
 
                             return;
@@ -349,7 +319,7 @@ namespace RestaurantChapeau
                     if (dialogResult == DialogResult.Yes)
                     {
                         tableService.OccupyTable(tableId);
-                        paymentService.CreateBill(tableId);
+                        paymentService.CreateBillForTable(tableId);
                     }
                 }
             }
@@ -377,6 +347,7 @@ namespace RestaurantChapeau
         {
             try
             {
+                OrderLogic orderLogic = new OrderLogic();
                 int lastSelected = lv_TableDetailView.SelectedItems.Count > 0 ? lv_TableDetailView.SelectedItems[0].Index : -1;
                 lbl_DisplayTableNr.Text = "Table" + tableId.ToString();
                 List<Order> orders = orderLogic.GetOrdersForBill(bill);
@@ -463,6 +434,7 @@ namespace RestaurantChapeau
         {
             try
             {
+                OrderLogic orderLogic = new OrderLogic();
                 if (lv_TableDetailView.FocusedItem.Tag == null) return;
 
                 foreach (ListViewItem lvi in lv_TableDetailView.SelectedItems)
@@ -521,7 +493,7 @@ namespace RestaurantChapeau
             int lbCount = 1;
 
             //For each table, add labels
-            for (int i = 0; i < nrOfTables; i++)
+            for (int i = 0; i < tables.Count; i++)
             {
                 //Create label using positioning paramaters
                 Label label = CreateNotificationLabel(lbCount, lbX, lbY);
@@ -548,7 +520,7 @@ namespace RestaurantChapeau
             int lbY = 1;
             int lbCount = 1;
 
-            for (int i = 0; i < nrOfTables; i++)
+            for (int i = 0; i < tables.Count; i++)
             {
                 //Create new label with positioning parameters
                 Label label = CreateNotificationLabel(lbCount, lbX, lbY);
@@ -586,6 +558,9 @@ namespace RestaurantChapeau
         }
         private void UpdateFoodLabels(List<Label> foodLabels)
         {
+            OrderLogic orderLogic = new OrderLogic();
+            PaymentService paymentService = new PaymentService();
+            TableService tableService = new TableService();
             int tableNr = 1;
             foreach (Label label in foodLabels)
             {
@@ -617,6 +592,9 @@ namespace RestaurantChapeau
 
         private void UpdateDrinkLabels(List<Label> drinkLabels)
         {
+            OrderLogic orderLogic = new OrderLogic();
+            PaymentService paymentService = new PaymentService();
+            TableService tableService = new TableService();
             int tableNr = 1;
             foreach (Label label in drinkLabels)
             {
@@ -644,15 +622,15 @@ namespace RestaurantChapeau
             }
         }
 
-        private Dictionary<int,Button> CreateButtonsForTables()
+        private Dictionary<int, Button> CreateButtonsForTables()
         {
-            Dictionary<int,Button> tableButtons = new Dictionary<int,Button>();
+            Dictionary<int, Button> tableButtons = new Dictionary<int, Button>();
 
             int buttonX = 1;
             int buttonY = 1;
             int buttonCount = 1;
 
-            for (int i = 0; i < nrOfTables; i++)
+            for (int i = 0; i < tables.Count; i++)
             {
                 Button button = CreateButtons(buttonCount, buttonX, buttonY);
 
@@ -665,8 +643,8 @@ namespace RestaurantChapeau
                 }
 
                 Controls.Add(button);
-                tableButtons.Add(i+1,button);
-                button.Click += /*OnTableButtonClick;*/CreateButtons;
+                tableButtons.Add(i + 1, button);
+                button.Click += CreateButtons;
 
             }
             return tableButtons;
@@ -684,14 +662,16 @@ namespace RestaurantChapeau
             return button;
         }
 
-        private void UpdateTableButtons(Dictionary<int,Button> tableButtons)
+        private void UpdateTableButtons(Dictionary<int, Button> tableButtons)
         {
             int tableNr = 1;
-            for (int i = 0; i < tableButtons.Count; i++)    
+            TableService tableService = new TableService();
+            ReservationService reservationService = new ReservationService();
+            for (int i = 0; i < tableButtons.Count; i++)
             {
                 if (tableService.IsOccupied(tableNr))
                 {
-                    tableButtons[i+1].Image = Properties.Resources.occupiedNotif2;
+                    tableButtons[i + 1].Image = Properties.Resources.occupiedNotif2;
                 }
                 else if (reservationService.IsReserved(tableNr))
                 {

@@ -6,10 +6,10 @@ using RestaurantModel;
 using System.Globalization;
 
 namespace RestaurantDAL
-{   
+{
     public class PaymentDao : BaseDao
     {
-            
+
         //getting all orders within the bill
         public List<Order> GetAllOrdersInBill(int billID)
         {
@@ -36,7 +36,7 @@ namespace RestaurantDAL
             };
             return ReadBillTable(ExecuteSelectQuery(query, sqlParameters));
 
-            
+
         }
 
         public void UpdateBillStatus(int billID, int billStatus)
@@ -51,6 +51,16 @@ namespace RestaurantDAL
             string query = $"INSERT INTO dbo.Bill(tableId, status) OUTPUT INSERTED.id, INSERTED.tableId, INSERTED.status VALUES({tableID}, 1);";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadBillTable(ExecuteEditAndSelectQuery(query, sqlParameters));
+        }
+        public void CreateBillForTable(int tableID)
+        {
+            string query = $"INSERT INTO dbo.Bill(tableId, status) VALUES(@tableId, @status);";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@tableId", tableID),
+                new SqlParameter("@status",1)
+            };
+            ExecuteEditQuery(query, sqlParameters);
         }
         public void CreatePayment(int billId, decimal amountPaid, string comment, decimal tip, int paymentType, int paymentNum)
         {
@@ -70,9 +80,9 @@ namespace RestaurantDAL
                     Id = Convert.ToInt32(dr["id"]),
                     Complete = Convert.ToBoolean(dr["complete"]),
                     Comment = (string)(dr["comment"]),
-                 
+
                 };
-                
+
                 orders.Add(order);
             }
             return orders;
@@ -84,7 +94,7 @@ namespace RestaurantDAL
             List<MenuItem> items = new List<MenuItem>();
 
             foreach (DataRow dr in dataTable.Rows)
-            { 
+            {
                 MenuItem item = new MenuItem()
                 {
                     Id = Convert.ToInt32(dr["id"]),
@@ -94,8 +104,8 @@ namespace RestaurantDAL
                     IsDrink = (bool)dr["isDrink"],
                     Quantity = Convert.ToInt32(dr["quantity"])
                 };
-  
-        items.Add(item);
+
+                items.Add(item);
             }
             return items;
         }
