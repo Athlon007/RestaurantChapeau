@@ -241,18 +241,26 @@ namespace RestaurantChapeau
         }
         private void EventHandlersForButtons(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (button != null)
+            try
             {
-                for (int i = 0; i < tables.Count + 1; i++)
+                Button button = sender as Button;
+                if (button != null)
                 {
-                    if (button.Text == i.ToString())
+                    for (int i = 0; i < tables.Count + 1; i++)
                     {
-                        HandleTableButtonClick(i);
-                        return;
+                        if (button.Text == i.ToString())
+                        {
+                            HandleTableButtonClick(i);
+                            return;
+                        }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong with EventHandler {ex.Message}");
+            }
+           
         }
         private void HandleTableButtonClick(int tableId)
         {
@@ -474,61 +482,78 @@ namespace RestaurantChapeau
 
         private List<Label> CreateLabelsForFoodNotification()
         {
-            List<Label> foodLabels = new List<Label>();
-            //Set position start
-            int lbX = 1;
-            int lbY = 1;
-            //Set labelCount to 1
-            int lbCount = 1;
-
-            //For each table, add labels
-            for (int i = 0; i < tables.Count; i++)
+            try
             {
-                //Create label using positioning paramaters
-                Label label = CreateNotificationLabel(lbCount, lbX, lbY);
+                List<Label> foodLabels = new List<Label>();
+                //Set position start
+                int lbX = 1;
+                int lbY = 1;
+                //Set labelCount to 1
+                int lbCount = 1;
 
-                lbX += 3;
-
-                if (i % 2 == 1)
+                //For each table, add labels
+                for (int i = 0; i < tables.Count; i++)
                 {
-                    lbX -= 6;
-                    lbY++;
-                }
-                Controls.Add(label);
-                foodLabels.Add(label);
+                    //Create label using positioning paramaters
+                    Label label = CreateNotificationLabel(lbCount, lbX, lbY);
 
-                lbCount++;
+                    lbX += 3;
+
+                    if (i % 2 == 1)
+                    {
+                        lbX -= 6;
+                        lbY++;
+                    }
+                    Controls.Add(label);
+                    foodLabels.Add(label);
+
+                    lbCount++;
+                }
+                return foodLabels;
             }
-            return foodLabels;
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong with food labels {ex.Message}");
+                return null;
+            }
+            
         }
 
         private List<Label> CreateLabelsForDrinkNotification()
         {
-            List<Label> drinkLabels = new List<Label>();
-            int lbX = 3;
-            int lbY = 1;
-            int lbCount = 1;
-
-            for (int i = 0; i < tables.Count; i++)
+            try
             {
-                //Create new label with positioning parameters
-                Label label = CreateNotificationLabel(lbCount, lbX, lbY);
+                List<Label> drinkLabels = new List<Label>();
+                int lbX = 3;
+                int lbY = 1;
+                int lbCount = 1;
 
-                lbX += 3;
-
-                //For each uneven label, move label to the left
-                if (i % 2 == 1)
+                for (int i = 0; i < tables.Count; i++)
                 {
-                    lbX -= 6;
-                    lbY++;
+                    //Create new label with positioning parameters
+                    Label label = CreateNotificationLabel(lbCount, lbX, lbY);
+
+                    lbX += 3;
+
+                    //For each uneven label, move label to the left
+                    if (i % 2 == 1)
+                    {
+                        lbX -= 6;
+                        lbY++;
+                    }
+
+                    Controls.Add(label);
+                    drinkLabels.Add(label);
+
+                    lbCount++;
                 }
-
-                Controls.Add(label);
-                drinkLabels.Add(label);
-
-                lbCount++;
+                return drinkLabels;
             }
-            return drinkLabels;
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong while updating drink labels {ex.Message}");
+                return null;
+            }                        
         }
 
         private Label CreateNotificationLabel(int lbCount, int lbX, int lbY)
@@ -547,95 +572,119 @@ namespace RestaurantChapeau
         }
         private void UpdateFoodLabels(List<Label> foodLabels)
         {
-            OrderLogic orderLogic = new OrderLogic();
-            PaymentService paymentService = new PaymentService();
-            TableService tableService = new TableService();
-            int tableNr = 1;
-            foreach (Label label in foodLabels)
+            try
             {
-                //If table has a bill, get ready orders and store them into label
-                if (paymentService.HasBill(tableNr))
+                OrderLogic orderLogic = new OrderLogic();
+                PaymentService paymentService = new PaymentService();
+                TableService tableService = new TableService();
+                int tableNr = 1;
+                foreach (Label label in foodLabels)
                 {
-                    Bill bill = paymentService.GetBill(tableNr);
-                    List<Order> orders = orderLogic.GetOrdersForBill(bill);
-
-                    int readyCount = 0;
-                    foreach (Order order in orders)
+                    //If table has a bill, get ready orders and store them into label
+                    if (paymentService.HasBill(tableNr))
                     {
-                        List<MenuItem> items = orderLogic.GetItemsForOrder(order);
-                        foreach (MenuItem item in items)
+                        Bill bill = paymentService.GetBill(tableNr);
+                        List<Order> orders = orderLogic.GetOrdersForBill(bill);
+
+                        int readyCount = 0;
+                        foreach (Order order in orders)
                         {
-                            if (item.Status == OrderStatus.ReadyToServe && !item.IsDrink)
+                            List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                            foreach (MenuItem item in items)
                             {
-                                readyCount++;
+                                if (item.Status == OrderStatus.ReadyToServe && !item.IsDrink)
+                                {
+                                    readyCount++;
+                                }
                             }
                         }
+                        label.Text = $"{readyCount}";
                     }
-                    label.Text = $"{readyCount}";
-                }
 
-                tableNr++;
+                    tableNr++;
+                }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong while update food labels {ex.Message}");
+            }
+            
         }
 
 
         private void UpdateDrinkLabels(List<Label> drinkLabels)
         {
-            OrderLogic orderLogic = new OrderLogic();
-            PaymentService paymentService = new PaymentService();
-            TableService tableService = new TableService();
-            int tableNr = 1;
-            foreach (Label label in drinkLabels)
+            try
             {
-                //If table has a bill, get ready orders and store them into label
-                if (paymentService.HasBill(tableNr))
+                OrderLogic orderLogic = new OrderLogic();
+                PaymentService paymentService = new PaymentService();
+                TableService tableService = new TableService();
+                int tableNr = 1;
+                foreach (Label label in drinkLabels)
                 {
-                    Bill bill = paymentService.GetBill(tableNr);
-                    List<Order> orders = orderLogic.GetOrdersForBill(bill);
-
-                    int readyCount = 0;
-                    foreach (Order order in orders)
+                    //If table has a bill, get ready orders and store them into label
+                    if (paymentService.HasBill(tableNr))
                     {
-                        List<MenuItem> items = orderLogic.GetItemsForOrder(order);
-                        foreach (MenuItem item in items)
+                        Bill bill = paymentService.GetBill(tableNr);
+                        List<Order> orders = orderLogic.GetOrdersForBill(bill);
+
+                        int readyCount = 0;
+                        foreach (Order order in orders)
                         {
-                            if (item.Status == OrderStatus.ReadyToServe && item.IsDrink)
+                            List<MenuItem> items = orderLogic.GetItemsForOrder(order);
+                            foreach (MenuItem item in items)
                             {
-                                readyCount++;
+                                if (item.Status == OrderStatus.ReadyToServe && item.IsDrink)
+                                {
+                                    readyCount++;
+                                }
                             }
                         }
+                        label.Text = $"{readyCount}";
                     }
-                    label.Text = $"{readyCount}";
+                    tableNr++;
                 }
-                tableNr++;
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong while updating drink labels {ex.Message}");
+            }
+            
         }
 
         private Dictionary<int, Button> CreateButtonsForTables()
         {
-            Dictionary<int, Button> tableButtons = new Dictionary<int, Button>();
-
-            int buttonX = 1;
-            int buttonY = 1;
-            int buttonCount = 1;
-
-            for (int i = 0; i < tables.Count; i++)
+            try
             {
-                Button button = CreateButtons(buttonCount, buttonX, buttonY);
+                Dictionary<int, Button> tableButtons = new Dictionary<int, Button>();
 
-                buttonX += 2;
-                buttonCount++;
-                if (i % 2 == 1)
+                int buttonX = 1;
+                int buttonY = 1;
+                int buttonCount = 1;
+
+                for (int i = 0; i < tables.Count; i++)
                 {
-                    buttonX -= 4;
-                    buttonY++;
-                }
+                    Button button = CreateButtons(buttonCount, buttonX, buttonY);
 
-                Controls.Add(button);
-                tableButtons.Add(i + 1, button);
-                button.Click += EventHandlersForButtons;
+                    buttonX += 2;
+                    buttonCount++;
+                    if (i % 2 == 1)
+                    {
+                        buttonX -= 4;
+                        buttonY++;
+                    }
+
+                    Controls.Add(button);
+                    tableButtons.Add(i + 1, button);
+                    button.Click += EventHandlersForButtons;
+                }
+                return tableButtons;
             }
-            return tableButtons;
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong while creating buttons {ex.Message}");
+            }
+            
         }
         private Button CreateButtons(int count, int x, int y)
         {
@@ -652,26 +701,33 @@ namespace RestaurantChapeau
 
         private void UpdateTableButtons(Dictionary<int, Button> tableButtons)
         {
-            PaymentService paymentService = new PaymentService();
-            int tableNr = 1;
-            TableService tableService = new TableService();
-            ReservationService reservationService = new ReservationService();
-            for (int i = 0; i < tableButtons.Count; i++)
+            try
             {
-                if (paymentService.HasBill(tableNr))
+                PaymentService paymentService = new PaymentService();
+                int tableNr = 1;
+                TableService tableService = new TableService();
+                ReservationService reservationService = new ReservationService();
+                for (int i = 0; i < tableButtons.Count; i++)
                 {
-                    tableButtons[i + 1].Image = Properties.Resources.occupiedNotif2;
-                }
-                else if (reservationService.IsReserved(tableNr))
-                {
-                    tableButtons[i + 1].Image = Properties.Resources.reserved;
-                }
-                else
-                {
-                    tableButtons[i + 1].Image = Properties.Resources.screenshotTable;
-                }
+                    if (paymentService.HasBill(tableNr))
+                    {
+                        tableButtons[i + 1].Image = Properties.Resources.occupiedNotif2;
+                    }
+                    else if (reservationService.IsReserved(tableNr))
+                    {
+                        tableButtons[i + 1].Image = Properties.Resources.reserved;
+                    }
+                    else
+                    {
+                        tableButtons[i + 1].Image = Properties.Resources.screenshotTable;
+                    }
 
-                tableNr++;
+                    tableNr++;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong while updating buttons {ex.Message}");
             }
         }
 
