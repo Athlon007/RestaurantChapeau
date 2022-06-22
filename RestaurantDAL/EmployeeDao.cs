@@ -30,11 +30,7 @@ namespace RestaurantDAL
             Employee employee = ReadTable(ExecuteSelectQuery(query, sqlParameters));
             if (employee == null)
             {
-<<<<<<< HEAD
                 throw new Exception("the password you entered is wrong");
-=======
-                throw new Exception(" YOur pass is wrong");
->>>>>>> parent of 32697bd (I changed a lot)
             }
             return employee;
         }

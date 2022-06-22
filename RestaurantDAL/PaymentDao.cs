@@ -28,14 +28,13 @@ namespace RestaurantDAL
         // getting a bill
         public Bill GetBill(int tableID)
         {
-            string query = $"Select id, tableId from dbo.Bill where tableId={tableID} and status=1";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"Select id, tableId from dbo.Bill where tableId = @tableId and status = @status";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@tableId",tableID),
+                new SqlParameter("@status",1)
+            };
             return ReadBillTable(ExecuteSelectQuery(query, sqlParameters));
-<<<<<<< HEAD
-
-
-=======
->>>>>>> parent of 32697bd (I changed a lot)
         }
 
         public void UpdateBillStatus(int billID, int billStatus)
@@ -47,20 +46,14 @@ namespace RestaurantDAL
 
         public Bill CreateBill(int tableID)
         {
-            string query = $"INSERT INTO dbo.Bill(tableId, status) OUTPUT INSERTED.id, INSERTED.tableId, INSERTED.status VALUES({tableID}, 1);";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadBillTable(ExecuteEditAndSelectQuery(query, sqlParameters));
-        }
-        public void CreateBillForTable(int tableID)
-        {
-            string query = $"INSERT INTO dbo.Bill(tableId, status) VALUES(@tableId, @status);";
+            string query = $"INSERT INTO dbo.Bill(tableId, status) OUTPUT INSERTED.id, INSERTED.tableId, INSERTED.status VALUES(@tableId, @status);";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@tableId", tableID),
+                new SqlParameter("@tableId",tableID),
                 new SqlParameter("@status",1)
             };
-            ExecuteEditQuery(query, sqlParameters);
-        }
+            return ReadBillTable(ExecuteEditAndSelectQuery(query, sqlParameters));
+        }        
         public void CreatePayment(int billId, decimal amountPaid, string comment, decimal tip, int paymentType, int paymentNum)
         {
             string query = $"INSERT INTO dbo.Payment (billId, dateTime, amountPaid, comment, tip, paymentType, paymentNum) VALUES ({billId}, CURRENT_TIMESTAMP, {amountPaid},'{comment}', {tip}, {paymentType}, {paymentNum})";
@@ -86,7 +79,6 @@ namespace RestaurantDAL
             }
             return orders;
         }
-
         private List<MenuItem> ReadItemTable(DataTable dataTable)
         {
             //create list to store the order items 
@@ -129,8 +121,12 @@ namespace RestaurantDAL
 
         public bool HasBill(int tableID)
         {
-            string query = $"Select id from dbo.Bill where tableId={tableID} and status=1";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"Select id from dbo.Bill where tableId = @tableId and status = @status";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@tableId",tableID),
+                new SqlParameter("@status",1)
+            };
             return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
         }
     }

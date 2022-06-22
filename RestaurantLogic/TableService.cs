@@ -17,18 +17,10 @@ namespace RestaurantLogic
         public List<Table> GetTables()
         {
             return tableDB.GetTables();
-        }
-        public bool IsOccupied(int tableId)
-        {
-            return tableDB.IsOccupied(tableId);
-        }
+        }      
         public void  OccupyTable(int tableId)
         {
              tableDB.OccupyTable(tableId);
-        }
-        public void MakeTableFree(int tableId)
-        {
-            tableDB.MakeTableFree(tableId);
-        }
+        }       
     }
 }

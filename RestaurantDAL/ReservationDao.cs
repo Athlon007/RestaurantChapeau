@@ -35,8 +35,6 @@ namespace RestaurantDAL
                 new SqlParameter("@tableid", tableId)
             };
             return ExecuteSelectQuery(query, sqlParameters).Rows.Count > 0;
-
-            //return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }        
         //getting a list of all the reservation
         public List<Reservation> GetAllReservations()
@@ -46,11 +44,11 @@ namespace RestaurantDAL
         }
         public List<Reservation> ReservationTimeForTable(int tableId)
         {
-            string query = $"SELECT ReservationStart, tableid FROM dbo.[Reservation] WHERE tableid = @tableid AND isReserved = '1'";
+            string query = $"SELECT ReservationStart, tableid FROM dbo.[Reservation] WHERE tableid = @tableid AND isReserved = @isReserved";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@tableid", tableId),
-                //new SqlParameter("@isReserved","1")
+                new SqlParameter("@isReserved",1)
             };
             return ReadTablesForReservationTime(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -92,8 +90,7 @@ namespace RestaurantDAL
                 reservations.Add(reservation);
             }
             return reservations;
-        }
-     
+        }     
         public void CancelReservation(Reservation reservation)
         {
             string query = $"DELETE FROM dbo.[Reservation] WHERE id = @id";
@@ -102,20 +99,6 @@ namespace RestaurantDAL
                 new SqlParameter("@id", reservation.reservationID)
             };
             ExecuteEditQuery(query, sqlParameters);
-        }           
-        private bool ReadTableHasBill(DataTable table)
-        {
-            if (table.Rows.Count == 0)
-            {
-                return false;
-            }
-
-            if (Convert.IsDBNull(table.Rows[0]["status"]))
-            {
-                return false;
-            }
-
-            return true;
-        }
+        }                 
     }
 }
