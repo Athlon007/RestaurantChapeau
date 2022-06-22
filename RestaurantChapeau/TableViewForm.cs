@@ -270,6 +270,7 @@ namespace RestaurantChapeau
                 PaymentService paymentService = new PaymentService();
                 TableService tableService = new TableService();
                 ReservationService reservationService = new ReservationService();
+
                 List<Reservation> CheckReservationTime = reservationService.ReservationTimeForTable(tableId);
                 foreach (Reservation reservation in CheckReservationTime)
                 {
@@ -278,9 +279,7 @@ namespace RestaurantChapeau
                         DialogResult dialogResult = MessageBox.Show($"this table has reservation at {reservation.ReservationStart} would you like to occupy this table? ", "Go to order view", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            ShowOrderView(tableId);
                             currentBill = paymentService.CreateBill(tableId);
-                            lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
 
                             return;
                         }
@@ -295,7 +294,7 @@ namespace RestaurantChapeau
                     DialogResult dialogResult = MessageBox.Show($"Would you like to occupy this table?", "Occupy Table", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        paymentService.CreateBill(tableId);
+                        currentBill = paymentService.CreateBill(tableId);
                     }
                 }
                 else
