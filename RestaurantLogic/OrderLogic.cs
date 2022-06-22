@@ -156,6 +156,18 @@ namespace RestaurantLogic
             order.Complete = true;
             UpdateOrderStatus(order);
         }
+        public void SetOrderItemStatusForFood(MenuItem item, Order order, bool isDrink)
+        {
+            orderDao.SetOrderItemStatusForFood(item, order, false);
+            List<MenuItem> foodItems = GetItemsForOrder(order);
+            foreach (MenuItem itemItem in foodItems)
+            {
+                if(item.Status != OrderStatus.Served)
+                {
+                    return;
+                }
+            }
+        }
     }
 
 }

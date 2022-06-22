@@ -24,7 +24,6 @@ namespace RestaurantDAL
                 Table table = new Table()
                 {
                     Id = int.Parse(dr["id"].ToString()),
-                    isOccupied = (bool)(dr["IsOccupied"])
                 };
                 tables.Add(table);
 

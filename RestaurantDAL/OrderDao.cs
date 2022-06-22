@@ -441,6 +441,26 @@ namespace RestaurantDAL
                 throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
             }
         }
+        public void SetOrderItemStatusForFood(MenuItem item, Order order, bool isDrink)
+        {
+            try
+            {
+                string query = "update dbo.PartOf Set status =@ItemStatus from dbo.PartOf join MenuItem on MenuItem.id = Partof.menuItemID where orderId = @OrderId and menuItemId = @ItemId;";
+
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                new SqlParameter("@ItemId", item.Id),
+                new SqlParameter("@ItemStatus", item.Status),
+                new SqlParameter("@OrderId", order.Id),
+                };
+
+                ExecuteEditQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
+            }
+        }
     }
 }
 

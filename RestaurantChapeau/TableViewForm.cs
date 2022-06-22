@@ -443,6 +443,7 @@ namespace RestaurantChapeau
                     {
                         item.Status = OrderStatus.Served;
                         orderLogic.SetOrderItemStatus(item, order,true);
+                        orderLogic.SetOrderItemStatusForFood(item, order, false);
                         lv_TableDetailView_SelectedIndexChanged(currentTableNumber, currentBill);
                     }
                     else if (item.Status == OrderStatus.Served)
