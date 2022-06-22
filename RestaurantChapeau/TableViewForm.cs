@@ -23,7 +23,11 @@ namespace RestaurantChapeau
         Timer timer;
 
         //Lists of components
+<<<<<<< HEAD
         Dictionary<int, Button> tableButtons;
+=======
+        List<Button> tableButtons;
+>>>>>>> parent of 32697bd (I changed a lot)
         List<Label> drinkNotifications;
         List<Label> foodNotifications;
 
@@ -276,12 +280,13 @@ namespace RestaurantChapeau
                         DialogResult dialogResult = MessageBox.Show($"this table has reservation at {reservation.ReservationStart} would you like to occupy this table? ", "Go to order view", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            reservationService.UpdateReservationStatus(tableId);
-                            tableService.OccupyTable(tableId);
                             ShowOrderView(tableId);
+<<<<<<< HEAD
                             currentBill = paymentService.CreateBill(tableId);
                             lv_TableDetailView_SelectedIndexChanged(tableId, this.currentBill);
 
+=======
+>>>>>>> parent of 32697bd (I changed a lot)
                             return;
                         }
                         else
@@ -565,7 +570,7 @@ namespace RestaurantChapeau
             foreach (Label label in foodLabels)
             {
                 //If table has a bill, get ready orders and store them into label
-                if (tableService.IsOccupied(tableNr))
+                if (paymentService.HasBill(tableNr))
                 {
                     Bill bill = paymentService.GetBill(tableNr);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
@@ -599,7 +604,7 @@ namespace RestaurantChapeau
             foreach (Label label in drinkLabels)
             {
                 //If table has a bill, get ready orders and store them into label
-                if (tableService.IsOccupied(tableNr))
+                if (paymentService.HasBill(tableNr))
                 {
                     Bill bill = paymentService.GetBill(tableNr);
                     List<Order> orders = orderLogic.GetOrdersForBill(bill);
@@ -622,9 +627,15 @@ namespace RestaurantChapeau
             }
         }
 
+<<<<<<< HEAD
         private Dictionary<int, Button> CreateButtonsForTables()
         {
             Dictionary<int, Button> tableButtons = new Dictionary<int, Button>();
+=======
+        private List<Button> CreateButtonsForTables()
+        {
+            List<Button> tableButtons = new List<Button>();
+>>>>>>> parent of 32697bd (I changed a lot)
 
             int buttonX = 1;
             int buttonY = 1;
@@ -643,8 +654,13 @@ namespace RestaurantChapeau
                 }
 
                 Controls.Add(button);
+<<<<<<< HEAD
                 tableButtons.Add(i + 1, button);
                 button.Click += CreateButtons;
+=======
+                tableButtons.Add(button);
+                button.Click += /*OnTableButtonClick;*/CreateButtons;
+>>>>>>> parent of 32697bd (I changed a lot)
 
             }
             return tableButtons;
@@ -662,24 +678,35 @@ namespace RestaurantChapeau
             return button;
         }
 
+<<<<<<< HEAD
         private void UpdateTableButtons(Dictionary<int, Button> tableButtons)
         {
             int tableNr = 1;
             TableService tableService = new TableService();
             ReservationService reservationService = new ReservationService();
             for (int i = 0; i < tableButtons.Count; i++)
+=======
+        private void UpdateTableButtons(List<Button> tableButtons)
+        {
+            int tableNr = 1;
+            foreach (Button button in tableButtons)
+>>>>>>> parent of 32697bd (I changed a lot)
             {
-                if (tableService.IsOccupied(tableNr))
+                if (paymentService.HasBill(tableNr) || tableService.IsOccupied(tableNr))
                 {
+<<<<<<< HEAD
                     tableButtons[i + 1].Image = Properties.Resources.occupiedNotif2;
+=======
+                    button.Image = Properties.Resources.occupiedNotif2;
+>>>>>>> parent of 32697bd (I changed a lot)
                 }
                 else if (reservationService.IsReserved(tableNr))
                 {
-                    tableButtons[i + 1].Image = Properties.Resources.reserved;
+                    button.Image = Properties.Resources.reserved;
                 }
                 else
                 {
-                    tableButtons[i + 1].Image = Properties.Resources.screenshotTable;
+                    button.Image = Properties.Resources.screenshotTable;
                 }
 
                 tableNr++;

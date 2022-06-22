@@ -50,5 +50,13 @@ namespace RestaurantLogic
         {
             paymentDb.CreatePayment(billId, amountPaid, comment, tip, paymentType, paymentNum);
         }
+<<<<<<< HEAD
+=======
+
+        public bool HasBill(int tableID)
+        {
+            return paymentDb.HasBill(tableID);
+        }
+>>>>>>> parent of 32697bd (I changed a lot)
     }
 }
