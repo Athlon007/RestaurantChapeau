@@ -406,6 +406,10 @@ namespace RestaurantChapeau
                         li.Tag = listItem;                   
                         
                         lv_TableDetailView.Items.Add(li);
+                        if(lv_TableDetailView.Items.Count % 2 == 0)
+                        {
+                            li.BackColor = Color.LightGray;
+                        }
                     }
                 }
 
