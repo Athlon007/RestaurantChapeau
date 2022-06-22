@@ -683,6 +683,7 @@ namespace RestaurantChapeau
             catch(Exception ex)
             {
                 Console.WriteLine($"Something went wrong while creating buttons {ex.Message}");
+                return null;
             }
             
         }
