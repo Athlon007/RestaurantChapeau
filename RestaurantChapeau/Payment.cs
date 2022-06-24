@@ -154,8 +154,6 @@ namespace RestaurantChapeau
         }
         #endregion
 
-
- 
         #region BACK BUTTONS
 
         // Back to Invoice
@@ -227,7 +225,8 @@ namespace RestaurantChapeau
 
             decimal CashValue = Convert.ToDecimal(cashValue.Text);
             paymentService.CreatePayment(billId, CashValue, comment, tip, 0, paymentNum);
-            alreadyPaid += CashValue;
+            alreadyPaid += CashValue + tip;
+
             if (alreadyPaid == totalPrice)
             {
                 paymentService.UpdateBillStatus(bill.Id, 0);
@@ -403,7 +402,7 @@ namespace RestaurantChapeau
 
                 decimal CardValue = Convert.ToDecimal(cardValue.Text);
                 paymentService.CreatePayment(bill.Id, CardValue, comment, tip, 0, paymentNum);
-                alreadyPaid += CardValue;
+                alreadyPaid += CardValue + tip;
                 if (alreadyPaid == totalPrice)
                 {
                     paymentService.UpdateBillStatus(bill.Id, 0);
