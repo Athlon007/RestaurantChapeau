@@ -21,7 +21,7 @@ namespace RestaurantChapeau
         Bill bill;
         ListView invoiceCopy = new ListView();
         Panel tableViewDetail;
-
+        List<MenuItem> items = new List<MenuItem>();
         private int tableId;
         private int startY;
         bool isChecked = false;
@@ -89,8 +89,6 @@ namespace RestaurantChapeau
             valueInvoiceDate.Text = DateTime.Now.ToString();
             valueTip.Text = "0.00";
 
-          
-            List<MenuItem> items = new List<MenuItem>();
             foreach (Order order in dbdata.Item2)
             {
                 items.AddRange(paymentService.GetAllItemsInOrder(order.Id));
@@ -139,14 +137,25 @@ namespace RestaurantChapeau
         #region PROCESS PAYMENT CLICK
         private void btnProcessPayment_Click(object sender, EventArgs e)
         {
+            pnlBills.Controls.Clear();
+            invoiceCopy.Items.Clear();
+            foreach (ListViewItem item in listViewInvoice.Items)
+            {
+                for (int i = 1; i <= int.Parse(item.SubItems[2].Text); i++)
+                {
+                    invoiceCopy.Items.Add((ListViewItem)item.Clone());
+                }
+            }
+
             startY = 50;
             numberOfLoads = 1;
-           
             startY = dynamicBillContainer(bill, startY, 1);
             pnlPaymentType.Show();
         }
         #endregion
 
+
+ 
         #region BACK BUTTONS
 
         // Back to Invoice
@@ -167,8 +176,8 @@ namespace RestaurantChapeau
         // Close Payment section
         private void paymentBackButton1_Click(object sender, EventArgs e)
         {
-            this.Close();
             tableViewDetail.Hide();
+            this.Close();
         }
 
         #endregion
@@ -482,7 +491,7 @@ namespace RestaurantChapeau
             TextBox payByCash = new TextBox();
             payByCash.Name = $"payBtn";
             payByCash.KeyPress += intInput_KeyPress;
-
+            payByCash.Text = "0.00";
             cash.Appearance = Appearance.Button;
             cash.AutoSize = false;
             cash.Location = new Point(112, 195);
@@ -548,7 +557,6 @@ namespace RestaurantChapeau
             {
                 billContainer.Controls.Add(load);
                 load.Left = ((billContainer.Width - load.Width) / 2);
-
             }
             else
             {
@@ -655,12 +663,9 @@ namespace RestaurantChapeau
                
             } else
             {
+                payByCash.Text = "0.00";
                 billContainer.Controls.Remove(payByCash);
                 btn.BackColor = Color.FromArgb(206, 206, 206);
-                if (creditCard.Checked || debitCard.Checked)
-                { 
-                  payByCash.Text = "1";   
-                }
                 billContainer.Controls.Remove(pay);
             }
 
@@ -725,6 +730,8 @@ namespace RestaurantChapeau
             }
             else
             {
+                cardValue.Text = (totalUnitPrice - Convert.ToDecimal(cashValue.Text)).ToString("#.##");
+
                 btn.Checked = true;
                 isChecked = false;
                 billContainer.Controls.Add(cardValue);
@@ -897,6 +904,7 @@ namespace RestaurantChapeau
             menuItems.Height = invoiceCopy.Items.Count * 40;
             menuItems.Name = $"selection{paymentNumber}";
             menuItems.AutoSize = true;
+
             foreach (ListViewItem item in invoiceCopy.Items)
             {
                 menuItems.Items.Add($"{invoiceCopy.Items.IndexOf(item)+1}.: 1x - {item.SubItems[0].Text} ({item.SubItems[1].Text})");
@@ -916,8 +924,8 @@ namespace RestaurantChapeau
 
             billContainer.Controls.Add(saveSelected);
 
-            if (numberOfLoads == Convert.ToInt32(paymentNumber.Text))
-            {
+            if (numberOfLoads == Convert.ToInt32(paymentNumber.Text)) { 
+
                 for (int i = 0; i < menuItems.Items.Count; i++) menuItems.SetItemChecked(i, true);
 
                 saveSelected.PerformClick();
