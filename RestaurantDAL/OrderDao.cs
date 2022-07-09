@@ -366,6 +366,7 @@ namespace RestaurantDAL
             List<MenuItem> items = new List<MenuItem>();
             foreach (DataRow row in table.Rows)
             {
+
                 MenuItem item = new MenuItem();
                 item.Id = Convert.ToInt32(row["id"]);
                 item.Name = row["name"].ToString();
@@ -460,6 +461,20 @@ namespace RestaurantDAL
             {
                 throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
             }
+        }
+
+        public void InsertFinishedTime(OrderItem item)
+        {
+            string query = "INSERT INTO dbo.PartOf (orderId, menuItemId, quantity, status)" +
+                            "VALUES (@OrderId, @ItemId, @Quantity, 0)";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderId", item.OrderId),
+                new SqlParameter("@ItemId", item.Id),
+                new SqlParameter("@Quantity", item.Quantity)
+            };
+
+            ExecuteEditQuery(query, parameters);
         }
     }
 }
