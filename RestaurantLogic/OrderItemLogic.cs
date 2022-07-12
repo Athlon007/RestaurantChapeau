@@ -18,5 +18,9 @@ namespace RestaurantLogic
         {
             return orderItemDAO.GetAllOrderItems(orderItem);
         }
+        public void SetOrderItemStatus(OrderItem item)
+        {
+            orderItemDAO.SetOrderItemStatus(item);
+        }
     }
 }

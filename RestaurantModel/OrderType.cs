@@ -4,5 +4,5 @@ using System.Text;
 
 namespace RestaurantModel
 {
-    public enum OrderType { Drink, FoodItem }
+    public enum OrderType {  FoodItem , Drink }
 }

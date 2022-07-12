@@ -103,6 +103,7 @@
             this.btn_newOrders.TabIndex = 16;
             this.btn_newOrders.Text = "New orders";
             this.btn_newOrders.UseVisualStyleBackColor = true;
+            this.btn_newOrders.Click += new System.EventHandler(this.btn_newOrders_Click);
             // 
             // lbl_CompletedOrders
             // 
@@ -161,6 +162,7 @@
             this.btn_Ready.TabIndex = 14;
             this.btn_Ready.Text = "Ready";
             this.btn_Ready.UseVisualStyleBackColor = false;
+            this.btn_Ready.Click += new System.EventHandler(this.btn_Ready_Click);
             // 
             // columnHeader8
             // 
@@ -185,6 +187,7 @@
             this.btn_CompletedOrders.TabIndex = 15;
             this.btn_CompletedOrders.Text = "Completed orders";
             this.btn_CompletedOrders.UseVisualStyleBackColor = true;
+            this.btn_CompletedOrders.Click += new System.EventHandler(this.btn_CompletedOrders_Click);
             // 
             // pnl_completeOrders
             // 

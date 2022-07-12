@@ -34,6 +34,29 @@ namespace RestaurantDAL
                 throw new Exception($"There was a problem getting the order items: {e.Message}");
             }
         }
+
+        public void SetOrderItemStatus(OrderItem item)
+        {
+            try
+            {
+                string query = "update dbo.PartOf Set status =@ItemStatus from dbo.PartOf join MenuItem on MenuItem.id = Partof.menuItemID where orderId = @OrderId and menuItemId = @ItemId and isDrink = @orderItemType;";
+
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                new SqlParameter("@ItemId", item.Id),
+                new SqlParameter("@ItemStatus", item.Status),
+                new SqlParameter("@OrderId", item.OrderId),
+                new SqlParameter("@orderItemType", item.OrderItemType)
+                };
+
+                ExecuteEditQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException($"Error, could not update the status of the order item: {ex.Message}");
+            }
+        }
+
         private List<OrderItem> ReadOrderItems(DataTable table)
         {
             List<OrderItem> items = new List<OrderItem>();
@@ -56,5 +79,7 @@ namespace RestaurantDAL
             return items;
 
         }
+
+        
     }
 }
