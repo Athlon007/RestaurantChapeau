@@ -44,30 +44,28 @@ namespace RestaurantChapeau
             //these are used by the query to search for items that are not started and are food items 
             item.Status = status;
 
-            //if kitchenmode is true, display only kitchen items
-
+            // change the type of items to get depending on the employee that is logged in 
             switch (employee.employeeType)
             {
                 case EmployeeType.KitchenStaff:
                     item.OrderItemType = OrderType.FoodItem;
-                    orderItems = orderItemLogic.GetAllOrderItems(item);
                     break;
                 case EmployeeType.Bartender:
                     item.OrderItemType = OrderType.Drink;
-                    orderItems = orderItemLogic.GetAllOrderItems(item);
                     break;
                 default:
                     item.OrderItemType = OrderType.FoodItem;
-                    orderItems = orderItemLogic.GetAllOrderItems(item);
                     break;
             }
+            // get all the order items and save them to the list of the orderitems
+            orderItems = orderItemLogic.GetAllOrderItems(item);
             // delete all the items in the listview before adding new ones
             RemoveListViewItems(listview_NewOrders);
 
             //foreach item in the list acquired from the db, add the name to the active order listview
             foreach (OrderItem orderItem in orderItems)
             {
-                ListViewItem li = new ListViewItem(orderItem.Id.ToString());
+                ListViewItem li = new ListViewItem(orderItem.OrderId.ToString());
                 li.SubItems.Add(orderItem.Name.ToString());
                 li.SubItems.Add(orderItem.Quantity.ToString());
                 li.SubItems.Add(orderItem.MenuType.ToString());
@@ -75,7 +73,7 @@ namespace RestaurantChapeau
                 li.SubItems.Add(orderItem.Table.ToString());
                 li.SubItems.Add(orderItem.PlacedTime.TimeOfDay.ToString());
                 li.SubItems.Add(orderItem.Status.ToString());
-                li.Tag = item;
+                li.Tag = orderItem;
                 // add all items to the listview active order
                 listview.Items.Add(li);
             }
@@ -182,11 +180,8 @@ namespace RestaurantChapeau
             // connect to logic layer 
             OrderItemLogic orderitemLogic = new OrderItemLogic();
 
-            //create new orderitem
-            OrderItem orderItem = new OrderItem();
-
             // the orderitem is what is selected in the listview new orders 
-             orderItem = listview_NewOrders.SelectedItems[0].Tag as OrderItem;
+            OrderItem orderItem = listview_NewOrders.SelectedItems[0].Tag as OrderItem;
 
             //give the listview item a status (ready to serve)
             orderItem.Status = OrderStatus.ReadyToServe;
@@ -202,7 +197,6 @@ namespace RestaurantChapeau
 
             //reset the timer 
             ResetTimer();
-
         }
 
         #region Fonts

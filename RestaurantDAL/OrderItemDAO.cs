@@ -39,7 +39,7 @@ namespace RestaurantDAL
         {
             try
             {
-                string query = "update dbo.PartOf Set status =@ItemStatus from dbo.PartOf join MenuItem on MenuItem.id = Partof.menuItemID where orderId = @OrderId and menuItemId = @ItemId and isDrink = @orderItemType;";
+                string query = "update dbo.PartOf Set status =@ItemStatus from dbo.PartOf join MenuItem on MenuItem.id = Partof.menuItemID where orderId = @OrderId and menuItemId = @ItemId"; //and isDrink = @orderItemType;
 
                 SqlParameter[] parameters = new SqlParameter[]
                 {
