@@ -45,8 +45,7 @@ namespace RestaurantDAL
                 {
                 new SqlParameter("@ItemId", item.Id),
                 new SqlParameter("@ItemStatus", item.Status),
-                new SqlParameter("@OrderId", item.OrderId),
-                new SqlParameter("@orderItemType", item.OrderItemType)
+                new SqlParameter("@OrderId", item.OrderId)
                 };
 
                 ExecuteEditQuery(query, parameters);

@@ -24,8 +24,7 @@ namespace RestaurantChapeau
         {
             this.employee = employee;
             InitializeComponent();
-            // SetFonts();
-            DisplayOrderItems(listview_NewOrders,OrderStatus.NotStarted);
+            DisplayOrderItems(listview_NewOrders, OrderStatus.NotStarted);
 
             ResetTimer();
         }
@@ -33,13 +32,12 @@ namespace RestaurantChapeau
 
 
         #region Display Order Items
-        private void DisplayOrderItems(ListView listview,OrderStatus status)
+        private void DisplayOrderItems(ListView listview, OrderStatus status)
         {
-            List<OrderItem> orderItems = new List<OrderItem>();
             OrderItemLogic orderItemLogic = new OrderItemLogic();
-
+            
             //create new orderitem
-             OrderItem item = new OrderItem();
+            OrderItem item = new OrderItem();
 
             //these are used by the query to search for items that are not started and are food items 
             item.Status = status;
@@ -53,12 +51,16 @@ namespace RestaurantChapeau
                 case EmployeeType.Bartender:
                     item.OrderItemType = OrderType.Drink;
                     break;
+                case EmployeeType.Waiter:
+                    break;
+                case EmployeeType.Manager:
+                    break;
                 default:
                     item.OrderItemType = OrderType.FoodItem;
                     break;
             }
             // get all the order items and save them to the list of the orderitems
-            orderItems = orderItemLogic.GetAllOrderItems(item);
+            List<OrderItem> orderItems = orderItemLogic.GetAllOrderItems(item);
             // delete all the items in the listview before adding new ones
             RemoveListViewItems(listview_NewOrders);
 
@@ -186,14 +188,14 @@ namespace RestaurantChapeau
             //give the listview item a status (ready to serve)
             orderItem.Status = OrderStatus.ReadyToServe;
 
-            // change the status of the selected item in the database to ready 
+            // change the status of the selected item to ready in the database
             orderitemLogic.SetOrderItemStatus(orderItem);
 
             MessageBox.Show($"Item {orderItem.Name} is now ready!");
 
             //delete all items in the listview and reload them
             RemoveListViewItems(listview_NewOrders);
-            DisplayOrderItems(listview_NewOrders,OrderStatus.NotStarted);
+            DisplayOrderItems(listview_NewOrders, OrderStatus.NotStarted);
 
             //reset the timer 
             ResetTimer();
