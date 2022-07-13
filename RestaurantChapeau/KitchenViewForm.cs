@@ -22,11 +22,15 @@ namespace RestaurantChapeau
 
         public KitchenViewForm(Employee employee)
         {
-            this.employee = employee;
             InitializeComponent();
+            this.employee = employee;
+            // set begin timer 
+            IsActive = true;
+
+            //display order items for the new orders 
             DisplayOrderItems(listview_NewOrders, OrderStatus.NotStarted);
 
-            ResetTimer();
+            //ResetTimer();
         }
 
 
@@ -35,7 +39,7 @@ namespace RestaurantChapeau
         private void DisplayOrderItems(ListView listview, OrderStatus status)
         {
             OrderItemLogic orderItemLogic = new OrderItemLogic();
-            
+
             //create new orderitem
             OrderItem item = new OrderItem();
 
@@ -71,18 +75,26 @@ namespace RestaurantChapeau
                 li.SubItems.Add(orderItem.Name.ToString());
                 li.SubItems.Add(orderItem.Quantity.ToString());
                 li.SubItems.Add(orderItem.MenuType.ToString());
-                li.SubItems.Add(orderItem.Comment.ToString());
+
+                if (orderItem.Comment == "")
+                    li.SubItems.Add("n/a");
+                else
+                    li.SubItems.Add(orderItem.Comment.ToString());
+
                 li.SubItems.Add(orderItem.Table.ToString());
                 li.SubItems.Add(orderItem.PlacedTime.TimeOfDay.ToString());
                 li.SubItems.Add(orderItem.Status.ToString());
                 li.Tag = orderItem;
-                // add all items to the listview active order
-                listview.Items.Add(li);
+                
+
+                //if item is ready to serve, display the oldest first else newest first 
+                if (orderItem.Status == OrderStatus.ReadyToServe)
+                    listview.Items.Insert(0, li);
+                else
+                    listview.Items.Add(li);
             }
         }
         #endregion
-
-
 
         #region Load Kitchen View
         private void KitchenViewForm_Load(object sender, EventArgs e)
@@ -91,7 +103,6 @@ namespace RestaurantChapeau
             pnl_newOrders.Show();
         }
         #endregion
-
 
         #region Hide Panels
         private void HidePanels()
@@ -117,9 +128,9 @@ namespace RestaurantChapeau
             lbl_Secs.Text = secs.ToString(":00");
             lbl_Hours.Text = hours.ToString("00");
         }
-
-        private void timer1_Tick_1(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
+
             if (IsActive)
             {
                 secs++;
@@ -139,6 +150,7 @@ namespace RestaurantChapeau
             //link the timer to the labels in the form
             Timer();
         }
+
         private void ResetTimer()
         {
             secs = 0;
@@ -157,6 +169,7 @@ namespace RestaurantChapeau
         }
         #endregion
 
+        #region Completed orders button
         private void btn_CompletedOrders_Click(object sender, EventArgs e)
         {
             HidePanels();
@@ -166,7 +179,9 @@ namespace RestaurantChapeau
             RemoveListViewItems(listview_CompletedOrders);
             DisplayOrderItems(listview_CompletedOrders, OrderStatus.ReadyToServe);
         }
+        #endregion
 
+        #region new orders button 
         private void btn_newOrders_Click(object sender, EventArgs e)
         {
             HidePanels();
@@ -177,6 +192,10 @@ namespace RestaurantChapeau
             DisplayOrderItems(listview_NewOrders, OrderStatus.NotStarted);
         }
 
+
+        #endregion
+
+        #region Ready button 
         private void btn_Ready_Click(object sender, EventArgs e)
         {
             // connect to logic layer 
@@ -200,6 +219,7 @@ namespace RestaurantChapeau
             //reset the timer 
             ResetTimer();
         }
+        #endregion
 
         #region Fonts
         public void SetFonts()

@@ -67,6 +67,7 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // lbl_Secs
             // 
@@ -206,9 +207,9 @@
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11,
-            this.columnHeader12,
             this.columnHeader14,
-            this.columnHeader16});
+            this.columnHeader16,
+            this.columnHeader12});
             this.listview_CompletedOrders.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listview_CompletedOrders.FullRowSelect = true;
             this.listview_CompletedOrders.HideSelection = false;
