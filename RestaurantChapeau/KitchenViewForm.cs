@@ -82,8 +82,15 @@ namespace RestaurantChapeau
                     li.SubItems.Add(orderItem.Comment.ToString());
 
                 li.SubItems.Add(orderItem.Table.ToString());
-                li.SubItems.Add(orderItem.PlacedTime.TimeOfDay.ToString());
+
+                if (orderItem.Status == OrderStatus.ReadyToServe)
+                    li.SubItems.Add(orderItem.FinishedTime.TimeOfDay.ToString());
+                else
+                     li.SubItems.Add(orderItem.PlacedTime.TimeOfDay.ToString());
+
                 li.SubItems.Add(orderItem.Status.ToString());
+                
+               
                 li.Tag = orderItem;
                 
 
@@ -198,6 +205,7 @@ namespace RestaurantChapeau
         #region Ready button 
         private void btn_Ready_Click(object sender, EventArgs e)
         {
+           
             // connect to logic layer 
             OrderItemLogic orderitemLogic = new OrderItemLogic();
 
@@ -207,8 +215,14 @@ namespace RestaurantChapeau
             //give the listview item a status (ready to serve)
             orderItem.Status = OrderStatus.ReadyToServe;
 
+            //set finished time to current moment 
+            orderItem.FinishedTime = DateTime.UtcNow;
+
             // change the status of the selected item to ready in the database
             orderitemLogic.SetOrderItemStatus(orderItem);
+
+            // insert the finished time into the database
+            orderitemLogic.UpdateFinishedTime(orderItem);
 
             MessageBox.Show($"Item {orderItem.Name} is now ready!");
 

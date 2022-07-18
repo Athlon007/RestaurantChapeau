@@ -22,5 +22,9 @@ namespace RestaurantLogic
         {
             orderItemDAO.SetOrderItemStatus(item);
         }
+        public void UpdateFinishedTime(OrderItem item)
+        {
+            orderItemDAO.UpdateFinishedTime(item);
+        }
     }
 }

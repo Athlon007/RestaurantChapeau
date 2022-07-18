@@ -14,7 +14,7 @@ namespace RestaurantDAL
         {
             try
             {
-                string query = "Select mi.[name] as 'Name',orderId,menuItemId,quantity,po.[status],tableId,o.comment,placedTime,MenuCategory.name as 'menutype' " +
+                string query = "Select mi.[name] as 'Name',po.finishedTime as finishedTime,orderId,menuItemId,quantity,po.[status],tableId,o.comment,placedTime,MenuCategory.name as 'menutype' " +
                     " from PartOf po " +
                     "join [Order] o  on po.orderId = o.id	" +
                     "join Bill on o.billId=bill.id" +
@@ -56,6 +56,18 @@ namespace RestaurantDAL
             }
         }
 
+        public void UpdateFinishedTime(OrderItem item)
+        {
+            string query = "update dbo.PartOf Set finishedTime= @finishedTime where orderId = @orderId and menuItemId = @itemId;";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter ("@finishedTime",item.FinishedTime),
+                new SqlParameter("orderId", item.OrderId),
+                new SqlParameter("@itemId", item.Id)
+            };
+            ExecuteEditQuery(query,parameters);
+        }
+
         private List<OrderItem> ReadOrderItems(DataTable table)
         {
             List<OrderItem> items = new List<OrderItem>();
@@ -72,6 +84,10 @@ namespace RestaurantDAL
                 item.Status = (OrderStatus)Convert.ToInt32(row["status"]);
                 item.PlacedTime = Convert.ToDateTime(row["placedTime"]);
                 item.Table = Convert.ToInt32((row["tableId"]));
+
+                if (!row.IsNull("finishedTime"))
+                    item.FinishedTime = Convert.ToDateTime(row["finishedTime"]);
+                    
                 //add items to table 
                 items.Add(item);
             }
